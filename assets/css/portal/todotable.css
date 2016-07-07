@@ -1,0 +1,86 @@
+.grid-table{
+    padding: 0;
+    padding-top: 0.5rem;
+    width: 93%;
+    margin-left: 1rem;
+    height: 33rem;
+    float: left;
+}
+.grid-table thead{
+    background:url("../images/th_graph.png");
+    background-size: cover;
+}
+.grid-table th{
+    vertical-align: middle !important;
+    text-align: center;
+}
+.grid-table .head-title{
+    margin: 0;
+}
+.grid-table tbody a{
+    color: #0000C0;
+}
+.grid-table .key{
+    background-color: lightgrey;
+    font-weight: bold;
+}
+
+.grid-table .head-title th{
+    width: 10%;
+    color: white;
+}
+.grid-table .head-title th:nth-child(1){
+    width: 20%;
+}
+.grid-table tbody td{
+      text-align: center;
+      width: 10%;
+      vertical-align: middle!important;
+  }
+.grid-table tbody td:nth-child(1){
+    text-align: left;
+    width: 20%;
+}
+.grid-table .grid-title{
+    background-color: lightgrey;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.grid-table .level{
+    margin-left: calc( 50% - 2rem );
+    text-align:center;
+    border:1px solid #a1a1a1;
+    width:4rem;
+    height:4rem;
+    line-height: 4rem;
+    border-radius:50%!important;
+}
+.grid-table .progress{
+    width: 70%;
+    height: 1rem;
+    border-radius: 5rem !important;
+}
+.moreURL{
+    cursor: hand;
+}
+.moreURL-div{
+    color: #00a2e5;
+    float: left;
+    padding-top: 1.5rem;
+    text-align: right;
+    width: 92%;
+    margin-left: 1rem;
+}
+.todoIsNull{
+    margin-left: 1rem;
+    height: 38rem;
+    text-align: center;
+    vertical-align: middle;
+    display: block;
+}
+.todoIsNull-img{
+    width: 40rem;
+    height: 24rem;
+    margin-top: 8%;
+}

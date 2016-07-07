@@ -1,0 +1,218 @@
+.btn.green:not(.btn-outline) {
+	margin-bottom: 1rem;
+	color: #FFF;
+	background-color: #ABCB27;
+	border-color: #ABCB27;
+}
+.btn.green:not(.btn-outline):hover {
+	color: #FFF;
+	background-color: #889F28;
+	border-color: #889F28;
+}
+.btn.gray:not(.btn-outline) {
+	margin-bottom: 1rem;
+	color: #FFF;
+	background-color: #C0C7A5;
+	border-color: #C0C7A5;
+}
+.btn-file {
+	position: relative;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.btn-file > input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-size: 23px;
+	cursor: pointer;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	direction: ltr;
+}
+.fileinput {
+	display: inline-block;
+	margin-bottom: 9px;
+}
+.fileinput .form-control {
+	display: inline-block;
+	padding-top: 7px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	vertical-align: middle;
+	cursor: text;
+	border-radius: 0px;
+}
+.fileinput .thumbnail {
+	display: inline-block;
+	margin-bottom: 5px;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+}
+.fileinput .thumbnail >img {
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+}
+.fileinput .thumbnail > img {
+	max-height: 100%;
+}
+.fileinput .btn {
+	vertical-align: middle;
+}
+.fileinput-exists .fileinput-new, .fileinput-new .fileinput-exists {
+	display: none;
+}
+.fileinput-inline .fileinput-controls {
+	display: inline;
+}
+.fileinput-filename {
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.form-control {
+	width: 100%;
+	height: 34px;
+	padding: 6px 12px;
+	background-color: #fff;
+	border: 1px solid #c2cad8;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	box-shadow: none!important;
+}
+.form-control-shorten {
+	width: 95%;
+}
+.control-label {
+	margin-top: 1px;
+	font-weight: 400;
+}
+.panel-heading {
+	background-color: #E8F2BE;
+	color: #6F8320;
+	margin: 0 0 20px;
+	border-left: 5px solid #ABCB27;
+	border-radius: 0px;
+}
+.panel-heading1 {
+	color: #6F8320;
+	background-color: #D8E991;
+	border-color: #ABCB27;
+	border-radius: 0px;
+	height: 3.8rem;
+	margin-bottom: 1rem;
+}
+.fileinput {
+	margin-bottom: 0;
+	display: inline-block;
+	margin-bottom: 9px;
+}
+.fileinput .thumbnail {
+	display: inline-block;
+	margin-bottom: 5px;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+}
+.thumbnail {
+	padding: 4px;
+	line-height: 1.42857;
+	border-radius: 50%;
+	-webkit-transition: border .2s ease-in-out;
+	-o-transition: border .2s ease-in-out;
+	transition: border .2s ease-in-out;
+}
+.btn.btn-outline.red {
+	border-color: #e7505a;
+	color: #e7505a;
+	background: 0 0;
+}
+.btn-file {
+	position: relative;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.namecard_panel {
+	width: 32%;
+	height: 12rem;
+	border: 1px solid lightgrey;
+	overflow: hidden;
+	box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+	margin:0.5rem;
+}
+.namecard_image {
+	width: 5rem;
+	height: 5rem;
+	border-radius: 50%;
+	margin: 1rem;
+	border: 2px solid #ABCB27;
+	padding: 0px;
+	background: #fff;
+}
+.namecard_image_big {
+	width: 10rem;
+	height: 10rem;
+	border-radius: 50%;
+	margin: 1rem;
+	border: 2px solid #ABCB27;
+	padding: 0px;
+	background: #fff;
+}
+
+.namecard_titleText {
+	position: relative;
+	left: 8rem;
+	top: -6rem;
+	font-family: 'Arial Regular', 'Arial';
+	transition: all .2s linear;
+	font-weight: 700;
+	font-style: normal;
+	font-size: 14px;
+	color: #666666;
+	line-height: 5px;
+}
+.namecard_text {
+	position: relative;
+	left: 8rem;
+	top: -6rem;
+	font-family: 'Arial Regular', 'Arial';
+	font-weight: 400;
+	font-style: normal;
+	transition: all .2s linear;
+	font-size: 11px;
+	color: #666666;
+	line-height: 20px;
+}
+.namecard_deleteText{
+	position: relative;
+	left: 20.5rem;
+	top: -17rem;
+	font-family: 'Arial Regular', 'Arial';
+	font-weight: 400;
+	font-style: normal;
+	color: #ABCB27;
+	transition: all .2s linear;
+	font-size: 11px;
+	line-height: 20px;
+}
+.namecard_functionalText{
+	position: relative;
+	left: 20.5rem;
+	top: -17rem;
+	font-family: 'Arial Regular', 'Arial';
+	font-weight: 400;
+	font-style: normal;
+	color: #ABCB27;
+	transition: all .2s linear;
+	font-size: 11px;
+	line-height: 20px;
+}

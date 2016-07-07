@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>统一待办</title>
+  <base href="http://172.16.51.137/"/>
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
+    <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
+</head>
+<body>
+<header>
+    <com-header></com-header>
+</header>
+<article class="container-fluid article" id="article">
+    <script>
+        //        document.getElementById("#lingdaopishi").style.display = "block";
+        function changeView(parmar){
+            document.getElementById("lingdaopishi").style.display = "none";
+            document.getElementById("gongbandaiyue").style.display = "none";
+            document.getElementById("gerendaiban").style.display = "none";
+            document.getElementById("gongbandaiban").style.display = "none";
+            document.getElementById("shoutuodaiban").style.display = "none";
+            document.getElementById("gerendaiyue").style.display = "none";
+            document.getElementById("weituodaiban").style.display = "none";
+            document.getElementById("xiaoxitixing").style.display = "none";
+            document.getElementById(parmar).style.display = "block";
+        }
+    </script>
+
+    <div class="bodySpace"></div>
+    <!--<div style="width:100%; height: 50rem;">-->
+    <div class="bodySection">
+        <div class="bodySectionLeft">
+            <div class="bodySectionLeftTool">
+                <div class="bodySectionLeftToolDiv">
+                    <div class="catalog-tools">
+                        <span>跨组织协作工具</span>
+                    </div>
+                    <!-- /.catalog -->
+                    <ul class="list subject-font">
+                        <li class="article-list-item">
+                            <a href="http://mail.cnnp.com.cn"  target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">事项督办</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://bjecm.cnnp.com.cn/publish2" target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg02.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">会议日程</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://erp.cnnp.com.cn/irj" target="_blank">
+                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">工作委托</span>
+                            </a>
+                        </li>
+                        <li class="article-list-item">
+                            <a href="http://erp.cnnp.com.cn/irj" target="_blank">
+                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">计划管理</span>
+                            </a>
+                        </li>
+                        <li class="article-list-item">
+                            <a href="http://erp.cnnp.com.cn/irj" target="_blank">
+                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">协作空间</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-tool-bottom" style="height: 60%;margin-top: 1rem;">
+                <div class="bodySectionLeftPortal">
+                    <div class="catalog-tools">
+                        <span>工作快捷入口</span>
+                    </div>
+                    <!-- /.catalog -->
+                    <ul class="list subject-font">
+                        <li class="article-list-item">
+                            <a href="http://mail.cnnp.com.cn"  target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">邮箱登录</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://bjecm.cnnp.com.cn/publish2" target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg02.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">信息发布</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://erp.cnnp.com.cn/irj" target="_blank">
+                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">N1-ERP</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=showLaunch&plantId=00" target="_blank">
+                                <img src="assets/images/portal/workspace/doc_bg2.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">公文发文</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://bjecm.cnnp.com.cn/calendar/" target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">会议日程</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="file://10.15.251.9/share" target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg02.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">共享文件夹</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=showInfoReport" target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg012.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">信息报告</span>
+                            </a>
+                        </li>
+                        <!-- /.list-item -->
+                        <li class="article-list-item">
+                            <a href="http://10.16.15.79/tel/" target="_blank">
+                                <img src="assets/images/portal/workspace/work_bg04.png" class="article-list-item-icon">
+                                <span class="article-list-item-span">通讯录</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="#" style="cursor: pointer;">
+                        <div class="bodySectionLeftPortalMoreSys" id="showPopViw">更多系统 >></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="bodySectionRight">
+            <div class="bodySectionRightCurrentTab">
+                <div class="bodySectionRightCurentTabTitle">
+                    <div class="catalog-tools" style="border: 0; margin-left: 1rem;">
+                        <span>近期工作看板</span>
+                    </div>
+                </div>
+                <div style="width: 70%; float: left;">
+                    <div style="width: 100%; padding-left: 2rem;">
+                        <div style="width: 100%; height: 2rem; min-width: 48rem;">
+                            <div class="bodySectionRightCurrentTabSubTitle">
+                                <span class="bodySectionRightCurrentTabSubTitleSpan">今日工作</span>
+                            </div>
+                        </div>
+                        <div class="important-task-title">
+                            <sapn class="bodySectionRightCurrentTabSubTitleImp">重点事宜提醒</sapn>
+                            <sapn class="bodySectionRightCurrentTabSubTitleOverdue">（今日会议和超期事项提醒）</sapn>
+                        </div>
+                        <!-- data list-->
+                        <div class="bodySectionRightMeeting">
+                            <ul>
+                                <li class="li-task-list">
+                                    <div class="task-list-meet">
+                                        <div>会议</div>
+                                    </div>
+                                    <div class="task-list-detail">
+                                        <div><span class="task-list-detail-title">部门例会</span></div>
+                                        <div><span class="task-list-detail-subtitle">上午9:30~10:00</span></div>
+                                    </div>
+                                    <div class="task-list-spack"></div>
+                                </li>
+                                <li class="li-task-list">
+                                    <div class="task-list-meet">
+                                        <div>会议</div>
+                                    </div>
+                                    <div class="task-list-detail">
+                                        <div><span class="task-list-detail-title">陪同张三丰领导视察1号发点机组</span></div>
+                                        <div><span class="task-list-detail-subtitle">下午2:30~5:00</span></div>
+                                    </div>
+                                    <div class="task-list-spack"></div>
+                                </li>
+                                <li class="li-task-list">
+                                    <div class="task-list-meet">
+                                        <div>督办</div>
+                                    </div>
+                                    <div class="task-list-detail">
+                                        <div><span class="task-list-detail-title">完成XYZ的督办工作督办工作</span></div>
+                                        <div><span class="task-list-detail-subtitle">距离计划完成还有<span
+                                                style="color: red;">2</span>天</span></div>
+                                    </div>
+                                    <div class="task-list-spack"></div>
+                                </li>
+                                <li class="li-task-list">
+                                    <div class="task-list-meet">
+                                        <div>公文</div>
+                                    </div>
+                                    <div class="task-list-detail">
+                                        <div><span class="task-list-detail-title">关于XYZ的指导意见</span></div>
+                                        <div><span class="task-list-detail-subtitle">已经超过<span
+                                                style="color: red;">3</span>天未处理</span></div>
+                                    </div>
+                                    <div class="task-list-spack"></div>
+                                </li>
+                                <li class="li-task-list">
+                                    <div class="task-list-meet">
+                                        <div>督办</div>
+                                    </div>
+                                    <div class="task-list-detail">
+                                        <div><span class="task-list-detail-title">陪同张三丰领导视察1号发点机组</span></div>
+                                        <div><span class="task-list-detail-subtitle">下午2:30~5:00</span></div>
+                                    </div>
+                                    <div class="task-list-spack"></div>
+                                </li>
+                                <li class="li-task-list">
+                                    <div class="task-list-meet">
+                                        <div>督办</div>
+                                    </div>
+                                    <div class="task-list-detail">
+                                        <div><span class="task-list-detail-title">完成XYZ的督办工作督办工作</span></div>
+                                        <div><span class="task-list-detail-subtitle">距离计划完成还有<span
+                                                style="color: red;">7</span>天</span></div>
+                                    </div>
+                                    <div class="task-list-spack"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bodySectionRightPlan">
+                    <!-- 明日计划-->
+                    <div style="height: 50%;">
+                        <div style="width: 100%; height: 2rem;">
+                            <div class="bodySectionRightPlanDiv">
+                                <span class="bodySectionRightPlanSpan">明日计划</span>
+                            </div>
+                        </div>
+
+                        <div class="task-item">
+                            <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察1号机组</span></br><span>【会议】下午2:30~5:00</span></div>
+                            <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察</span></br><span>【会议】下午2:30~5:00</span></div>
+                        </div>
+                    </div>
+                    <!-- 后天计划-->
+                    <div style="height: 50%; margin-top: 1rem;">
+                        <div style="width: 100%; height: 2rem;">
+                            <div class="bodySectionRightPlanDiv">
+                                <span class="bodySectionRightPlanSpan">明日计划</span>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察1号机组</span></br><span>【会议】下午2:30~5:00</span></div>
+                            <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察</span></br><span>【会议】下午2:30~5:00</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%; height:60%;float: left; margin-top: 1rem;">
+                <div class="panel-tool-bottom-right">
+                    <div class="catalog-tools-right-div">
+                        <div class="catalog" style="border-bottom: 1px solid lightgray; width: 98%;">
+                            <span>统一待办</span>
+                        </div>
+                        <!-- /.taskCount-->
+                        <div class="task-btntype" style="padding-left: 0.5rem;padding-top:0.5rem;">
+                            <div  onclick="changeView('lingdaopishi')">
+                                <div class="task-btntype-title">
+                                    <span>{{findcount}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>领导批示</span>
+                                </div>
+                            </div>
+                            <div  onclick="changeView('gongbandaiyue')">
+                                <div class="task-btntype-title">
+                                    <span style="width: 7rem; height: 1rem;">{{taskCount[0].GC}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>公办待阅</span>
+                                </div>
+                            </div>
+                            <div  onclick="changeView('gerendaiban')">
+                                <div class="task-btntype-title">
+                                    <span>{{taskCount[0].DB}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>个人待办</span>
+                                </div>
+                            </div>
+                            <div onclick="changeView('gongbandaiban')">
+                                <div class="task-btntype-title">
+                                    <span>{{taskCount[0].GB}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>公办待办</span>
+                                </div>
+                            </div>
+                            <div onclick="changeView('shoutuodaiban')">
+                                <div class="task-btntype-title">
+                                    <span>{{taskCount[0].ST}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>受托待办</span>
+                                </div>
+                            </div>
+                            <div onclick="changeView('gerendaiyue')">
+                                <div class="task-btntype-title">
+                                    <span>{{taskCount[0].DY}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>个人待阅</span>
+                                </div>
+                            </div>
+                            <div onclick="changeView('weituodaiban')">
+                                <div class="task-btntype-title">
+                                    <span>{{taskCount[0].WT}}</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>委托待办</span>
+                                </div>
+                            </div>
+                            <div onclick="changeView('xiaoxitixing')">
+                                <div class="task-btntype-title">
+                                    <span>0</span>
+                                </div>
+                                <div class="task-btntype-subtitle">
+                                    <span>消息提醒</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style=" height: 80rem;">
+                            <!-- 领导批示 find-->
+                            <div class="line-tasktype-wedigt" id="lingdaopishi"  style="display: block;">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 4%;"/>
+                                    </div>
+                                </div>
+                                <section class="grid-table">
+                                    <table class="table table-condensed head-title">
+                                        <thead>
+                                        <tr>
+                                            <th > 事项名称 </th>
+                                            <th > 创建人员 </th>
+                                            <th> 创建时间 </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <template  v-for="item in personalread">
+                                            <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
+                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class="">{{item.creator}}</td>
+                                                <td class="">{{item.created}}</td>
+                                            </tr>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <a :href="{{personalread[0].moreUrl}}" class="moreURL">
+                                    <div class="moreURL-div">更多 >></div>
+                                </a>
+                            </div>
+                            <!-- 办公待阅 publicread-->
+                            <div class="line-tasktype-wedigt" id="gongbandaiyue">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 17%;"/>
+                                    </div>
+                                </div>
+                                <section class="grid-table">
+                                    <table class="table table-condensed head-title">
+                                        <thead>
+                                        <tr>
+                                            <th > 事项名称 </th>
+                                            <th > 创建人员 </th>
+                                            <th> 创建时间 </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <template  v-for="item in publicread">
+                                            <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
+                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class="">{{item.creator}}</td>
+                                                <td class="">{{item.created}}</td>
+                                            </tr>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <a :href="{{publicread[0].moreUrl}}" style="cursor: pointer; padding-bottom: 1rem;">
+                                    <div class="moreURL-div">更多 >></div>
+                                </a>
+                            </div>
+                            <!-- 个人待办 personal-->
+                            <div class="line-tasktype-wedigt" id="gerendaiban">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 30%;"/>
+                                    </div>
+                                </div>
+                                <section class="grid-table">
+                                    <table class="table table-condensed head-title">
+                                        <thead>
+                                        <tr>
+                                            <th > 事项名称 </th>
+                                            <th > 创建人员 </th>
+                                            <th> 创建时间 </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <template  v-for="item in personal">
+                                            <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
+                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class="">{{item.creator}}</td>
+                                                <td class="">{{item.created}}</td>
+                                            </tr>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <a :href="{{personal[0].moreUrl}}" style="cursor: pointer; padding-bottom: 1rem;">
+                                    <div class="moreURL-div">更多 >></div>
+                                </a>
+                            </div>
+                            <!-- 公办待办 public-->
+                            <div class="line-tasktype-wedigt" id="gongbandaiban">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 42%;"/>
+                                    </div>
+                                </div>
+                                <section class="grid-table">
+                                    <table class="table table-condensed head-title">
+                                        <thead>
+                                        <tr>
+                                            <th > 事项名称 </th>
+                                            <th > 创建人员 </th>
+                                            <th> 创建时间 </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <template  v-for="item in public">
+                                            <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
+                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class="">{{item.creator}}</td>
+                                                <td class="">{{item.created}}</td>
+                                            </tr>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <a :href="{{personal[0].moreUrl}}" style="cursor: pointer; padding-bottom: 1rem;">
+                                    <div class="moreURL-div">更多 >></div>
+                                </a>
+                            </div>
+                            <!-- 受托待办-->
+                            <div class="line-tasktype-wedigt" id="shoutuodaiban">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 55%;"/>
+                                    </div>
+                                </div>
+                                <div class="todoIsNull">
+                                    <img src="assets/images/portal/workspace/todoIsNull.png" class="todoIsNull-img"/>
+                                </div>
+                            </div>
+                            <!-- 个人待阅 personalread-->
+                            <div class="line-tasktype-wedigt" id="gerendaiyue">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 64%;"/>
+                                    </div>
+                                </div>
+                                <section class="grid-table">
+                                    <table class="table table-condensed head-title">
+                                        <thead>
+                                        <tr>
+                                            <th > 事项名称 </th>
+                                            <th > 创建人员 </th>
+                                            <th> 创建时间 </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <template  v-for="item in personalread">
+                                            <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
+                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class="">{{item.creator}}</td>
+                                                <td class="">{{item.created}}</td>
+                                            </tr>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <a :href="{{personalread[0].moreUrl}}" style="cursor: pointer; padding-bottom: 1rem;">
+                                    <div class="moreURL-div">更多 >></div>
+                                </a>
+                            </div>
+                            <!-- 委托待办-->
+                            <div class="line-tasktype-wedigt" id="weituodaiban">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 76%;"/>
+                                    </div>
+                                </div>
+                                <div class="todoIsNull">
+                                    <img src="assets/images/portal/workspace/todoIsNull.png" class="todoIsNull-img"/>
+                                </div>
+                            </div>
+                            <!-- 消息提醒-->
+                            <div class="line-tasktype-wedigt" id="xiaoxitixing">
+                                <div class="line-tasktype-wedigt-arrow">
+                                    <div class="line-tasktype-wedigt-arrow-label">
+                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 88%;"/>
+                                    </div>
+                                </div>
+                                <div class="todoIsNull">
+                                    <img src="assets/images/portal/workspace/todoIsNull.png" class="todoIsNull-img"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<div style="position: absolute; top: 0px; background-color:rgba(0,0,0,0.5); z-index: 2; left: 0px; width: 100%; height: 200rem; display: none;" id="hidePopView">
+    <div class="popDiv">
+        <div class="popViewTitle">
+            <div class="popViewTitleLabel" style="padding-top: 0.5rem;">
+                工作快捷入口
+            </div>
+            <div style="width: 4rem; height: 4rem;float: right" id="closePopView">
+                <a href="#" style="cursor: pointer"> <img src="assets/images/portal/workspace/close.png" style="width: 4rem; height: 4rem;"/></a>
+            </div>
+        </div>
+        <ul class="ul-wedigt">
+            <li class="ul-wedigt-item">
+                <a href="http://mail.cnnp.com.cn"  target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg01.png">
+                    <span>邮箱登录</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/publish2" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg02.png">
+                    <span>信息发布</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://erp.cnnp.com.cn/irj" target="_blank">
+                    <img src="assets/images/portal/workspace/erp_bg2.png">
+                    <span>N1-ERP</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=showLaunch&plantId=00" target="_blank">
+                    <img src="assets/images/portal/workspace/doc_bg2.png">
+                    <span>公文发文</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/calendar/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg01.png">
+                    <span>会议日程</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="file://10.15.251.9/share" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg02.png">
+                    <span>共享文件夹</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=showInfoReport" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg012.png">
+                    <span>信息报告</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.16.15.79/tel/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg04.png">
+                    <span>通讯录</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.85:8080/npolmanage/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg05.png">
+                    <span>核电在线</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.85:8080/npol/LeaderShow.jsp" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg08.png">
+                    <span>实时参数</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://wfks.cnnp.com.cn/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg06.png">
+                    <span>知识服务</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/publish2/newsShow/dmList?bizCode=ManagementProcedur" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg07.png">
+                    <span>管理制度</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://wf.cnnp.com.cn/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg014.png">
+                    <span>国家标准</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.80/RunInfo/default.aspx" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg09.png">
+                    <span>经验交流</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.85:8081/CNNPIS/servlet/wanoServlet" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg010.png">
+                    <span>WANO指标</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.85:8181/NuclearPower/index/index!preLogin.action?sysCode=sys_code_wano" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg011.png">
+                    <span>WANO活动</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.85:8088/cnnpoe/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg013.png">
+                    <span>状态报告</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpdm/#SearchUseView.userDocumentCreate" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg015.png">
+                    <span>文档著录</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.16.15.83/zentao" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg016.png">
+                    <span>禅道系统</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.80:8080/frame/login.aspx" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg017.png">
+                    <span>供评委</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.251.82:9081/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg018.png">
+                    <span>共管委</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.85:8182/fgbzbs/indexAction.action#/home" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg019.png">
+                    <span>法规标准</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.16.15.79/bookinfo/default.aspx" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg020.png">
+                    <span>图书情报</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://10.15.16.84/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg021.png">
+                    <span>指标展示</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/publish2/newsShow/deptList" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg022.png">
+                    <span>新闻统计</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=showNG" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg023.png">
+                    <span>拟稿</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="#" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg024.png">
+                    <span>表单</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpdm/service.jsp?action=searchdocument&searchType=ManageProcess&level=all" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg025.png">
+                    <span>升级</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=showLaunch&plantId=00" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg026.png">
+                    <span>流程</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://wfet.cnnp.com.cn/" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg027.png">
+                    <span>标准体系</span>
+                </a>
+            </li>
+            <!-- /.list-item -->
+            <li class="ul-wedigt-item">
+                <a href="http://bjecm.cnnp.com.cn/cnnpdm/#SearchUseView" target="_blank">
+                    <img src="assets/images/portal/workspace/work_bg028.png">
+                    <span>文档查询</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer style="margin-top: 2rem;">
+    <com-footer></com-footer>
+</footer>
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src="assets/dist/builds.js"></script>
+<script>
+    $(function () {
+        $("#comPortalNav").hover(function (ev) {
+            $(this.querySelector(".nav-panel")).show();
+        }, function () {
+            $(this.querySelector(".nav-panel")).hide();
+        });
+        $("#showPopViw").click(function(ev){
+            $("#hidePopView").css("display","block");
+        });
+        $("#hidePopView").click(function(ev){
+            $("#hidePopView").css("display","none");
+        });
+        $("#closePopView").click(function(ev){
+            $("#hidePopView").css("display","none");
+        });
+    })
+
+</script>
+</body>
+</html>

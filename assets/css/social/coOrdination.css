@@ -1,0 +1,320 @@
+.article{
+    padding: 0;
+    margin: 0;
+}
+.article .row{
+    margin: 0;
+}
+.panel{
+    padding: 3px;
+}
+.panel.left{
+    padding-left: 0;
+}
+.panel.right{padding-right: 0;
+}
+.carousel.slide{
+    border-top: none;
+}
+div.scroll-panel{
+    border: none;
+    position: relative;
+}
+.scroll-icon{
+    background: url("../images/portal/grey_line.png");
+    width: 100%;
+    text-align: center;
+    height: 1rem;
+}
+.scroll-icon .glyphicon{
+    color: #ffffff;
+    line-height: 0.5rem;
+    font-size: 2rem;
+}
+.scroll-icon.down{
+    position: absolute;
+    bottom: 0;left: 0;
+}
+.scroll-panel .scroll-item{
+    height: 8.1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    border: 1px solid lightgrey;
+}
+.scroll-item .col-md-4{
+    height: 100%;
+    padding: 0.5rem;
+}
+.scroll-item .col-md-8{
+    padding-top: 1rem;
+}
+.subject-font{
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2rem;
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+    font-style: normal;
+}
+.desc{
+    background-color: white;
+    position: relative;
+    color: #999999;
+    font-size: 1.2rem;
+}
+.scroll-item .desc span{
+    position: absolute;
+    right: 1.2rem;
+}
+.catalog-panel{
+    padding: 0 1rem;
+    text-align: left;
+}
+.catalog-panel .catalog{
+    height: 4rem;
+    border-bottom: 1px solid lightgray;
+    line-height: 4rem;
+    position: relative;
+}
+.catalog span{
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+.catalog .btn{
+    position: absolute;
+    right: 1rem;
+    /*line-height: 3rem;*/
+    top: 2px;
+    font-size: 1.4rem;
+}
+.cnnp-trends .material img{
+    width: 100%;
+}
+.cnnp-trends .material .subject{
+    width: 100%;
+}
+.message{
+    width: 100%;
+    height: 100px;
+    border: 1px solid blue;
+}
+.catalog-panel .list{
+    padding: 0 1rem 0 1.5rem;
+}
+.catalog-panel .list-item{
+
+    position: relative;
+    list-style: inside;
+
+    height: 3.9rem;
+    line-height: 3.9rem;
+}
+.catalog-panel .list-item .title{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis ;
+    width: 60%;
+    /*list-style: disc inside;*/
+}
+.catalog-panel .list-item .title::before{
+    /*content: "·";*/
+    /*display: inline-block;*/
+    /* width: 5px;
+     height: 5px;
+     line-height: 5px;
+     background-color: #000;
+     border-radius: 50%;*/
+
+}
+/*.catalog-panel .list-item .title:hover{
+    overflow: visible;
+}*/
+.catalog-panel .list-item .date{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.img-list .list-item{
+    list-style: none;
+    /*width: 100%;*/
+    height: 10rem;
+    margin: 3px 0;
+}
+.img-list img{
+    width: 100%;
+}
+.poster img{
+    padding-top: 1rem;
+    width: 100%;
+    height: 15rem;
+}
+.poster .list-item{
+    margin-top: 1rem;
+    border-top: 1px solid #D0CCC7;
+    list-style: none;
+}
+.movie-panel .title{
+    margin-top: 1rem;
+}
+.movie-panel .catalog{
+    margin-bottom: 1rem;
+}
+.article-list-item{
+    height: 5rem;
+    list-style: none;
+    padding-left: 3rem;
+    padding-top: 0.5rem;
+}
+.article-list-item a{
+    text-decoration: none;
+    color: black;
+}
+.article-list-item-icon{
+    width: 4rem;
+    height: 4rem;
+}
+.article-list-item-span{
+    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-weight: 400;
+    font-size: 1.4rem;
+    /*margin-bottom: -2rem;*/
+    padding-left: 2rem;
+}
+
+.panel-tool-bottom-right{
+    position: relative;
+    /*height: 100%;*/
+    float: left;
+    width: 100%;
+    border-top: 5px solid #A6CC38;
+    overflow: hidden;
+}
+
+/*new Style for coOrdination.html*/
+.co-title-div{
+    height: 4rem;
+    width: 100%;
+    padding-left: 2%;
+}
+.co-title{
+    height: 2rem;
+    width: 100%;
+    position: relative;
+    top: 2rem;
+}
+.co-title-img{
+    width: 2rem;
+    height: 2rem;
+    position: relative;
+    float: left;
+}
+.co-title-span{
+    font-size: 80%;
+    font-family: 'Microsoft YaHei Regular', 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    width: 80%;
+    height: 80%;
+    font-weight: 700;
+}
+.co-title-search{
+    height: 2rem;
+    width: 20%;
+    min-width: 30rem;
+    position: absolute;
+    bottom: 0; right: 0;
+}
+.co-title-search-a{
+    float: right;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+.co-title-search-input{
+    display: inline;
+    min-width: 15rem;
+    float: right;
+    width: 40%;
+    height: 2rem;
+}
+.co-section{
+    border: 1px solid lightgrey;
+    width: 22%;
+    margin-top: 1rem;
+    float: left;
+    min-width: 15rem;
+    min-height: 49rem;
+    height: 98%;
+    position: absolute;
+    text-align: center;
+}
+.co-section-imgdiv{
+	text-align: center;
+	width: 10rem;
+	/* [disabled]height: 13rem; */
+	position: relative;
+}
+.co-section-imgdiv-img{
+    width: 10rem;
+    height: 10rem;
+    position: relative;
+}
+.co-section-listdiv{
+    min-width: 15rem;
+    min-height: 20rem;
+    width: 100%;
+    height: 30rem;
+    position: relative;
+    margin-top: 2rem;
+}
+.co-section-listdiv-ul{
+    text-align: center;
+    list-style: none;
+    vertical-align: middle;
+}
+.co-section-listdiv-ul-li{
+    height: 2.5rem;
+    width: 100%;
+    vertical-align: middle;
+    text-align: left;
+    /*font-family: "Microsoft YaHei Regular","Microsoft YaHei";*/
+    font-weight: 400;
+    font-size: 1.4rem;
+    padding-left: 20%;
+    color: black;
+}
+.co-section-listdiv-ul-li:hover{
+    cursor: pointer;
+    height: 2.5rem;
+    width: 100%;
+    vertical-align: middle;
+    background-color: #A6CC38;
+    color: white;
+}
+
+.co-itemlist{
+    width: 77%;
+    float: right;
+    margin-top: 1rem;
+    min-height: 49rem;
+}
+.co-td{
+    border: 0; width: 20%;
+    position: relative;
+    min-width: 20rem;
+}
+.co-tr{
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    background-color: #A6CC38;
+    color: white;;
+}
+.co-section-listdiv-ul-li a{
+    text-decoration: none;
+    color: black;
+}
+.co-section-listdiv-ul-li a:hover{
+    background-color: #A6CC38;
+    color: white;
+    text-decoration: none;
+}
