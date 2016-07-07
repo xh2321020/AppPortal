@@ -13,6 +13,7 @@ let headerVm = new Vue({
         ComHeader
     }
 });
+console.log("hehe")
 let footerVm = new Vue({
     el: "footer",
     components: {
