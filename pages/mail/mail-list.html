@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>门户通讯录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!--<link href="../assets/libs/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>-->
+    <link href="../assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!--<script src="../assets/libs/jquery-1.9.min.js"></script>-->
+    <!--<script src="../assets/libs/tree/bootstrap-treeview.js"></script>-->
+    <link rel="stylesheet" href="../assets/css/jqx/jqx.base.css" type="text/css"/>
+    <script type="text/javascript" src="../assets/libs/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../assets/libs/demos.js"></script>
+    <script type="text/javascript" src="../assets/libs/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../assets/libs/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../assets/libs/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../assets/libs/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../assets/libs/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../assets/libs/jqwidgets/jqxtree.js"></script>
+    <style>
+        .col-center-block {
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .emp-class {
+            height: 90px;
+            margin-left: 1.5rem;
+            float: left;
+            border: 1px solid #CCCCCC;
+            margin: 0.25rem;
+            border-right-style: groove;
+            border-right: 2px solid #CCCCCC;
+        }
+
+        .emp-class-img {
+            width: 60px;
+            float: left;
+            margin-top: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .emp-class-div {
+            color: #666666;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            float: left;
+            margin-top: 0.5rem;
+            width: 17rem;
+        }
+
+        .emp-class-div-p-span {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .container-div {
+            border: 1px solid #CCCCCC;
+            margin-top: 1rem;
+            border-right-style: groove;
+            border-right: 2px solid #CCCCCC;
+            border-top: 0.5rem solid #A7C528;
+        }
+
+        .emp-class-div-s {
+            float: right;
+            border: 1px solid #CCCCCC;
+            font-size: 8px;
+            line-height: 1rem;
+            border-radius: 5px;
+            color: #29A8FF;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 中间部分开始 -->
+<div class="container">
+    <span>个人工作台 >通讯录 </span>
+
+    <div class="container col-center-block container-div" style="min-height: 60rem;">
+
+
+        <label for="exampleInputPassword1" style="margin-top: 8px;">通讯录</label>
+
+        <div style="width: 100%; height: 3rem; min-width: 1024px; margin-top: 1rem;">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">按组织方式浏览</a></li>
+                <li role="presentation"><a href="mail-list-search.html">搜索方式</a></li>
+            </ul>
+        </div>
+        <div style="width: 100%;min-height: 2rem;">
+            <div style="width: 100%;margin-top: 2rem;">
+                <img class="img " style="width: 2%;height: 2px;" src="../assets/images/mail/u271_line.png"
+                     alt="u271_line"/>
+                <span>按组织方式浏览</span>
+                <img class="img" style="width: 84%;" src="../assets/images/mail/u271_line.png" alt="u271_line"/>
+            </div>
+        </div>
+        <div style="width: 100%; min-height: 48rem;">
+            <!-- tree -->
+            <div id="treeview7" style="width: 25%;float: left;">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $.ajax({
+                            type: "get",
+                            dataType: "json",
+                            url: "http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou=",
+                            success: function (data, state, jqxhr) {
+                                var source =
+                                {
+                                    datatype: "json",
+                                    datafields: [
+                                        {name: 'ou'},
+                                        {name: 'pid'},
+                                        {name: 'name'},
+                                        {name: 'id'}
+                                    ],
+                                    id: 'ou',
+                                    localdata: data
+                                };
+
+                                // create data adapter.
+                                var dataAdapter = new $.jqx.dataAdapter(source);
+                                // perform Data Binding.
+                                dataAdapter.dataBind();
+                                // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
+                                // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
+                                // specifies the mapping between the 'text' and 'label' fields.
+                                var records = dataAdapter.getRecordsHierarchy('ou', 'pid', 'items', [{
+                                    name: 'name',
+                                    map: 'label'
+                                }]);
+                                $('#jqxWidget').jqxTree({source: records, width: '300px'});
+                                $('#jqxWidget').on('select', function (event) {
+                                    var args = event.args;
+                                    var item = $('#jqxWidget').jqxTree('getItem', args.element);
+                                    getMembers(item.id);
+                                });
+                                var ou = "02";
+                                getMembers(ou);
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                        function getMembers(parmar) {
+                            $.ajax({
+                                type: "post",
+                                contentType: "application/json",
+                                data: "",
+                                url: "http://172.16.51.137:8010/api/contact/getorgmember?apikey=e71982d5401b488da4acef8827c41845&ou=" + parmar,
+//									url: "http://172.16.51.137:8010/api/contact/getorgmember?apikey=e71982d5401b488da4acef8827c41845&ou=0010",
+                                success: function (data, state, jqxhr) {
+                                    var leaderHtml = '<div><span>领导/负责人</span><img style="width: 85%;height: 1px;" class="img " '+
+                                            'src="../assets/images/mail/u225_line.png" alt="u225_line"/></div><div style="float: left;width: 100%;margin-top: 5px;">';
+                                    var allMemberHtml = '<div style="margin-top: 130px;"><span>所有员工</span>'+
+                                            '<img id="u225_line" style="width: 86%;height: 1px;" class="img" src="../assets/images/mail/u225_line.png" alt="u225_line"/>'+
+                                            '</div><div style="float: left;margin-top: 5px;">';
+                                    var countLeaders=0;
+                                    var countMembers=0;
+                                    for (var i = 0; i < data.length; i++) {
+                                        var images = "";
+                                        var mobileNo = "";
+                                        var mailAdd = "";
+                                        var department = "";
+                                        if ((typeof(data[i].mobile) == "undefined") || (typeof(data[i].mobile) == "")) {
+                                            mobileNo = "";
+                                        } else {
+                                            mobileNo = data[i].mobile;
+                                        }
+                                        if ((typeof(data[i].telephoneNumber) == "undefined") || (typeof(data[i].telephoneNumber) == "")) {
+                                            mobileNo = mobileNo + "";
+                                        } else {
+                                            mobileNo = mobileNo + " ,分机号" + data[i].telephoneNumber;
+                                        }
+                                        if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
+                                            images = "../assets/images/mail/defaultUserPhoto.png";
+                                        } else {
+                                            images = data[i].imageurl;
+                                        }
+                                        if ((typeof(data[i].mail) == "undefined") || (typeof(data[i].mail) == "")) {
+                                            mailAdd = "";
+                                        } else {
+                                            mailAdd = data[i].mail;
+                                        }
+                                        for (var j = 1; j < data[i].orgtree.length; j++) {
+                                            for (var key in data[i].orgtree[j]) {
+                                                if(j<=3){
+                                                    department = department + '<span>' + data[i].orgtree[j][key] + '</span><br>';
+                                                }
+                                            }
+                                        }
+                                        if (data[i].isleader == "1") {
+                                            countLeaders ++;
+                                            if ((typeof(data[i].userstatus) == "undefined") || (data[i].userstatus == "")) {
+                                                leaderHtml = leaderHtml + '<div class="emp-class" onclick="myFunction(\''+data[i].displayname+'\')"><img class="img emp-class-img" src="' + images + '"/>' +
+                                                '<div class="emp-class-div"><p><span class="emp-class-div-p-span">' + data[i].displayname +
+                                                '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
+                                                '</span></p></div></div></a>';
+                                            } else {
+                                                leaderHtml = leaderHtml + '<div class="emp-class"><img class="img emp-class-img" src="' + images + '"/>' +
+                                                '<div class="emp-class-div"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
+                                                '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
+                                                '</span></p></div></div>';
+                                            }
+                                        }else{
+                                            countMembers ++
+                                            if ((typeof(data[i].userstatus) == "undefined") || (data[i].userstatus == "")) {
+                                                allMemberHtml = allMemberHtml + '<div class="emp-class"><img class="img emp-class-img" src="' + images + '"/>' +
+                                                '<div class="emp-class-div"><p><span class="emp-class-div-p-span">' + data[i].displayname +
+                                                '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
+                                                '</span></p></div></div>';
+                                            } else {
+                                                allMemberHtml = allMemberHtml + '<div class="emp-class"><img class="img emp-class-img" src="' + images + '"/>' +
+                                                '<div class="emp-class-div"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
+                                                '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
+                                                '</span></p></div></div>';
+                                            }
+                                        }
+                                    }
+                                    if(countLeaders>0){
+                                        $("#leaderArea").html(leaderHtml+'</div>');
+                                    }
+                                    if(countMembers>0){
+                                        $("#member").html(allMemberHtml+'</div>');
+                                    }
+                                    if((countLeaders=0)&&(countMembers=0)){
+                                        $("#leaderArea").html("暂无相关人员信息！");
+                                        $("#member").html("");
+                                    }
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
+                        };
+                        function myFunction(parmare){
+                            alert(parmare);
+                        }
+                    });
+                </script>
+                <div id='jqxWidget'>
+                </div>
+            </div>
+            <!--<img id="u290_line" class="img " style="float: left;height: 500px;width: 1px;" src="../assets/images/mail/u290_line.png" alt="u290_line"/>-->
+            <div style="width: 70%;float: left;margin-left: 30px; border-left: 1px dashed lightgrey; height: auto; min-height: 47rem;">
+                <div style="width: 100%;float: left;margin-left: 15px;">
+                    <!--  领导/负责人 开始-->
+                    <div style="width: 100%;" id="leaderArea">
+
+
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!-- -->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!--  领导/负责人 结束-->
+
+                    <!-- 所有员工 开始-->
+                    <div style="width: 100%;" id="member">
+
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="emp-class">-->
+                            <!--<img class="img emp-class-img" src="../assets/images/mail/u280.png"/>-->
+                            <!--<div class="emp-class-div">-->
+                            <!--<p>-->
+                            <!--<span class="emp-class-div-s">授权信息</span>-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>秦山核电有限公司</span>-->
+                            <!--<span></span>-->
+                            <!--<span>计划建设部</span><br>-->
+                            <!--<span>chendm@cnnp.com</span><br>-->
+                            <!--<span>138-1234-5678，内线2134</span>-->
+                            <!--</p>-->
+                            <!--<p style="display: none;">-->
+                            <!--<span class="emp-class-div-p-span">陈道明</span><br>-->
+                            <!--<span>本人休假期间与项目审批的事项请联系张三，和安全检查相关的工作请联系李四，其余可以联系王五。谢谢</span>-->
+                            <!--</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!-- 所有员工 结束-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
