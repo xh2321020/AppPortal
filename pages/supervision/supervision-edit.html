@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>督办管理-首页</title>
+    <base href="../../">
+    <!-- Bootstrap -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/daterangepicker.css" rel="stylesheet">   
+    <link href="assets/css/supervision.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+</head>
+<body>
+<!--head-->
+<header>
+    <com-header></com-header>
+</header>
+<!--head end-->
+<img class="horizontal-line" src="assets/images/hori-line.png"/>
+<article id="article" class="create-supervision">
+    <p>督办管理</p>
+
+		<table class="table table-bordered">
+
+		    <tr class="title2">
+			<td colspan="4">新增督办事项
+			<span style="margin-left: 10rem">{{saveState}}</span>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">督办事项</td>
+			<td colspan="3"><input type="text" style="width: 100%;" v-model="name"/></td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">督办编号</td>
+			<td width="40%">{{code}}</td>
+			<td width="13%" class="al-right">督办来源</td>
+			<td width="34%">
+			    <select class="form-control" v-model="sourceSelected">
+				<option v-for="option in sourceOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">领域</td>
+			<td width="40%">
+			    <select class="form-control" v-model="areaSelected">
+				<option v-for="option in areaOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+			<td width="13%" class="al-right">计划完成时间</td>
+			<td width="34%">
+			    <input type="text" class="form-control" id="completeDate" style="width: 50%;" 
+			       v-model="estimatedcompletetiontime"    />
+			</td>
+		    </tr>
+		      <tr>
+			<td width="13%" class="al-right">责任领导(A)</td>
+			<td width="40%">    
+                        <style scoped>.outer-container{float: left;}</style>                            
+                                <leader-select :supervision-request="requests" multiple="false" :selected.sync="leaders" leader-only="true"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
+                            </td>
+			<td width="13%" class="al-right">紧急程度</td>
+			<td width="34%">
+			    <select class="form-control" v-model="urgency">
+				<option v-for="option in urgencyOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		     <tr>
+			<td width="13%" class="al-right">责任部门</td>
+			<td width="40%">
+			  <style scoped>.outer-container{display: inline-block;}</style>                            
+                                <com-accordion :selected-Depts.sync="selectedDept" :supervision-request="requests" multiple="false" 
+		     btn_title="请选择"></com-accordion>
+                               <span style="display: inline-block;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsibledeptname}}</span>
+			 </td>
+			<td width="13%" class="al-right">重要程度</td>
+			<td width="34%">
+			    <select class="form-control" v-model="importance">
+				<option v-for="option in importanceOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">责任人(R)</td>
+			<td width="40%">
+			 <style scoped>.outer-container{float: left;}</style>                            
+                                <leader-select :supervision-request="requests" multiple="false" :selected.sync="responsibleOptions" leader-only="false"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
+			</td>
+			<td width="13%" class="al-right">公开范围</td>
+			<td width="34%">
+			    <select class="form-control" v-model="public">
+				<option v-for="option in publicOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">协办及通知部门</td>
+			<td colspan="3"><input style="width: 85%;height:3.3rem;display: inline-block;" v-model="scope"/>
+		     <com-accordion :selected-Depts.sync="selectedDepts" :supervision-request="requests" multiple="true" 
+		     btn_title="选择协办及通知部门"></com-accordion>
+			 </td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">备注</td>
+			<td colspan="3" class="al-left"><textarea style="width: 100%;" v-model="comments"></textarea>
+			 </td>
+		    </tr>
+		      <tr>
+			<td width="13%" class="al-right">附件</td>
+			<td colspan="3" class="al-left">
+			<div  style="width: 100%;">
+			    <button class="btn btn-default accessoryBtn">附件上传</button>
+			    <!-- <file-uploader></file-uploader> -->
+			</div>
+			 </td>
+		    </tr>
+		</table>
+		<div class="data-action" style="text-align: center;">
+		    <button class="btn btn-default" @click="submit_handler" style="margin:0 5rem;">保存</button> 
+		     <button class="btn btn-default" @click="" style="margin:0 5rem;">取消</button>
+		</div>
+
+</article>
+<footer>
+    <com-footer></com-footer>
+</footer>
+
+<script type="text/javascript" src="assets/libs/jquery.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/daterangepicker/moment.min.js"></script>
+<script src="assets/libs/daterangepicker/daterangepicker.js"></script>
+<script src="dist/supervision-edit.js"></script>
+</body>
+</html>
