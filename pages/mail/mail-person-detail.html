@@ -5,197 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link href="../assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="../assets/libs/jquery-1.11.1.min.js"></script>
-
-    <style>
-        .container-div {
-            border: 1px solid #CCCCCC;
-            margin-top: 1rem;
-            border-right-style: groove;
-            border-right: 2px solid #CCCCCC;
-            border-top: 0.5rem solid #A7C528;
-        }
-
-        .clear-float {
-            zoom: 1;
-        }
-        .xc-main-image{
-            zoom: 1;
-            width: 30%;
-            float: left;
-            min-height: 100%;
-        }
-
-        .clear-float::after {
-            content: '';
-            height: 0;
-            display: block;
-            visibility: hidden;
-            clear: both;
-        }
-
-        .clear-border {
-            border: 0;
-        }
-
-        .round-data {
-            display: block;
-            /*width: 3rem;*/
-            height: 3rem;
-            line-height: 2rem;
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 15px;
-            background-color: #FFFFFF;
-            border: 1px solid #333333;
-            margin-right: 0.5rem;
-            padding-top: 0.3rem;
-        }
-
-        .min-zt {
-            font-size: 12px;
-            color: #999999;
-        }
-
-        .kh-xz {
-            /* Safari */
-            -webkit-transform: rotate(90deg);
-
-            /* Firefox */
-            -moz-transform: rotate(90deg);
-            /* IE */
-            transform:rotate(90deg);
-            margin-top: -4px;
-        }
-
-        .right-bottom-org {
-            font-size: 12px;
-            color: #999999;
-            margin-left: 5px;
-        }
-
-        .right-bottom-org-sp{
-            color: #abcb27;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .right-bottom-org-sp-split{
-            border-bottom: 1px dotted lightgrey;
-            margin-left: 1rem;
-            margin-right: 1rem;
-            min-height: 3rem;
-            padding-bottom: 0.5rem;
-        }
-        .right-bottom-img {
-            margin-left: 0.5rem;
-            width: 4rem;
-            height: 4rem;
-            border-radius: 50%;
-        }
-        .right-name{
-            margin-left: 5px;
-            float: left;
-            padding-left: 5px;
-        }
-        .xc-right-name {
-            margin-left: 0.5rem;
-            float: left;
-            margin-top: 0.5rem;
-            width: 18rem;
-            white-space:nowrap;
-            text-overflow:ellipsis;
-            overflow: hidden;
-            display: block;
-        }
-
-        .right-p {
-            font-size: 12px;
-            color: #999999;
-            margin-left: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        .right {
-            float: left;
-            width: 20%;
-            margin-top: 2rem;
-            margin-left: 1rem;
-        }
-        .title-label {
-            margin-top: 1rem;
-            margin-left: 0.5rem;
-        }
-        .ma-detail-suo{
-            float: left;
-            margin-left: 2rem;
-        }
-        .ma-detail-suo >div{
-            margin-top: 0.5rem;
-        }
-        .ma-detail-title-suo{
-            color: #abcb27;
-            min-height: 1rem; 
-            height: auto;
-            min-width: 1rem; 
-            float: left;
-        }
-        .ma-detail-title-suo-annu{
-            float: left;
-            height: 100%;
-            width: auto;
-        }
-        .ma-detail-title-span-suo{
-            /*margin-left: 4rem;*/
-        }
-        .xc-div{
-            min-height: 6.5rem;
-            width: 100%;
-        }
-        .xc-div-datediv{
-            float: left;
-            border-right: 1px dashed black;
-            min-height: 6.5rem;
-        }
-        .xc-workitemsdiv{
-            width: 30rem;
-            white-space:nowrap;
-            text-overflow:ellipsis;
-            overflow: hidden;
-            display: block;
-            float: left;
-        }
-        .xc-workitems-input{
-            width: 30rem;
-            display: none;
-            word-break:break-all;
-            float: left;
-        }
-        .xc-click-delegateAnnu{
-            width: 50rem;
-            min-height: 3rem;
-            position: relative;
-        }
-        .xc-special-title{
-            margin-top: 0.5rem;
-        }
-        .xc-member-data{
-            min-height: 1rem; 
-            height: auto;
-            min-width: 20rem; 
-            float: left;
-        }
-        .xc-member-data-div{
-            width: 100%;
-            min-height: 1rem;
-            height: auto;
-            float: left;
-        }
-        .xc-edit-btn{
-            float: left;
-            font-size: 10px;
-        }
-    </style>
+    <base href="../"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="assets/libs/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="assets/src/personalpage/portUrl.js"></script>
+    <script type="text/javascript" src="assets/src/personalpage/contactMembers.js"></script>
 </head>
 
 <body style="min-width: 1024px;">
@@ -203,335 +18,20 @@
 <div class="container" style="min-width: 1024px;">
     <div style="float: left;width: 75%;">
         <span>个人工作台 >通讯录 </span>
-
         <div class="col-center-block container-div">
-            <label for="exampleInputPassword1" class="title-label">个人资料</label>
+            <label class="title-label">个人资料</label>
             <div style="width: 100%;" id="userInfo">
-                <img class="img " style="margin-left: 0.5rem;width: 80%;" src="../assets/images/mail/u291_line.png"
-                     alt="u291_line"/>
-                <div class="xc-main-image" style="width: 25%; min-height: 30rem; float: left;">
-                    <img style="width:13rem;margin-left: 3rem; " class="img " src="../assets/images/mail/defaultUserPhoto.png" alt="u229"/>
-                    <p style="margin-left: 6rem;"><span>陈道明 </span></p>
-                </div>
-                <div class="ma-detail-suo" style="width: 70%; min-height: 30rem; padding-top: 3rem; padding-left: 3rem;">
-                    <div style="width: 100%; min-height: 5rem; height: auto;">
-                        <div class="ma-detail-title-suo">组织：</div>
-                        <div style="min-height: 3rem; height: auto;min-width: 20rem; float: left;">
-                            <span class="ma-detail-title-span-suo">中国核能电力股份有限公司</span><br>
-                            <span class="ma-detail-title-span-suo">计划建设部</span><br>
-                            <span class="ma-detail-title-span-suo">工程建设项目规划处</span><br>
-                        </div>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">职务：</div>
-                        <div class="xc-member-data">
-                            <span id="spanTitle" class="xc-workitemsdiv">经理（兼）</span>
-                            <input id="inputTitle" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <div id="buttonTitle"></div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnTitle" onclick="editWork()">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">电话：</div>
-                        <div class="xc-member-data">
-                            <span id="spanTel" class="xc-workitemsdiv">经理（兼）</span>
-                            <input id="inputTel" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnWork">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">手机：</div>
-                        <div class="xc-member-data">
-                            <span id="spanMob" class="xc-workitemsdiv" title="谢谢">经理（兼）</span>
-                            <input id="inputMob" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnDate">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">邮件：</div>
-                        <div class="xc-member-data">
-                            <span id="spanMail" class="xc-workitemsdiv" title="谢谢">经理（兼）</span>
-                            <input id="inputMail" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnDate">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">办公地点：</div>
-                        <div class="xc-member-data">
-                            <span id="spanLoc" class="xc-workitemsdiv" title="谢谢">经理（兼）</span>
-                            <input id="inputLoc" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnDate">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">工作事项：</div>
-                        <div class="xc-member-data">
-                            <span id="spanWork" class="xc-workitemsdiv" title="谢谢">sfsdfasdfasdf</span>
-                            <input id="inputWork" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <!--<div id="btnWork"></div>-->
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnDate">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">委托声明：</div>
-                        <div class="xc-member-data">
-                            <span id="spanAnno" class="xc-workitemsdiv" title="谢谢">adsfasdfasfdsadf</span>
-                            <input id="inputAnno" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnDate">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                    <div class="xc-member-data-div">
-                        <div class="ma-detail-title-suo">委托时间：</div>
-                        <div class="xc-member-data">
-                            <span id="spanDate" class="xc-workitemsdiv" title="谢谢">谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢</span>
-                            <input id="inputDate" type="text" class="xc-workitems-input"/>
-                        </div>
-                        <button type="button" class="btn btn-default" style="padding: 0px; color: #abcb27; float: right;" id="btnDate">
-                            <span class="glyphicon glyphicon-edit" style="padding: 0px; height: 1.5rem; width: 1.5rem; top: 2px;"></span>
-                        </button>
-                    </div>
-                </div>
+
             </div>
-                <script type="text/javascript">
-                    var currentUserId="20116636";
-                    function editWork(){
-                        alert($("#spanTitle").text());
-                        $("#spanTitle").css({display:"none"});
-                        $("#inputTitle").show();
-                        $("#btnTitle").hide();
-                        $("#inputTitle").val($("#spanTitle").text());
-                        $("#buttonTitle").html('<button onclick="editWork();" id="editWorks" style="display: none;" class="xc-edit-btn">编辑</button>'+
-                        '<button onclick="editWorkSave();" id="editWorksSave" style="float: right;" class="xc-edit-btn">保存</button>'+
-                        '<button onclick="editWorkCancel();" id="editWorksCancel" style="float: right;" class="xc-edit-btn">取消</button>');
-                        $("#editWorksSave").css({display:"block"});
-                        $("#editWorksCancel").css({display:"block"});
-                    }
-                    $(document).ready(function () {
-                        function getQueryString(name) {
-                            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-                            var r = window.location.search.substr(1).match(reg);
-                            if (r != null) return unescape(r[2]);
-                            return null;
-                        }
-                        var pageUser="20116636";
-                        var currentUser=window.currentUserId;
-                        var sameOrgOu = "";
-                        var sameOrgName="";
-                        $.ajax({
-                            type: "post",
-                            contentType: "application/json",
-                            data: "",
-                            url: "http://172.16.51.137:8010/api/contact/getuserlist?apikey=e71982d5401b488da4acef8827c41845&uid=" + pageUser,
-                            success: function (data, state, jqxhr) {
-                                var countLeaders=0;
-                                var countMembers=0;
-                                for (var i = 0; i < data.length; i++) {
-                                    var iconImages = "";
-                                    var department = "";
-                                    if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
-                                        iconImages = "../assets/images/mail/defaultUserPhoto.png";
-                                    } else {
-                                        iconImages = data[i].imageurl;
-                                    }
-                                    for (var j = 1; j < data[i].orgtree.length; j++) {
-                                        for (var key in data[i].orgtree[j]) {
-                                            sameOrgOu = key;
-                                            sameOrgName = data[i].orgtree[j][key];
-                                            if(j == "1"){
-                                                department = department + '<span>' + sameOrgName + '</span><br>'
-                                            }else{
-                                                department = department + '<span class="ma-detail-title-span-suo">' + sameOrgName + '</span><br>'
-                                            }
-                                        }
-                                    }
-                                    var leaderHtml = '<img class="img " style="margin-left: 0.5rem;width: 80%;" src="../assets/images/mail/u291_line.png"alt="u291_line"/>';
-                                    leaderHtml = leaderHtml +'<div class="xc-main-image"><img style="width:13rem;margin-left: 3rem; " class="img" src="' + iconImages +
-                                    '" alt="u229"/><p style="margin-left: 6rem;"><span> ' + data[i].displayname  + '</span></p></div><div class="ma-detail-suo">'+
-                                    '<div style="margin-top: 0.5rem;"><span class="ma-detail-title-suo">组织：</span>'+department+'</div>'+
-                                    '<div><span class="ma-detail-title-suo">职务：</span><span>'+getValue(data[i].title)+'</span><br></div>' +
-                                    '<div><span class="ma-detail-title-suo">电话：</span><span>'+getValue(data[i].telephonenumber)+'</span><br></div>'+
-                                    '<div><span class="ma-detail-title-suo">手机：</span><span>'+getValue(data[i].mobile)+'</span><br></div>'+
-                                    '<div><span class="ma-detail-title-suo">邮件：</span><span>'+getValue(data[i].mail)+'</span><br></div>'+
-                                    '<div><span class="ma-detail-title-suo">办公地点：</span><span>'+getValue(data[i].physicalDeliveryOfficeName)+'</span><br></div>'+
-                                    '<div><span class="ma-detail-title-suo xc-special-title">工作事项：</span>'+
-//                                    '<span id="workItems" class="xc-workitemsdiv" title="'+getValue(data[i].workitem)+'">'+getValue(data[i].workitem)+'</span>'+
-                                    '<span id="workItems" class="xc-workitemsdiv" title="a;dsfjalsdjfaldsjfaldsjfalsdjfalsdjfaldsjfasldfjaldsfja;sldf">a;flasjdlfjsaldfjasldfjalsdjfalsdjfa;ldsjfalsdjfa;fdja;ldsfj</span>'+
-                                    '<input id="inputworkitems" type="text" class="xc-workitems-input" /><div id="button"></div></div>'+
-                                    '<div class="xc-click-delegateAnnu xc-special-title" id="delegateAnnu"><span class="ma-detail-title-suo">委托声明：</span>' +
-                                    '<div class="xc-workitemsdiv ma-detail-title-suo-annu" id="delegateAnnouace" title="'+getValue(data[i].delegateannu)+'">'+getValue(data[i].delegateannu)+'</div>'+
-                                    '</div><div style="margin-left: 6rem;margin-top: 1rem;"><span class="right-bottom-org">委托时间：'+getValue(data[i].delegatedate)+'</span></div>';
-//                                    $("#userInfo").html(leaderHtml);
-                                    if(currentUser == pageUser){
-//                                        $("#btnWork").html('<button onclick="editWork();" id="editWorks" class="xc-edit-btn">编辑</button>');
-                                    }
-                                }
-                                getChain(pageUser);
-                                getXinCheng();
-                                getSameOrg(sameOrgOu);
-                            },
-                            error: function (err) {
-                                console.log(err);
-                            }
-                        });
-                        function getValue(key){
-                            if ((typeof(key) == "undefined") || (typeof(key) == "")) {
-                                return  "";
-                            } else {
-                                return  key;
-                            }
-                        }
-                        function getChain(parmar){
-                            $.ajax({
-                                type: "get",
-                                dataType:"json",
-                                url: "http://172.16.51.137:8010/api/contact/Reportchain?apikey=e71982d5401b488da4acef8827c41845&uid="+parmar,
-                                success: function (data, state, jqxhr) {
-                                    var leveArray = new Array();
-                                    var titleArray = new Array();
-                                    var displaynames="";
-                                    var currentposition = 0;
-                                    if(data.length>0){
-                                        currentposition = data[0].position;
-                                    }
-                                    for (var i = 0; i < data.length; i++) {
-                                        if(data[i].position == currentposition){
-                                            var member = leveArray[currentposition-1];
-                                            var currentMember = member + data[i].displayname+",";
-                                            displaynames = data[i].displayname;
-                                            leveArray[currentposition-1] = currentMember;
-                                            for (var m = 2; m < data[i].orgtree.length; m++) {
-                                                for (var key in data[i].orgtree[m]) {
-                                                    titleArray[currentposition-1] = data[i].orgtree[m][key];
-                                                }
-                                            }
-                                        }else{
-                                            currentposition = data[i].position;
-                                            var member = leveArray[currentposition-1];
-                                            var currentMember = member + data[i].displayname+",";
-                                            displaynames = data[i].displayname;
-                                            leveArray[currentposition-1] = currentMember;
-                                            for (var m = 2; m < data[i].orgtree.length; m++) {
-                                                for (var key in data[i].orgtree[m]) {
-                                                    titleArray[currentposition-1] = data[i].orgtree[m][key];
-                                                }
-                                            }
-                                        }
-                                    }
-                                    var firstManageUrl = "";
-                                    for(var i = 0; i< titleArray.length; i++){
-                                        titleArray[i] = titleArray[i].replace(/undefined/, "");
-                                    }
-                                    for(var i = 0; i< leveArray.length; i++){
-                                        leveArray[i] = leveArray[i].replace(/undefined/, "");
-                                        leveArray[i] = leveArray[i].substring(0,leveArray[i].length-1);
-                                        if(i == "0"){
-                                            firstManageUrl = '<div  style="width: 100%; text-align: center" style="background-color: red;"><span class="right-bottom-org-sp">'+titleArray[i]+
-                                            '</span><div class="right-bottom-org-sp-split" style="border: 0;">'+leveArray[i]+'</div>'+
-                                            '</div>';
-                                        }else{
-                                            firstManageUrl = '<div  style="width: 100%; text-align: center;"><span class="right-bottom-org-sp">'+titleArray[i]+
-                                            '</span><div class="right-bottom-org-sp-split">'+leveArray[i]+'</div>'+
-                                            '<img id="u393" class="img kh-xz" src="../assets/images/mail/u393.png" alt="u393"/></div>' + firstManageUrl;
-                                        }
-                                    }
-                                    var line='<img id="u291_line" class="img " alt="u291_line" src="../assets/images/mail/u291_line.png" style="margin-left: 5px;width: 80%;height: 1px;">';
-                                    $("#userChains").html(line + firstManageUrl);
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
-                        function getWeeks(parmar){
-                            var oDate1 = new Date(parmar);
-                            var arrayChar=["日","一","二","三","四","五","六"];
-                            var dataChar = parmar.substring(parmar.length-2, parmar.length);
-                            var weekDay = dataChar+arrayChar[new Date(oDate1).getDay()];
-                            var monthChar = parmar.substring(5, parmar.length-3)+"月";
-                            if(monthChar.indexOf("0") == 0){
-                                monthChar = monthChar.substring(1, monthChar.length);
-                            }
-                            var weeksArr = [weekDay,monthChar];
-                            return weeksArr;
-                        }
-                        function getXinCheng(){
-                            $.ajax({
-                                type: "get",
-                                dataType:"json",
-                                url: "http://192.168.253.1:8000/api/V1.0/schedule/schedule/10086",
-                                success: function (data, state, jqxhr) {
-                                    var xinChengIcon = "";
-                                    var xinChengDetail=""
-                                    for(var i = 0; i< data.length; i++){
-                                        var arrayChar=getWeeks(data[i].startdate);
-                                        xinChengIcon = xinChengIcon + '<div class="xc-div"><div class="xc-div-datediv">'+
-                                        '<div class="round-data">'+arrayChar[0]+'</div><p class="right-p">'+arrayChar[1]+'</p></div><div>'+
-                                        '<span class="xc-right-name" title="'+data[i].description+'">'+ data[i].description+'</span><br>'+
-                                        '<span class="right-bottom-org">'+data[i].starttime+'~'+data[i].endtime+' 领导活动</span></div></div>';
-                                    }
-                                    $("#xinChengDate").html(xinChengIcon + xinChengIcon);
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
-                        function getSameOrg(pramar){
-                            $.ajax({
-                                type: "get",
-                                dataType:"json",
-                                url: "http://172.16.51.137:8010/api/contact/getorgmember?apikey=e71982d5401b488da4acef8827c41845&ou="+pramar,
-                                success: function (data, state, jqxhr) {
-                                    var lineHtml = '<img id="u291_line" class="img " style="margin-left: 5px;width: 80%;height: 1px;"'+
-                                            'src="../assets/images/mail/u291_line.png" alt="u291_line"/>';
-                                    var sameOrgHtml = "";
-                                    for(var i = 0; i< data.length; i++){
-                                        var iconImages=""
-                                        if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
-                                            iconImages = "../assets/images/mail/defaultUserPhoto.png";
-                                        } else {
-                                            iconImages = data[i].imageurl;
-                                        }
-                                        sameOrgHtml = sameOrgHtml +'<div style="margin-top: 5px;"><div style="float: left;"><div style="margin-right: 5px;">'+
-                                        '<img class="img right-bottom-img" src="'+iconImages+'" alt="u280"/></div></div>'+
-                                        '<span class="right-name">'+data[i].displayname+'</span><br>' +
-                                        '<span class="right-bottom-org">'+ sameOrgName + '</span></div>';
-                                    }
-                                    $("#sameOrgMember").html(lineHtml+sameOrgHtml);
-                                },
-                                error: function (err) {
-                                    console.log(err);
-                                }
-                            });
-                        }
-                    });
-                </script>
-
-
-
             <!-- 底部开始 -->
             <div class="clear-float" style="width: 100%;">
                 <!-- 左边的日期开始 -->
                 <div style="float: left;width: 30%;margin-left: 20px;">
                     <div style="margin-top: 40px;">
-                        <img class="img " style="width: 2%;height: 2px" src="../assets/images/mail/u271_line.png"
+                        <img class="img " style="width: 2%;height: 2px" src="assets/images/personalpage/u271_line.png"
                              alt="u271_line"/>
                         <span>行程</span>
-                        <img class="img" style="width: 70%;height: 2px;" src="../assets/images/mail/u271_line.png"
+                        <img class="img" style="width: 70%;height: 2px;" src="assets/images/personalpage/u271_line.png"
                              alt="u271_line"/>
                     </div>
 
@@ -543,10 +43,10 @@
                 <!-- 左边的会议开始 -->
                 <div style="float: left;width: 30%;margin-left: 10px;">
                     <div style="margin-top: 40px;">
-                        <img class="img " style="width: 2%;height: 2px" src="../assets/images/mail/u271_line.png"
+                        <img class="img " style="width: 2%;height: 2px" src="assets/images/personalpage/u271_line.png"
                              alt="u271_line"/>
                         <span>会议</span>
-                        <img class="img" style="width: 70%;height: 2px;" src="../assets/images/mail/u271_line.png"
+                        <img class="img" style="width: 70%;height: 2px;" src="assets/images/personalpage/u271_line.png"
                              alt="u271_line"/>
                     </div>
 
@@ -587,11 +87,11 @@
                 <!-- 左边的日程开始-->
                 <div style="float: left;width: 30%;margin-left: 10px;">
                     <div style="margin-top: 40px;">
-                        <img class="img " style="width: 2%;height: 2px;" src="../assets/images/mail/u271_line.png"
+                        <img class="img " style="width: 2%;height: 2px;" src="assets/images/personalpage/u271_line.png"
                              alt="u271_line"/>
                         <span>值班</span>
                         <img id="u225_line" class="img" style="width: 70%;height: 2px;"
-                             src="../assets/images/mail/u271_line.png" alt="u271_line"/>
+                             src="assets/images/personalpage/u271_line.png" alt="u271_line"/>
                     </div>
 
                     <div style="margin-top: 10px;">
@@ -622,21 +122,13 @@
     <!-- 右边部分开始 -->
     <div class="right">
         <!-- 右边上部分开始 -->
-        <div class="container-div clear-float">
-            <label for="exampleInputPassword1" class="title-label">汇报链</label>
+        <div id="userChains">
 
-            <div style="width: 100%;" id="userChains">
-
-            </div>
         </div>
         <!-- 右边下部分结束 -->
         <!-- 右边上部分开始 -->
-        <div class="container-div clear-float">
-            <label for="exampleInputPassword1" class="title-label">同一组织</label>
+        <div id="sameOrgMember">
 
-            <div style="width: 100%;" id="sameOrgMember">
-
-            </div>
         </div>
         <!-- 右边下部分结束 -->
     </div>
