@@ -1,6 +1,10 @@
 /**
  * Created by kingsinsd on 2016/7/8.
  */
+function myFunction(parmar){
+    var url = "views/personalpage-detail.html?uid="+parmar;
+    window.open(url,"fullscreen=0");
+}
 $(document).ready(function () {
     $.ajax({
         type: "get",
@@ -53,9 +57,9 @@ $(document).ready(function () {
             success: function (data, state, jqxhr) {
                 var leaderHtml = '<div><span>领导/负责人</span><img style="width: 85%;height: 1px;" class="img " '+
                     'src="assets/images/personalpage/u225_line.png" alt="u225_line"/></div><div style="float: left;width: 100%;margin-top: 5px;">';
-                var allMemberHtml = '<div style="margin-top: 130px;"><span>所有员工</span>'+
+                var allMemberHtml = '<div style="margin-top: 130px; margin-left: 1.5rem;"><span>所有员工</span>'+
                     '<img id="u225_line" style="width: 86%;height: 1px;" class="img" src="assets/images/personalpage/u225_line.png" alt="u225_line"/>'+
-                    '</div><div style="float: left;margin-top: 5px;">';
+                    '</div><div style="float: left;margin-top: 5px; margin-left: 1.5rem;">';
                 var countLeaders=0;
                 var countMembers=0;
                 for (var i = 0; i < data.length; i++) {
@@ -93,30 +97,35 @@ $(document).ready(function () {
                     if (data[i].isleader == "1") {
                         countLeaders ++;
                         if ((typeof(data[i].userstatus) == "undefined") || (data[i].userstatus == "")) {
-                            leaderHtml = leaderHtml + '<div class="emp-class" onclick="myFunction(\''+data[i].displayname+'\')"><img class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div"><p><span class="emp-class-div-p-span">' + data[i].displayname +
+                            leaderHtml = leaderHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
+                            '<img style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
+                            '<div class="emp-class-div" style="margin-left: 1rem;"><p><span class="emp-class-div-p-span">' + data[i].displayname +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
-                            '</span></p></div></div></a>';
+                            '</span></p></div></div>';
                         } else {
-                            leaderHtml = leaderHtml + '<div class="emp-class"><img class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
+                            leaderHtml = leaderHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
+                            '<img  style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
+                            '<div class="emp-class-div"  style="margin-left: 1rem;"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         }
                     }else{
                         countMembers ++
                         if ((typeof(data[i].userstatus) == "undefined") || (data[i].userstatus == "")) {
-                            allMemberHtml = allMemberHtml + '<div class="emp-class"><img class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div"><p><span class="emp-class-div-p-span">' + data[i].displayname +
+                            allMemberHtml = allMemberHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
+                            '<img  style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
+                            '<div class="emp-class-div"  style="margin-left: 1rem;"><p><span class="emp-class-div-p-span">' + data[i].displayname +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         } else {
-                            allMemberHtml = allMemberHtml + '<div class="emp-class"><img class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
+                            allMemberHtml = allMemberHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
+                            '<img  style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
+                            '<div class="emp-class-div" style="margin-left: 1rem;"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         }
                     }
+                    $("#loadingimg").hide();
                 }
                 if(countLeaders>0){
                     $("#leaderArea").html(leaderHtml+'</div>');

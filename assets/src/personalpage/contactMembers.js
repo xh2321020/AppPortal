@@ -1,10 +1,14 @@
 /**
  * Created by kingsinsd on 2016/7/8.
  */
+    //get current UserId from Section
 var currentUserId="20116636";
 var pageUserUid="";
-//alert(window.pageUserUid);
 var cancelText = "";
+function myFunction(parmar){
+    var url = "views/personalpage-detail.html?uid="+parmar;
+    window.open(url,"fullscreen=0");
+}
 function editWork(parmar){
     var span = "#span"+parmar;
     var input = "#input"+parmar;
@@ -47,7 +51,6 @@ function editSave(parmar,parmarKey){
                 $(buttonDiv).hide();
                 $(input).hide();
                 $(span).show();
-                //alert($(input).val() + span);
                 $(span).text($(input).val());
                 $(btn).show();
                 alert("保存成功！");
@@ -55,7 +58,8 @@ function editSave(parmar,parmarKey){
         },
         error: function (err) {
             console.log(err);
-            //editCancel(parmar);
+            alert("保存失败，请稍后再试！");
+            editCancel(parmar);
         }
     });
 }
@@ -67,9 +71,10 @@ $(document).ready(function () {
         return null;
     }
     window.pageUserUid=getQueryString("uid");
-    window.pageUserUid = "20116636";
-    var pageUser=getQueryString("uid");
-    pageUser="20116636";
+    var pageUser=window.pageUserUid;
+    if(pageUser == null){
+        pageUser = window.currentUserId;
+    }
     var currentUser=window.currentUserId;
     var sameOrgOu = "";
     var sameOrgName="";
@@ -81,7 +86,6 @@ $(document).ready(function () {
         success: function (data, state, jqxhr) {
             var countLeaders=0;
             var countMembers=0;
-            //var emplyeeId = "";
             for (var i = 0; i < data.length; i++) {
                 var iconImages = "";
                 var department = "";
@@ -101,14 +105,13 @@ $(document).ready(function () {
                         }
                     }
                 }
-                var leaderHtml = '<img class="img " style="margin-left: 0.5rem;width: 80%;" src="assets/images/personalpage/u291_line.png" alt="u291_line"/>';
+                var leaderHtml = '<img class="img " style="margin-left: 0.5rem;width: 80%; height: 0.5rem;" src=""/>';
                 leaderHtml = leaderHtml +'<div class="xc-main-image"> <img class="img xc-main-image-img" src="'+ iconImages +
                 '" alt="u229"/><p class="xc-main-image-p"><span> ' + data[i].displayname  + '</span></p></div><div class="ma-detail-suo">'+
                 '<div class="ma-detail-suo-org"><div class="ma-detail-title-suo">组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;织：</div><div class="ma-detail-suo-org-title">'+department+'</div>';
                 var titleArray = ["Title","Tel","Mob","Mail","Loc","Work","Anno","Date"];
                 var keyArray = ["title","telephonenumber","mobile","mail","physicalDeliveryOfficeName","workitem","delegateannu","delegatedate"];
-                var titleCharArray = ["职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：","电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：","手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：","邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件：","办公地点：","工作事项：","委托声明：","委托时间："];
-                //var subHtml=;
+                var titleCharArray = ["职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：","电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：","手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：","邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件：","办公地点：","个人备注：","委托声明：","委托时间："];
                 var interHtml="";
                 for(var k = 0; k< titleArray.length; k++){
                     var keys = keyArray[k];
@@ -165,8 +168,7 @@ $(document).ready(function () {
                 for (var i = 0; i < data.length; i++) {
                     if(data[i].position == currentposition){
                         var member = leveArray[currentposition-1];
-                        var currentMember = member + data[i].displayname+",";
-                        displaynames = data[i].displayname;
+                        var currentMember = member + '<a class="xc-org-chain-member-a" onclick="myFunction(\''+data[i].uid+'\')"> '+data[i].displayname+"</a>,";
                         leveArray[currentposition-1] = currentMember;
                         for (var m = 2; m < data[i].orgtree.length; m++) {
                             for (var key in data[i].orgtree[m]) {
@@ -176,8 +178,7 @@ $(document).ready(function () {
                     }else{
                         currentposition = data[i].position;
                         var member = leveArray[currentposition-1];
-                        var currentMember = member + data[i].displayname+",";
-                        displaynames = data[i].displayname;
+                        var currentMember = member + '<a class="xc-org-chain-member-a" onclick="myFunction(\''+data[i].uid+'\')"> '+data[i].displayname+"</a>,";
                         leveArray[currentposition-1] = currentMember;
                         for (var m = 2; m < data[i].orgtree.length; m++) {
                             for (var key in data[i].orgtree[m]) {
@@ -204,7 +205,9 @@ $(document).ready(function () {
                 }
                 var lineHtml = '<img id="u291_line" style="margin-left: 5px;width: 80%;height: 1px; vertical-align: top;" src="assets/images/personalpage/u291_line.png"/>';
                 var line='<div class="container-div clear-float"><label for="exampleInputPassword1" class="title-label">汇报链</label><div style="width: 100%;">'+ lineHtml;
-                $("#userChains").html(line + firstManageUrl + '</div></div>');
+                if(data.length > 0){
+                    $("#userChains").html(line + firstManageUrl + '</div></div>');
+                }
             },
             error: function (err) {
                 console.log(err);
@@ -231,15 +234,14 @@ $(document).ready(function () {
             url: getXingChengDetails + parmar,
             success: function (data, state, jqxhr) {
                 var xinChengIcon = "";
-                var xinChengDetail=""
                 for(var i = 0; i< data.length; i++){
                     var arrayChar=getWeeks(data[i].startdate);
                     xinChengIcon = xinChengIcon + '<div class="xc-div"><div class="xc-div-datediv">'+
                     '<div class="round-data">'+arrayChar[0]+'</div><p class="right-p">'+arrayChar[1]+'</p></div><div>'+
-                    '<span class="xc-right-name" style="max-width: 18rem;" title="'+data[i].description+'">'+ data[i].description+'</span><br>'+
+                    '<span class="xc-right-name" style="max-width: 18rem; margin-top:0.5rem;" title="'+data[i].description+'">'+ data[i].description+'</span><br>'+
                     '<span class="right-bottom-org">'+data[i].starttime+'~'+data[i].endtime+' 领导活动</span></div></div>';
                 }
-                $("#xinChengDate").html(xinChengIcon + xinChengIcon);
+                $("#xinChengDate").html(xinChengIcon);
             },
             error: function (err) {
                 console.log(err);
@@ -261,7 +263,8 @@ $(document).ready(function () {
                     sameOrgCount=data.length;
                 }else{
                     sameOrgCount=4;
-                    moreHtml = '<div style="margin-right: 5px; background-color: red; min-height: 4.7rem;"><a href="#" style="float:right; margin-top:3rem;">More>></a></div>';
+                    moreHtml = '<div style="margin-right: 5px;min-height: 4.7rem;">'+
+                    '<a href="views/personalpage-list-search.html?ou=' +pramar+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
                 }
                 for(var i = 0; i< sameOrgCount; i++){
                     var iconImages=""
@@ -270,13 +273,16 @@ $(document).ready(function () {
                     } else {
                         iconImages = data[i].imageurl;
                     }
-                    sameOrgHtml = sameOrgHtml +'<div style="margin-top: 5px;"><div style="float: left;"><div style="margin-right: 5px;">'+
+                    sameOrgHtml = sameOrgHtml +'<div style="margin-top: 5px;margin-left: 1rem; cursor:pointer;" onclick="myFunction(\'' +data[i].uid +
+                    '\')"><div style="float: left;"><div style="margin-right: 5px;">'+
                     '<img class="img right-bottom-img" src="'+iconImages+'" alt="u280"/></div></div>'+
                     '<span class="right-name">'+data[i].displayname+'</span><br>' +
                     '<span class="right-bottom-org">'+ sameOrgName + '</span></div>';
                 }
                 var sameOrgMemberDiv = '<div class="container-div clear-float"><label class="title-label">同一组织</label><div style="width: 100%;" >';
-                $("#sameOrgMember").html(sameOrgMemberDiv+lineHtml+sameOrgHtml + moreHtml+ '</div></div>');
+                if(data.length > 0){
+                    $("#sameOrgMember").html(sameOrgMemberDiv+lineHtml+sameOrgHtml + moreHtml+ '</div></div>');
+                }
             },
             error: function (err) {
                 console.log(err);

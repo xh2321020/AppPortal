@@ -20,54 +20,37 @@
     <script type="text/javascript" src="assets/libs/jqwidgets/jqxtree.js"></script>
     <script type="text/javascript" src="assets/src/personalpage/portUrl.js"></script>
     <script type="text/javascript" src="assets/src/personalpage/contact.js"></script>
-
 </head>
-<body>
-
-<div class="container">
-    <span>个人工作台 >通讯录 </span>
-    <div class="container col-center-block container-div" style="min-height: 60rem;">
-        <label for="exampleInputPassword1" style="margin-top: 8px;">通讯录</label>
-        <div style="width: 100%; height: 3rem; min-width: 1024px; margin-top: 1rem;">
-            <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">按组织方式浏览</a></li>
-                <li role="presentation"><a href="personalpage-list-search.html">搜索方式</a></li>
-            </ul>
-        </div>
-        <div style="width: 100%;min-height: 2rem;">
-            <div style="width: 100%;margin-top: 2rem;">
-                <img class="img " style="width: 2%;height: 2px;" src="assets/images/personalpage/u271_line.png"
-                     alt="u271_line"/>
-                <span>按组织方式浏览</span>
-                <img class="img" style="width: 84%;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>
+    <body>
+        <div class="container">
+            <span>个人工作台 >按组织浏览 </span>
+            <div class="cover" id="loadingimg">
+                <img class="loading" src="assets/images/loading3.gif"></img>
             </div>
-        </div>
-        <div style="width: 100%; min-height: 48rem;">
-            <!-- tree -->
-            <div id="treeview7" style="width: 25%;float: left;">
-
-                <div id='jqxWidget'>
+            <div class="container col-center-block container-div" style="min-height: 60rem;">
+                <div class="org-tab-li">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="#">按组织浏览</a></li>
+                        <li role="presentation"><a href="pages/mail/personalpage-list-search.html">搜索方式</a></li>
+                        <li role="presentation"><a href="pages/mail/personalpage-detail.html">个人页面</a></li>
+                    </ul>
                 </div>
-            </div>
-            <div style="width: 70%;float: left;margin-left: 30px; border-left: 1px dashed lightgrey; height: auto; min-height: 47rem;">
-                <!--  领导/负责人 开始-->
-                <div style="width: 100%;float: left;margin-left: 15px;">
-                    <div style="width: 100%;" id="leaderArea">
+                <div style="width: 100%; min-height: 48rem; margin-top:2rem;">
+                    <div id="treeview7" style="width: 25%;float: left;">
+                        <div id='jqxWidget'>
+                        </div>
+                    </div>
+                    <div class="org-member-card-list">
+                        <div class="org-member-card-list-div">
+                            <div style="width: 100%;" id="leaderArea">
 
+                            </div>
+                        </div>
+                        <div style="width: 100%;" id="member">
+                        </div>
                     </div>
                 </div>
-                    <!--  领导/负责人 结束-->
-
-                    <!-- 所有员工 开始-->
-                <div style="width: 100%;" id="member">
-
-                </div>
-                    </div>
-                    <!-- 所有员工 结束-->
-                </div>
             </div>
         </div>
-    </div>
-</div>
-</body>
+    </body>
 </html>
