@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <base href="../">
+    <link href="assets/css/personalpage/personalpagesearch.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <span>个人工作台 >智能搜索 </span>
+    <div class="container col-center-block container-div" style="min-height: 60rem;">
+        <div class="pls-tab-li">
+            <ul class="nav nav-tabs" style="clear: both;">
+                <li role="presentation">
+                    <a href="pages/mail/personalpage-list.html">按组织浏览</a>
+                </li>
+                <li class="active" role="presentation">
+                    <a href="#">智能搜索</a>
+                </li>
+                <li role="presentation"><a href="pages/mail/personalpage-detail.html">个人页面</a></li>
+            </ul>
+        </div>
+            <article id="article">
+                <leader-select :supervision-request="requests" multiple="false" :selected.sync="leaders" leader-only="true"></leader-select>
+            </article>
+        <div id="userInfo">
+        </div>
+        <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="dist/personalPageSearch.js"></script>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="assets/src/personalpage/portUrl.js"></script>
+<script type="text/javascript" src="assets/src/personalpage/contactSameOrgInit.js"></script>
+</html>
