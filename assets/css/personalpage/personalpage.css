@@ -320,7 +320,7 @@
     border-radius: 50%;
     background: none;
     opacity: 0.6;
-    /*animation: loadingRotate 1s linear 0.05s  infinite;*/
+    /*animation:loadingRotate 1s linear 0.05s  infinite;*/
 }
 .org-member-card-list{
     width: 70%;
