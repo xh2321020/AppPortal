@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"></title>
+        <title>中国核电内网门户-日程管理</title>
+
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/schedule/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="assets/css/schedule/fullcalendar.css">
+        <link rel="stylesheet" href="assets/css/schedule/style.css">
+    </head>
+    <body ng-app="eventApp">
+    <div ng-controller="TeamCtrl">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <br><br><br>
+
+                    <h3>日程管理</h3>
+                    <div id="myTabContent2" class="tab-content">
+                        <div id="schedule" class="tab-pane fade in active">
+                            <ul id="myTab" class="nav nav-tabs">
+                                <li><a href="personal.html">个人日程</a></li>
+                                <li><a href="leader.html">领导日程</a></li>
+                                <li><a href="all.html">组织日程</a></li>
+                                <li class="active"><a href="team.html">协作空间日程</a></li>
+                            </ul>
+
+                            <div id="all">
+                                <div class="text-tips">
+                                    <span>支持查询您所加入的协作空间的成员日程信息。</span>
+                                </div>
+
+                                <div class="org">
+                                    <span style="float: left"><strong>协作空间：</strong></span>
+                                    <ul class="ul-org">
+                                        <li ng-repeat="coll in colls" ng-click="collClick(coll)">
+                                            <span class="span-org-selected" ng-show="coll.isSelected">{{coll.collspacename}}</span>
+                                            <span class="span-org" ng-show="!coll.isSelected">{{coll.collspacename}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br>
+
+                                <div>
+                                    <button style="float: left; margin-top: 8px; margin-left: 10px" href="#add" data-toggle="tab" ng-click="addClick()">新建日程</button>
+
+                                    <div class="checkbox-event pull-right">
+                                        <div>
+                                            <img class="img-meeting">
+                                            <input type="checkbox" class="text-event" ng-checked="scheduletype[0]" ng-click="scheduleTypeClick(0)"><span class="a-event">会议信息</span></input>
+                                        </div>
+                                        <div>
+                                            <img class="img-travel">
+                                            <input type="checkbox"  class="text-event" ng-checked="scheduletype[1]" ng-click="scheduleTypeClick(1)"><span class="a-event">行程信息</span></input>
+                                        </div>
+                                        <div>
+                                            <img class="img-duty">
+                                            <input type="checkbox"  class="text-event" ng-checked="scheduletype[2]" ng-click="scheduleTypeClick(2)"><span class="a-event">值班信息</span></input>
+                                        </div>
+                                        <div>
+                                            <img class="img-agent">
+                                            <input type="checkbox"  class="text-event" ng-checked="scheduletype[3]" ng-click="scheduleTypeClick(3)"><span class="a-event">委托信息</span></input>
+                                        </div>
+                                        <div>
+                                            <img class="img-holiday">
+                                            <input type="checkbox" class="text-event" ng-checked="scheduletype[4]" ng-click="scheduleTypeClick(4)"><span class="a-event">休假信息</span></input>
+                                        </div>
+
+                                        <div style="width: 10px;visibility: hidden"></div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div id='calendar'  class="calendar"  style=""></div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="add">
+                            <div ng-include="'event-add.html'"></div>
+                        </div>
+
+                        <div class="tab-pane fade" id="detail">
+                            <div ng-include="'event-detail.html'"></div>
+                        </div>
+
+                        <div class="tab-pane fade" id="edit">
+                            <div ng-include="'event-edit.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    	<script src="assets/libs/angular/angular.min.js"></script>
+        <script src="assets/libs/jquery-1.11.1.min.js"></script>
+        <script src='assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
+        <script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="assets/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+        <script src="assets/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+        <script src='src/schedule/fullcalendar.js'></script>
+        <script src="src/schedule/eventservice.js"></script>
+        <script src="src/schedule/team.js"></script>
+        <script src='assets/libs/jquery.blockUI.js'></script>
+    </body>
+</html>
