@@ -59,11 +59,15 @@
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var _header = __webpack_require__(3);
+	var _stringify = __webpack_require__(3);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _header = __webpack_require__(6);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(10);
+	var _footer = __webpack_require__(13);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
@@ -73,7 +77,7 @@
 	 * Created by kingsinsd on 2016/6/7.
 	 */
 
-	var Vue = __webpack_require__(14);
+	var Vue = __webpack_require__(17);
 
 	var headerVm = new Vue({
 	    el: "header",
@@ -245,36 +249,42 @@
 	        var _this = this;
 	        var fetchArray = ["DUBANSHIXIANG", "PERSONAL", "PUBLIC", "PUBLICREAD", "PERSONALREAD"];
 	        var nameArray = ["dubanshixiang", "personalred", "personal", "public", "publicread", "findcount"];
-
-	        var _loop = function _loop() {
+	        var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead><tr><th > 事项名称 </th><th > 创建人员 </th><th> 创建时间 </th></tr></thead><tbody>";
+	        var tableFooter = "</tbody></table></section>";
+	        for (var i = 0, len = fetchArray.length + 1; i < len; i++) {
 	            var url = "";
-	            objData = [];
-
-	            if (fetchArray[i] == "DUBANSHIXIANG") {
-	                url = "http://172.16.51.137:8000/api/v1.0/supervision/search";
-	                currentUse = "20120014";
-
-	                objData.push("accountablesn=" + currentUse);
-	                $.ajax({
-	                    type: "post",
-	                    dataType: "json",
-	                    contentType: "application/json",
-	                    url: url,
-	                    data: objData.join("&"),
-	                    success: function success(data, state, jqxhr) {
-	                        alert(objData + url);
-	                        var index = jqxhr.index;
-	                        var jsonArray = JSON.parse(data);
-	                        _this[nameArray[index]] = jsonArray;
-	                        if (jqxhr.index == 0) console.log(data);
-	                    },
-
-	                    error: function error(err) {
-	                        alert(url + "haha");
-	                        console.log(err);
-	                    }
-	                }).index = i;
+	            var datas = "";
+	            //var objData = [];
+	            var contentTypes = "";
+	            var datatypes = "";
+	            var types = "";
+	            if (fetchArray[i] == "PERSONAL") {
+	                types = "post";
+	                url = "http://bjecm.cnnp.com.cn/cnnpbpm/web/getPortalWorklist.do?action=PERSONAL&count=8";
+	                datatypes = "json";
+	            } else if (fetchArray[i] == "DUBANSHIXIANG") {
+	                //return;
+	                types = "post";
+	                url = "http://172.16.51.137:8000/api/v1.0/supervision/search?page=0&size=50";
+	                datas = (0, _stringify2.default)({ "accountablesn": "20120014" });
+	                //currentUse = "20120014";
+	                contentTypes = "application/json";
 	            }
+	            $.ajax({
+	                type: types,
+	                dataType: datatypes,
+	                contentType: contentTypes,
+	                url: url,
+	                data: datas,
+	                success: function success(data, state, jqxhr) {
+	                    var index = jqxhr.index;
+	                    _this[nameArray[index]] = data;
+	                    if (jqxhr.index == 0) console.log(data);
+	                },
+	                error: function error(err) {
+	                    //console.log(err);
+	                }
+	            }).index = i;
 	            //if(i==4){
 	            //    url = "http://bjecm.cnnp.com.cn/cnnpbpm/web/leaderCommentCollections.do?action=count";
 	            //}else{
@@ -300,13 +310,6 @@
 	            //        console.log(err);
 	            //    }
 	            //}).index=i;
-	        };
-
-	        for (var i = 0, len = fetchArray.length + 1; i < len; i++) {
-	            var objData;
-	            var currentUse;
-
-	            _loop();
 	        }
 	    }
 	});
@@ -316,14 +319,37 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(4), __esModule: true };
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(5)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_script__, __vue_template__
-	__webpack_require__(4)
-	__vue_script__ = __webpack_require__(8)
+	__webpack_require__(7)
+	__vue_script__ = __webpack_require__(11)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] assets\\src\\components\\header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(9)
+	__vue_template__ = __webpack_require__(12)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -342,16 +368,16 @@
 	})()}
 
 /***/ },
-/* 4 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(5);
+	var content = __webpack_require__(8);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(10)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -368,10 +394,10 @@
 	}
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(9)();
 	// imports
 
 
@@ -382,7 +408,7 @@
 
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports) {
 
 	/*
@@ -438,7 +464,7 @@
 
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -660,7 +686,7 @@
 
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -1013,18 +1039,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 9 */
+/* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'../assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"pages/portal/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'../assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/workspace.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'../assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'../assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'../assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'../assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
 
 /***/ },
-/* 10 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(11)
-	__vue_template__ = __webpack_require__(13)
+	__webpack_require__(14)
+	__vue_template__ = __webpack_require__(16)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -1043,16 +1069,16 @@
 	})()}
 
 /***/ },
-/* 11 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(12);
+	var content = __webpack_require__(15);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(10)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -1069,10 +1095,10 @@
 	}
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(9)();
 	// imports
 
 
@@ -1083,13 +1109,13 @@
 
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'../assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'../assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -11122,10 +11148,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(15), __webpack_require__(1)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(18), __webpack_require__(1)))
 
 /***/ },
-/* 15 */
+/* 18 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
