@@ -1,0 +1,168 @@
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td colspan="10" style="background: #f3f2f0">创建日程</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">姓名</td>
+        <td colspan="8"><input size="60" type="text" ng-model="addParams.username" readonly>
+            <div id="userselect" style="display: inline">
+                <button ng-click="addPeopleClick()">添加人员</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">开始日期</td>
+        <td colspan="4">
+            <div id="startdate" class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input size="16" type="text" value="" readonly ng-model="addParams.startdate">
+                <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
+            </div>
+        </td>
+        <td colspan="1" class="td-text">开始时间</td>
+        <td colspan="1">
+            <select class="select-time" ng-model="addParams.starttime">
+                <option>请选择</option>
+                <option value="8:00">8:00</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="9:30">9:30</option>
+                <option value="10:0">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+            </select>
+        </td>
+        <td colspan="1"><input type="checkbox">上午</input></td>
+        <td colspan="1"><input type="checkbox">全天</input></td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">结束日期</td>
+        <td colspan="4">
+            <div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input size="16" type="text" value="" readonly ng-model="addParams.enddate">
+                <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
+            </div>
+        </td>
+        <td class="td-text" colspan="1">结束时间</td>
+        <td colspan="1">
+            <select class="select-time" ng-model="addParams.endtime">
+                <option>请选择</option>
+                <option value="8:00">8:00</option>
+                <option value="8:30">8:30</option>
+                <option value="9:00">9:00</option>
+                <option value="9:30">9:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:30">18:00</option>
+            </select>
+        </td>
+        <td colspan="1"><input type="checkbox">下午</input></td>
+        <td colspan="1"><input type="checkbox">重要</input></td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">标题</td>
+        <td colspan="4">
+            <input size="16" type="text" ng-model="addParams.title">
+        </td>
+        <td class="td-text" colspan="1">日程类型</td>
+        <td colspan="3">
+            <select class="select-time" ng-model="addParams.scheduletype" ng-options="t.dicname for t in scheduletypes">
+                <option value="">请选择</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">地点</td>
+        <td colspan="4">
+            <input size="16" type="text" ng-model="addParams.address">
+        </td>
+        <td class="td-text" colspan="1">公开范围</td>
+        <td colspan="3">
+            <select class="select-time" ng-model="addParams.scope" ng-options="s.dicname for s in scope">
+                <option value="">请选择</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">内容</td>
+        <td colspan="8">
+            <input size="60" type="text" ng-model="addParams.content">
+        </td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">备注</td>
+        <td colspan="8">
+            <textarea style="width:80%;" rows="4" ng-model="addParams.description"></textarea>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container" style="text-align: center">
+    <button data-toggle="tab" ng-click="addEvent()">保存</button>
+    <button style="margin-left: 80px" href="#schedule" data-toggle="tab">取消</button>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="peopleSelectModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    选择员工
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input style="display: inline" size="60" type="text" ng-model="searchParams.content" placeholder="请输入员工姓名或拼音">
+                <div style="display: inline">
+                    <button ng-click="searchPeople()">查询</button>
+                </div>
+
+                <div style="margin-top: 20px">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                        <thead>
+                        <tr>
+                            <th>选中</th>
+                            <th> 员工号 </th>
+                            <th> 姓名 </th>
+                            <th> 部门 </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="odd gradeX" ng-repeat="user in searchParams.result">
+                            <td><input type="checkbox" ng-checked="user.isChecked" ng-click="userClick(user)"/> </td>
+                            <td>{{user.employeeid}} </td>
+                            <td>{{user.displayname}}</td>
+                            <td>{{user.orgtree}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer; text-center" style="margin: 10px;">
+                <button type="button" class="btn btn-default" ng-click="peopleConfig()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

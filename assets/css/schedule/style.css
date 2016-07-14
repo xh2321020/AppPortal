@@ -1,0 +1,195 @@
+#myTab {
+    border-bottom: 1px solid #a6cc38;
+}
+
+.text-tips {
+    padding: 15px 0px 5px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.checkbox-event{
+    margin: 10px;
+    padding-right: 15px;
+}
+
+.checkbox-event div {
+    border:1px dotted #5e5e5e;
+    display: inline;
+    background: #f3f2f0;
+    margin-right: 5px;
+    padding: 2px 8px 2px 0px;
+}
+
+.a-event{
+    margin-top: 2px;
+    color: #000;
+    font-family: 'Microsoft YaHei Bold', 'Microsoft YaHei';
+    font-weight: 700;
+    font-style: normal;
+}
+
+.event-meeting {
+    background: #a6cc38;
+    margin-bottom: 3px;
+    font-size: 12px;
+    color: #000;
+}
+
+.event-travel {
+    background: #0003c6;
+    margin-bottom: 3px;
+    font-size: 12px;
+    color: #e5e5e5;
+}
+
+.event-duty {
+    background: #ff0000;
+    margin-bottom: 3px;
+    font-size: 12px;
+    color: #000;
+}
+
+.event-agent {
+    background: #ffca00;
+    margin-bottom: 3px;
+    font-size: 12px;
+    color: #000;
+}
+
+.event-holiday {
+    background: #00ff4c;
+    margin-bottom: 3px;
+    font-size: 12px;
+    color: #000;
+}
+
+.img-meeting {
+    background: #a6cc38;
+    margin-bottom: 3px;
+    width: 8px;
+    height: 20px;
+}
+
+.img-travel {
+    background: #0003c6;
+    width: 8px;
+    margin-bottom: 3px;
+    height: 20px;
+}
+
+.img-duty {
+    background: #ff0000;
+    width: 8px;
+    margin-bottom: 3px;
+    height: 20px;
+}
+
+.img-agent {
+    background: #ffca00;
+    width: 8px;
+    margin-bottom: 3px;
+    height: 20px;
+}
+
+.img-holiday {
+    background: #00ff4c;
+    width: 8px;
+    margin-bottom: 3px;
+    height: 20px;
+}
+
+.text-event {
+    margin: 12px;
+    padding: 10px;
+}
+
+.calendar {
+    border: 1px solid #000;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    padding: 5px;
+}
+
+.select-time {
+    width: 130px;
+}
+
+.table.tr {
+    height: 30px;
+}
+
+.td-text {
+    text-align: right;
+    font-family: 'Arial Regular', 'Arial';
+    font-weight: 400;
+    height: 30px;
+    font-style: normal;
+    font-size: 13px;
+    color: #333333;
+}
+
+.org{
+    border-bottom: 1px solid #e5e5e5;
+    padding: 6px;
+    display: block;
+}
+
+.ul-org{
+    display: table-row;
+}
+
+.ul-org >li{
+    list-style:none;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    float: left;
+    font-family: 'Arial Regular', 'Arial';
+    font-weight: 400;
+    height: 22px;
+    padding: 2px 6px 2px 6px;
+    font-style: normal;
+    font-size: 13px;
+    color: #333333;
+}
+
+.span-org   {
+    padding: 2px 6px 2px 6px;
+}
+
+.span-org-selected   {
+    background:#99ffff;
+    padding: 2px 6px 2px 6px;
+}
+
+.fc-agenda-allday::before{
+    background: #000;
+}
+
+.all-series-switch i {
+    position: absolute;
+    right: 20px;
+    top: 11px;
+    width: 9px;
+    height: 6px;
+    background-position: 0 -37px;
+}
+
+.all-series {
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 24px;
+    margin: 3px 0;
+}
+
+.all-series-switch {
+    position: relative;
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 0 0 0 8px;
+    cursor: default;
+    color: #666;
+}
