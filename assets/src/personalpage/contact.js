@@ -2,52 +2,58 @@
  * Created by kingsinsd on 2016/7/8.
  */
 function myFunction(parmar){
-    var url = "views/personalpage-detail.html?uid="+parmar;
+    var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
     window.open(url,"fullscreen=0");
 }
 $(document).ready(function () {
-    $.ajax({
-        type: "get",
-        dataType: "json",
-        url: getDepartment,
-        success: function (data, state, jqxhr) {
-            var source =
-            {
-                datatype: "json",
-                datafields: [
-                    {name: 'ou'},
-                    {name: 'pid'},
-                    {name: 'name'},
-                    {name: 'id'}
-                ],
-                id: 'ou',
-                localdata: data
-            };
+    var ou = "02";
+    var loadingImg='<div style="width:10rem; height:10rem; margin-left: 3rem;"><img src="assets/images/loading3.gif"></img> </div>';
+    $("#loadingImgs").html(loadingImg);
+    getMembers(ou);
+    getDepartments();
+    function getDepartments() {
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: getDepartment,
+            success: function (data, state, jqxhr) {
+                var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        {name: 'ou'},
+                        {name: 'pid'},
+                        {name: 'name'},
+                        {name: 'id'}
+                    ],
+                    id: 'ou',
+                    localdata: data
+                };
 
-            // create data adapter.
-            var dataAdapter = new $.jqx.dataAdapter(source);
-            // perform Data Binding.
-            dataAdapter.dataBind();
-            // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
-            // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
-            // specifies the mapping between the 'text' and 'label' fields.
-            var records = dataAdapter.getRecordsHierarchy('ou', 'pid', 'items', [{
-                name: 'name',
-                map: 'label'
-            }]);
-            $('#jqxWidget').jqxTree({source: records, width: '300px'});
-            $('#jqxWidget').on('select', function (event) {
-                var args = event.args;
-                var item = $('#jqxWidget').jqxTree('getItem', args.element);
-                getMembers(item.id);
-            });
-            var ou = "02";
-            getMembers(ou);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
+                // create data adapter.
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // perform Data Binding.
+                dataAdapter.dataBind();
+                // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
+                // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
+                // specifies the mapping between the 'text' and 'label' fields.
+                var records = dataAdapter.getRecordsHierarchy('ou', 'pid', 'items', [{
+                    name: 'name',
+                    map: 'label'
+                }]);
+                $('#jqxWidget').jqxTree({source: records, width: '300px'});
+                $('#jqxWidget').on('select', function (event) {
+                    var args = event.args;
+                    var item = $('#jqxWidget').jqxTree('getItem', args.element);
+                    getMembers(item.id);
+                });
+                $("#loadingImgs").remove();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    };
     function getMembers(parmar) {
         $.ajax({
             type: "post",
@@ -137,13 +143,11 @@ $(document).ready(function () {
                     $("#leaderArea").html("暂无相关人员信息！");
                     $("#member").html("");
                 }
+
             },
             error: function (err) {
                 console.log(err);
             }
         });
     };
-    function myFunction(parmare){
-        alert(parmare);
-    }
 });

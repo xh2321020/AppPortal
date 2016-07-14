@@ -6,7 +6,7 @@ var currentUserId="20116636";
 var pageUserUid="";
 var cancelText = "";
 function myFunction(parmar){
-    var url = "views/personalpage-detail.html?uid="+parmar;
+    var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
     window.open(url,"fullscreen=0");
 }
 function editWork(parmar){
@@ -71,6 +71,15 @@ $(document).ready(function () {
         return null;
     }
     window.pageUserUid=getQueryString("uid");
+    var reportChainLine='<div id="reportChainId" class="container-div clear-float"><label for="exampleInputPassword1" class="title-label">汇报链</label><div style="width: 100%;">';
+    var reportChainLineHtml = '<img id="u291_line" style="margin-left: 5px;width: 80%;height: 1px; vertical-align: top;" src="assets/images/personalpage/u291_line.png"/>';
+    $("#userChains").html(reportChainLine + reportChainLineHtml + '</div></div>');
+
+    var sameOrgMemberDiv = '<div id="sameOrgId" class="container-div clear-float"><label class="title-label">同一组织</label><div style="width: 100%;" >';
+    var sameOrgLineHtml = '<img id="u291_line" class="img " style="margin-left: 5px;width: 80%;height: 1px;"'+
+        'src="assets/images/personalpage/u291_line.png" alt="u291_line"/>';
+    $("#sameOrgMember").html(sameOrgMemberDiv+sameOrgLineHtml + '</div></div>');
+
     var pageUser=window.pageUserUid;
     if(pageUser == null){
         pageUser = window.currentUserId;
@@ -105,7 +114,7 @@ $(document).ready(function () {
                         }
                     }
                 }
-                var leaderHtml = '<img class="img " style="margin-left: 0.5rem;width: 80%; height: 0.5rem;" src=""/>';
+                var leaderHtml = '<img class="img " style="margin-left: 0.5rem;width: 80%; height: 0;" src=""/>';
                 leaderHtml = leaderHtml +'<div class="xc-main-image"> <img class="img xc-main-image-img" src="'+ iconImages +
                 '" alt="u229"/><p class="xc-main-image-p"><span> ' + data[i].displayname  + '</span></p></div><div class="ma-detail-suo">'+
                 '<div class="ma-detail-suo-org"><div class="ma-detail-title-suo">组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;织：</div><div class="ma-detail-suo-org-title">'+department+'</div>';
@@ -203,10 +212,11 @@ $(document).ready(function () {
                         '<img id="u393" class="img kh-xz" src="assets/images/personalpage/u393.png" alt="u393"/></div>' + firstManageUrl;
                     }
                 }
-                var lineHtml = '<img id="u291_line" style="margin-left: 5px;width: 80%;height: 1px; vertical-align: top;" src="assets/images/personalpage/u291_line.png"/>';
-                var line='<div class="container-div clear-float"><label for="exampleInputPassword1" class="title-label">汇报链</label><div style="width: 100%;">'+ lineHtml;
                 if(data.length > 0){
-                    $("#userChains").html(line + firstManageUrl + '</div></div>');
+                    $("#reportChainId").remove();
+                    $("#userChains").html(reportChainLine + reportChainLineHtml + firstManageUrl + '</div></div>');
+                }else{
+                    $("#userChains").hide();
                 }
             },
             error: function (err) {
@@ -254,8 +264,7 @@ $(document).ready(function () {
             dataType:"json",
             url: getSameOrgDetails+pramar,
             success: function (data, state, jqxhr) {
-                var lineHtml = '<img id="u291_line" class="img " style="margin-left: 5px;width: 80%;height: 1px;"'+
-                    'src="assets/images/personalpage/u291_line.png" alt="u291_line"/>';
+
                 var sameOrgHtml = "";
                 var sameOrgCount = "";
                 var moreHtml = "";
@@ -264,7 +273,7 @@ $(document).ready(function () {
                 }else{
                     sameOrgCount=4;
                     moreHtml = '<div style="margin-right: 5px;min-height: 4.7rem;">'+
-                    '<a href="views/personalpage-list-search.html?ou=' +pramar+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
+                    '<a href="pages/personalpage/personalpage-list-search.html?ou=' +pramar+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
                 }
                 for(var i = 0; i< sameOrgCount; i++){
                     var iconImages=""
@@ -273,15 +282,18 @@ $(document).ready(function () {
                     } else {
                         iconImages = data[i].imageurl;
                     }
-                    sameOrgHtml = sameOrgHtml +'<div style="margin-top: 5px;margin-left: 1rem; cursor:pointer;" onclick="myFunction(\'' +data[i].uid +
+                    sameOrgHtml = sameOrgHtml +'<div class="tyzz-div" onclick="myFunction(\'' +data[i].uid +
                     '\')"><div style="float: left;"><div style="margin-right: 5px;">'+
                     '<img class="img right-bottom-img" src="'+iconImages+'" alt="u280"/></div></div>'+
                     '<span class="right-name">'+data[i].displayname+'</span><br>' +
                     '<span class="right-bottom-org">'+ sameOrgName + '</span></div>';
                 }
-                var sameOrgMemberDiv = '<div class="container-div clear-float"><label class="title-label">同一组织</label><div style="width: 100%;" >';
+
                 if(data.length > 0){
-                    $("#sameOrgMember").html(sameOrgMemberDiv+lineHtml+sameOrgHtml + moreHtml+ '</div></div>');
+                    $("#sameOrgId").remove();
+                    $("#sameOrgMember").html(sameOrgMemberDiv+sameOrgLineHtml+sameOrgHtml + moreHtml+ '</div></div>');
+                }else{
+
                 }
             },
             error: function (err) {

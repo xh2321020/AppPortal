@@ -2,7 +2,7 @@
  * Created by kingsinsd on 2016/7/8.
  */
 function myFunction(parmar){
-    var url = "views/personalpage-detail.html?uid="+parmar;
+    var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
     window.open(url,"fullscreen=0");
 }
 $(document).ready(function () {
