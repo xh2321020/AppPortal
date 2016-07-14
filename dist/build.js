@@ -105,7 +105,7 @@
 	        this.bindMore();
 	        for (var i = 0, len = fetchArray.length; i < len; i++) {
 	            if (i == 6) continue;
-	            var url = "http://bjecmportal.cnnp.com.cn:8000/news/" + fetchArray[i] + "?size=" + sizeArray[i];
+	            var url = "http://172.16.51.137:8010/api/news/" + fetchArray[i] + "?apikey=e71982d5401b488da4acef8827c41845&size=" + sizeArray[i];
 	            $.ajax({
 	                type: "get",
 	                dataType: "json",
