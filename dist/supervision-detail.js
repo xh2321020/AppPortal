@@ -44,34 +44,27 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var _stringify = __webpack_require__(3);
+	var _stringify = __webpack_require__(34);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _vue = __webpack_require__(6);
+	var _vue = __webpack_require__(21);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _webconfig = __webpack_require__(8);
+	var _webconfig = __webpack_require__(36);
 
-	var _header = __webpack_require__(9);
+	var _header = __webpack_require__(23);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(16);
+	var _footer = __webpack_require__(30);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _commonFunction = __webpack_require__(33);
+	var _commonFunction = __webpack_require__(37);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -242,45 +235,47 @@
 	    },
 	    components: {
 	        // updateRate:require("../supervision/components/update-rate.vue"),
-	        postphone: __webpack_require__(20),
-	        modalPop: __webpack_require__(25),
-	        progressBar: __webpack_require__(28)
+	        postphone: __webpack_require__(38),
+	        modalPop: __webpack_require__(43),
+	        progressBar: __webpack_require__(46)
 	    }
 
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 2 */
+/* 1 */
 /***/ function(module, exports) {
 
 	module.exports = jQuery;
 
 /***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(4), __esModule: true };
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(5)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
-/* 5 */
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 6 */
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -10313,10 +10308,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(7), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(22), __webpack_require__(1)))
 
 /***/ },
-/* 7 */
+/* 22 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10416,60 +10411,17 @@
 
 
 /***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var serverAddress = "http://172.16.51.137:8000",
-	    serverAddress2 = "";
-
-	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
-	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
-	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
-	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
-	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
-	//?page={当前页码，第一页为0}&size={每页条数}';
-	// 最后一个接口为POST方式，其他的均为GET方式
-	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
-	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
-	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
-	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
-	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845&id=20116636"; //用户模糊查询
-	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
-
-	var requestUrls = {
-		supervisionRequest: {
-			supSourceUrl: supSourceUrl,
-			orgUrl: orgUrl,
-			supAreaUrl: supAreaUrl,
-			deptUrl: deptUrl,
-			searchUrl: searchUrl,
-			supDetailUrl: supDetailUrl,
-			supAddUrl: supAddUrl,
-			searchuserUrl: searchuserUrl,
-			deptListUrl: deptListUrl,
-			postphoneUrl: postphoneUrl
-		}
-	};
-	///getorgInfo
-
-	// export {requestUrls}
-	// export default requestUrls
-	module.exports = requestUrls;
-
-/***/ },
-/* 9 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(10)
-	__vue_script__ = __webpack_require__(14)
+	__webpack_require__(24)
+	__vue_script__ = __webpack_require__(28)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(15)
+	__vue_template__ = __webpack_require__(29)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -10488,16 +10440,16 @@
 	})()}
 
 /***/ },
-/* 10 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(11);
+	var content = __webpack_require__(25);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -10514,10 +10466,10 @@
 	}
 
 /***/ },
-/* 11 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -10528,7 +10480,7 @@
 
 
 /***/ },
-/* 12 */
+/* 26 */
 /***/ function(module, exports) {
 
 	/*
@@ -10584,7 +10536,7 @@
 
 
 /***/ },
-/* 13 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -10806,7 +10758,7 @@
 
 
 /***/ },
-/* 14 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -10995,7 +10947,7 @@
 	//             <div class="nav-link" id="navLink">
 	//                 <ul class="nav-list">
 	//                     <li class="nav-list-item" id="comPortalNav">
-	//                         <a class="navbar-link com-portal" href="www.baidu.com">公司门户</a>
+	//                         <a class="navbar-link com-portal" href="pages/portal/index.html">公司门户</a>
 	//
 	//                         <div class="nav-panel company">
 	//                             <ul class="list">
@@ -11156,21 +11108,21 @@
 	    }
 	};
 	// </script>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 15 */
+/* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"www.baidu.com\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"pages/portal/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
 
 /***/ },
-/* 16 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(17)
-	__vue_template__ = __webpack_require__(19)
+	__webpack_require__(31)
+	__vue_template__ = __webpack_require__(33)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11189,16 +11141,16 @@
 	})()}
 
 /***/ },
-/* 17 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(18);
+	var content = __webpack_require__(32);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11215,10 +11167,10 @@
 	}
 
 /***/ },
-/* 18 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -11229,23 +11181,208 @@
 
 
 /***/ },
-/* 19 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 20 */
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(35), __esModule: true };
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(8)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var serverAddress = "http://172.16.51.137:8000",
+	    serverAddress2 = "";
+
+	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
+	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
+	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
+	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
+	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
+	//?page={当前页码，第一页为0}&size={每页条数}';
+	// 最后一个接口为POST方式，其他的均为GET方式
+	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
+	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
+	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
+	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
+	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
+	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
+
+	var requestUrls = {
+		supervisionRequest: {
+			supSourceUrl: supSourceUrl,
+			orgUrl: orgUrl,
+			supAreaUrl: supAreaUrl,
+			deptUrl: deptUrl,
+			searchUrl: searchUrl,
+			supDetailUrl: supDetailUrl,
+			supAddUrl: supAddUrl,
+			searchuserUrl: searchuserUrl,
+			deptListUrl: deptListUrl,
+			postphoneUrl: postphoneUrl
+		}
+	};
+	///getorgInfo
+
+	// export {requestUrls}
+	// export default requestUrls
+	module.exports = requestUrls;
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.loadingCover = exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
+
+	var _stringify = __webpack_require__(34);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _webconfig = __webpack_require__(36);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//ajax
+	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
+		if (type == "post") requestData = (0, _stringify2.default)(requestData);
+		$.ajax({
+			url: url,
+			type: type,
+			data: requestData,
+			// dataType:"json",
+			contentType: "application/json",
+			success: function success(result, state, jqxhr) {
+				console.log("success");
+				successHandler(result, state, jqxhr);
+			},
+			error: function error(result, state, jqxhr) {
+				console.log("error");
+				errorHandler(result, state, jqxhr);
+			}
+		});
+	};
+	//fetch organization
+
+	//fetch depts   部门
+	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
+		var url = _webconfig.supervisionRequest["deptUrl"] + pid;
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision source
+	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
+		var url = _webconfig.supervisionRequest["supSourceUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision area
+	var fetch_areaFromServer = function fetch_areaFromServer(success) {
+		var url = _webconfig.supervisionRequest["supAreaUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+
+	//accountable sn
+
+	//add new supervision
+	var add_supervision = function add_supervision(options, success) {
+		var url = _webconfig.supervisionRequest["supAddUrl"];
+		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//*cookies*/
+
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + expiredays);
+		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+	}
+	function getCookie(c_name) {
+		if (document.cookie.length > 0) {
+			var c_start = document.cookie.indexOf(c_name + "=");
+			if (c_start != -1) {
+				c_start = c_start + c_name.length + 1;
+				var c_end = document.cookie.indexOf(";", c_start);
+				if (c_end == -1) c_end = document.cookie.length;
+				return unescape(document.cookie.substring(c_start, c_end));
+			}
+		}
+		return "";
+	}
+	//*cookies*/
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		} else {
+			return null;
+		}
+	}
+
+	/*covering loading function*/
+	function loadingCover() {
+		$.blockUI({ message: '数据获取中，请稍候... ...',
+			css: {
+				border: 'none',
+				padding: '15px',
+				backgroundColor: '#000',
+				'-webkit-border-radius': '10px',
+				'-moz-border-radius': '10px',
+				opacity: .5,
+				color: '#fff'
+			}
+		});
+	}
+
+	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
+	exports.fetch_deptsFromServer = fetch_deptsFromServer;
+	exports.fetch_areaFromServer = fetch_areaFromServer;
+	exports.fetch_sourceFromServer = fetch_sourceFromServer;
+	exports.add_supervision = add_supervision;
+	exports.getCookie = getCookie;
+	exports.getQueryString = getQueryString;
+	exports.loadingCover = loadingCover;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(21)
-	__vue_script__ = __webpack_require__(23)
+	__webpack_require__(39)
+	__vue_script__ = __webpack_require__(41)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\supervision\\components\\postphone.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(24)
+	__vue_template__ = __webpack_require__(42)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11264,16 +11401,16 @@
 	})()}
 
 /***/ },
-/* 21 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(22);
+	var content = __webpack_require__(40);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11290,10 +11427,10 @@
 	}
 
 /***/ },
-/* 22 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -11304,7 +11441,7 @@
 
 
 /***/ },
-/* 23 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -11365,25 +11502,25 @@
 		}
 	};
 	// </script>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 24 */
+/* 42 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\t<div class=\"com-container\" _v-2a88e1ae=\"\">\n\t<form class=\"form-horizontal\" _v-2a88e1ae=\"\">\n\t  <div class=\"form-group\" _v-2a88e1ae=\"\">\n\t    <label class=\"col-sm-2 control-label\" _v-2a88e1ae=\"\">日期</label>\n\t    <div class=\"col-sm-10\" _v-2a88e1ae=\"\">\n\t      <input type=\"text\" class=\"form-control\" :id=\"input_id\" _v-2a88e1ae=\"\">\n\t    </div>\n\t  </div>\n\t  <div class=\"form-group\" _v-2a88e1ae=\"\">\n\t    <label class=\"col-sm-2 control-label\" _v-2a88e1ae=\"\">延期原因</label>\n\t    <div class=\"col-sm-10\" _v-2a88e1ae=\"\">\n\t   <textarea class=\"form-control comment\" v-model=\"comment\" _v-2a88e1ae=\"\"></textarea>\n\t    </div>\n\t  </div>\n  \t</form>\n\t\n\t</div>\n";
 
 /***/ },
-/* 25 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(26)
+	__vue_script__ = __webpack_require__(44)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\modal-pop.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(27)
+	__vue_template__ = __webpack_require__(45)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11402,7 +11539,7 @@
 	})()}
 
 /***/ },
-/* 26 */
+/* 44 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -11446,23 +11583,23 @@
 	// </script>
 
 /***/ },
-/* 27 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n<!-- <button class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\">button</button> -->\r\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n\t\t<h4 class=\"modal-title\"></h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n      <slot name=\"body\"></slot>\r\n\t\t</div>\r\n\t\t<!-- accordion end -->\r\n\t\t<div class=\"modal-footer\">\r\n\t\t<slot name=\"save\"></slot>\r\n\t     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\r\n     \t</div>\r\n      </div>    \r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 28 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(29)
-	__vue_script__ = __webpack_require__(31)
+	__webpack_require__(47)
+	__vue_script__ = __webpack_require__(49)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\progressbar-drag.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(32)
+	__vue_template__ = __webpack_require__(50)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11481,16 +11618,16 @@
 	})()}
 
 /***/ },
-/* 29 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(30);
+	var content = __webpack_require__(48);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11507,10 +11644,10 @@
 	}
 
 /***/ },
-/* 30 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -11521,7 +11658,7 @@
 
 
 /***/ },
-/* 31 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11625,120 +11762,10 @@
 	// </script>
 
 /***/ },
-/* 32 */
+/* 50 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t<div class=\"progress-container\" _v-1214d038=\"\">\n\t\t<span :id=\"title_id\" _v-1214d038=\"\">0</span>\n<div class=\"scale_panel\" _v-1214d038=\"\">\n\t<span class=\"r\" _v-1214d038=\"\">100</span>0\n\t<div class=\"scale\" :id=\"bar_id\" _v-1214d038=\"\">\n\t\t<div class=\"bar\" _v-1214d038=\"\"></div>\n\t\t<span :id=\"btn_id\" style=\"background: url(assets/images/progressdrag.gif) no-repeat; \" _v-1214d038=\"\"></span>\n\t</div> \n</div> \n\t</div>\n";
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
-
-	var _stringify = __webpack_require__(3);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
-	var _webconfig = __webpack_require__(8);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//ajax
-	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
-		if (type == "post") requestData = (0, _stringify2.default)(requestData);
-		$.ajax({
-			url: url,
-			type: type,
-			data: requestData,
-			// dataType:"json",
-			contentType: "application/json",
-			success: function success(result, state, jqxhr) {
-				console.log("success");
-				successHandler(result, state, jqxhr);
-			},
-			error: function error(result, state, jqxhr) {
-				console.log("error");
-				errorHandler(result, state, jqxhr);
-			}
-		});
-	};
-	//fetch organization
-
-	//fetch depts   部门
-	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
-		var url = _webconfig.supervisionRequest["deptUrl"] + pid;
-		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-	//supervision source
-	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
-		var url = _webconfig.supervisionRequest["supSourceUrl"];
-		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-	//supervision area
-	var fetch_areaFromServer = function fetch_areaFromServer(success) {
-		var url = _webconfig.supervisionRequest["supAreaUrl"];
-		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-
-	//accountable sn
-
-	//add new supervision
-	var add_supervision = function add_supervision(options, success) {
-		var url = _webconfig.supervisionRequest["supAddUrl"];
-		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-	//*cookies*/
-	function getCookie(c_name) {
-		setCookie("userid", "20046009", 30);
-		if (document.cookie.length > 0) {
-			c_start = document.cookie.indexOf(c_name + "=");
-			if (c_start != -1) {
-				c_start = c_start + c_name.length + 1;
-				c_end = document.cookie.indexOf(";", c_start);
-				if (c_end == -1) c_end = document.cookie.length;
-				return unescape(document.cookie.substring(c_start, c_end));
-			}
-		}
-		return "";
-	};
-
-	function setCookie(c_name, value, expiredays) {
-		var exdate = new Date();
-		exdate.setDate(exdate.getDate() + expiredays);
-		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
-	}
-	//*cookies*/
-	function getQueryString(name) {
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-		var r = window.location.search.substr(1).match(reg);
-		if (r != null) {
-			return unescape(r[2]);
-		} else {
-			return null;
-		}
-	}
-	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
-	exports.fetch_deptsFromServer = fetch_deptsFromServer;
-	exports.fetch_areaFromServer = fetch_areaFromServer;
-	exports.fetch_sourceFromServer = fetch_sourceFromServer;
-	exports.add_supervision = add_supervision;
-	exports.getCookie = getCookie;
-	exports.getQueryString = getQueryString;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }
 /******/ ]);

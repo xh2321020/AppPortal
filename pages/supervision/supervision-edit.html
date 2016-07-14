@@ -80,7 +80,7 @@
 			<td width="13%" class="al-right">责任领导(A)</td>
 			<td width="40%">    
                         <style scoped>.outer-container{float: left;}</style>                            
-                                <leader-select :supervision-request="requests" multiple="false" :selected.sync="leaders" leader-only="true"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
+                                <leader-select :given-params="leaderParams"  :selected.sync="leaders" leader-only="true"></><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
                             </td>
 			<td width="13%" class="al-right">紧急程度</td>
 			<td width="34%">
@@ -108,7 +108,7 @@
 			<td width="13%" class="al-right">责任人(R)</td>
 			<td width="40%">
 			 <style scoped>.outer-container{float: left;}</style>                            
-                                <leader-select :supervision-request="requests" multiple="true" :selected.sync="responsibleOptions" leader-only="false"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
+                                <leader-select :given-params="responsibleParams"  :selected.sync="responsibleOptions"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
 			</td>
 			<td width="13%" class="al-right">公开范围</td>
 			<td width="34%">

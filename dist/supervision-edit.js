@@ -44,58 +44,25 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var _vue = __webpack_require__(3);
+	var _vue = __webpack_require__(21);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _webconfig = __webpack_require__(5);
+	var _webconfig = __webpack_require__(36);
 
-	var _header = __webpack_require__(6);
+	var _header = __webpack_require__(23);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(13);
+	var _footer = __webpack_require__(30);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _commonFunction = __webpack_require__(17);
+	var _commonFunction = __webpack_require__(37);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/*common function start********************/
-	/**
-	 * Created by Mattia on 2016/6/23.
-	 */
-	function getCookie(c_name) {
-	    if (document.cookie.length > 0) {
-	        c_start = document.cookie.indexOf(c_name + "=");
-	        if (c_start != -1) {
-	            c_start = c_start + c_name.length + 1;
-	            c_end = document.cookie.indexOf(";", c_start);
-	            if (c_end == -1) c_end = document.cookie.length;
-	            return unescape(document.cookie.substring(c_start, c_end));
-	        }
-	    }
-	    return "";
-	};
-	function getQueryString(name) {
-	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-	    var r = window.location.search.substr(1).match(reg);
-	    if (r != null) {
-	        return unescape(r[2]);
-	    } else {
-	        return null;
-	    }
-	}
 
 	/*common function end*********************/
 	var headerVm = new _vue2.default({
@@ -104,6 +71,11 @@
 	        ComHeader: _header2.default
 	    }
 	});
+	/*common function start********************/
+	/**
+	 * Created by Mattia on 2016/6/23.
+	 */
+
 	var footerVm = new _vue2.default({
 	    el: "footer",
 	    components: {
@@ -155,11 +127,23 @@
 	        publicOptions: levelArray.concat(),
 	        comments: "",
 	        accessory: {},
-	        requests: _webconfig.supervisionRequest,
+	        leaderParams: {
+	            searchuserUrl: _webconfig.supervisionRequest.searchuserUrl,
+	            multiple: false,
+	            leaderOnly: true,
+	            title: "责任领导选择(仅搜索领导)"
+	        },
+	        responsibleParams: {
+	            searchuserUrl: _webconfig.supervisionRequest.searchuserUrl,
+	            multiple: false,
+	            leaderOnly: true,
+	            title: "责任人选择"
+	        },
 	        saveState: "",
 	        selectedDepts: [],
 	        selectedDept: [],
-	        leaders: []
+	        leaders: [],
+	        requests: _webconfig.supervisionRequest
 	    },
 	    computed: {
 	        scope: function scope() {
@@ -194,14 +178,14 @@
 	        var _this2 = this;
 
 	        var _this = this;
-	        var pid = getQueryString("pid");
+	        var pid = (0, _commonFunction.getQueryString)("pid");
 	        if (pid) this.pid = pid;
-	        var iid = getQueryString("id");
+	        var iid = (0, _commonFunction.getQueryString)("id");
 	        if (iid) {
 	            this.id = iid;
 	            this.fetchOriginSupervision();
 	        }
-	        this.previous = getQueryString("previous");
+	        this.previous = (0, _commonFunction.getQueryString)("previous");
 	        (0, _commonFunction.fetch_areaFromServer)(function (result, state, jqxhr) {
 	            var area = [{
 	                text: "请选择", value: ""
@@ -303,7 +287,6 @@
 	                _this3.saveState = "保存成功";
 	                var timer = setTimeout(function () {
 	                    clearTimeout(timer);
-	                    alert("hehe");
 	                }, 700);
 	            }, function (result, state, jqxhr) {
 	                _this3.saveState = "保存失败";
@@ -321,22 +304,47 @@
 	        }
 	    },
 	    components: {
-	        comAccordion: __webpack_require__(21),
-	        leaderSelect: __webpack_require__(26),
-	        updateRate: __webpack_require__(31)
+	        comAccordion: __webpack_require__(51),
+	        leaderSelect: __webpack_require__(56),
+	        updateRate: __webpack_require__(61)
 	    }
 
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 2 */
+/* 1 */
 /***/ function(module, exports) {
 
 	module.exports = jQuery;
 
 /***/ },
-/* 3 */
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -10369,10 +10377,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(22), __webpack_require__(1)))
 
 /***/ },
-/* 4 */
+/* 22 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10472,60 +10480,17 @@
 
 
 /***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var serverAddress = "http://172.16.51.137:8000",
-	    serverAddress2 = "";
-
-	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
-	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
-	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
-	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
-	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
-	//?page={当前页码，第一页为0}&size={每页条数}';
-	// 最后一个接口为POST方式，其他的均为GET方式
-	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
-	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
-	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
-	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
-	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
-	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
-
-	var requestUrls = {
-		supervisionRequest: {
-			supSourceUrl: supSourceUrl,
-			orgUrl: orgUrl,
-			supAreaUrl: supAreaUrl,
-			deptUrl: deptUrl,
-			searchUrl: searchUrl,
-			supDetailUrl: supDetailUrl,
-			supAddUrl: supAddUrl,
-			searchuserUrl: searchuserUrl,
-			deptListUrl: deptListUrl,
-			postphoneUrl: postphoneUrl
-		}
-	};
-	///getorgInfo
-
-	// export {requestUrls}
-	// export default requestUrls
-	module.exports = requestUrls;
-
-/***/ },
-/* 6 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(7)
-	__vue_script__ = __webpack_require__(11)
+	__webpack_require__(24)
+	__vue_script__ = __webpack_require__(28)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(12)
+	__vue_template__ = __webpack_require__(29)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -10544,16 +10509,16 @@
 	})()}
 
 /***/ },
-/* 7 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(8);
+	var content = __webpack_require__(25);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -10570,10 +10535,10 @@
 	}
 
 /***/ },
-/* 8 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -10584,7 +10549,7 @@
 
 
 /***/ },
-/* 9 */
+/* 26 */
 /***/ function(module, exports) {
 
 	/*
@@ -10640,7 +10605,7 @@
 
 
 /***/ },
-/* 10 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -10862,7 +10827,7 @@
 
 
 /***/ },
-/* 11 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -11051,7 +11016,7 @@
 	//             <div class="nav-link" id="navLink">
 	//                 <ul class="nav-list">
 	//                     <li class="nav-list-item" id="comPortalNav">
-	//                         <a class="navbar-link com-portal" href="www.baidu.com">公司门户</a>
+	//                         <a class="navbar-link com-portal" href="pages/portal/index.html">公司门户</a>
 	//
 	//                         <div class="nav-panel company">
 	//                             <ul class="list">
@@ -11212,21 +11177,21 @@
 	    }
 	};
 	// </script>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 12 */
+/* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"www.baidu.com\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"pages/portal/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
 
 /***/ },
-/* 13 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(14)
-	__vue_template__ = __webpack_require__(16)
+	__webpack_require__(31)
+	__vue_template__ = __webpack_require__(33)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11245,16 +11210,16 @@
 	})()}
 
 /***/ },
-/* 14 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(15);
+	var content = __webpack_require__(32);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11271,10 +11236,10 @@
 	}
 
 /***/ },
-/* 15 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -11285,13 +11250,72 @@
 
 
 /***/ },
-/* 16 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 17 */
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(35), __esModule: true };
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(8)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var serverAddress = "http://172.16.51.137:8000",
+	    serverAddress2 = "";
+
+	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
+	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
+	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
+	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
+	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
+	//?page={当前页码，第一页为0}&size={每页条数}';
+	// 最后一个接口为POST方式，其他的均为GET方式
+	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
+	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
+	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
+	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
+	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
+	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
+
+	var requestUrls = {
+		supervisionRequest: {
+			supSourceUrl: supSourceUrl,
+			orgUrl: orgUrl,
+			supAreaUrl: supAreaUrl,
+			deptUrl: deptUrl,
+			searchUrl: searchUrl,
+			supDetailUrl: supDetailUrl,
+			supAddUrl: supAddUrl,
+			searchuserUrl: searchuserUrl,
+			deptListUrl: deptListUrl,
+			postphoneUrl: postphoneUrl
+		}
+	};
+	///getorgInfo
+
+	// export {requestUrls}
+	// export default requestUrls
+	module.exports = requestUrls;
+
+/***/ },
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -11301,11 +11325,11 @@
 	});
 	exports.loadingCover = exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
 
-	var _stringify = __webpack_require__(18);
+	var _stringify = __webpack_require__(34);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _webconfig = __webpack_require__(5);
+	var _webconfig = __webpack_require__(36);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11393,7 +11417,6 @@
 
 	/*covering loading function*/
 	function loadingCover() {
-		alert(0);
 		$.blockUI({ message: '数据获取中，请稍候... ...',
 			css: {
 				border: 'none',
@@ -11415,43 +11438,282 @@
 	exports.getCookie = getCookie;
 	exports.getQueryString = getQueryString;
 	exports.loadingCover = loadingCover;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(19), __esModule: true };
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(20)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	var core = module.exports = {version: '2.4.0'};
-	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ },
-/* 21 */
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(22)
-	__vue_script__ = __webpack_require__(24)
+	__vue_script__ = __webpack_require__(44)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\modal-pop.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(45)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./modal-pop.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <template>
+	// <!-- <button class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">button</button> -->
+	// <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	//   <div class="modal-dialog" role="document">
+	//     <div class="modal-content">
+	//       <div class="modal-header">
+	// 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	// 		<h4 class="modal-title"></h4>
+	//       </div>
+	//       <div class="modal-body">
+	//       <slot name="body"></slot>
+	// 		</div>
+	// 		<!-- accordion end -->
+	// 		<div class="modal-footer">
+	// 		<slot name="save"></slot>
+	// 	     	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	//      	</div>
+	//       </div>   
+	//     </div>
+	//   </div>
+	// </template>
+	// <script >
+	exports.default = {
+		data: function data() {
+			var timeNow = new Date().getTime();
+			return {
+				// :"modal"+timeNow
+			};
+		},
+
+		props: ["modalTitle", "modal_id"]
+	};
+
+	// </script>
+
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n<!-- <button class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\">button</button> -->\r\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n\t\t<h4 class=\"modal-title\"></h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n      <slot name=\"body\"></slot>\r\n\t\t</div>\r\n\t\t<!-- accordion end -->\r\n\t\t<div class=\"modal-footer\">\r\n\t\t<slot name=\"save\"></slot>\r\n\t     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\r\n     \t</div>\r\n      </div>    \r\n    </div>\r\n  </div>\r\n";
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(47)
+	__vue_script__ = __webpack_require__(49)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\progressbar-drag.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(50)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./progressbar-drag.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(48);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(27)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(26)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n.scale_panel[_v-1214d038]{\r\n\tfont-size:12px;\r\n\tcolor:#999;\r\n\twidth:70%;\r\n\tposition:absolute; \r\n\tline-height:18px; \r\n\tleft:60px;\r\n\ttop:-0px;\r\n}\r\n.scale_panel .r[_v-1214d038]{\r\n\tfloat:right;\r\n}\r\n.scale span[_v-1214d038]{\r\n\t\r\n\twidth:8px;\r\n\theight:16px; \r\n\tposition:absolute; \r\n\tleft:-2px;\r\n\ttop:-5px;\r\n\tcursor:pointer;\r\n\t/*background-color: lightgrey;*/\r\n}\r\n.scale[_v-1214d038]{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }\r\n.scale .bar[_v-1214d038]{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <style scoped>
+	// .scale_panel{
+	// 	font-size:12px;
+	// 	color:#999;
+	// 	width:70%;
+	// 	position:absolute;
+	// 	line-height:18px;
+	// 	left:60px;
+	// 	top:-0px;
+	// }
+	// .scale_panel .r{
+	// 	float:right;
+	// }
+	// .scale span{
+	//
+	// 	width:8px;
+	// 	height:16px;
+	// 	position:absolute;
+	// 	left:-2px;
+	// 	top:-5px;
+	// 	cursor:pointer;
+	// 	/*background-color: lightgrey;*/
+	// }
+	// .scale{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }
+	// .scale .bar{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }
+	//
+	// </style>
+	// <template>
+	// 	<div class="progress-container">
+	// 		<span :id="title_id">0</span>
+	// <div class="scale_panel">
+	// 	<span class="r">100</span>0
+	// 	<div class="scale" :id="bar_id">
+	// 		<div class="bar"></div>
+	// 		<span :id="btn_id" style="background: url(assets/images/progressdrag.gif) no-repeat; "></span>
+	// 	</div>
+	// </div>
+	// 	</div>
+	// </template>
+	//
+	// <script>
+	var scale = function scale(btn, bar, title, _this) {
+		this.btn = document.getElementById(btn);
+		this.bar = document.getElementById(bar);
+		this.title = document.getElementById(title);
+		this.step = this.bar.getElementsByTagName("div")[0];
+		this.init(_this);
+	};
+	scale.prototype = {
+		init: function init(_this) {
+			var f = this,
+			    g = document,
+			    b = window,
+			    m = Math;
+			f.btn.onmousedown = function (e) {
+				var x = (e || b.event).clientX;
+				var l = this.offsetLeft;
+				var max = f.bar.offsetWidth - this.offsetWidth;
+				g.onmousemove = function (e) {
+					var thisX = (e || b.event).clientX;
+					var to = m.min(max, m.max(-2, l + (thisX - x)));
+					f.btn.style.left = to + 'px';
+					f.ondrag(m.round(m.max(0, to / max) * 100), to);
+					b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+					_this.rate = m.round(m.max(0, to / max) * 100);
+				};
+				g.onmouseup = new Function('this.onmousemove=null');
+			};
+		},
+		ondrag: function ondrag(pos, x) {
+			this.step.style.width = Math.max(0, x) + 'px';
+			this.title.innerHTML = pos + '%';
+		}
+	};
+
+	exports.default = {
+		data: function data() {
+			var timeStr = new Date().getTime();
+			return {
+				btn_id: "btn" + timeStr,
+				bar_id: "bar" + timeStr,
+				title_id: "title" + timeStr
+			};
+		},
+
+		props: ["rate"],
+		created: function created() {},
+		ready: function ready() {
+			new scale(this.btn_id, this.bar_id, this.title_id, this);
+		},
+		methods: {}
+	};
+
+	// </script>
+
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t<div class=\"progress-container\" _v-1214d038=\"\">\n\t\t<span :id=\"title_id\" _v-1214d038=\"\">0</span>\n<div class=\"scale_panel\" _v-1214d038=\"\">\n\t<span class=\"r\" _v-1214d038=\"\">100</span>0\n\t<div class=\"scale\" :id=\"bar_id\" _v-1214d038=\"\">\n\t\t<div class=\"bar\" _v-1214d038=\"\"></div>\n\t\t<span :id=\"btn_id\" style=\"background: url(assets/images/progressdrag.gif) no-repeat; \" _v-1214d038=\"\"></span>\n\t</div> \n</div> \n\t</div>\n";
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(52)
+	__vue_script__ = __webpack_require__(54)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\accordion-menu.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(25)
+	__vue_template__ = __webpack_require__(55)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11470,16 +11732,16 @@
 	})()}
 
 /***/ },
-/* 22 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(23);
+	var content = __webpack_require__(53);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11496,10 +11758,10 @@
 	}
 
 /***/ },
-/* 23 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -11510,7 +11772,7 @@
 
 
 /***/ },
-/* 24 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -11881,26 +12143,26 @@
 	};
 
 	// </script>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 25 */
+/* 55 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div style=\"display:inline-block;\" _v-f85852e6=\"\">\n <button type=\"button\" class=\"btn  btn-sm\" style=\"vertical-align: baseline;\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\" _v-f85852e6=\"\">{{btn_title}}</button>\n<!-- Modal -->\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-f85852e6=\"\">\n  <div class=\"modal-dialog\" role=\"document\" _v-f85852e6=\"\">\n    <div class=\"modal-content\" _v-f85852e6=\"\">\n      <div class=\"modal-header\" _v-f85852e6=\"\">\n\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-f85852e6=\"\"><span aria-hidden=\"true\" _v-f85852e6=\"\">×</span></button>\n\t<h4 class=\"modal-title\" _v-f85852e6=\"\">部门列表</h4>\n      </div>\n      <div class=\"modal-body\" _v-f85852e6=\"\">\n\n\t\t<!--accordion start -->\n\t\t\n\t\t\t<ul :id=\"accordion_id\" class=\"accordion\" _v-f85852e6=\"\">\n\t\t\t\t<li v-for=\"org in orgs\" _v-f85852e6=\"\">\n\t\t\t\t\t<div class=\"link\" _v-f85852e6=\"\"><i class=\"fa fa-th-list\" _v-f85852e6=\"\"></i>{{org.name}}<i class=\"fa fa-chevron-down\" _v-f85852e6=\"\"></i></div>\n\t\t\t\t\t<ul class=\"submenu\" _v-f85852e6=\"\">\n\t\t\t\t\t\t\n\t\t\t\t\t\t<li v-for=\"dept in depts[org.ou]\" _v-f85852e6=\"\">\n\t\t\t\t\t\t<template v-if=\"sections[dept.ou]\">\n\t\t\t\t\t\t\t<div class=\"link\" _v-f85852e6=\"\"><i class=\"fa fa-th-list\" _v-f85852e6=\"\"></i>{{dept.name}}<i class=\"fa fa-plus\" _v-f85852e6=\"\"></i></div>\n\t\t\t\t\t\t\t<ul class=\"submenu\" _v-f85852e6=\"\">\n\t\t\t\t\t\t\t\t<li v-for=\"section in sections[dept.ou]\" _v-f85852e6=\"\"><a @click=\"selectDept(section,$event)\" _v-f85852e6=\"\">{{section.name}}</a></li>\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</template>\n\t\t\t\t\t\t\t<template v-else=\"\">\n\t\t\t\t\t\t\t\t<a @click=\"selectDept(dept,$event)\" _v-f85852e6=\"\">{{dept.name}}</a>\n\t\t\t\t\t\t\t</template>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\t\t\t\n\t\t\t</ul>\n\t\t</div>\n\t\t<!-- accordion end -->\n\t\t  <div class=\"modal-footer\" _v-f85852e6=\"\">\n     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-f85852e6=\"\">关闭</button>\n     </div>\n      </div>\n    \n    </div>\n  </div>\n</div>\n<!--modal end-->\n\n\n\t\n";
 
 /***/ },
-/* 26 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(27)
-	__vue_script__ = __webpack_require__(29)
+	__webpack_require__(57)
+	__vue_script__ = __webpack_require__(59)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\user-selector.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(30)
+	__vue_template__ = __webpack_require__(60)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11919,16 +12181,16 @@
 	})()}
 
 /***/ },
-/* 27 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(28);
+	var content = __webpack_require__(58);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11945,10 +12207,10 @@
 	}
 
 /***/ },
-/* 28 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -11959,7 +12221,7 @@
 
 
 /***/ },
-/* 29 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -12076,7 +12338,7 @@
 	//                 <div class="modal-header">
 	//                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 	//                             aria-hidden="true">&times;</span></button>
-	//                     <h4 class="modal-title">责任领导选择(仅搜索领导)</h4>
+	//                     <h4 class="modal-title">{{givenParams.title}}</h4>
 	//                 </div>
 	//                 <div class="modal-body">
 	//                     <div class="input"><input type="text" class="form-control inputSuccess1" v-model="input"
@@ -12131,17 +12393,21 @@
 	            members: [],
 	            // options:[],
 	            input: "",
-	            request: {}
+	            request: {},
+	            multiple: "",
+	            leaderOnly: "",
+	            searchuserUrl: "",
+	            title: ""
 	        };
 	    },
 
-	    props: ["supervisionRequest", "multiple", 'leaderOnly', 'selected'],
+	    props: ["givenParams", 'selected'],
 
 	    created: function created() {
-	        if (this.multiple == "false") this.multiple = false;else this.multiple = true;
-	        if (this.leaderOnly == "false") this.leaderOnly = false;else this.leaderOnly = true;
+	        this.multiple = this.givenParams.multiple;
+	        this.leaderOnly = this.givenParams.leaderOnly;
+	        this.searchuserUrl = this.givenParams.searchuserUrl;
 	    },
-	    ready: function ready() {},
 
 	    methods: {
 	        selectMember: function selectMember(item) {
@@ -12151,13 +12417,13 @@
 	            var _this2 = this;
 
 	            var _this = this;
-	            var input = this.input.trim();
+	            var input = this.input.replace(/(^\s*)|(\s*$)/g, "");
 	            if (input == "") {
 	                return;
 	            }
 	            var timer = setTimeout(function () {
 	                clearTimeout(timer);
-	                var inputVal = _this.input.trim();
+	                var inputVal = _this.input.replace(/(^\s*)|(\s*$)/g, "");
 	                if (inputVal != input) {
 	                    return;
 	                } else {
@@ -12169,7 +12435,7 @@
 
 	                    _this.request = $.ajax({
 	                        type: "get",
-	                        url: _this2.supervisionRequest.searchuserUrl + "&q=" + inputVal,
+	                        url: _this2.searchuserUrl + "&q=" + inputVal,
 	                        success: function success(result, state, jqxhr) {
 	                            var members = [];
 	                            var count = 0;
@@ -12225,26 +12491,26 @@
 	// </script>
 	// </body>
 	// </html>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 30 */
+/* 60 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n<div class=\"outer-container\" _v-04adc868=\"\">\n    <div class=\"input-grout\" style=\"width: 50%;position: relative;\" _v-04adc868=\"\">\n     <button type=\"button\" class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\" _v-04adc868=\"\">请选择</button>\n    </div>\n    <div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-04adc868=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-04adc868=\"\">\n            <div class=\"modal-content\" _v-04adc868=\"\">\n                <div class=\"modal-header\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-04adc868=\"\"><span aria-hidden=\"true\" _v-04adc868=\"\">×</span></button>\n                    <h4 class=\"modal-title\" _v-04adc868=\"\">责任领导选择(仅搜索领导)</h4>\n                </div>\n                <div class=\"modal-body\" _v-04adc868=\"\">\n                    <div class=\"input\" _v-04adc868=\"\"><input type=\"text\" class=\"form-control inputSuccess1\" v-model=\"input\" @keyup=\"searchInput\" _v-04adc868=\"\"></div>\n                   <section class=\"search-result\" _v-04adc868=\"\">\n                                                  \n                    <table class=\"table table-hover table-condensed content-key\" _v-04adc868=\"\">\n                        <thead _v-04adc868=\"\">\n                        <tr _v-04adc868=\"\"><th _v-04adc868=\"\">单位</th>\n                        <th _v-04adc868=\"\">处室</th>\n                        <th _v-04adc868=\"\">科室</th>\n                        <th _v-04adc868=\"\">姓名</th>\n                        <th _v-04adc868=\"\"></th>\n                        </tr></thead>\n                        <tbody _v-04adc868=\"\">\n                        <tr v-for=\"member in members\" _v-04adc868=\"\">\n                            <td v-for=\"n in 3\" _v-04adc868=\"\">{{member.orgtree[n+1]?member.orgtree[n+1].name:\"\"}}</td>\n                            <td _v-04adc868=\"\">{{member.displayname}}</td>\n                            <td _v-04adc868=\"\">\n                                <button class=\"btn btn-default\" @click=\"addUser(member)\" _v-04adc868=\"\">添加</button>\n                            </td>\n                        </tr>\n\n                        </tbody>\n                    </table>\n                    <div class=\"result\" _v-04adc868=\"\">\n                        <ul class=\"list\" _v-04adc868=\"\">\n                            <li v-for=\"user in selected\" class=\"btn btn-primary\" @click=\"removeUser($index,event)\" _v-04adc868=\"\">\n                                <a v-text=\"user.displayname\" style=\"color: white;\" _v-04adc868=\"\">\n                                </a><i class=\"glyphicon glyphicon-remove\" _v-04adc868=\"\"></i></li>\n                        </ul>\n                    </div>\n                        <div class=\"cover\" _v-04adc868=\"\">\n                            <img class=\"loading\" :src=\"'assets/images/loading3.gif'\" _v-04adc868=\"\">\n                        </div>\n                   </section>\n                </div>\n                <div class=\"modal-footer\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-04adc868=\"\">关闭</button>\n                    <!-- <button type=\"button\" class=\"btn btn-primary\">Save changes</button> -->\n                </div>\n            </div>\n        </div>\n    </div>\n    </div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n<div class=\"outer-container\" _v-04adc868=\"\">\n    <div class=\"input-grout\" style=\"width: 50%;position: relative;\" _v-04adc868=\"\">\n     <button type=\"button\" class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\" _v-04adc868=\"\">请选择</button>\n    </div>\n    <div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-04adc868=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-04adc868=\"\">\n            <div class=\"modal-content\" _v-04adc868=\"\">\n                <div class=\"modal-header\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-04adc868=\"\"><span aria-hidden=\"true\" _v-04adc868=\"\">×</span></button>\n                    <h4 class=\"modal-title\" _v-04adc868=\"\">{{givenParams.title}}</h4>\n                </div>\n                <div class=\"modal-body\" _v-04adc868=\"\">\n                    <div class=\"input\" _v-04adc868=\"\"><input type=\"text\" class=\"form-control inputSuccess1\" v-model=\"input\" @keyup=\"searchInput\" _v-04adc868=\"\"></div>\n                   <section class=\"search-result\" _v-04adc868=\"\">\n                                                  \n                    <table class=\"table table-hover table-condensed content-key\" _v-04adc868=\"\">\n                        <thead _v-04adc868=\"\">\n                        <tr _v-04adc868=\"\"><th _v-04adc868=\"\">单位</th>\n                        <th _v-04adc868=\"\">处室</th>\n                        <th _v-04adc868=\"\">科室</th>\n                        <th _v-04adc868=\"\">姓名</th>\n                        <th _v-04adc868=\"\"></th>\n                        </tr></thead>\n                        <tbody _v-04adc868=\"\">\n                        <tr v-for=\"member in members\" _v-04adc868=\"\">\n                            <td v-for=\"n in 3\" _v-04adc868=\"\">{{member.orgtree[n+1]?member.orgtree[n+1].name:\"\"}}</td>\n                            <td _v-04adc868=\"\">{{member.displayname}}</td>\n                            <td _v-04adc868=\"\">\n                                <button class=\"btn btn-default\" @click=\"addUser(member)\" _v-04adc868=\"\">添加</button>\n                            </td>\n                        </tr>\n\n                        </tbody>\n                    </table>\n                    <div class=\"result\" _v-04adc868=\"\">\n                        <ul class=\"list\" _v-04adc868=\"\">\n                            <li v-for=\"user in selected\" class=\"btn btn-primary\" @click=\"removeUser($index,event)\" _v-04adc868=\"\">\n                                <a v-text=\"user.displayname\" style=\"color: white;\" _v-04adc868=\"\">\n                                </a><i class=\"glyphicon glyphicon-remove\" _v-04adc868=\"\"></i></li>\n                        </ul>\n                    </div>\n                        <div class=\"cover\" _v-04adc868=\"\">\n                            <img class=\"loading\" :src=\"'assets/images/loading3.gif'\" _v-04adc868=\"\">\n                        </div>\n                   </section>\n                </div>\n                <div class=\"modal-footer\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-04adc868=\"\">关闭</button>\n                    <!-- <button type=\"button\" class=\"btn btn-primary\">Save changes</button> -->\n                </div>\n            </div>\n        </div>\n    </div>\n    </div>\n";
 
 /***/ },
-/* 31 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(32)
-	__vue_script__ = __webpack_require__(34)
+	__webpack_require__(62)
+	__vue_script__ = __webpack_require__(64)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\supervision\\components\\update-rate.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(43)
+	__vue_template__ = __webpack_require__(65)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -12263,16 +12529,16 @@
 	})()}
 
 /***/ },
-/* 32 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(33);
+	var content = __webpack_require__(63);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(27)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -12289,10 +12555,10 @@
 	}
 
 /***/ },
-/* 33 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(26)();
 	// imports
 
 
@@ -12303,7 +12569,7 @@
 
 
 /***/ },
-/* 34 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -12351,8 +12617,8 @@
 
 		props: ["rate", "modal_id"],
 		components: {
-			modalPop: __webpack_require__(35),
-			progressBar: __webpack_require__(38)
+			modalPop: __webpack_require__(43),
+			progressBar: __webpack_require__(46)
 		},
 		created: function created() {
 			// body...
@@ -12362,264 +12628,7 @@
 	// </script>
 
 /***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(36)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\modal-pop.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(37)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "./modal-pop.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	// <template>
-	// <!-- <button class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">button</button> -->
-	// <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	//   <div class="modal-dialog" role="document">
-	//     <div class="modal-content">
-	//       <div class="modal-header">
-	// 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	// 		<h4 class="modal-title"></h4>
-	//       </div>
-	//       <div class="modal-body">
-	//       <slot name="body"></slot>
-	// 		</div>
-	// 		<!-- accordion end -->
-	// 		<div class="modal-footer">
-	// 		<slot name="save"></slot>
-	// 	     	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	//      	</div>
-	//       </div>   
-	//     </div>
-	//   </div>
-	// </template>
-	// <script >
-	exports.default = {
-		data: function data() {
-			var timeNow = new Date().getTime();
-			return {
-				// :"modal"+timeNow
-			};
-		},
-
-		props: ["modalTitle", "modal_id"]
-	};
-
-	// </script>
-
-/***/ },
-/* 37 */
-/***/ function(module, exports) {
-
-	module.exports = "\r\n<!-- <button class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\">button</button> -->\r\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n\t\t<h4 class=\"modal-title\"></h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n      <slot name=\"body\"></slot>\r\n\t\t</div>\r\n\t\t<!-- accordion end -->\r\n\t\t<div class=\"modal-footer\">\r\n\t\t<slot name=\"save\"></slot>\r\n\t     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\r\n     \t</div>\r\n      </div>    \r\n    </div>\r\n  </div>\r\n";
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(39)
-	__vue_script__ = __webpack_require__(41)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\progressbar-drag.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(42)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "./progressbar-drag.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(40);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(9)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\r\n.scale_panel[_v-1214d038]{\r\n\tfont-size:12px;\r\n\tcolor:#999;\r\n\twidth:70%;\r\n\tposition:absolute; \r\n\tline-height:18px; \r\n\tleft:60px;\r\n\ttop:-0px;\r\n}\r\n.scale_panel .r[_v-1214d038]{\r\n\tfloat:right;\r\n}\r\n.scale span[_v-1214d038]{\r\n\t\r\n\twidth:8px;\r\n\theight:16px; \r\n\tposition:absolute; \r\n\tleft:-2px;\r\n\ttop:-5px;\r\n\tcursor:pointer;\r\n\t/*background-color: lightgrey;*/\r\n}\r\n.scale[_v-1214d038]{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }\r\n.scale .bar[_v-1214d038]{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }\r\n\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 41 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	// <style scoped>
-	// .scale_panel{
-	// 	font-size:12px;
-	// 	color:#999;
-	// 	width:70%;
-	// 	position:absolute;
-	// 	line-height:18px;
-	// 	left:60px;
-	// 	top:-0px;
-	// }
-	// .scale_panel .r{
-	// 	float:right;
-	// }
-	// .scale span{
-	//
-	// 	width:8px;
-	// 	height:16px;
-	// 	position:absolute;
-	// 	left:-2px;
-	// 	top:-5px;
-	// 	cursor:pointer;
-	// 	/*background-color: lightgrey;*/
-	// }
-	// .scale{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }
-	// .scale .bar{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }
-	//
-	// </style>
-	// <template>
-	// 	<div class="progress-container">
-	// 		<span :id="title_id">0</span>
-	// <div class="scale_panel">
-	// 	<span class="r">100</span>0
-	// 	<div class="scale" :id="bar_id">
-	// 		<div class="bar"></div>
-	// 		<span :id="btn_id" style="background: url(assets/images/progressdrag.gif) no-repeat; "></span>
-	// 	</div>
-	// </div>
-	// 	</div>
-	// </template>
-	//
-	// <script>
-	var scale = function scale(btn, bar, title, _this) {
-		this.btn = document.getElementById(btn);
-		this.bar = document.getElementById(bar);
-		this.title = document.getElementById(title);
-		this.step = this.bar.getElementsByTagName("div")[0];
-		this.init(_this);
-	};
-	scale.prototype = {
-		init: function init(_this) {
-			var f = this,
-			    g = document,
-			    b = window,
-			    m = Math;
-			f.btn.onmousedown = function (e) {
-				var x = (e || b.event).clientX;
-				var l = this.offsetLeft;
-				var max = f.bar.offsetWidth - this.offsetWidth;
-				g.onmousemove = function (e) {
-					var thisX = (e || b.event).clientX;
-					var to = m.min(max, m.max(-2, l + (thisX - x)));
-					f.btn.style.left = to + 'px';
-					f.ondrag(m.round(m.max(0, to / max) * 100), to);
-					b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
-					_this.rate = m.round(m.max(0, to / max) * 100);
-				};
-				g.onmouseup = new Function('this.onmousemove=null');
-			};
-		},
-		ondrag: function ondrag(pos, x) {
-			this.step.style.width = Math.max(0, x) + 'px';
-			this.title.innerHTML = pos + '%';
-		}
-	};
-
-	exports.default = {
-		data: function data() {
-			var timeStr = new Date().getTime();
-			return {
-				btn_id: "btn" + timeStr,
-				bar_id: "bar" + timeStr,
-				title_id: "title" + timeStr
-			};
-		},
-
-		props: ["rate"],
-		created: function created() {},
-		ready: function ready() {
-			new scale(this.btn_id, this.bar_id, this.title_id, this);
-		},
-		methods: {}
-	};
-
-	// </script>
-
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t<div class=\"progress-container\" _v-1214d038=\"\">\n\t\t<span :id=\"title_id\" _v-1214d038=\"\">0</span>\n<div class=\"scale_panel\" _v-1214d038=\"\">\n\t<span class=\"r\" _v-1214d038=\"\">100</span>0\n\t<div class=\"scale\" :id=\"bar_id\" _v-1214d038=\"\">\n\t\t<div class=\"bar\" _v-1214d038=\"\"></div>\n\t\t<span :id=\"btn_id\" style=\"background: url(assets/images/progressdrag.gif) no-repeat; \" _v-1214d038=\"\"></span>\n\t</div> \n</div> \n\t</div>\n";
-
-/***/ },
-/* 43 */
+/* 65 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"outer-container\" _v-4282b744=\"\">\n\t<modal-pop :modal_id=\"modal_id\" _v-4282b744=\"\">\n\t\t<div slot=\"body\" _v-4282b744=\"\">\n\t\t\t<form class=\"form-horizontal\" _v-4282b744=\"\">\n\t\t\t  <div class=\"form-group\" _v-4282b744=\"\">\n\t\t\t    <label class=\"col-sm-2 control-label\" _v-4282b744=\"\">进度</label>\n\t\t\t    <div class=\"col-sm-10\" _v-4282b744=\"\">\n\t\t\t    <progress-bar :rate.sync=\"rate.rate\" _v-4282b744=\"\"></progress-bar>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t\t\t<div class=\"form-group\" _v-4282b744=\"\">\n\t\t\t\t<label class=\"col-sm-2 control-label\" _v-4282b744=\"\"></label>\n\t\t\t\t<textarea class=\"form-control\" v-model=\"rate.comment\" _v-4282b744=\"\"></textarea>\n\t\t\t\t</div>\t\t\t\t\t\n\t\t\t\t</form>\n\t\t\t</div>\n\t</modal-pop>\n</div>\n";

@@ -44,34 +44,27 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var _stringify = __webpack_require__(3);
+	var _stringify = __webpack_require__(34);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _webconfig = __webpack_require__(6);
+	var _webconfig = __webpack_require__(36);
 
-	var _header = __webpack_require__(7);
+	var _header = __webpack_require__(23);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(14);
+	var _footer = __webpack_require__(30);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _commonFunction = __webpack_require__(18);
+	var _commonFunction = __webpack_require__(37);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(19); /**
+	var Vue = __webpack_require__(21); /**
 	                           * Created by Mattia on 2016/6/12.
 	                           */
 	// var requestInterfaces=require("../webconfig.js")
@@ -508,984 +501,41 @@
 
 	    /* body... */
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },
-/* 2 */
+/* 1 */
 /***/ function(module, exports) {
 
 	module.exports = jQuery;
 
 /***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(4), __esModule: true };
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(5)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
-/* 5 */
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var serverAddress = "http://172.16.51.137:8000",
-	    serverAddress2 = "";
-
-	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
-	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
-	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
-	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
-	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
-	//?page={当前页码，第一页为0}&size={每页条数}';
-	// 最后一个接口为POST方式，其他的均为GET方式
-	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
-	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
-	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
-	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
-	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
-	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
-
-	var requestUrls = {
-		supervisionRequest: {
-			supSourceUrl: supSourceUrl,
-			orgUrl: orgUrl,
-			supAreaUrl: supAreaUrl,
-			deptUrl: deptUrl,
-			searchUrl: searchUrl,
-			supDetailUrl: supDetailUrl,
-			supAddUrl: supAddUrl,
-			searchuserUrl: searchuserUrl,
-			deptListUrl: deptListUrl,
-			postphoneUrl: postphoneUrl
-		}
-	};
-	///getorgInfo
-
-	// export {requestUrls}
-	// export default requestUrls
-	module.exports = requestUrls;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(8)
-	__vue_script__ = __webpack_require__(12)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(13)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "./header.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(9);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./header.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./header.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(10)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n*,article,section,ul,div,p,td,li{\n    margin: 0;padding: 0;\n}\nhtml {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}\nbody {font-size: 1.4rem;/*1.4 × 10px = 14px */\n    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    min-width: 1024px;\n    max-width: 80%;\n    margin: 0 auto;\n}\nh1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}\n\n\n/*顶部导航开始*/\n.navbar{\n    width: 100%;\n    margin: 0 auto;\n}\n\n.navbar .container-fluid{\n    position: relative;\n    padding: 0;\n    background: #ffffff;\n}\n.brand{\n    float: left;\n    width: 25.8rem;\n    height: 5.2rem;\n}\n\n.nav-list{\n    list-style: none;\n    float: left;\n    border-left: 1px solid lightgrey;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n}\n.navbar-link.com-portal:hover{\n    background: #00a2e5;\n    color: #ffffff;\n}\n.dep-portal:hover{\n    background: #FFB341;\n    color: #ffffff;\n}\n.navbar-link.workbench:hover{\n    background: #ABCB27;\n    color: #ffffff;\n}\n.navbar-link{\n    display: inline-block;\n    height: 100%;\n    position: relative;\n    padding:0 3rem;\n    color: #797979;\n    width: 100%;\n}\n\n.nav-list .navbar-link:hover{\n    color: #ffffff;\n    text-decoration: none;\n\n}\n.nav-list .active{\n    color: #0066cc;\n}\n.nav-list-item{\n    float: left;\n    border-right: 1px solid lightgrey;\n    line-height: 5.2rem;\n    text-align: center;\n    width: 20rem;\n}\n#depPortalNav{\n    display: none;\n}\n.nav-action{\n    /*border: 1px solid blue;*/\n    position: absolute;\n    top: 0;\n    right: 0;\n    line-height: 3.2rem;\n    list-style: none;\n    font-size: 1.6rem;\n    font-weight: 700;\n    color: grey;\n}\n.nav-action .login{\n    min-width:12rem;\n    text-align: center;\n}\n.nav-action .search{\n    min-width: 22rem;\n    border-left: solid 1px lightgrey;\n    text-align: left;\n}\n.nav-action .form-control{\n    display: inline;\n    /*width: auto;*/\n    width: 15rem;\n}\n.nav-action .search{\n    padding-left: 3rem;\n}\n.nav-link{\n    position: relative;\n}\n.nav-panel{\n    background-color: white;\n    display: none;\n    left: 0;\n    top: 0;\n    position: absolute;\n    margin-top: 5.2rem;\n    width: 100%;\n    height: 16.5rem;\n    z-index: 1030;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n    margin-left: 0!important;\n    margin-right: 0!important;\n    border: 1px solid lightgrey;\n}\n.company>ul:first-child{\n    padding-top: 2rem;\n}\n.nav-panel .list{\n    border-top: 1px solid lightgrey;\n\n}\n.nav-panel ul{\n    padding: 0 2rem;\n    list-style: none;\n}\n\n.nav-panel .list-item{\n    float: left;\n    width: 14%;\n    text-align: center;\n}\n.company .btn:hover{\n    background-color: #00a2e5;\n    color:#fff\n}\n.dept-subj .btn:hover{\n    background-color: #FFB341;\n    color:#fff\n}\n.dept-subj .list-item{\n    width: 25%;\n    margin-bottom: -1rem;\n}\n.dept-subj .title{\n    margin-bottom: -2rem;\n}\n\n.list.dept{\n    position: relative;\n}\n.dept .split{\n    position: absolute;\n    top: 0;\n    right: 0;\n}\n/*顶部导航结束*/\n/*logo*/\n.logo{\n    width: 100%;\n    padding: 0 1px;\n}\n/*logo end*/\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if (media) {
-			styleElement.setAttribute("media", media);
-		}
-
-		if (sourceMap) {
-			// https://developer.chrome.com/devtools/docs/javascript-debugging
-			// this makes source maps inside style tags work properly in Chrome
-			css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
-
-	// <style>
-	//     *,article,section,ul,div,p,td,li{
-	//         margin: 0;padding: 0;
-	//     }
-	//     html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
-	//     body {font-size: 1.4rem;/*1.4 × 10px = 14px */
-	//         font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
-	//         min-width: 1024px;
-	//         max-width: 80%;
-	//         margin: 0 auto;
-	//     }
-	//     h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
-	//
-	//
-	//     /*顶部导航开始*/
-	//     .navbar{
-	//         width: 100%;
-	//         margin: 0 auto;
-	//     }
-	//
-	//     .navbar .container-fluid{
-	//         position: relative;
-	//         padding: 0;
-	//         background: #ffffff;
-	//     }
-	//     .brand{
-	//         float: left;
-	//         width: 25.8rem;
-	//         height: 5.2rem;
-	//     }
-	//
-	//     .nav-list{
-	//         list-style: none;
-	//         float: left;
-	//         border-left: 1px solid lightgrey;
-	//         font-size: 14px;
-	//         font-weight: 400;
-	//         color: #797979!important;
-	//     }
-	//     .navbar-link.com-portal:hover{
-	//         background: #00a2e5;
-	//         color: #ffffff;
-	//     }
-	//     .dep-portal:hover{
-	//         background: #FFB341;
-	//         color: #ffffff;
-	//     }
-	//     .navbar-link.workbench:hover{
-	//         background: #ABCB27;
-	//         color: #ffffff;
-	//     }
-	//     .navbar-link{
-	//         display: inline-block;
-	//         height: 100%;
-	//         position: relative;
-	//         padding:0 3rem;
-	//         color: #797979;
-	//         width: 100%;
-	//     }
-	//
-	//     .nav-list .navbar-link:hover{
-	//         color: #ffffff;
-	//         text-decoration: none;
-	//
-	//     }
-	//     .nav-list .active{
-	//         color: #0066cc;
-	//     }
-	//     .nav-list-item{
-	//         float: left;
-	//         border-right: 1px solid lightgrey;
-	//         line-height: 5.2rem;
-	//         text-align: center;
-	//         width: 20rem;
-	//     }
-	//     #depPortalNav{
-	//         display: none;
-	//     }
-	//     .nav-action{
-	//         /*border: 1px solid blue;*/
-	//         position: absolute;
-	//         top: 0;
-	//         right: 0;
-	//         line-height: 3.2rem;
-	//         list-style: none;
-	//         font-size: 1.6rem;
-	//         font-weight: 700;
-	//         color: grey;
-	//     }
-	//     .nav-action .login{
-	//         min-width:12rem;
-	//         text-align: center;
-	//     }
-	//     .nav-action .search{
-	//         min-width: 22rem;
-	//         border-left: solid 1px lightgrey;
-	//         text-align: left;
-	//     }
-	//     .nav-action .form-control{
-	//         display: inline;
-	//         /*width: auto;*/
-	//         width: 15rem;
-	//     }
-	//     .nav-action .search{
-	//         padding-left: 3rem;
-	//     }
-	//     .nav-link{
-	//         position: relative;
-	//     }
-	//     .nav-panel{
-	//         background-color: white;
-	//         display: none;
-	//         left: 0;
-	//         top: 0;
-	//         position: absolute;
-	//         margin-top: 5.2rem;
-	//         width: 100%;
-	//         height: 16.5rem;
-	//         z-index: 1030;
-	//         font-size: 14px;
-	//         font-weight: 400;
-	//         color: #797979!important;
-	//         margin-left: 0!important;
-	//         margin-right: 0!important;
-	//         border: 1px solid lightgrey;
-	//     }
-	//     .company>ul:first-child{
-	//         padding-top: 2rem;
-	//     }
-	//     .nav-panel .list{
-	//         border-top: 1px solid lightgrey;
-	//
-	//     }
-	//     .nav-panel ul{
-	//         padding: 0 2rem;
-	//         list-style: none;
-	//     }
-	//
-	//     .nav-panel .list-item{
-	//         float: left;
-	//         width: 14%;
-	//         text-align: center;
-	//     }
-	//     .company .btn:hover{
-	//         background-color: #00a2e5;
-	//         color:#fff
-	//     }
-	//     .dept-subj .btn:hover{
-	//         background-color: #FFB341;
-	//         color:#fff
-	//     }
-	//     .dept-subj .list-item{
-	//         width: 25%;
-	//         margin-bottom: -1rem;
-	//     }
-	//     .dept-subj .title{
-	//         margin-bottom: -2rem;
-	//     }
-	//
-	//     .list.dept{
-	//         position: relative;
-	//     }
-	//     .dept .split{
-	//         position: absolute;
-	//         top: 0;
-	//         right: 0;
-	//     }
-	//     /*顶部导航结束*/
-	//     /*logo*/
-	//     .logo{
-	//         width: 100%;
-	//         padding: 0 1px;
-	//     }
-	//     /*logo end*/
-	// </style>
-	// <template>
-	//     <!--<base href="../../../">-->
-	//     <div class="navbar navbar-default">
-	//         <div class="container-fluid nav-header">
-	//             <img class="brand" :src="'assets/images/portal/brand_big.png'" />
-	//
-	//             <div class="nav-link" id="navLink">
-	//                 <ul class="nav-list">
-	//                     <li class="nav-list-item" id="comPortalNav">
-	//                         <a class="navbar-link com-portal" href="www.baidu.com">公司门户</a>
-	//
-	//                         <div class="nav-panel company">
-	//                             <ul class="list">
-	//                                 <li class="list-item"><a class="btn" href="http://bjportal.cnnp.com.cn/wps/portal"
-	//                                                          target="_blank">中国核电旧主页</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="http://www.cnnc.com.cn"
-	//                                                          target="_blank">中国核工业集团公司</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="http://10.16.15.38"
-	//                                                          target="_blank">中核运行</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="" target="_blank">中浙能源</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn"
-	//                                                          href="http://10.16.15.38:10039/wps/portal/Home/cnnc_index"
-	//                                                          target="_blank">秦山(筹)</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">江苏核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">三门核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                             </ul>
-	//                             <ul>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="http://fqecm.cnnp.com.cn/wps/portal"
-	//                                                          target="_blank">福清核电</a></li>
-	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">海南核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">桃花江核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">辽宁核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="http://fsecm.cnnp.com.cn/wps/portal"
-	//                                                          target="_blank">三明核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="http://zgecm.cnnp.com.cn/wps/portal"
-	//                                                          target="_blank">漳州核电</a></li>
-	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item">&nbsp;</li>
-	//                                 <!-- /.list-item -->
-	//                             </ul>
-	//                         </div>
-	//                     </li>
-	//                     <li class="nav-list-item dept-subj" id="depPortalNav">
-	//                         <a class="navbar-link dep-portal">部门及专题门户</a>
-	//
-	//                         <div class="nav-panel row">
-	//                             <div class="list dept col-md-6">
-	//                                 <p class="title">部门门户</p>
-	//                                 <!-- /.title -->
-	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                 </ul>
-	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                 </ul>
-	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                 </ul>
-	//                                 <img :src="'assets/images/portal/dash_line.png'" alt="" class="split"/>
-	//                                 <!-- /.split -->
-	//                             </div>
-	//                             <!-- /.list -->
-	//                             <div class="list col-md-6">
-	//                                 <p class="title">专题门户</p>
-	//                                 <!-- /.title -->
-	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                 </ul>
-	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-	//                                     <!-- /.list-item -->
-	//                                 </ul>
-	//                             </div>
-	//                             <!-- /.list -->
-	//                         </div>
-	//                     </li>
-	//                     <li class="nav-list-item"><a class="navbar-link workbench" href="pages/portal/portal-personalCon.html">个人工作台</a></li>
-	//                 </ul>
-	//             </div>
-	//             <!-- /.nav-link -->
-	//
-	//             <ul class="nav-action" id="nav-action">
-	//                 <li class="nav-list-item search"><input type="text" class="form-control" placeholder="搜索" v-model="searchInputVal"/>
-	//                     <a class="btn-search" @click="doSearch"><span class="glyphicon glyphicon-search"></span>
-	//                         <!-- /.glyphicon glyphicon-search --></a>
-	//                     <!-- /.search -->
-	//                 </li>
-	//                 <!-- <li class="nav-list-item login"><a :href="f2000"></a></li> -->
-	//             </ul>
-	//             <!-- /.nav-action -->
-	//         </div>
-	//         <!-- /.container -->
-	//
-	//         <!-- /.nav-panel -->
-	//     </div>
-	//     <div>
-	//         <img :src="'assets/images/portal/portal-logo1.jpg'" alt="" class="logo" />
-	//         <!-- /.logo -->
-	//     </div>
-	// </template>
-	// <script>
-	module.exports = {
-	    data: function data() {
-	        return {
-	            searchInputVal: ""
-	        };
-	    },
-	    methods: {
-	        doSearch: function doSearch(argument) {
-	            // body...
-	            // var qstr = this.searchInputVal;
-	            var url = "http://bjportal.cnnp.com.cn/publish2/newsShow/search?qstr=" + this.searchInputVal;
-	            window.open(url);
-	        }
-	    },
-	    ready: function ready() {
-	        $("#comPortalNav").hover(function (ev) {
-	            $(this.querySelector(".nav-panel")).show();
-	        }, function () {
-	            $(this.querySelector(".nav-panel")).hide();
-	        });
-	    }
-	};
-	// </script>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"www.baidu.com\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(15)
-	__vue_template__ = __webpack_require__(17)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "./footer.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(16);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./footer.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./footer.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(10)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\r\n    \r\n/*----底部样式-----*/\r\n.footer{ background-color:#6a7986; height:80px; margin-top: 2rem;}\r\n.footer_content{ width:490px; margin:0 auto; padding-top:10px; color:#fff;}\r\n.sina{ width:58px; height:65px; text-align:center; float:left; font-size:12px; }\r\n.con{ width:245px; float:left; text-align:center; margin:0 0 0 60px;}\r\n.weixin{ height:65px; text-align:center; float:right; font-size:12px;}\r\n/***************************************end***********************************/\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.loadingCover = exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
-
-	var _stringify = __webpack_require__(3);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
-	var _webconfig = __webpack_require__(6);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//ajax
-	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
-		if (type == "post") requestData = (0, _stringify2.default)(requestData);
-		$.ajax({
-			url: url,
-			type: type,
-			data: requestData,
-			// dataType:"json",
-			contentType: "application/json",
-			success: function success(result, state, jqxhr) {
-				console.log("success");
-				successHandler(result, state, jqxhr);
-			},
-			error: function error(result, state, jqxhr) {
-				console.log("error");
-				errorHandler(result, state, jqxhr);
-			}
-		});
-	};
-	//fetch organization
-
-	//fetch depts   部门
-	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
-		var url = _webconfig.supervisionRequest["deptUrl"] + pid;
-		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-	//supervision source
-	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
-		var url = _webconfig.supervisionRequest["supSourceUrl"];
-		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-	//supervision area
-	var fetch_areaFromServer = function fetch_areaFromServer(success) {
-		var url = _webconfig.supervisionRequest["supAreaUrl"];
-		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-
-	//accountable sn
-
-	//add new supervision
-	var add_supervision = function add_supervision(options, success) {
-		var url = _webconfig.supervisionRequest["supAddUrl"];
-		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
-			console.log(result);
-		});
-	};
-	//*cookies*/
-
-	function setCookie(c_name, value, expiredays) {
-		var exdate = new Date();
-		exdate.setDate(exdate.getDate() + expiredays);
-		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
-	}
-	function getCookie(c_name) {
-		if (document.cookie.length > 0) {
-			var c_start = document.cookie.indexOf(c_name + "=");
-			if (c_start != -1) {
-				c_start = c_start + c_name.length + 1;
-				var c_end = document.cookie.indexOf(";", c_start);
-				if (c_end == -1) c_end = document.cookie.length;
-				return unescape(document.cookie.substring(c_start, c_end));
-			}
-		}
-		return "";
-	}
-	//*cookies*/
-	function getQueryString(name) {
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-		var r = window.location.search.substr(1).match(reg);
-		if (r != null) {
-			return unescape(r[2]);
-		} else {
-			return null;
-		}
-	}
-
-	/*covering loading function*/
-	function loadingCover() {
-		$.blockUI({ message: '数据获取中，请稍候... ...',
-			css: {
-				border: 'none',
-				padding: '15px',
-				backgroundColor: '#000',
-				'-webkit-border-radius': '10px',
-				'-moz-border-radius': '10px',
-				opacity: .5,
-				color: '#fff'
-			}
-		});
-	}
-
-	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
-	exports.fetch_deptsFromServer = fetch_deptsFromServer;
-	exports.fetch_areaFromServer = fetch_areaFromServer;
-	exports.fetch_sourceFromServer = fetch_sourceFromServer;
-	exports.add_supervision = add_supervision;
-	exports.getCookie = getCookie;
-	exports.getQueryString = getQueryString;
-	exports.loadingCover = loadingCover;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 19 */
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -11518,10 +10568,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(20), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(22), __webpack_require__(1)))
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -11619,6 +10669,967 @@
 	};
 	process.umask = function() { return 0; };
 
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(24)
+	__vue_script__ = __webpack_require__(28)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(29)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./header.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(25);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(27)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./header.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./header.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(26)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n*,article,section,ul,div,p,td,li{\n    margin: 0;padding: 0;\n}\nhtml {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}\nbody {font-size: 1.4rem;/*1.4 × 10px = 14px */\n    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    min-width: 1024px;\n    max-width: 80%;\n    margin: 0 auto;\n}\nh1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}\n\n\n/*顶部导航开始*/\n.navbar{\n    width: 100%;\n    margin: 0 auto;\n}\n\n.navbar .container-fluid{\n    position: relative;\n    padding: 0;\n    background: #ffffff;\n}\n.brand{\n    float: left;\n    width: 25.8rem;\n    height: 5.2rem;\n}\n\n.nav-list{\n    list-style: none;\n    float: left;\n    border-left: 1px solid lightgrey;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n}\n.navbar-link.com-portal:hover{\n    background: #00a2e5;\n    color: #ffffff;\n}\n.dep-portal:hover{\n    background: #FFB341;\n    color: #ffffff;\n}\n.navbar-link.workbench:hover{\n    background: #ABCB27;\n    color: #ffffff;\n}\n.navbar-link{\n    display: inline-block;\n    height: 100%;\n    position: relative;\n    padding:0 3rem;\n    color: #797979;\n    width: 100%;\n}\n\n.nav-list .navbar-link:hover{\n    color: #ffffff;\n    text-decoration: none;\n\n}\n.nav-list .active{\n    color: #0066cc;\n}\n.nav-list-item{\n    float: left;\n    border-right: 1px solid lightgrey;\n    line-height: 5.2rem;\n    text-align: center;\n    width: 20rem;\n}\n#depPortalNav{\n    display: none;\n}\n.nav-action{\n    /*border: 1px solid blue;*/\n    position: absolute;\n    top: 0;\n    right: 0;\n    line-height: 3.2rem;\n    list-style: none;\n    font-size: 1.6rem;\n    font-weight: 700;\n    color: grey;\n}\n.nav-action .login{\n    min-width:12rem;\n    text-align: center;\n}\n.nav-action .search{\n    min-width: 22rem;\n    border-left: solid 1px lightgrey;\n    text-align: left;\n}\n.nav-action .form-control{\n    display: inline;\n    /*width: auto;*/\n    width: 15rem;\n}\n.nav-action .search{\n    padding-left: 3rem;\n}\n.nav-link{\n    position: relative;\n}\n.nav-panel{\n    background-color: white;\n    display: none;\n    left: 0;\n    top: 0;\n    position: absolute;\n    margin-top: 5.2rem;\n    width: 100%;\n    height: 16.5rem;\n    z-index: 1030;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n    margin-left: 0!important;\n    margin-right: 0!important;\n    border: 1px solid lightgrey;\n}\n.company>ul:first-child{\n    padding-top: 2rem;\n}\n.nav-panel .list{\n    border-top: 1px solid lightgrey;\n\n}\n.nav-panel ul{\n    padding: 0 2rem;\n    list-style: none;\n}\n\n.nav-panel .list-item{\n    float: left;\n    width: 14%;\n    text-align: center;\n}\n.company .btn:hover{\n    background-color: #00a2e5;\n    color:#fff\n}\n.dept-subj .btn:hover{\n    background-color: #FFB341;\n    color:#fff\n}\n.dept-subj .list-item{\n    width: 25%;\n    margin-bottom: -1rem;\n}\n.dept-subj .title{\n    margin-bottom: -2rem;\n}\n\n.list.dept{\n    position: relative;\n}\n.dept .split{\n    position: absolute;\n    top: 0;\n    right: 0;\n}\n/*顶部导航结束*/\n/*logo*/\n.logo{\n    width: 100%;\n    padding: 0 1px;\n}\n/*logo end*/\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+
+		if (media) {
+			styleElement.setAttribute("media", media);
+		}
+
+		if (sourceMap) {
+			// https://developer.chrome.com/devtools/docs/javascript-debugging
+			// this makes source maps inside style tags work properly in Chrome
+			css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+
+	// <style>
+	//     *,article,section,ul,div,p,td,li{
+	//         margin: 0;padding: 0;
+	//     }
+	//     html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+	//     body {font-size: 1.4rem;/*1.4 × 10px = 14px */
+	//         font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+	//         min-width: 1024px;
+	//         max-width: 80%;
+	//         margin: 0 auto;
+	//     }
+	//     h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
+	//
+	//
+	//     /*顶部导航开始*/
+	//     .navbar{
+	//         width: 100%;
+	//         margin: 0 auto;
+	//     }
+	//
+	//     .navbar .container-fluid{
+	//         position: relative;
+	//         padding: 0;
+	//         background: #ffffff;
+	//     }
+	//     .brand{
+	//         float: left;
+	//         width: 25.8rem;
+	//         height: 5.2rem;
+	//     }
+	//
+	//     .nav-list{
+	//         list-style: none;
+	//         float: left;
+	//         border-left: 1px solid lightgrey;
+	//         font-size: 14px;
+	//         font-weight: 400;
+	//         color: #797979!important;
+	//     }
+	//     .navbar-link.com-portal:hover{
+	//         background: #00a2e5;
+	//         color: #ffffff;
+	//     }
+	//     .dep-portal:hover{
+	//         background: #FFB341;
+	//         color: #ffffff;
+	//     }
+	//     .navbar-link.workbench:hover{
+	//         background: #ABCB27;
+	//         color: #ffffff;
+	//     }
+	//     .navbar-link{
+	//         display: inline-block;
+	//         height: 100%;
+	//         position: relative;
+	//         padding:0 3rem;
+	//         color: #797979;
+	//         width: 100%;
+	//     }
+	//
+	//     .nav-list .navbar-link:hover{
+	//         color: #ffffff;
+	//         text-decoration: none;
+	//
+	//     }
+	//     .nav-list .active{
+	//         color: #0066cc;
+	//     }
+	//     .nav-list-item{
+	//         float: left;
+	//         border-right: 1px solid lightgrey;
+	//         line-height: 5.2rem;
+	//         text-align: center;
+	//         width: 20rem;
+	//     }
+	//     #depPortalNav{
+	//         display: none;
+	//     }
+	//     .nav-action{
+	//         /*border: 1px solid blue;*/
+	//         position: absolute;
+	//         top: 0;
+	//         right: 0;
+	//         line-height: 3.2rem;
+	//         list-style: none;
+	//         font-size: 1.6rem;
+	//         font-weight: 700;
+	//         color: grey;
+	//     }
+	//     .nav-action .login{
+	//         min-width:12rem;
+	//         text-align: center;
+	//     }
+	//     .nav-action .search{
+	//         min-width: 22rem;
+	//         border-left: solid 1px lightgrey;
+	//         text-align: left;
+	//     }
+	//     .nav-action .form-control{
+	//         display: inline;
+	//         /*width: auto;*/
+	//         width: 15rem;
+	//     }
+	//     .nav-action .search{
+	//         padding-left: 3rem;
+	//     }
+	//     .nav-link{
+	//         position: relative;
+	//     }
+	//     .nav-panel{
+	//         background-color: white;
+	//         display: none;
+	//         left: 0;
+	//         top: 0;
+	//         position: absolute;
+	//         margin-top: 5.2rem;
+	//         width: 100%;
+	//         height: 16.5rem;
+	//         z-index: 1030;
+	//         font-size: 14px;
+	//         font-weight: 400;
+	//         color: #797979!important;
+	//         margin-left: 0!important;
+	//         margin-right: 0!important;
+	//         border: 1px solid lightgrey;
+	//     }
+	//     .company>ul:first-child{
+	//         padding-top: 2rem;
+	//     }
+	//     .nav-panel .list{
+	//         border-top: 1px solid lightgrey;
+	//
+	//     }
+	//     .nav-panel ul{
+	//         padding: 0 2rem;
+	//         list-style: none;
+	//     }
+	//
+	//     .nav-panel .list-item{
+	//         float: left;
+	//         width: 14%;
+	//         text-align: center;
+	//     }
+	//     .company .btn:hover{
+	//         background-color: #00a2e5;
+	//         color:#fff
+	//     }
+	//     .dept-subj .btn:hover{
+	//         background-color: #FFB341;
+	//         color:#fff
+	//     }
+	//     .dept-subj .list-item{
+	//         width: 25%;
+	//         margin-bottom: -1rem;
+	//     }
+	//     .dept-subj .title{
+	//         margin-bottom: -2rem;
+	//     }
+	//
+	//     .list.dept{
+	//         position: relative;
+	//     }
+	//     .dept .split{
+	//         position: absolute;
+	//         top: 0;
+	//         right: 0;
+	//     }
+	//     /*顶部导航结束*/
+	//     /*logo*/
+	//     .logo{
+	//         width: 100%;
+	//         padding: 0 1px;
+	//     }
+	//     /*logo end*/
+	// </style>
+	// <template>
+	//     <!--<base href="../../../">-->
+	//     <div class="navbar navbar-default">
+	//         <div class="container-fluid nav-header">
+	//             <img class="brand" :src="'assets/images/portal/brand_big.png'" />
+	//
+	//             <div class="nav-link" id="navLink">
+	//                 <ul class="nav-list">
+	//                     <li class="nav-list-item" id="comPortalNav">
+	//                         <a class="navbar-link com-portal" href="pages/portal/index.html">公司门户</a>
+	//
+	//                         <div class="nav-panel company">
+	//                             <ul class="list">
+	//                                 <li class="list-item"><a class="btn" href="http://bjportal.cnnp.com.cn/wps/portal"
+	//                                                          target="_blank">中国核电旧主页</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="http://www.cnnc.com.cn"
+	//                                                          target="_blank">中国核工业集团公司</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="http://10.16.15.38"
+	//                                                          target="_blank">中核运行</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="" target="_blank">中浙能源</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn"
+	//                                                          href="http://10.16.15.38:10039/wps/portal/Home/cnnc_index"
+	//                                                          target="_blank">秦山(筹)</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">江苏核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">三门核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                             </ul>
+	//                             <ul>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="http://fqecm.cnnp.com.cn/wps/portal"
+	//                                                          target="_blank">福清核电</a></li>
+	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">海南核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">桃花江核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">辽宁核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="http://fsecm.cnnp.com.cn/wps/portal"
+	//                                                          target="_blank">三明核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item"><a class="btn" href="http://zgecm.cnnp.com.cn/wps/portal"
+	//                                                          target="_blank">漳州核电</a></li>
+	//                                 <!-- /.list-item -->
+	//                                 <li class="list-item">&nbsp;</li>
+	//                                 <!-- /.list-item -->
+	//                             </ul>
+	//                         </div>
+	//                     </li>
+	//                     <li class="nav-list-item dept-subj" id="depPortalNav">
+	//                         <a class="navbar-link dep-portal">部门及专题门户</a>
+	//
+	//                         <div class="nav-panel row">
+	//                             <div class="list dept col-md-6">
+	//                                 <p class="title">部门门户</p>
+	//                                 <!-- /.title -->
+	//                                 <ul>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                 </ul>
+	//                                 <ul>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                 </ul>
+	//                                 <ul>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                 </ul>
+	//                                 <img :src="'assets/images/portal/dash_line.png'" alt="" class="split"/>
+	//                                 <!-- /.split -->
+	//                             </div>
+	//                             <!-- /.list -->
+	//                             <div class="list col-md-6">
+	//                                 <p class="title">专题门户</p>
+	//                                 <!-- /.title -->
+	//                                 <ul>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                 </ul>
+	//                                 <ul>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                 </ul>
+	//                             </div>
+	//                             <!-- /.list -->
+	//                         </div>
+	//                     </li>
+	//                     <li class="nav-list-item"><a class="navbar-link workbench" href="pages/portal/portal-personalCon.html">个人工作台</a></li>
+	//                 </ul>
+	//             </div>
+	//             <!-- /.nav-link -->
+	//
+	//             <ul class="nav-action" id="nav-action">
+	//                 <li class="nav-list-item search"><input type="text" class="form-control" placeholder="搜索" v-model="searchInputVal"/>
+	//                     <a class="btn-search" @click="doSearch"><span class="glyphicon glyphicon-search"></span>
+	//                         <!-- /.glyphicon glyphicon-search --></a>
+	//                     <!-- /.search -->
+	//                 </li>
+	//                 <!-- <li class="nav-list-item login"><a :href="f2000"></a></li> -->
+	//             </ul>
+	//             <!-- /.nav-action -->
+	//         </div>
+	//         <!-- /.container -->
+	//
+	//         <!-- /.nav-panel -->
+	//     </div>
+	//     <div>
+	//         <img :src="'assets/images/portal/portal-logo1.jpg'" alt="" class="logo" />
+	//         <!-- /.logo -->
+	//     </div>
+	// </template>
+	// <script>
+	module.exports = {
+	    data: function data() {
+	        return {
+	            searchInputVal: ""
+	        };
+	    },
+	    methods: {
+	        doSearch: function doSearch(argument) {
+	            // body...
+	            // var qstr = this.searchInputVal;
+	            var url = "http://bjportal.cnnp.com.cn/publish2/newsShow/search?qstr=" + this.searchInputVal;
+	            window.open(url);
+	        }
+	    },
+	    ready: function ready() {
+	        $("#comPortalNav").hover(function (ev) {
+	            $(this.querySelector(".nav-panel")).show();
+	        }, function () {
+	            $(this.querySelector(".nav-panel")).hide();
+	        });
+	    }
+	};
+	// </script>
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"pages/portal/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(31)
+	__vue_template__ = __webpack_require__(33)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./footer.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(32);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(27)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./footer.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./footer.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(26)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n    \r\n/*----底部样式-----*/\r\n.footer{ background-color:#6a7986; height:80px; margin-top: 2rem;}\r\n.footer_content{ width:490px; margin:0 auto; padding-top:10px; color:#fff;}\r\n.sina{ width:58px; height:65px; text-align:center; float:left; font-size:12px; }\r\n.con{ width:245px; float:left; text-align:center; margin:0 0 0 60px;}\r\n.weixin{ height:65px; text-align:center; float:right; font-size:12px;}\r\n/***************************************end***********************************/\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(35), __esModule: true };
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(8)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var serverAddress = "http://172.16.51.137:8000",
+	    serverAddress2 = "";
+
+	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
+	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
+	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
+	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
+	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
+	//?page={当前页码，第一页为0}&size={每页条数}';
+	// 最后一个接口为POST方式，其他的均为GET方式
+	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
+	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
+	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
+	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
+	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
+	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
+
+	var requestUrls = {
+		supervisionRequest: {
+			supSourceUrl: supSourceUrl,
+			orgUrl: orgUrl,
+			supAreaUrl: supAreaUrl,
+			deptUrl: deptUrl,
+			searchUrl: searchUrl,
+			supDetailUrl: supDetailUrl,
+			supAddUrl: supAddUrl,
+			searchuserUrl: searchuserUrl,
+			deptListUrl: deptListUrl,
+			postphoneUrl: postphoneUrl
+		}
+	};
+	///getorgInfo
+
+	// export {requestUrls}
+	// export default requestUrls
+	module.exports = requestUrls;
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.loadingCover = exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
+
+	var _stringify = __webpack_require__(34);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _webconfig = __webpack_require__(36);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//ajax
+	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
+		if (type == "post") requestData = (0, _stringify2.default)(requestData);
+		$.ajax({
+			url: url,
+			type: type,
+			data: requestData,
+			// dataType:"json",
+			contentType: "application/json",
+			success: function success(result, state, jqxhr) {
+				console.log("success");
+				successHandler(result, state, jqxhr);
+			},
+			error: function error(result, state, jqxhr) {
+				console.log("error");
+				errorHandler(result, state, jqxhr);
+			}
+		});
+	};
+	//fetch organization
+
+	//fetch depts   部门
+	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
+		var url = _webconfig.supervisionRequest["deptUrl"] + pid;
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision source
+	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
+		var url = _webconfig.supervisionRequest["supSourceUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision area
+	var fetch_areaFromServer = function fetch_areaFromServer(success) {
+		var url = _webconfig.supervisionRequest["supAreaUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+
+	//accountable sn
+
+	//add new supervision
+	var add_supervision = function add_supervision(options, success) {
+		var url = _webconfig.supervisionRequest["supAddUrl"];
+		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//*cookies*/
+
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + expiredays);
+		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+	}
+	function getCookie(c_name) {
+		if (document.cookie.length > 0) {
+			var c_start = document.cookie.indexOf(c_name + "=");
+			if (c_start != -1) {
+				c_start = c_start + c_name.length + 1;
+				var c_end = document.cookie.indexOf(";", c_start);
+				if (c_end == -1) c_end = document.cookie.length;
+				return unescape(document.cookie.substring(c_start, c_end));
+			}
+		}
+		return "";
+	}
+	//*cookies*/
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		} else {
+			return null;
+		}
+	}
+
+	/*covering loading function*/
+	function loadingCover() {
+		$.blockUI({ message: '数据获取中，请稍候... ...',
+			css: {
+				border: 'none',
+				padding: '15px',
+				backgroundColor: '#000',
+				'-webkit-border-radius': '10px',
+				'-moz-border-radius': '10px',
+				opacity: .5,
+				color: '#fff'
+			}
+		});
+	}
+
+	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
+	exports.fetch_deptsFromServer = fetch_deptsFromServer;
+	exports.fetch_areaFromServer = fetch_areaFromServer;
+	exports.fetch_sourceFromServer = fetch_sourceFromServer;
+	exports.add_supervision = add_supervision;
+	exports.getCookie = getCookie;
+	exports.getQueryString = getQueryString;
+	exports.loadingCover = loadingCover;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }
 /******/ ]);
