@@ -10,6 +10,13 @@
             overflow-y: auto;
             /*min-height: 80px;*/
         }
+        .vue-font{
+            margin-left:5%;
+            color:lightgrey;
+            width:100%;
+            font-size:1.2rem;
+            font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+        }
         .emp-class {
              height: 8rem;
            /* margin-left: 1.5rem;
@@ -20,7 +27,7 @@
             border-right: 2px solid #CCCCCC;*/
         }
         .emp-class-result{
-            border: 1px solid red;
+            border: 1px solid grey;
             float: left;
                 margin-right: 0.5rem;
                 margin-top: 0.5rem;
@@ -28,7 +35,9 @@
                 cursor: pointer
         }
         .emp-class-result:hover{
-            background-color:red;
+            box-shadow: 0  15px 30px rgba(0,0,0,.1);
+            transform: translate3d(0,-2px,0);
+            cursor: pointer;
         }
         .emp-class-img {
             width: 60px;
@@ -136,6 +145,10 @@
          }
          /*cover end*/
 
+    .form-control{
+    display:block;
+    height:34px;
+    padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)}.form-control::-moz-placeholder{color:#999;opacity:1}.form-control:-ms-input-placeholder{color:#999}.form-control::-webkit-input-placeholder{color:#999}.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{background-color:#eee;opacity:1}.form-control[disabled],fieldset[disabled] .form-control{cursor:not-allowed}textarea.form-control{height:auto}input[type=search]{-webkit-appearance:none}@media screen and (-webkit-min-device-pixel-ratio:0){input[type=date].form-control,input[type=time].form-control,input[type=datetime-local].form-control,input[type=month].form-control{line-height:34px}.input-group-sm input[type=date],.input-group-sm input[type=time],.input-group-sm input[type=datetime-local],.input-group-sm input[type=month],input[type=date].input-sm,input[type=time].input-sm,input[type=datetime-local].input-sm,input[type=month].input-sm{line-height:30px}.input-group-lg input[type=date],.input-group-lg input[type=time],.input-group-lg input[type=datetime-local],.input-group-lg input[type=month],input[type=date].input-lg,input[type=time].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg{line-height:46px}}
 </style>
 <template>  
 <div class="outer-container">
@@ -146,13 +159,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body" style="margin-top:1rem;">
-                        <div style="margin-left:10%; color:red;">
-                            注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。
+                        <div class="input" style="width: 100%;float: left; ">
+                            <input id="inputField" type="text" class="form-control inputSuccess1" v-model="input"
+                                              @keyup="searchInput" style="border-radius: 0.5rem; min-width: 80%;min-height: 2rem; float:left; margin-left:5%;margin-bottom: 0.5rem;"></ br>
                         </div>
-                        <div class="input" style="width: 100%;float: left; "><input id="inputField" type="text" class="form-control inputSuccess1" v-model="input"
-                                              @keyup="searchInput" style="border-radius: 0.5rem; min-width: 80%;min-height: 2rem; float:left; margin-left:10%;margin-bottom: 0.5rem;"></ br>
+
                         <div style="margin-left: 1rem; float:left; font-size:1.4rem;">
-                    </div>
+                            <div class="vue-font">
+                                注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。
+                            </div>
+                        </div>
                    <section class="search-result">
                        <div class="cover">
                            <img class="loading" :src="'assets/images/loading3.gif'"></img>
