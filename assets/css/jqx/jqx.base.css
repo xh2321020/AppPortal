@@ -1203,6 +1203,8 @@ button.jqx-button, input[type=button].jqx-button,  input[type=submit].jqx-button
     outline: none;
     white-space: nowrap;
     line-height: 14px !important;
+    max-height: 50rem;
+    overflow: auto;
 }
 /*applied to the jqxTree root UL element.*/
 .jqx-tree-dropdown-root

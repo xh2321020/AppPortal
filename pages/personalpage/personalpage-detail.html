@@ -5,11 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <base href="http://172.16.51.144/">
-        <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <base href="../"/>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="assets/libs/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="assets/src/personalpage/portUrl.js"></script>
+        <script type="text/javascript" src="dist/portUrlVue.js"></script>
         <script type="text/javascript" src="assets/src/personalpage/contactMembers.js"></script>
         <style>
             .xc-title{
@@ -20,21 +20,23 @@
             }
         </style>
     </head>
-
+    <header>
+        <com-header></com-header>
+    </header>
     <body style="min-width: 1024px;">
         <div class="container" style="min-width: 1024px;">
             <div style="float: left;width: 75%;">
-                <span>个人工作台 >个人页面 </span>
-                <div class="col-center-block container-div">
+                <span class="font-fam">个人工作台 >个人页面 </span>
+                <div class="col-center-block container-div font-fam">
                     <div class="org-tab-li">
                         <ul class="nav nav-tabs" style="clear: both;margin-left: 1rem;width: 80%;">
+                            <li class="active" role="presentation"><a href="#" class="font-fam">个人页面</a></li>
                             <li role="presentation">
-                                <a href="pages/mail/personalpage-list.html">按组织浏览</a>
+                                <a href="pages/personalpage/personalpage-list.html" class="font-fam">按组织浏览</a>
                             </li>
                             <li role="presentation">
-                                <a href="pages/mail/personalpage-list-search.html">智能搜索</a>
+                                <a href="pages/personalpage/personalpage-list-search.html" class="font-fam">智能搜索</a>
                             </li>
-                            <li class="active" role="presentation"><a href="#">个人页面</a></li>
                         </ul>
                     </div>
 
@@ -45,7 +47,7 @@
                         <div class="xc-title">
                             <div style="margin-top: 40px;">
                                 <img class="img " style="width: 2%;height: 2px" src="assets/images/personalpage/u271_line.png"/>
-                                <span>行程</span>
+                                <span class="font-fam">行程</span>
                                 <img class="img" style="width: 70%;height: 2px;" src="assets/images/personalpage/u271_line.png"/>
                             </div>
 
@@ -128,4 +130,8 @@
             </div>
         </div>
     </body>
+    <footer style="margin-top: 1rem; position: relative ;">
+        <com-footer></com-footer>
+    </footer>
+
 </html>

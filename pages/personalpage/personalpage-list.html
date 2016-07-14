@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <base href="http://172.16.51.144/"/>
+    <base href="../"/>
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="assets/css/jqx/jqx.base.css" type="text/css"/>
@@ -22,25 +21,35 @@
     <script type="text/javascript" src="assets/src/personalpage/portUrl.js"></script>
     <script type="text/javascript" src="assets/src/personalpage/contact.js"></script>
 </head>
-    <body>
-        <div class="container">
-            <span>个人工作台 >按组织浏览 </span>
+    <body style="min-width: 1024px;">
+        <div class="container" style="min-width: 1024px;">
+            <span class="font-fam">个人工作台 >按组织浏览 </span>
             <div class="cover" id="loadingimg">
                 <img class="loading" src="assets/images/loading3.gif"></img>
             </div>
             <div class="container col-center-block container-div" style="min-height: 60rem;">
                 <div class="org-tab-li">
                     <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="#">按组织浏览</a></li>
-                        <li role="presentation"><a href="pages/mail/personalpage-list-search.html">搜索方式</a></li>
-                        <li role="presentation"><a href="pages/mail/personalpage-detail.html">个人页面</a></li>
+                        <li role="presentation"><a href="pages/personalpage/personalpage-detail.html" class="font-fam">个人页面</a></li>
+                        <li role="presentation" class="active"><a href="#" class="font-fam">按组织浏览</a></li>
+                        <li role="presentation"><a href="pages/personalpage/personalpage-list-search.html" class="font-fam">智能搜索</a></li>
                     </ul>
                 </div>
                 <div style="width: 100%; min-height: 48rem; margin-top:2rem;">
-                    <div id="treeview7" style="width: 25%;float: left;">
-                        <div id='jqxWidget'>
+                    <div style="width: 27%;float: left;">
+                        <div>
+                            <span>组织树</span>
+                            <img class="img " alt="u225_line" src="assets/images/personalpage/u225_line.png" style="width: 83%;height: 1px;">
+                        </div>
+                        <div id="treeview7" style="max-height:60rem;">
+                            <div id="loadingImgs">
+
+                            </div>
+                            <div id='jqxWidget'>
+                            </div>
                         </div>
                     </div>
+
                     <div class="org-member-card-list">
                         <div class="org-member-card-list-div">
                             <div style="width: 100%;" id="leaderArea">
@@ -54,5 +63,4 @@
             </div>
         </div>
     </body>
-
 </html>
