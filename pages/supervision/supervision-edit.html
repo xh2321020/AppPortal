@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base href="../../">
+   <base href="http://172.16.51.144/">
     <!-- Bootstrap -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome-4.5.0/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">   
     <link href="assets/css/supervision.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,8 +28,20 @@
 <!--head end-->
 <img class="horizontal-line" src="assets/images/hori-line.png"/>
 <article id="article" class="create-supervision">
-    <p>督办管理</p>
-
+     <div class="btn-group" role="group" aria-label="...">
+           督办管理
+              <template v-if="pid">><a type="button" :href="'pages/supervision/supervision-detail?id='+pid">督办详情</a></template>
+              ><a type="button">新建督办</a>
+            </div>
+<ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation"><a  @click="navtomine">我的督办</a></li>
+	    <li role="presentation"><a role="tab" data-toggle="tab" @click="navtoAll">全部督办</a>
+	    </li>
+	    <li role="presentation" class="active"><a href="#createSupervision_panel" role="tab"
+						      data-toggle="tab">新建督办</a></li>
+	</ul>
+	<div class="tab-content">
+	 <div role="tabpanel" class="tab-pane fade in active" >
 		<table class="table table-bordered">
 
 		    <tr class="title2">
@@ -96,7 +108,7 @@
 			<td width="13%" class="al-right">责任人(R)</td>
 			<td width="40%">
 			 <style scoped>.outer-container{float: left;}</style>                            
-                                <leader-select :supervision-request="requests" multiple="false" :selected.sync="responsibleOptions" leader-only="false"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
+                                <leader-select :supervision-request="requests" multiple="true" :selected.sync="responsibleOptions" leader-only="false"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
 			</td>
 			<td width="13%" class="al-right">公开范围</td>
 			<td width="34%">
@@ -129,16 +141,17 @@
 		</table>
 		<div class="data-action" style="text-align: center;">
 		    <button class="btn btn-default" @click="submit_handler" style="margin:0 5rem;">保存</button> 
-		     <button class="btn btn-default" @click="" style="margin:0 5rem;">取消</button>
+		     <button class="btn btn-default" @click="cancel" style="margin:0 5rem;">取消</button>
 		</div>
-
+		</div>
+		</div>
 </article>
 <footer>
     <com-footer></com-footer>
 </footer>
 
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
-<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap/bootstrap.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="dist/supervision-edit.js"></script>

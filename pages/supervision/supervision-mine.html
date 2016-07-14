@@ -7,10 +7,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>督办管理-全部督办</title>
-    <base href="../../">
+    <title>督办管理-我的督办</title>
+   <base href="http://172.16.51.144/">
     <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
     <link href="assets/css/supervision.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -42,12 +42,15 @@
 
         <div role="tabpanel" class="tab-pane fade in active">
             <img class="horizontal-line" src="assets/images/hori-line.png"/>
-
-            <p>督办管理</p>
+            <div class="btn-group" role="group" aria-label="...">
+                督办管理
+                  ><a type="button">我的督办</a>
+            </div>
             <section class="inner-tab ">
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#">我的督办</a></li>
-                    <li role="presentation"><a href="#">全部督办</a></li>
+                    <li role="presentation" class="active"><a >我的督办</a></li>
+                    <li role="presentation"><a href="pages/supervision/supervision-all.html">全部督办</a></li>
+                    <li role="presentation" ><a href="pages/supervision/supervision-edit.html">新建督办</a></li>
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-panel fade in active">
@@ -114,15 +117,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <!--  <div class="state">
-
-                                 <label v-for="item in stateList" class="checkbox-inline" :style="{marginLeft:item.margin};">
-                                     <input type="checkbox" value="{{item.value}}" checked><span
-                                         :class="['label',item.feature]" > {{item.label}}</span>
-                                 </label>
-
-                                 <button class="btn btn-default">新增督办</button>
-                             </div> -->
+                          
                         </section>
                         <section class="grid-table container-fluid " id="result-section">
 
@@ -144,7 +139,7 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in keyItems.show">
                                         <td>{{item.code}}</td>
-                                        <td><a class="item-name">{{item.name}}</a></td>
+                                        <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -194,7 +189,7 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in otherItems.show">
                                         <td>{{item.code}}</td>
-                                        <td><a class="item-name">{{item.name}}</a></td>
+                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -244,7 +239,7 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in doneItems.show">
                                         <td>{{item.code}}</td>
-                                        <td><a class="item-name">{{item.name}}</a></td>
+                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -296,10 +291,11 @@
 
 <!--<script data-main="assetsjs/main" src="assetsjs/require.js"></script>-->
 <script src="assets/libs/jquery.min.js"></script>
-<script src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="assets/libs/extendPagination.js"></script>
+<script src="assets/libs/jquery.blockUI.js"></script>
 <script src="dist/supervision-mine.js"></script>
 
 </body>

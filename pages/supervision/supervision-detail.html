@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base href="../../">
+    <base href="http://172.16.51.144/">
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">   
     <link href="assets/css/supervision.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,25 +28,31 @@
 <!--head end-->
 <img class="horizontal-line" src="assets/images/hori-line.png"/>
 <article id="article">
-    <p>督办管理</p>
-<div class="location">
-        <ul>
-                <li class="item"><a href="">呵呵</a></li>
-        </ul>
-</div>
+	      <div class="btn-group" role="group" aria-label="...">
+           督办管理
+              <template v-if="previous=='all'">><a type="button" href="pages/supervision/supervision-all.html">全部督办</a></template>
+              <template v-if="previous=='mine'">><a type="button" href="pages/supervision/supervision-mine.html">我的督办</a></template>
+              ><a type="button">督办详情</a>
+            </div>
     <section class="details">
-	<ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation"><a href="#">我的督办</a></li>
-	    <li role="presentation"><a href="#supervisionDetail_panel" role="tab" data-toggle="tab">全部督办</a>
+	<ul class="nav nav-tabs" role="tablist" >
+	    <li role="presentation" :class="{'active':actpage=='mine'}"><a href="pages/supervision/supervision-mine.html" >我的督办</a></li>
+	    <li role="presentation" :class="{'active':actpage=='all'}"><a href="pages/supervision/supervision-all.html" role="tab" data-toggle="tab">全部督办</a>
 	    </li>
-	    <li role="presentation" class="active"><a href="#createSupervision_panel" role="tab"
-						      data-toggle="tab">新建督办</a></li>
+	    <li role="presentation" :class="{'active':actpage=='new'}"><a href="pages/supervision/supervision-edit.html">新建督办</a></li>
 	</ul>
 	<div class="tab-content">
-	    <div role="tabpanel" class="tab-pane fade" id="supervisionDetail_panel">
+	<style scoped>
+		.table a:hover{
+			cursor: pointer;
+		}
+	</style>
+	    <div role="tabpanel" class="tab-pane fade in active" id="supervisionDetail_panel">
 		<table class="table table-bordered">
 		    <tr class="title1">
-			<td colspan="6">督办明细</td>
+			<td colspan="6">督办明细
+				<a type="button" style="float: right;margin-right: 1rem;">返回</a>
+			</td>
 		    </tr>
 		    <tr class="title2">
 			<td colspan="6">督办层级详情</td>
@@ -89,8 +95,8 @@
 			<td class="middle"><p>{{responsiblename}}</p></td>
 			<td class="middle"><p>{{estimatedcompletetiontime}}</p></td>
 			<td class="middle">
-			    <a href="" class="menu">新增子项</a>
-			    <a href="">更新进度</a>
+			    <a :href="'pages/supervision/supervision-edit.html?pid='+id" class="menu">新增子项</a>
+			    <a data-toggle="modal" type="button" @click="updateProgress('parent')">更新进度</a>
 			</td>
 		    </tr>
 
@@ -101,9 +107,9 @@
 			<td class="middle"><p>{{item.estimatedcompletetiontime}}</p></td>
 			<td class="middle">
 			    <a href="" class="menu">编辑</a>
-			    <!-- /.menu --><a href="" class="menu">延期</a>
-			    <!-- /.menu --><a href="" class="menu">撤销</a>
-			    <!-- /.menu --><a href="" class="menu">关闭</a>
+			    <!-- /.menu --><a @click="postphone(item)" class="menu">延期</a>
+			    <!-- /.menu --><a @click="revoke(item)"class="menu">撤销</a>
+			    <!-- /.menu --><a @click="close(item)" class="menu">关闭</a>
 			    <!-- /.menu -->
 			</td>
 		    </tr>
@@ -207,129 +213,43 @@
 		    </tr>
 		    <!-- /.level-head -->
 		</table>
-		<!-- /.table table-bordered -->
-	    </div>
-	    <div role="tabpanel" class="tab-pane fade in active create-supervision" id="createSupervision_panel">
-		<table class="table table-bordered">
-
-		    <tr class="title2">
-			<td colspan="4">新增督办事项
-			<span style="margin-left: 10rem">{{saveState}}</span>
-			</td>
-		    </tr>
-		    <tr>
-			<td width="13%" class="al-right">督办事项</td>
-			<td colspan="3"><input type="text" style="width: 100%;" v-model="name"/></td>
-		    </tr>
-		    <tr>
-			<td width="13%" class="al-right">督办编号</td>
-			<td width="40%">{{code}}</td>
-			<td width="13%" class="al-right">督办来源</td>
-			<td width="34%">
-			    <select class="form-control" v-model="sourceSelected">
-				<option v-for="option in sourceOptions" :value="option.value">{{option.text}}</option>
-			    </select>
-			</td>
-		    </tr>
-		    <tr>
-			<td width="13%" class="al-right">领域</td>
-			<td width="40%">
-			    <select class="form-control" v-model="areaSelected">
-				<option v-for="option in areaOptions" :value="option.value">{{option.text}}</option>
-			    </select>
-			</td>
-			<td width="13%" class="al-right">计划完成时间</td>
-			<td width="34%">
-			    <input type="text" class="form-control" id="completeDate" style="width: 50%;" 
-			       v-model="estimatedcompletetiontime"    />
-			</td>
-		    </tr>
-		      <tr>
-			<td width="13%" class="al-right">责任领导(A)</td>
-			<td width="40%">    
-                        <style scoped>.outer-container{float: left;}</style>                            
-                                <leader-select :supervision-request="requests" multiple="false" :selected.sync="leaders" leader-only="true"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
-                            </td>
-			<td width="13%" class="al-right">紧急程度</td>
-			<td width="34%">
-			    <select class="form-control" v-model="urgency">
-				<option v-for="option in urgencyOptions" :value="option.value">{{option.text}}</option>
-			    </select>
-			</td>
-		    </tr>
-		     <tr>
-			<td width="13%" class="al-right">责任部门</td>
-			<td width="40%">
-			 <select class="form-control" v-model="responsibledeptcode">
-				<option v-for="option in responsibledeptOptions" :value="option.value">{{option.text}}</option>
-			    </select></td>
-			<td width="13%" class="al-right">重要程度</td>
-			<td width="34%">
-			    <select class="form-control" v-model="importance">
-				<option v-for="option in importanceOptions" :value="option.value">{{option.text}}</option>
-			    </select>
-			</td>
-		    </tr>
-		    <tr>
-			<td width="13%" class="al-right">责任人(R)</td>
-			<td width="40%">
-			<input style="min-width: 50%;" v-model="responsiblename">
-			</td>
-			<td width="13%" class="al-right">公开范围</td>
-			<td width="34%">
-			    <select class="form-control" v-model="public">
-				<option v-for="option in publicOptions" :value="option.value">{{option.text}}</option>
-			    </select>
-			</td>
-		    </tr>
-		    <tr>
-			<td width="13%" class="al-right">协办及通知部门</td>
-			<td colspan="3"><input style="width: 85%;height:3.3rem;display: inline-block;" v-model="scope"/>
-		      <button type="button" class="btn  btn-sm" style="vertical-align: baseline;" data-toggle="modal" data-target="#deptModal">选择通知及协办部门</button>
-			 </td>
-		    </tr>
-		    <tr>
-			<td width="13%" class="al-right">备注</td>
-			<td colspan="3" class="al-left"><textarea style="width: 100%;" v-model="comments"></textarea>
-			 </td>
-		    </tr>
-		      <tr>
-			<td width="13%" class="al-right">附件</td>
-			<td colspan="3" class="al-left">
-			<div  style="width: 100%;">
-			    <button class="btn btn-default accessoryBtn">附件上传</button>
-			    <!-- <file-uploader></file-uploader> -->
-			</div>
-			 </td>
-		    </tr>
-		</table>
-		<div class="data-action" style="text-align: center;">
-		    <button class="btn btn-default" @click="submit_handler" style="margin:0 5rem;">保存</button> 
-		     <button class="btn btn-default" @click="" style="margin:0 5rem;">取消</button>
-		</div>
-
-<!-- Button trigger modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="deptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4 class="modal-title">部门列表</h4>
-      </div>
-      <div class="modal-body">
-       <com-accordion :selected-Depts.sync="selectedDepts" :supervision-request="requests" multiple="true"></com-accordion>
-      </div>
-      <div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-      </div>
-    </div>
-  </div>
-</div>
-<!--modal end-->
-
+		<!-- <update-rate :modal_id="progressModalId" :rate.sync="progressRate" ></update-rate> -->
+		<modal-pop :modal_id="modalId">
+				<template slot="body">
+					<form class="form-horizontal" v-show="currentModal=='updateProgress'">
+					  <div class="form-group">
+						    <label  class="col-sm-2 control-label">进度</label>
+						    <div class="col-sm-10">
+						    <style scoped>
+								.progress-container{
+									width: 100%;
+								}
+						    </style>
+						    	<progress-bar :rate.sync="progressRate.rate"></progress-bar>
+						    </div>
+					  </div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">更新原因</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" v-model="progressRate.comment"></textarea>
+							</div>
+							
+						</div>					
+					</form>
+					<postphone v-show="currentModal=='postphone'" :estimatedcompletetiontime.sync="updateItem.postphoneDate" :comment.sync="updateItem.comment"></postphone>	
+					<form class="form-horizontal" v-show='currentModal=="revoke"'>					 
+						  <div class="form-group">
+						    <label  class="col-sm-2 control-label">撤销原因</label>
+						    <div class="col-sm-10">
+						   		<textarea class="form-control" id="revokeArea"></textarea>
+						    </div>
+						  </div>
+				  	</form>
+				  	<div v-show="currentModal=='close'">确定要关闭此督办吗？(确定点保存)</div>
+				</template>
+				  <button type="button" class="btn btn-primary" @click="saveChanges" slot="save">保存</button>
+		</modal-pop>
+		<!-- detail tab end-->
 	    </div>
 	</div>
     </section>
@@ -341,7 +261,7 @@
 </footer>
 
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
-<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap/bootstrap.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="dist/supervision-detail.js"></script>

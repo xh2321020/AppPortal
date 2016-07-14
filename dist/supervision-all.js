@@ -67,9 +67,11 @@
 
 	var _footer2 = _interopRequireDefault(_footer);
 
+	var _commonFunction = __webpack_require__(18);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(18); /**
+	var Vue = __webpack_require__(19); /**
 	                           * Created by Mattia on 2016/6/12.
 	                           */
 	// var requestInterfaces=require("../webconfig.js")
@@ -92,7 +94,7 @@
 	        filterOptions: {
 	            areaCode: [],
 	            sourceCode: [],
-	            scopeCode: []
+	            deptsCode: []
 	        },
 	        dateFilter: [{ title: "全部", status: true }, { title: "上周", status: true }, { title: "本周", status: true }, { title: "下周", status: true }, { title: "时段", status: true }],
 	        dateOptions: {
@@ -103,8 +105,8 @@
 	            end: "2016-12-25",
 	            x: 0,
 	            y: 0,
-	            range: true },
-	        //是否多选
+	            range: true //是否多选
+	        },
 	        area: {
 	            show: [{ status: "1", name: "全部" }], more: []
 
@@ -112,8 +114,13 @@
 	            show: [], more: []
 	        },
 	        org: { show: [], more: [] },
-	        scope: { show: [], more: [] },
-	        stateList: [{ label: "正常", value: true, feature: "label-success", margin: '50%' }, { label: "一周内过期", value: true, feature: "label-warning", margin: '' }, { label: "已过期", value: true, feature: "label-danger", margin: '' }, { label: "已完成", value: false, feature: "label-default", margin: '' }]
+	        depts: { show: [], more: [] },
+	        stateList: [
+	            // {label: "正常", value: true, feature: "label-success", margin: '50%'},
+	            // {label: "一周内过期", value: true, feature: "label-warning", margin: ''},
+	            // {label: "已过期", value: true, feature: "label-danger", margin: ''},
+	            // {label: "已完成", value: false, feature: "label-default", margin: ''}
+	        ]
 	    },
 	    methods: {
 	        changeTime: function changeTime(ev) {
@@ -182,7 +189,7 @@
 	                //      area[0].status = "0";
 	                // }
 	                var diccode = "diccode";
-	                if (filter = "scope") diccode = "ou";
+	                if (filter == "depts") diccode = "ou";
 	                if (area[index].status == "1") {
 	                    area[index].status = "0";
 	                    for (var _i3 in areaCode) {
@@ -229,6 +236,7 @@
 	            } else {
 	                this.org = { show: area, more: other };
 	            }
+	            (0, _commonFunction.loadingCover)();
 	            // console.log(JSON.stringify(area))
 	            this.fetchDepts(area[index].ou);
 	        },
@@ -237,7 +245,7 @@
 	            $.ajax({
 	                type: "get",
 	                dataType: "json",
-	                url: _webconfig.supervisionRequest.deptUrl + pid,
+	                url: _webconfig.supervisionRequest.deptListUrl + pid,
 	                success: function success(result, state, jqxhr) {
 	                    // console.log(JSON.stringify(result))
 	                    var depts = [];
@@ -248,12 +256,14 @@
 	                        }
 	                    }
 	                    var show = [{ status: "1", name: "全部" }];
-	                    _this.scope = {
+	                    _this.depts = {
 	                        show: show.concat(depts.slice(0, 6)),
 	                        more: depts.slice(6)
 	                    };
+	                    $.unblockUI();
 	                },
 	                error: function error(data, state, jqxhr) {
+	                    $.unblockUI();
 	                    console.log(jqxhr.key);
 	                    console.log(data);
 	                }
@@ -303,7 +313,7 @@
 	                            };
 	                            filterVm.changeOrg(0, "show");
 	                        } else {
-	                            _this.scope = {
+	                            _this.depts = {
 	                                show: show.concat(result.slice(0, 6)),
 	                                more: result.slice(6)
 	                            };
@@ -420,8 +430,8 @@
 	                options.areaCode = options.areaCode.join(",");
 	            }
 
-	            options.scope = options.scopeCode;
-	            delete options.scopeCode;
+	            options.scope = options.deptsCode;
+	            delete options.deptsCode;
 	            if (options.scope.length == 0) {
 	                delete options.scope;
 	            } else {
@@ -533,17 +543,24 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	var supSourceUrl = 'http://172.16.51.137:8000/api/v1.0/cache/find/type/source-code'; // 督办来源接口
+	var serverAddress = "http://172.16.51.137:8000",
+	    serverAddress2 = "";
+
+	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
 	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
-	var supAreaUrl = 'http://172.16.51.137:8000/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
+	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
 	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
-	var searchUrl = 'http://172.16.51.137:8000/api/v1.0/supervision/search';
+	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
 	//?page={当前页码，第一页为0}&size={每页条数}';
 	// 最后一个接口为POST方式，其他的均为GET方式
-	var supDetailUrl = "http://172.16.51.137:8000/api/v1.0/supervision/findchildren/"; //{id}
-	var supAddUrl = "http://172.16.51.137:8000/api/v1.0/supervision/add"; //新增督办
+	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
+	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
+	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
+	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
+	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
+	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
 
 	var requestUrls = {
 		supervisionRequest: {
@@ -553,9 +570,14 @@
 			deptUrl: deptUrl,
 			searchUrl: searchUrl,
 			supDetailUrl: supDetailUrl,
-			supAddUrl: supAddUrl
+			supAddUrl: supAddUrl,
+			searchuserUrl: searchuserUrl,
+			deptListUrl: deptListUrl,
+			postphoneUrl: postphoneUrl
 		}
 	};
+	///getorgInfo
+
 	// export {requestUrls}
 	// export default requestUrls
 	module.exports = requestUrls;
@@ -1097,7 +1119,7 @@
 	//             <div class="nav-link" id="navLink">
 	//                 <ul class="nav-list">
 	//                     <li class="nav-list-item" id="comPortalNav">
-	//                         <a class="navbar-link com-portal" href="/pages/index.html">公司门户</a>
+	//                         <a class="navbar-link com-portal" href="www.baidu.com">公司门户</a>
 	//
 	//                         <div class="nav-panel company">
 	//                             <ul class="list">
@@ -1264,7 +1286,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"/pages/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"www.baidu.com\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
 
 /***/ },
 /* 14 */
@@ -1338,6 +1360,132 @@
 
 /***/ },
 /* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.loadingCover = exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
+
+	var _stringify = __webpack_require__(3);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _webconfig = __webpack_require__(6);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//ajax
+	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
+		if (type == "post") requestData = (0, _stringify2.default)(requestData);
+		$.ajax({
+			url: url,
+			type: type,
+			data: requestData,
+			// dataType:"json",
+			contentType: "application/json",
+			success: function success(result, state, jqxhr) {
+				console.log("success");
+				successHandler(result, state, jqxhr);
+			},
+			error: function error(result, state, jqxhr) {
+				console.log("error");
+				errorHandler(result, state, jqxhr);
+			}
+		});
+	};
+	//fetch organization
+
+	//fetch depts   部门
+	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
+		var url = _webconfig.supervisionRequest["deptUrl"] + pid;
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision source
+	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
+		var url = _webconfig.supervisionRequest["supSourceUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision area
+	var fetch_areaFromServer = function fetch_areaFromServer(success) {
+		var url = _webconfig.supervisionRequest["supAreaUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+
+	//accountable sn
+
+	//add new supervision
+	var add_supervision = function add_supervision(options, success) {
+		var url = _webconfig.supervisionRequest["supAddUrl"];
+		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//*cookies*/
+
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + expiredays);
+		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+	}
+	function getCookie(c_name) {
+		if (document.cookie.length > 0) {
+			var c_start = document.cookie.indexOf(c_name + "=");
+			if (c_start != -1) {
+				c_start = c_start + c_name.length + 1;
+				var c_end = document.cookie.indexOf(";", c_start);
+				if (c_end == -1) c_end = document.cookie.length;
+				return unescape(document.cookie.substring(c_start, c_end));
+			}
+		}
+		return "";
+	}
+	//*cookies*/
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		} else {
+			return null;
+		}
+	}
+
+	/*covering loading function*/
+	function loadingCover() {
+		$.blockUI({ message: '数据获取中，请稍候... ...',
+			css: {
+				border: 'none',
+				padding: '15px',
+				backgroundColor: '#000',
+				'-webkit-border-radius': '10px',
+				'-moz-border-radius': '10px',
+				opacity: .5,
+				color: '#fff'
+			}
+		});
+	}
+
+	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
+	exports.fetch_deptsFromServer = fetch_deptsFromServer;
+	exports.fetch_areaFromServer = fetch_areaFromServer;
+	exports.fetch_sourceFromServer = fetch_sourceFromServer;
+	exports.add_supervision = add_supervision;
+	exports.getCookie = getCookie;
+	exports.getQueryString = getQueryString;
+	exports.loadingCover = loadingCover;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -11370,10 +11518,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(19), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(20), __webpack_require__(2)))
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser

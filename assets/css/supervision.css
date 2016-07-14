@@ -20,6 +20,9 @@
     .inner-tab li{
         padding: .5rem 1rem;
     }
+    .inner-tab .pagination li{
+        padding: 0;
+    }
 .inner-tab .tip{
     color:grey;
     /*margin-left: 4rem;*/

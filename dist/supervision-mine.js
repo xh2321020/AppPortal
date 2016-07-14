@@ -67,9 +67,11 @@
 
 	var _footer2 = _interopRequireDefault(_footer);
 
+	var _commonFunction = __webpack_require__(18);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Vue = __webpack_require__(18); /**
+	var Vue = __webpack_require__(19); /**
 	                           * Created by Mattia on 2016/6/12.
 	                           */
 	// var requestInterfaces=require("../webconfig.js")
@@ -89,6 +91,7 @@
 	var filterVm = new Vue({
 	    el: "#filterSection",
 	    data: {
+	        userLoginInfo: {},
 	        filterOptions: {
 	            areaCode: [],
 	            sourceCode: [],
@@ -183,6 +186,7 @@
 
 	    },
 	    created: function created() {
+	        console.log($);
 	        var _this = this;
 	        var urls = {
 	            'supAreaUrl': _webconfig.supervisionRequest["supAreaUrl"],
@@ -263,6 +267,11 @@
 	    },
 	    created: function created() {
 	        var _this = this;
+	        this.userLoginInfo = {
+	            userid: "20120014",
+	            username: (0, _commonFunction.getCookie)("username")
+	        };
+	        console.log("userinfo", this.userLoginInfo);
 	        _webconfig.supervisionRequest.searchUrl += "?page=0" + "&size=100";
 	        //search for the initialization
 	        this.fetchTransactions(_webconfig.supervisionRequest.searchUrl);
@@ -334,8 +343,9 @@
 	            } else {
 	                options.source = options.source.join(",");
 	            }
-	            options.responsiblesn = "20116636";
 	            var that = this;
+	            options.accountableSN = this.userLoginInfo.userid;
+	            options.responsibleSN = this.userLoginInfo.userid;
 	            options = (0, _stringify2.default)(options);
 	            $.ajax({
 	                type: "POST",
@@ -454,20 +464,25 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	var supSourceUrl = 'http://172.16.51.137:8000/api/v1.0/cache/find/type/source-code'; // 督办来源接口
+	var serverAddress = "http://172.16.51.137:8000",
+	    serverAddress2 = "";
+
+	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
 	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
-	var supAreaUrl = 'http://172.16.51.137:8000/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
+	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
 	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
-	var searchUrl = 'http://172.16.51.137:8000/api/v1.0/supervision/search';
+	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
 	//?page={当前页码，第一页为0}&size={每页条数}';
 	// 最后一个接口为POST方式，其他的均为GET方式
-	var supDetailUrl = "http://172.16.51.137:8000/api/v1.0/supervision/findchildren/"; //{id}
-	var supAddUrl = "http://172.16.51.137:8000/api/v1.0/supervision/add"; //新增督办
+	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
+	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
 	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
-	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845"; //子部门
-	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845&id=20116636"; //用户模糊查询
+	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
+	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
+	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
+
 	var requestUrls = {
 		supervisionRequest: {
 			supSourceUrl: supSourceUrl,
@@ -477,9 +492,13 @@
 			searchUrl: searchUrl,
 			supDetailUrl: supDetailUrl,
 			supAddUrl: supAddUrl,
-			searchuserUrl: searchuserUrl
+			searchuserUrl: searchuserUrl,
+			deptListUrl: deptListUrl,
+			postphoneUrl: postphoneUrl
 		}
 	};
+	///getorgInfo
+
 	// export {requestUrls}
 	// export default requestUrls
 	module.exports = requestUrls;
@@ -1262,6 +1281,115 @@
 
 /***/ },
 /* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
+
+	var _stringify = __webpack_require__(3);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _webconfig = __webpack_require__(6);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//ajax
+	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
+		if (type == "post") requestData = (0, _stringify2.default)(requestData);
+		$.ajax({
+			url: url,
+			type: type,
+			data: requestData,
+			// dataType:"json",
+			contentType: "application/json",
+			success: function success(result, state, jqxhr) {
+				console.log("success");
+				successHandler(result, state, jqxhr);
+			},
+			error: function error(result, state, jqxhr) {
+				console.log("error");
+				errorHandler(result, state, jqxhr);
+			}
+		});
+	};
+	//fetch organization
+
+	//fetch depts   部门
+	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
+		var url = _webconfig.supervisionRequest["deptUrl"] + pid;
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision source
+	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
+		var url = _webconfig.supervisionRequest["supSourceUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision area
+	var fetch_areaFromServer = function fetch_areaFromServer(success) {
+		var url = _webconfig.supervisionRequest["supAreaUrl"];
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+
+	//accountable sn
+
+	//add new supervision
+	var add_supervision = function add_supervision(options, success) {
+		var url = _webconfig.supervisionRequest["supAddUrl"];
+		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//*cookies*/
+
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + expiredays);
+		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+	}
+	function getCookie(c_name) {
+		if (document.cookie.length > 0) {
+			var c_start = document.cookie.indexOf(c_name + "=");
+			if (c_start != -1) {
+				c_start = c_start + c_name.length + 1;
+				var c_end = document.cookie.indexOf(";", c_start);
+				if (c_end == -1) c_end = document.cookie.length;
+				return unescape(document.cookie.substring(c_start, c_end));
+			}
+		}
+		return "";
+	}
+	//*cookies*/
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		} else {
+			return null;
+		}
+	}
+	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
+	exports.fetch_deptsFromServer = fetch_deptsFromServer;
+	exports.fetch_areaFromServer = fetch_areaFromServer;
+	exports.fetch_sourceFromServer = fetch_sourceFromServer;
+	exports.add_supervision = add_supervision;
+	exports.getCookie = getCookie;
+	exports.getQueryString = getQueryString;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -11294,10 +11422,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(19), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(20), __webpack_require__(2)))
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser

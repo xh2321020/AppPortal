@@ -53,47 +53,51 @@
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
-	var _vue = __webpack_require__(3);
+	var _stringify = __webpack_require__(3);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _vue = __webpack_require__(6);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _webconfig = __webpack_require__(5);
+	var _webconfig = __webpack_require__(8);
 
-	var _header = __webpack_require__(6);
+	var _header = __webpack_require__(9);
 
 	var _header2 = _interopRequireDefault(_header);
 
-	var _footer = __webpack_require__(13);
+	var _footer = __webpack_require__(16);
 
 	var _footer2 = _interopRequireDefault(_footer);
 
-	var _commonFunction = __webpack_require__(17);
+	var _commonFunction = __webpack_require__(33);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * Created by Mattia on 2016/6/23.
-	 */
-
 
 	var headerVm = new _vue2.default({
 	    el: "header",
 	    components: {
 	        ComHeader: _header2.default
 	    }
-	});
+	}); /**
+	     * Created by Mattia on 2016/6/23.
+	     */
+
 	var footerVm = new _vue2.default({
 	    el: "footer",
 	    components: {
 	        ComFooter: _footer2.default
 	    }
 	});
+	var timeNow = new Date().getTime();
 	var detailVm = new _vue2.default({
-	    el: "#supervisionDetail_panel",
+	    el: "#article",
 	    data: {
-	        "id": 1000,
+	        previous: null,
+	        id: null,
 	        "code": "",
-	        "pid": 0,
+	        "pid": null,
 	        "pcode": null,
 	        "pname": null,
 	        "name": "",
@@ -113,204 +117,134 @@
 	        "responsibledeptname": null,
 	        "comments": null,
 	        "latestTrace": {},
-	        children: []
+	        children: [],
+	        progressModalId: "progressModal" + timeNow,
+	        modalId: "modal" + timeNow,
+	        progressRate: { rate: 4, comment: "" },
+	        currentModal: "close",
+	        updateItem: {},
+	        userLogin: {}
 	    },
 	    created: function created() {
 	        var _this = this;
-	        $.ajax({
-	            type: "get",
-	            dataType: "json",
-	            url: _webconfig.supervisionRequest.supDetailUrl + this.id,
-	            success: function success(result) {
-	                var children = [];
-	                for (var i = 0, len = result.length; i < len; i++) {
-	                    var item = result[i];
-	                    if (item.id == "1000") {
-	                        for (var key in item) {
-	                            _this[key] = item[key];
-	                        }
-	                    } else {
-	                        children.push(item);
-	                    }
-	                }
-
-	                _this.children = children;
-	                // console.log(JSON.stringify(_this.children))
-	            },
-	            error: function error(data) {
-	                console.log(data);
-	            }
-	        });
-	    }
-
-	});
-
-	var levelArray = [{
-	    text: "1级", value: 1
-	}, {
-	    text: "2级", value: 2
-	}, {
-	    text: "3级", value: 3
-	}, {
-	    text: "4级", value: 4
-	}, {
-	    text: "5级", value: 5
-	}];
-	var createVm = new _vue2.default({
-	    el: "#createSupervision_panel",
-	    data: {
-	        pid: "",
-	        id: "",
-	        name: "",
-	        sourceOptions: [{
-	            text: "请选择", value: ""
-	        }, {
-	            text: "hehe", value: "1"
-	        }, {
-	            text: "uiui", value: "2"
-	        }],
-	        sourceSelected: "",
-	        areaSelected: "",
-	        areaOptions: [{
-	            text: "请选择", value: ""
-	        }, {
-	            text: "hehe", value: "1"
-	        }, {
-	            text: "uiui", value: "2"
-	        }],
-	        estimatedcompletetiontime: "",
-	        accountableOptions: [{
-	            text: "请选择", value: ""
-	        }, {
-	            text: "hehe", value: "1"
-	        }, {
-	            text: "uiui", value: "2"
-	        }],
-	        urgency: 1,
-	        urgencyOptions: levelArray.concat(),
-	        importance: 1,
-	        importanceOptions: levelArray.concat(),
-	        responsibledeptcode: "",
-	        responsibledeptOptions: [{
-	            text: "请选择", value: ""
-	        }],
-	        responsiblename: "",
-	        responsibleOptions: [],
-	        public: 1,
-	        publicOptions: levelArray.concat(),
-	        comments: "",
-	        accessory: {},
-	        requests: _webconfig.supervisionRequest,
-	        saveState: "",
-	        selectedDepts: [],
-	        leaders: []
-	    },
-	    computed: {
-	        scope: function scope() {
-	            var depts = $.map(this.selectedDepts, function (item) {
-	                return item.name;
-	            });
-	            return depts.join(",");
-	        },
-	        accountablesn: function accountablesn() {
-	            var names = $.map(this.leaders, function (item) {
-	                return item.displayname;
-	            });
-	            return names.join(",");
-	        }
-	    },
-	    created: function created(argument) {
-	        var _this2 = this;
-
-	        // let urls=['supSourceUrl','deptUrl'];
-	        (0, _commonFunction.fetch_deptsFromServer)("10001", function (result, state, jqxhr) {
-	            var depts = [{
-	                text: "请选择", value: ""
-	            }];
-	            for (var i = 0, len = result.length; i < len; i++) {
-	                depts.push({
-	                    text: result[i].dicname,
-	                    value: result[i].id
-	                });
-	            }
-	            _this2.responsibledeptOptions = depts;
-	        });
-	        //fetch area
-	        (0, _commonFunction.fetch_areaFromServer)(function (result, state, jqxhr) {
-	            var area = [{
-	                text: "请选择", value: ""
-	            }];
-	            // console.log(result)
-	            for (var i = 0, len = result.length; i < len; i++) {
-	                area.push({
-	                    text: result[i].dicname,
-	                    value: result[i].diccode
-	                });
-	            }
-	            _this2.areaOptions = area;
-	        });
-	        // fetch source
-	        (0, _commonFunction.fetch_sourceFromServer)(function (result, state, jqxhr) {
-	            var source = [{
-	                text: "请选择", value: ""
-	            }];
-	            // console.log(result)
-	            for (var i = 0, len = result.length; i < len; i++) {
-	                source.push({
-	                    text: result[i].dicname,
-	                    value: result[i].diccode
-	                });
-	            }
-	            _this2.sourceOptions = source;
-	        });
-	        // body...
-	    }, ready: function ready() {
-	        var _this = this;
-	        $("#completeDate").daterangepicker({
-	            singleDatePicker: true,
-	            showDropdowns: true
-	        }, function (start, end, label) {
-	            _this.estimatedcompletetiontime = start;
-	            // alert(_this.estimatedcompletetiontime)
-	            // alert(start.format('YYYY-MM-DD'))
-	        });
+	        this.userLogin = {
+	            updateuserid: (0, _commonFunction.getCookie)("userid"),
+	            updateusername: (0, _commonFunction.getCookie)("username")
+	        };
+	        this.id = (0, _commonFunction.getQueryString)("id");
+	        this.fetchOriginSupervision(this.id);
+	        this.previous = (0, _commonFunction.getQueryString)("previous");
 	    },
 	    methods: {
-	        submit_handler: function submit_handler() {
-	            var _this3 = this;
+	        fetchOriginSupervision: function fetchOriginSupervision(iid) {
+	            var _this = this;
+	            $.ajax({
+	                type: "get",
+	                dataType: "json",
+	                url: _webconfig.supervisionRequest.supDetailUrl + iid,
+	                success: function success(result) {
+	                    console.log("result", result);
+	                    var children = [];
+	                    for (var i = 0, len = result.length; i < len; i++) {
+	                        var item = result[i];
+	                        if (item.id == iid) {
+	                            for (var key in item) {
+	                                _this[key] = item[key];
+	                            }
+	                        } else {
+	                            children.push(item);
+	                        }
+	                    }
 
-	            var options = {
-	                "accountablesn": this.accountablesn,
-	                "area": this.areaSelected,
-	                // "code": "string",
-	                "comments": this.comments,
-	                "estimatedcompletetiontime": moment(this.estimatedcompletetiontime, "MM-DD-YYYY").format('YYYY-MM-DD'),
-	                "importance": this.importance,
-	                "name": this.name,
-	                "pid": this.pid,
-	                "responsibledeptcode": this.responsibledeptcode,
-	                "responsiblesn": this.responsiblesn,
-	                "scope": this.scope,
-	                "source": this.sourceSelected,
-	                "status": 0,
-	                "urgency": this.urgency,
-	                "public": this.public
+	                    _this.children = children;
+	                },
+	                error: function error(data) {
+	                    console.log(data);
+	                }
+	            });
+	        },
+	        updateProgress: function updateProgress(iid) {
+	            // $("#"+this.progressModalId).modal({backdrop: 'static', keyboard: false});
+	            this.currentModal = "updateProgress";
+	            this.showModal();
+	        },
+	        showModal: function showModal() {
+	            $("#" + this.modalId).modal({ backdrop: 'static', keyboard: false });
+	        },
+	        postphone: function postphone(item) {
+	            this.currentModal = "postphone";
+	            this.postphoneDate = item.estimatedcompletetiontime;
+	            this.updateItem = {
+	                id: item.id,
+	                postphoneDate: item.estimatedcompletetiontime,
+	                comment: ""
 	            };
-	            (0, _commonFunction.add_supervision)(options, function (result, state, jqxhr) {
-	                _this3.saveState = "保存成功";
-	                var timer = setTimeout(function () {
-	                    clearTimeout(timer);
-	                    alert("hehe");
-	                }, 700);
-	            }, function (result, state, jqxhr) {
-	                _this3.saveState = "保存失败";
-	                console.log(result);
+	            console.log("postphoneDate", this.postphoneDate);
+	            this.showModal();
+	        },
+	        revoke: function revoke(item) {
+	            this.currentModal = "revoke";
+	            this.updateItem = {
+	                id: item.id,
+	                comment: ""
+	            };
+	            this.showModal();
+	        },
+	        close: function close(item) {
+	            this.currentModal = "close";
+	            this.updateItem = {
+	                id: item.id,
+	                comment: ""
+	            };
+	            this.showModal();
+	        },
+	        saveChanges: function saveChanges() {
+	            console.log(this.updateItem);
+	            var item = this.updateItem;
+	            var url = "",
+	                type = "";
+	            var options = {
+	                "updateuserid": this.userLogin.updateuserid,
+	                "updateusername": this.userLogin.updateusername,
+	                "reason": this.updateItem.comment
+	            };
+	            switch (this.currentModal) {
+	                // case "updateProgress":
+	                // url=""
+	                case "postphone":
+	                    url = _webconfig.supervisionRequest.postphoneUrl + item.id + "?newDateStr=" + item.postphoneDate;
+	                    type = "put";
+	                    break;
+	                case "revoke":
+	                    url = _webconfig.supervisionRequest.revokeUrl;
+	                    type = "delete";
+	                    break;
+	                case "close":
+	                    url = _webconfig.supervisionRequest.closeUrl + item.id;
+	                    type = "delete";
+	                    break;
+	            }
+	            $("#" + this.modalId).modal("hide");
+	            $.ajax({
+	                type: type,
+	                contentType: "application/json",
+	                data: (0, _stringify2.default)(options),
+	                url: url,
+	                success: function success(result, state, xhr) {
+	                    console.log("updateresult", result);
+	                },
+
+	                error: function error(result, state, xhr) {
+	                    console.log("error", result);
+	                }
 	            });
 	        }
 	    },
 	    components: {
-	        comAccordion: __webpack_require__(21),
-	        leaderSelect: __webpack_require__(26)
+	        // updateRate:require("../supervision/components/update-rate.vue"),
+	        postphone: __webpack_require__(20),
+	        modalPop: __webpack_require__(25),
+	        progressBar: __webpack_require__(28)
 	    }
 
 	});
@@ -324,6 +258,29 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(4), __esModule: true };
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(5)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process, jQuery) {/*!
@@ -10356,10 +10313,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(7), __webpack_require__(2)))
 
 /***/ },
-/* 4 */
+/* 7 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10459,23 +10416,28 @@
 
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	var supSourceUrl = 'http://172.16.51.137:8000/api/v1.0/cache/find/type/source-code'; // 督办来源接口
+	var serverAddress = "http://172.16.51.137:8000",
+	    serverAddress2 = "";
+
+	var supSourceUrl = serverAddress + '/api/v1.0/cache/find/type/source-code'; // 督办来源接口
 	var orgUrl = 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845'; // 组织机构-公司接口';
-	var supAreaUrl = 'http://172.16.51.137:8000/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
+	var supAreaUrl = serverAddress + '/api/v1.0/cache/find/type/area-code'; // 督办领域接口';
 	var deptUrl = 'http://172.16.51.137:8010/api/contact/getorgbyou?apikey=e71982d5401b488da4acef8827c41845&ou='; //{组织机构-公司ID} 某公司下面部门接口';
-	var searchUrl = 'http://172.16.51.137:8000/api/v1.0/supervision/search';
+	var searchUrl = serverAddress + '/api/v1.0/supervision/search';
 	//?page={当前页码，第一页为0}&size={每页条数}';
 	// 最后一个接口为POST方式，其他的均为GET方式
-	var supDetailUrl = "http://172.16.51.137:8000/api/v1.0/supervision/findchildren/"; //{id}
-	var supAddUrl = "http://172.16.51.137:8010/api/v1.0/supervision/add"; //新增督办
+	var supDetailUrl = serverAddress + "/api/v1.0/supervision/findchildren/"; //{id}
+	var supAddUrl = serverAddress + "/api/v1.0/supervision/add"; //新增督办
 	var leaderUrl = "http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845"; //获取领导
-	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845"; //子部门
-	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845"; //用户模糊查询
+	var deptListUrl = "http://172.16.51.137:8010/api/contact/getchlistbyou?apikey=e71982d5401b488da4acef8827c41845&ou="; //子部门;
+	var searchuserUrl = "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845&id=20116636"; //用户模糊查询
+	var postphoneUrl = serverAddress + '/api/v1.0/supervision/postpone/';
+
 	var requestUrls = {
 		supervisionRequest: {
 			supSourceUrl: supSourceUrl,
@@ -10485,25 +10447,29 @@
 			searchUrl: searchUrl,
 			supDetailUrl: supDetailUrl,
 			supAddUrl: supAddUrl,
-			searchuserUrl: searchuserUrl
+			searchuserUrl: searchuserUrl,
+			deptListUrl: deptListUrl,
+			postphoneUrl: postphoneUrl
 		}
 	};
+	///getorgInfo
+
 	// export {requestUrls}
 	// export default requestUrls
 	module.exports = requestUrls;
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(7)
-	__vue_script__ = __webpack_require__(11)
+	__webpack_require__(10)
+	__vue_script__ = __webpack_require__(14)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(12)
+	__vue_template__ = __webpack_require__(15)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -10522,16 +10488,16 @@
 	})()}
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(8);
+	var content = __webpack_require__(11);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -10548,10 +10514,10 @@
 	}
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
@@ -10562,7 +10528,7 @@
 
 
 /***/ },
-/* 9 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/*
@@ -10618,7 +10584,7 @@
 
 
 /***/ },
-/* 10 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -10840,7 +10806,7 @@
 
 
 /***/ },
-/* 11 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -11193,18 +11159,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"www.baidu.com\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/portal-personalCon.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(14)
-	__vue_template__ = __webpack_require__(16)
+	__webpack_require__(17)
+	__vue_template__ = __webpack_require__(19)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -11223,16 +11189,16 @@
 	})()}
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(15);
+	var content = __webpack_require__(18);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11249,10 +11215,10 @@
 	}
 
 /***/ },
-/* 15 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(9)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
@@ -11263,13 +11229,82 @@
 
 
 /***/ },
-/* 16 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 17 */
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(21)
+	__vue_script__ = __webpack_require__(23)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\supervision\\components\\postphone.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(24)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./postphone.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(22);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-2a88e1ae&scoped=true!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./postphone.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-2a88e1ae&scoped=true!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./postphone.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.comment[_v-2a88e1ae]{\n\tmargin-top: 1rem;\n}\n\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -11277,13 +11312,340 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
+	// <style scoped>
+	// 	.comment{
+	// 		margin-top: 1rem;
+	// 	}
+	//
+	// </style>
+	// <template>
+	// 	<div class="com-container">
+	// 	<form class="form-horizontal">
+	// 	  <div class="form-group">
+	// 	    <label  class="col-sm-2 control-label">日期</label>
+	// 	    <div class="col-sm-10">
+	// 	      <input type="text" class="form-control" :id="input_id"/>
+	// 	    </div>
+	// 	  </div>
+	// 	  <div class="form-group">
+	// 	    <label  class="col-sm-2 control-label">延期原因</label>
+	// 	    <div class="col-sm-10">
+	// 	   <textarea class="form-control comment" v-model="comment"></textarea>
+	// 	    </div>
+	// 	  </div>
+	//   	</form>
+	//
+	// 	</div>
+	// </template>
+	// <script >
+	exports.default = {
+		data: function data() {
+			var timeNow = new Date().getTime();
+			return {
+				input_id: "dateInput" + timeNow
+			};
+		}, props: ["estimatedcompletetiontime", "comment"],
+		created: function created() {
+			var _this = this;
+			this.$watch("estimatedcompletetiontime", function (newVal, oldVal) {
+				$("#" + _this.input_id).val(newVal);
+			});
+		}, ready: function ready() {
+			var _this = this;
+			$("#" + this.input_id).daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true,
+				//       locale: {
+				//   format: 'YYYY-MM-DD'
+				// },
+				startDate: this.estimatedcompletetiontime
+			}, function (start, end, label) {
+				_this.estimatedcompletetiontime = start.format('YYYY-MM-DD');
+			});
+		}
+	};
+	// </script>
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
-	var _stringify = __webpack_require__(18);
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\t<div class=\"com-container\" _v-2a88e1ae=\"\">\n\t<form class=\"form-horizontal\" _v-2a88e1ae=\"\">\n\t  <div class=\"form-group\" _v-2a88e1ae=\"\">\n\t    <label class=\"col-sm-2 control-label\" _v-2a88e1ae=\"\">日期</label>\n\t    <div class=\"col-sm-10\" _v-2a88e1ae=\"\">\n\t      <input type=\"text\" class=\"form-control\" :id=\"input_id\" _v-2a88e1ae=\"\">\n\t    </div>\n\t  </div>\n\t  <div class=\"form-group\" _v-2a88e1ae=\"\">\n\t    <label class=\"col-sm-2 control-label\" _v-2a88e1ae=\"\">延期原因</label>\n\t    <div class=\"col-sm-10\" _v-2a88e1ae=\"\">\n\t   <textarea class=\"form-control comment\" v-model=\"comment\" _v-2a88e1ae=\"\"></textarea>\n\t    </div>\n\t  </div>\n  \t</form>\n\t\n\t</div>\n";
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(26)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\modal-pop.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(27)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./modal-pop.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <template>
+	// <!-- <button class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">button</button> -->
+	// <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	//   <div class="modal-dialog" role="document">
+	//     <div class="modal-content">
+	//       <div class="modal-header">
+	// 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	// 		<h4 class="modal-title"></h4>
+	//       </div>
+	//       <div class="modal-body">
+	//       <slot name="body"></slot>
+	// 		</div>
+	// 		<!-- accordion end -->
+	// 		<div class="modal-footer">
+	// 		<slot name="save"></slot>
+	// 	     	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	//      	</div>
+	//       </div>   
+	//     </div>
+	//   </div>
+	// </template>
+	// <script >
+	exports.default = {
+		data: function data() {
+			var timeNow = new Date().getTime();
+			return {
+				// :"modal"+timeNow
+			};
+		},
+
+		props: ["modalTitle", "modal_id"]
+	};
+
+	// </script>
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n<!-- <button class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\">button</button> -->\r\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n\t\t<h4 class=\"modal-title\"></h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n      <slot name=\"body\"></slot>\r\n\t\t</div>\r\n\t\t<!-- accordion end -->\r\n\t\t<div class=\"modal-footer\">\r\n\t\t<slot name=\"save\"></slot>\r\n\t     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\r\n     \t</div>\r\n      </div>    \r\n    </div>\r\n  </div>\r\n";
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(29)
+	__vue_script__ = __webpack_require__(31)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\progressbar-drag.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(32)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./progressbar-drag.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(30);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n.scale_panel[_v-1214d038]{\r\n\tfont-size:12px;\r\n\tcolor:#999;\r\n\twidth:70%;\r\n\tposition:absolute; \r\n\tline-height:18px; \r\n\tleft:60px;\r\n\ttop:-0px;\r\n}\r\n.scale_panel .r[_v-1214d038]{\r\n\tfloat:right;\r\n}\r\n.scale span[_v-1214d038]{\r\n\t\r\n\twidth:8px;\r\n\theight:16px; \r\n\tposition:absolute; \r\n\tleft:-2px;\r\n\ttop:-5px;\r\n\tcursor:pointer;\r\n\t/*background-color: lightgrey;*/\r\n}\r\n.scale[_v-1214d038]{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }\r\n.scale .bar[_v-1214d038]{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <style scoped>
+	// .scale_panel{
+	// 	font-size:12px;
+	// 	color:#999;
+	// 	width:70%;
+	// 	position:absolute;
+	// 	line-height:18px;
+	// 	left:60px;
+	// 	top:-0px;
+	// }
+	// .scale_panel .r{
+	// 	float:right;
+	// }
+	// .scale span{
+	//
+	// 	width:8px;
+	// 	height:16px;
+	// 	position:absolute;
+	// 	left:-2px;
+	// 	top:-5px;
+	// 	cursor:pointer;
+	// 	/*background-color: lightgrey;*/
+	// }
+	// .scale{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }
+	// .scale .bar{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }
+	//
+	// </style>
+	// <template>
+	// 	<div class="progress-container">
+	// 		<span :id="title_id">0</span>
+	// <div class="scale_panel">
+	// 	<span class="r">100</span>0
+	// 	<div class="scale" :id="bar_id">
+	// 		<div class="bar"></div>
+	// 		<span :id="btn_id" style="background: url(assets/images/progressdrag.gif) no-repeat; "></span>
+	// 	</div>
+	// </div>
+	// 	</div>
+	// </template>
+	//
+	// <script>
+	var scale = function scale(btn, bar, title, _this) {
+		this.btn = document.getElementById(btn);
+		this.bar = document.getElementById(bar);
+		this.title = document.getElementById(title);
+		this.step = this.bar.getElementsByTagName("div")[0];
+		this.init(_this);
+	};
+	scale.prototype = {
+		init: function init(_this) {
+			var f = this,
+			    g = document,
+			    b = window,
+			    m = Math;
+			f.btn.onmousedown = function (e) {
+				var x = (e || b.event).clientX;
+				var l = this.offsetLeft;
+				var max = f.bar.offsetWidth - this.offsetWidth;
+				g.onmousemove = function (e) {
+					var thisX = (e || b.event).clientX;
+					var to = m.min(max, m.max(-2, l + (thisX - x)));
+					f.btn.style.left = to + 'px';
+					f.ondrag(m.round(m.max(0, to / max) * 100), to);
+					b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+					_this.rate = m.round(m.max(0, to / max) * 100);
+				};
+				g.onmouseup = new Function('this.onmousemove=null');
+			};
+		},
+		ondrag: function ondrag(pos, x) {
+			this.step.style.width = Math.max(0, x) + 'px';
+			this.title.innerHTML = pos + '%';
+		}
+	};
+
+	exports.default = {
+		data: function data() {
+			var timeStr = new Date().getTime();
+			return {
+				btn_id: "btn" + timeStr,
+				bar_id: "bar" + timeStr,
+				title_id: "title" + timeStr
+			};
+		},
+
+		props: ["rate"],
+		created: function created() {},
+		ready: function ready() {
+			new scale(this.btn_id, this.bar_id, this.title_id, this);
+		},
+		methods: {}
+	};
+
+	// </script>
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t<div class=\"progress-container\" _v-1214d038=\"\">\n\t\t<span :id=\"title_id\" _v-1214d038=\"\">0</span>\n<div class=\"scale_panel\" _v-1214d038=\"\">\n\t<span class=\"r\" _v-1214d038=\"\">100</span>0\n\t<div class=\"scale\" :id=\"bar_id\" _v-1214d038=\"\">\n\t\t<div class=\"bar\" _v-1214d038=\"\"></div>\n\t\t<span :id=\"btn_id\" style=\"background: url(assets/images/progressdrag.gif) no-repeat; \" _v-1214d038=\"\"></span>\n\t</div> \n</div> \n\t</div>\n";
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.getQueryString = exports.getCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = undefined;
+
+	var _stringify = __webpack_require__(3);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _webconfig = __webpack_require__(5);
+	var _webconfig = __webpack_require__(8);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11339,757 +11701,44 @@
 			console.log(result);
 		});
 	};
+	//*cookies*/
+	function getCookie(c_name) {
+		setCookie("userid", "20046009", 30);
+		if (document.cookie.length > 0) {
+			c_start = document.cookie.indexOf(c_name + "=");
+			if (c_start != -1) {
+				c_start = c_start + c_name.length + 1;
+				c_end = document.cookie.indexOf(";", c_start);
+				if (c_end == -1) c_end = document.cookie.length;
+				return unescape(document.cookie.substring(c_start, c_end));
+			}
+		}
+		return "";
+	};
 
+	function setCookie(c_name, value, expiredays) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + expiredays);
+		document.cookie = c_name + "=" + escape(value) + (expiredays == null ? "" : ";expires=" + exdate.toGMTString());
+	}
+	//*cookies*/
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		} else {
+			return null;
+		}
+	}
 	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
 	exports.fetch_deptsFromServer = fetch_deptsFromServer;
 	exports.fetch_areaFromServer = fetch_areaFromServer;
 	exports.fetch_sourceFromServer = fetch_sourceFromServer;
 	exports.add_supervision = add_supervision;
+	exports.getCookie = getCookie;
+	exports.getQueryString = getQueryString;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(19), __esModule: true };
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(20)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	var core = module.exports = {version: '2.4.0'};
-	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(22)
-	__vue_script__ = __webpack_require__(24)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\accordion-menu.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(25)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "./accordion-menu.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(23);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-f85852e6&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./accordion-menu.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-f85852e6&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./accordion-menu.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(9)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\r\nul[_v-f85852e6] {\r\n\tlist-style-type: none;\r\n}\r\n\r\na[_v-f85852e6] {\r\n\tcolor: #b63b4d;\r\n\ttext-decoration: none;\r\n}\r\n\r\n/** =======================\r\n * Contenedor Principal\r\n ===========================*/\r\nh1[_v-f85852e6] {\r\n \tcolor: #FFF;\r\n \tfont-size: 24px;\r\n \tfont-weight: 400;\r\n \ttext-align: center;\r\n \tmargin-top: 80px;\r\n }\r\n\r\nh1 a[_v-f85852e6] {\r\n \tcolor: #c12c42;\r\n \tfont-size: 16px;\r\n }\r\n\r\n .accordion[_v-f85852e6] {\r\n \twidth: 100%;\r\n \tmax-width: 360px;\r\n \tmargin: 30px auto 20px;\r\n \tbackground: #FFF;\r\n \tborder-radius: 4px;\r\n }\r\n\r\n.accordion .link[_v-f85852e6] {\r\n\tcursor: pointer;\r\n\tdisplay: block;\r\n\tpadding: 15px 15px 15px 42px;\r\n\tcolor: #739217;\r\n\tfont-size: 14px;\r\n\tfont-weight: 400;\r\n\tborder-bottom: 1px solid #CCC;\r\n\tposition: relative;\r\n\t-webkit-transition: all 0.4s ease;\r\n\ttransition: all 0.4s ease;\r\n}\r\n\r\n.accordion li:last-child .link[_v-f85852e6] {\r\n\tborder-bottom: 0;\r\n}\r\n\r\n.accordion li i[_v-f85852e6] {\r\n\tposition: absolute;\r\n\ttop: 16px;\r\n\tleft: 12px;\r\n\tfont-size: 18px;\r\n\tcolor: #739217;\r\n\t-webkit-transition: all 0.4s ease;\r\n\ttransition: all 0.4s ease;\r\n}\r\n\r\n.accordion li i.fa-chevron-down[_v-f85852e6],.accordion li i.fa-plus[_v-f85852e6]{\r\n\tright: 12px;\r\n\tleft: auto;\r\n\tfont-size: 16px;\r\n}\r\n\r\n.accordion li.open .link[_v-f85852e6] {\r\n\tcolor: #739217;\r\n}\r\n\r\n.accordion li.open i[_v-f85852e6] {\r\n\tcolor: #739217;\r\n}\r\n.accordion li.open i.fa-chevron-down[_v-f85852e6]{\r\n\t-webkit-transform: rotate(180deg);\r\n\ttransform: rotate(180deg);\r\n}\r\n.accordion .open>.link .fa-plus[_v-f85852e6]{\r\n\t-webkit-transform: rotate(45deg);\r\n\ttransform: rotate(45deg);\r\n}\r\n\r\n/**\r\n * Submenu\r\n -----------------------------*/\r\n .submenu[_v-f85852e6] {\r\n \tdisplay: none;\r\n \tbackground: #444359;\r\n \tfont-size: 14px;\r\n \tmax-height: 30rem;\r\n \toverflow-y: auto;\r\n }\r\n\r\n .submenu li[_v-f85852e6] {\r\n \tborder-bottom: 1px solid #4b4a5e;\r\n }\r\n .submenu .link[_v-f85852e6]{\r\n\tcolor:white!important;\r\n}\r\n.submenu .link i[_v-f85852e6]{\r\n\tcolor:white!important;\r\n}\r\n \r\n .submenu a[_v-f85852e6] {\r\n \tdisplay: block;\r\n \ttext-decoration: none;\r\n \tcolor: #d9d9d9;\r\n \tpadding: 12px;\r\n \tpadding-left: 42px;\r\n \t-webkit-transition: all 0.25s ease;\r\n \ttransition: all 0.25s ease;\r\n }\r\n\r\n .submenu a[_v-f85852e6]:hover {\r\n \tbackground: #739217;\r\n \tcolor: #FFF;\r\n }\r\n .submenu .selected[_v-f85852e6]{\r\n \tbackground: #A1C636;\r\n \tcolor: #000;\r\n }\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	// <style scoped>
-	// ul {
-	// 	list-style-type: none;
-	// }
-	//
-	// a {
-	// 	color: #b63b4d;
-	// 	text-decoration: none;
-	// }
-	//
-	// /** =======================
-	//  * Contenedor Principal
-	//  ===========================*/
-	// h1 {
-	//  	color: #FFF;
-	//  	font-size: 24px;
-	//  	font-weight: 400;
-	//  	text-align: center;
-	//  	margin-top: 80px;
-	//  }
-	//
-	// h1 a {
-	//  	color: #c12c42;
-	//  	font-size: 16px;
-	//  }
-	//
-	//  .accordion {
-	//  	width: 100%;
-	//  	max-width: 360px;
-	//  	margin: 30px auto 20px;
-	//  	background: #FFF;
-	//  	-webkit-border-radius: 4px;
-	//  	-moz-border-radius: 4px;
-	//  	border-radius: 4px;
-	//  }
-	//
-	// .accordion .link {
-	// 	cursor: pointer;
-	// 	display: block;
-	// 	padding: 15px 15px 15px 42px;
-	// 	color: #739217;
-	// 	font-size: 14px;
-	// 	font-weight: 400;
-	// 	border-bottom: 1px solid #CCC;
-	// 	position: relative;
-	// 	-webkit-transition: all 0.4s ease;
-	// 	-o-transition: all 0.4s ease;
-	// 	transition: all 0.4s ease;
-	// }
-	//
-	// .accordion li:last-child .link {
-	// 	border-bottom: 0;
-	// }
-	//
-	// .accordion li i {
-	// 	position: absolute;
-	// 	top: 16px;
-	// 	left: 12px;
-	// 	font-size: 18px;
-	// 	color: #739217;
-	// 	-webkit-transition: all 0.4s ease;
-	// 	-o-transition: all 0.4s ease;
-	// 	transition: all 0.4s ease;
-	// }
-	//
-	// .accordion li i.fa-chevron-down,.accordion li i.fa-plus{
-	// 	right: 12px;
-	// 	left: auto;
-	// 	font-size: 16px;
-	// }
-	//
-	// .accordion li.open .link {
-	// 	color: #739217;
-	// }
-	//
-	// .accordion li.open i {
-	// 	color: #739217;
-	// }
-	// .accordion li.open i.fa-chevron-down{
-	// 	-webkit-transform: rotate(180deg);
-	// 	-ms-transform: rotate(180deg);
-	// 	-o-transform: rotate(180deg);
-	// 	transform: rotate(180deg);
-	// }
-	// .accordion .open>.link .fa-plus{
-	// 	-webkit-transform: rotate(45deg);
-	// 	-ms-transform: rotate(45deg);
-	// 	-o-transform: rotate(45deg);
-	// 	transform: rotate(45deg);
-	// }
-	//
-	// /**
-	//  * Submenu
-	//  -----------------------------*/
-	//  .submenu {
-	//  	display: none;
-	//  	background: #444359;
-	//  	font-size: 14px;
-	//  	max-height: 30rem;
-	//  	overflow-y: auto;
-	//  }
-	//
-	//  .submenu li {
-	//  	border-bottom: 1px solid #4b4a5e;
-	//  }
-	//  .submenu .link{
-	// 	color:white!important;
-	// }
-	// .submenu .link i{
-	// 	color:white!important;
-	// }
-	//
-	//  .submenu a {
-	//  	display: block;
-	//  	text-decoration: none;
-	//  	color: #d9d9d9;
-	//  	padding: 12px;
-	//  	padding-left: 42px;
-	//  	-webkit-transition: all 0.25s ease;
-	//  	-o-transition: all 0.25s ease;
-	//  	transition: all 0.25s ease;
-	//  }
-	//
-	//  .submenu a:hover {
-	//  	background: #739217;
-	//  	color: #FFF;
-	//  }
-	//  .submenu .selected{
-	//  	background: #A1C636;
-	//  	color: #000;
-	//  }
-	// </style>
-	// <!-- Contenedor -->
-	// <template>
-	//
-	// 	<div>
-	// 		<ul id="accordion" class="accordion">
-	// 			<li v-for="org in orgs">
-	// 				<div class="link"><i class="fa fa-th-list"></i>{{org.name}}<i class="fa fa-chevron-down"></i></div>
-	// 				<ul class="submenu">
-	//
-	// 					<li  v-for="dept in depts[org.ou]">
-	// 					<template v-if="sections[dept.ou]">
-	// 						<div class="link" ><i class="fa fa-th-list"></i>{{dept.name}}<i class="fa fa-plus"></i></div>
-	// 						<ul class="submenu">
-	// 							<li v-for="section in sections[dept.ou]"><a @click="selectDept(section,$event)">{{section.name}}</a></li>
-	// 						</ul>
-	// 					</template>
-	// 						<template v-else>
-	// 							<a @click="selectDept(dept,$event)">{{dept.name}}</a>
-	// 						</template>
-	// 					</li>
-	// 				</ul>
-	// 			</li>			
-	// 		</ul>
-	// 	</div>
-	// </template>
-	// <script >
-	exports.default = {
-		data: function data() {
-			return {
-				orgs: [],
-				depts: {},
-				sections: {},
-				times: {}
-			};
-		},
-
-		props: ["supervisionRequest", "selectedDepts", "multiple"],
-		created: function created() {
-			// console.log(this.supervisionRequest)	
-			var _this = this;
-			$.ajax({
-				type: "get",
-				dataType: "json",
-				url: this.supervisionRequest.orgUrl,
-				success: function success(result, state, jqxhr) {
-					_this.orgs = result;
-					_this.fetchDepts();
-				},
-				error: function error(data, state, jqxhr) {
-					console.log(jqxhr.key);
-					console.log(data);
-				}
-			});
-		},
-		ready: function ready() {
-			var Accordion = function Accordion(el, multiple) {
-				this.el = el || {};
-				this.multiple = multiple || false;
-				this.el.on("click", ".link", { el: this.el, multiple: this.multiple }, this.dropdown);
-			};
-			Accordion.prototype.dropdown = function (e) {
-				var $el = e.data.el,
-				    $this = $(this),
-				    $next = $this.next();
-				$next.toggle();
-				$this.parent().toggleClass('open');
-				var parentBro = $this.parent().siblings();
-				for (var i = 0; i < parentBro.length; i++) {
-					var single = $(parentBro[i]);
-					if (single.hasClass("open")) {
-						single.find(">.submenu").toggle();
-						single.toggleClass("open");
-						break;
-					}
-				}
-			};
-
-			var accordion = new Accordion($('#accordion'), true);
-		},
-
-		methods: {
-			selectDept: function selectDept(dept, event) {
-				var selectedDepts = this.selectedDepts;
-				dept.selected = !dept.selected;
-				if (this.multiple == "false") {
-					if (selectedDepts.length > 0) {
-						selectedDepts[0].selected = false;
-						this.selected.toggleClass("selected");
-					}
-					this.selectedDepts = [];
-					if (dept.selected) {
-						this.selectedDepts.push(dept);
-						this.selected = $(event.currentTarget).toggleClass("selected");
-					}
-					return;
-				}
-
-				$(event.currentTarget).toggleClass("selected");
-				if (dept.selected) {
-					selectedDepts.push(dept);
-				} else {
-					for (var i in selectedDepts) {
-						if (selectedDepts[i].id == dept.id) {
-							selectedDepts.splice(i, 1);
-							break;
-						}
-					}
-				}
-			},
-			fetchDepts: function fetchDepts() {
-				var _this = this;
-				this.times.dept = 0;
-				$.ajax({
-					type: "get",
-					dataType: "json",
-					url: this.supervisionRequest.deptUrl,
-					success: function success(result, state, jqxhr) {
-						if (result && result.length > 0) {
-							// _this.depts[jqxhr.index.toString()]=result;	
-							for (var i = 0; i < result.length; i++) {
-								result[i].selected = false;
-							}
-							var depts = result;
-							var orgs = _this.orgs,
-							    department = {},
-							    sections = {};
-							for (var _i = 0, len = orgs.length; _i < len; _i++) {
-								var pid = orgs[_i].id;
-								var new_depts = [];
-								for (var di = 0; di < depts.length; di++) {
-									if (depts[di].pid == pid) {
-										new_depts.push(depts[di]);
-										depts.splice(di, 1);
-										di--;
-									}
-								}
-								department[pid] = new_depts;
-							}
-							for (var key in department) {
-								var dept = department[key];
-								for (var _i2 = 0; _i2 < dept.length; _i2++) {
-									var _pid = dept[_i2].id;
-									sections[_pid] = [];
-									for (var si = 0; si < depts.length; si++) {
-										if (_pid == depts[si].pid) {
-											sections[_pid].push(depts[si]);
-											depts.splice(si, 1);
-											si--;
-										}
-									}
-									if (sections[_pid].length == 0) delete sections[_pid];
-								}
-							}
-							_this.depts = department;
-							_this.sections = sections;
-						}
-					},
-					error: function error(data) {
-						console.log(data);
-					}
-				});
-			},
-			fetchSections: function fetchSections(iid) {
-				var _this = this,
-				    depts = this.depts[iid];
-				this.times[iid] = 0;
-				for (var i = 0, len = depts.length; i < len; i++) {
-					$.ajax({
-						type: "get",
-						dataType: "json",
-						url: this.supervisionRequest.deptUrl + depts[i].ou,
-						success: function success(result, state, jqxhr) {
-							for (var j = 0; j < result.length; j++) {
-								result[j].selected = false;
-							}
-							if (result && result.length > 0) {
-
-								var ou = jqxhr.index.toString();
-								_this.sections[ou] = result;
-								// let sections=_this.sections;						
-								// _this.sections={};
-								// _this.sections=sections;		
-							}
-
-							if (++_this.times[iid] == _this.depts[iid].length) {
-								var sections = _this.sections;
-								_this.sections = {};
-								_this.sections = sections;
-							}
-						},
-						error: function error(data) {
-							console.log(data);
-						}
-					}).index = depts[i].ou;
-				}
-			}
-		}
-	};
-
-	// </script>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div _v-f85852e6=\"\">\n\t<ul id=\"accordion\" class=\"accordion\" _v-f85852e6=\"\">\n\t\t<li v-for=\"org in orgs\" _v-f85852e6=\"\">\n\t\t\t<div class=\"link\" _v-f85852e6=\"\"><i class=\"fa fa-th-list\" _v-f85852e6=\"\"></i>{{org.name}}<i class=\"fa fa-chevron-down\" _v-f85852e6=\"\"></i></div>\n\t\t\t<ul class=\"submenu\" _v-f85852e6=\"\">\n\t\t\t\t\n\t\t\t\t<li v-for=\"dept in depts[org.ou]\" _v-f85852e6=\"\">\n\t\t\t\t<template v-if=\"sections[dept.ou]\">\n\t\t\t\t\t<div class=\"link\" _v-f85852e6=\"\"><i class=\"fa fa-th-list\" _v-f85852e6=\"\"></i>{{dept.name}}<i class=\"fa fa-plus\" _v-f85852e6=\"\"></i></div>\n\t\t\t\t\t<ul class=\"submenu\" _v-f85852e6=\"\">\n\t\t\t\t\t\t<li v-for=\"section in sections[dept.ou]\" _v-f85852e6=\"\"><a @click=\"selectDept(section,$event)\" _v-f85852e6=\"\">{{section.name}}</a></li>\n\t\t\t\t\t</ul>\n\t\t\t\t</template>\n\t\t\t\t\t<template v-else=\"\">\n\t\t\t\t\t\t<a @click=\"selectDept(dept,$event)\" _v-f85852e6=\"\">{{dept.name}}</a>\n\t\t\t\t\t</template>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</li>\t\t\t\n\t</ul>\n</div>\n";
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(27)
-	__vue_script__ = __webpack_require__(29)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\user-selector.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(30)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "./user-selector.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(28);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(10)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-04adc868&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./user-selector.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-04adc868&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./user-selector.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(9)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n.inner[_v-04adc868] {\n    position: static;\n    float: none;\n    border: 0;\n    padding: 0;\n    margin: 0;\n    border-radius: 0;\n    max-height: 16rem;\n    overflow-y: auto;\n    /*min-height: 80px;*/\n}\n\n.dropdown-menu.open[_v-04adc868] {\n    width: 100%;\n}\n\n.dropdown-toggle .fa[_v-04adc868] {\n    float: right;\n    margin-right: -6px;\n}\n\n.bs-searchbox .form-control[_v-04adc868] {\n    border: 1px solid skyblue;\n    border-radius: 5px;\n}\n\n.input-group > .btn[_v-04adc868] {\n    width: 100%;\n    text-align: left;\n    background: white;\n}\n\n.result[_v-04adc868] {\n    border: 1px solid lightgrey;\n    width: 100%;\n    margin: 2rem 0 0;\n    padding: 0.5rem 0.5rem;\n    height: 4.5rem;\n    border-radius: 0.5rem;\n}\n\n.list[_v-04adc868] {\n    list-style: none;\n}\n\n.table th[_v-04adc868] {\n    width: 25%;\n    text-align: center;\n}\n\n.table td[_v-04adc868] {\n    text-align: center;\n    vertical-align: middle;\n}\n.outer-container[_v-04adc868]{\n\tdisplay: inline-block;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	// <style scoped>
-	//     .inner {
-	//         position: static;
-	//         float: none;
-	//         border: 0;
-	//         padding: 0;
-	//         margin: 0;
-	//         border-radius: 0;
-	//         max-height: 16rem;
-	//         overflow-y: auto;
-	//         /*min-height: 80px;*/
-	//     }
-	//
-	//     .dropdown-menu.open {
-	//         width: 100%;
-	//     }
-	//
-	//     .dropdown-toggle .fa {
-	//         float: right;
-	//         margin-right: -6px;
-	//     }
-	//
-	//     .bs-searchbox .form-control {
-	//         border: 1px solid skyblue;
-	//         border-radius: 5px;
-	//     }
-	//
-	//     .input-group > .btn {
-	//         width: 100%;
-	//         text-align: left;
-	//         background: white;
-	//     }
-	//
-	//     .result {
-	//         border: 1px solid lightgrey;
-	//         width: 100%;
-	//         margin: 2rem 0 0;
-	//         padding: 0.5rem 0.5rem;
-	//         height: 4.5rem;
-	//         border-radius: 0.5rem;
-	//     }
-	//
-	//     .list {
-	//         list-style: none;
-	//     }
-	//
-	//     .table th {
-	//         width: 25%;
-	//         text-align: center;
-	//     }
-	//
-	//     .table td {
-	//         text-align: center;
-	//         vertical-align: middle;
-	//     }
-	//     .outer-container{
-	//     	display: inline-block;
-	//     }
-	// </style>
-	// <template>
-	//     <!-- <div class="input-group" style="width: 50%;position: relative;">
-	//             <button  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;text-align: left;background: white;">{{(selected.displayname?selected.displayname:"请选择")}}<i class="fa fa-sort-down"></i></button>
-	//             <div class="dropdown-menu open">
-	//             <div class="bs-searchbox"><input type="text" v-model="input" class="form-control"></div>
-	//             <ul class="dropdown-menu inner" role="menu" >
-	//            <li class="menu-option" v-for="option in options"><a @click="selectMember(option)">{{option.displayname}}</a></li>
-	//             </ul>
-	//             </div>
-	//
-	//     </div>   -->
-	// <div class="outer-container">
-	//     <div class="input-grout" style="width: 50%;position: relative;">
-	//         <button class="btn btn-default" data-toggle="modal" data-target="#leaderModal">请选择</button>
-	//     </div>
-	//     <div class="modal fade" id="leaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	//         <div class="modal-dialog" role="document">
-	//             <div class="modal-content">
-	//                 <div class="modal-header">
-	//                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-	//                             aria-hidden="true">&times;</span></button>
-	//                     <h4 class="modal-title">责任领导选择(仅搜索领导)</h4>
-	//                 </div>
-	//                 <div class="modal-body">
-	//                     <div class="input"><input type="text" class="form-control inputSuccess1" v-model="input"
-	//                                               @keyup="searchInput"></div>
-	//                     <table class="table table-hover table-condensed content-key">
-	//                         <thead>
-	//                         <th>单位</th>
-	//                         <th>处室</th>
-	//                         <th>科室</th>
-	//                         <th>姓名</th>
-	//                         <th></th>
-	//                         </thead>
-	//                         <tbody>
-	//                         <tr v-for="member in members">
-	//                             <td v-for="n in 3">{{member.orgtree[n+1]?member.orgtree[n+1].name:""}}</td>
-	//                             <!-- <td >{{member.orgtree[1]?member.orgtree[1].name:""}}</td>
-	//                             <td>{{member.orgtree[1]?member.orgtree[1].name:""}}</td> -->
-	//                             <td>{{member.displayname}}</td>
-	//                             <td>
-	//                                 <button class="btn btn-default" @click="addUser(member)">添加</button>
-	//                             </td>
-	//                         </tr>
-	//
-	//                         </tbody>
-	//                     </table>
-	//                     <div class="result">
-	//                         <ul class="list">
-	//                             <li v-for="user in selected" class="btn btn-primary" @click="removeUser($index,event)">
-	//                                 <a v-text="user.displayname" style="color: white;">
-	//                                 </a><i class="glyphicon glyphicon-remove"></i></li>
-	//                         </ul>
-	//                     </div>
-	//                 </div>
-	//                 <div class="modal-footer">
-	//                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	//                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-	//                 </div>
-	//             </div>
-	//         </div>
-	//     </div>
-	//     </div>
-	// </template>
-	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {
-	            members: [],
-	            // options:[],
-	            input: "",
-	            request: {}
-	        };
-	    },
-
-	    props: ["supervisionRequest", "multiple", 'leaderOnly', 'selected'],
-
-	    created: function created() {
-	        if (this.multiple == "false") this.multiple = false;else this.multiple = true;
-	        if (this.leaderOnly == "false") this.leaderOnly = false;else this.leaderOnly = true;
-	    },
-	    ready: function ready() {},
-
-	    methods: {
-	        selectMember: function selectMember(item) {
-	            this.selected = item;
-	        },
-	        searchInput: function searchInput() {
-	            var _this2 = this;
-
-	            var _this = this;
-	            var input = this.input.trim();
-	            if (input == "") return;
-	            var timer = setTimeout(function () {
-	                clearTimeout(timer);
-	                var inputVal = _this.input.trim();
-	                if (inputVal != input) {
-	                    return;
-	                } else {
-	                    if (inputVal == "") return;
-	                    if (_this.request.readyState && _this.request.readyState != 4) {
-	                        _this.request.abort();
-	                    }
-	                    _this.request = $.ajax({
-	                        type: "get",
-	                        url: _this2.supervisionRequest.searchuserUrl + "&q=" + inputVal,
-	                        success: function success(result, state, jqxhr) {
-	                            var members = [];
-	                            var count = 0;
-	                            for (var i = 0, len = result.length; i < len; i++) {
-	                                //leaders only
-	                                if (this.leaderOnly && result[i].isleader != 1) {
-	                                    continue;
-	                                }
-	                                var orgtree = result[i].orgtree;
-	                                if (orgtree) {
-	                                    for (var orgi in orgtree) {
-	                                        for (var key in orgtree[orgi]) {
-	                                            orgtree[orgi].name = orgtree[orgi][key];
-	                                        }
-	                                    }
-	                                }
-	                                result.orgtree = orgtree;
-	                                members.push(result[i]);
-	                                count++;
-	                                if (count == 4) break;
-	                            }
-	                            _this.members = members;
-	                        },
-	                        error: function error(result, state, jqxhr) {
-	                            console.log("error", jqxhr);
-	                        }
-	                    });
-	                }
-	            }, 1000);
-	        },
-	        addUser: function addUser(item) {
-	            if (item.selected) {
-	                alert("不可重复添加");
-	                return;
-	            }
-	            if (this.multiple || this.selected.length == 0) {
-	                this.selected.push(item);
-	                item.selected = true;
-	            } else {
-	                alert("只能选择一个候选人，请移除后再添加..");
-	            }
-	        },
-	        removeUser: function removeUser(index) {
-	            this.selected[index].selected = false;
-	            this.selected.splice(index, 1);
-	        }
-	    }
-	};
-
-	// </script>
-	// </body>
-	// </html>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    <!-- <div class=\"input-group\" style=\"width: 50%;position: relative;\">\n            <button  class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" style=\"width: 100%;text-align: left;background: white;\">{{(selected.displayname?selected.displayname:\"请选择\")}}<i class=\"fa fa-sort-down\"></i></button>\n            <div class=\"dropdown-menu open\">\n            <div class=\"bs-searchbox\"><input type=\"text\" v-model=\"input\" class=\"form-control\"></div>\n            <ul class=\"dropdown-menu inner\" role=\"menu\" >\n           <li class=\"menu-option\" v-for=\"option in options\"><a @click=\"selectMember(option)\">{{option.displayname}}</a></li>\n            </ul>\n            </div>\n\n    </div>   -->\n<div class=\"outer-container\" _v-04adc868=\"\">\n    <div class=\"input-grout\" style=\"width: 50%;position: relative;\" _v-04adc868=\"\">\n        <button class=\"btn btn-default\" data-toggle=\"modal\" data-target=\"#leaderModal\" _v-04adc868=\"\">请选择</button>\n    </div>\n    <div class=\"modal fade\" id=\"leaderModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-04adc868=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-04adc868=\"\">\n            <div class=\"modal-content\" _v-04adc868=\"\">\n                <div class=\"modal-header\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-04adc868=\"\"><span aria-hidden=\"true\" _v-04adc868=\"\">×</span></button>\n                    <h4 class=\"modal-title\" _v-04adc868=\"\">责任领导选择(仅搜索领导)</h4>\n                </div>\n                <div class=\"modal-body\" _v-04adc868=\"\">\n                    <div class=\"input\" _v-04adc868=\"\"><input type=\"text\" class=\"form-control inputSuccess1\" v-model=\"input\" @keyup=\"searchInput\" _v-04adc868=\"\"></div>\n                    <table class=\"table table-hover table-condensed content-key\" _v-04adc868=\"\">\n                        <thead _v-04adc868=\"\">\n                        <tr _v-04adc868=\"\"><th _v-04adc868=\"\">单位</th>\n                        <th _v-04adc868=\"\">处室</th>\n                        <th _v-04adc868=\"\">科室</th>\n                        <th _v-04adc868=\"\">姓名</th>\n                        <th _v-04adc868=\"\"></th>\n                        </tr></thead>\n                        <tbody _v-04adc868=\"\">\n                        <tr v-for=\"member in members\" _v-04adc868=\"\">\n                            <td v-for=\"n in 3\" _v-04adc868=\"\">{{member.orgtree[n+1]?member.orgtree[n+1].name:\"\"}}</td>\n                            <!-- <td >{{member.orgtree[1]?member.orgtree[1].name:\"\"}}</td>\n                            <td>{{member.orgtree[1]?member.orgtree[1].name:\"\"}}</td> -->\n                            <td _v-04adc868=\"\">{{member.displayname}}</td>\n                            <td _v-04adc868=\"\">\n                                <button class=\"btn btn-default\" @click=\"addUser(member)\" _v-04adc868=\"\">添加</button>\n                            </td>\n                        </tr>\n\n                        </tbody>\n                    </table>\n                    <div class=\"result\" _v-04adc868=\"\">\n                        <ul class=\"list\" _v-04adc868=\"\">\n                            <li v-for=\"user in selected\" class=\"btn btn-primary\" @click=\"removeUser($index,event)\" _v-04adc868=\"\">\n                                <a v-text=\"user.displayname\" style=\"color: white;\" _v-04adc868=\"\">\n                                </a><i class=\"glyphicon glyphicon-remove\" _v-04adc868=\"\"></i></li>\n                        </ul>\n                    </div>\n                </div>\n                <div class=\"modal-footer\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-04adc868=\"\">关闭</button>\n                    <!-- <button type=\"button\" class=\"btn btn-primary\">Save changes</button> -->\n                </div>\n            </div>\n        </div>\n    </div>\n    </div>\n";
 
 /***/ }
 /******/ ]);
