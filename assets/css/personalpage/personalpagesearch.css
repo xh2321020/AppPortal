@@ -142,3 +142,9 @@ a {
     min-width: 1024px;
     margin-top: 1rem;
 }
+.font-fam{
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+.span{
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}

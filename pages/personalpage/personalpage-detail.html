@@ -5,12 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <base href="http://172.16.51.144/"/>
+        <base href="http://172.16.51.144"/>
         <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="assets/libs/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="assets/libs/personalpage/portUrl.js"></script>
         <script type="text/javascript" src="assets/libs/personalpage/contactMembers.js"></script>
+        <!--<script type="text/javascript" src="dist/portUrlVue.js"></script>-->
         <style>
             .xc-title{
                 float: left;
@@ -20,14 +21,17 @@
             }
         </style>
     </head>
+    <header>
+        <com-header></com-header>
+    </header>
     <body style="min-width: 1024px;">
-        <div class="container" style="min-width: 1024px;">
-            <div style="float: left;width: 75%;">
+        <div class="container" style="min-width: 1024px; width: 100%; padding: 0px;">
+            <div style="float: left; width: 79.1%; margin-left: 0px;">
                 <span class="font-fam">个人工作台 >个人页面 </span>
                 <div class="col-center-block container-div font-fam">
                     <div class="org-tab-li">
                         <ul class="nav nav-tabs" style="clear: both;margin-left: 1rem;width: 80%;">
-                            <li class="active" role="presentation"><a href="#" class="font-fam">个人页面</a></li>
+                            <li class="active" role="presentation"><a class="font-fam">个人页面</a></li>
                             <li role="presentation">
                                 <a href="pages/personalpage/personalpage-list.html" class="font-fam">按组织浏览</a>
                             </li>
@@ -127,4 +131,8 @@
             </div>
         </div>
     </body>
+    <footer style="margin-top: 1rem; position: relative ;">
+        <com-footer></com-footer>
+    </footer>
+    <script type="text/javascript" src="dist/portUrlVue.js"></script>
 </html>

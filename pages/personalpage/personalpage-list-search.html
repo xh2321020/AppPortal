@@ -3,13 +3,16 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <base href="http://172.16.51.144/"/>
+    <base href="http://172.16.51.144"/>
     <link href="assets/css/personalpage/personalpagesearch.css" rel="stylesheet" type="text/css"/>
 </head>
-<body style="min-width: 1024px;">
-<div class="container">
+<header>
+    <com-header></com-header>
+</header>
+<body style="min-width: 1024px; width: 100%; padding: 0px;">
+<div class="container" style="min-width: 1024px; width: 100%; padding: 0px;">
     <span class="font-fam">个人工作台 >智能搜索 </span>
-    <div class="container col-center-block container-div" style="min-height: 60rem;">
+    <div class="container col-center-block container-div" style="min-height: 60rem; width: 100%;padding: 0px;">
         <div class="pls-tab-li">
             <ul class="nav nav-tabs" style="clear: both;">
                 <li role="presentation"><a href="pages/personalpage/personalpage-detail.html" class="font-fam">个人页面</a></li>
@@ -17,7 +20,7 @@
                     <a href="pages/personalpage/personalpage-list.html" class="font-fam">按组织浏览</a>
                 </li>
                 <li class="active" role="presentation">
-                    <a href="#" class="font-fam">智能搜索</a>
+                    <a class="font-fam">智能搜索</a>
                 </li>
             </ul>
         </div>
@@ -31,6 +34,10 @@
     </div>
 </div>
 </body>
+<footer style="margin-top: 1rem; position: relative ;">
+    <com-footer></com-footer>
+</footer>
+<script type="text/javascript" src="dist/portUrlVue.js"></script>
 <script type="text/javascript" src="assets/libs/personalpage/portUrl.js"></script>
 <script type="text/javascript" src="assets/libs/personalpage/contactSameOrgInit.js"></script>
 </html>

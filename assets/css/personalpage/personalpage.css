@@ -5,7 +5,12 @@
     border-right: 2px solid #CCCCCC;
     border-top: 0.5rem solid #A7C528;
 }
-
+.font-fam{
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+.span{
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
 .clear-float {
     zoom: 1;
 }
@@ -301,8 +306,8 @@
 }
 .xc-org-chain-member-a:hover{
     cursor: pointer;
-    color: red;
-    text-decoration: none;
+    color: #A7C528;
+    text-decoration: underline;
 }
 .cover {
 
@@ -312,15 +317,15 @@
     position: absolute;
     width: 16rem;
     height: 16rem;
-    left: calc(50% - 8rem);
-    top: calc(25%);
+    left: calc(60% - 8rem);
+    top: calc(50%);
     display: table-cell;
     vertical-align: middle;
     margin: 0 auto;
     border-radius: 50%;
     background: none;
     opacity: 0.6;
-    /*animation:loadingRotate 1s linear 0.05s  infinite;*/
+    /*animation: loadingRotate 1s linear 0.05s  infinite;*/
 }
 .org-member-card-list{
     width: 70%;
@@ -340,4 +345,14 @@
     height: 3rem;
     min-width: 1024px;
     margin-top: 1rem;
+}
+.tyzz-div{
+    margin-top: 5px;
+    margin-left: 1rem;
+    cursor:pointer;
+}
+.tyzz-div:hover{
+    box-shadow: 0  15px 30px rgba(0,0,0,.1);
+    transform: translate3d(0,-2px,0);
+    cursor: pointer;
 }

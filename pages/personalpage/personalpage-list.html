@@ -18,20 +18,23 @@
     <script type="text/javascript" src="assets/libs/jqwidgets/jqxscrollbar.js"></script>
     <script type="text/javascript" src="assets/libs/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="assets/libs/jqwidgets/jqxtree.js"></script>
-    <script type="text/javascript" src="assets/libs/personalpage/portUrl.js"></script>
+    <script type="text/javascript" src="assets/libs/personalpage/personalpage/portUrl.js"></script>
     <script type="text/javascript" src="assets/libs/personalpage/contact.js"></script>
 </head>
-    <body style="min-width: 1024px;">
-        <div class="container" style="min-width: 1024px;">
+<header>
+    <com-header></com-header>
+</header>
+    <body style="min-width: 1024px; width: 100%; padding: 0px;">
+        <div class="container" style="min-width: 1024px; width: 100%; padding: 0px;">
             <span class="font-fam">个人工作台 >按组织浏览 </span>
             <div class="cover" id="loadingimg">
                 <img class="loading" src="assets/images/loading3.gif"></img>
             </div>
-            <div class="container col-center-block container-div" style="min-height: 60rem;">
+            <div class="container col-center-block container-div" style="min-height: 60rem; width: 100%;">
                 <div class="org-tab-li">
                     <ul class="nav nav-tabs">
                         <li role="presentation"><a href="pages/personalpage/personalpage-detail.html" class="font-fam">个人页面</a></li>
-                        <li role="presentation" class="active"><a href="#" class="font-fam">按组织浏览</a></li>
+                        <li role="presentation" class="active"><a class="font-fam">按组织浏览</a></li>
                         <li role="presentation"><a href="pages/personalpage/personalpage-list-search.html" class="font-fam">智能搜索</a></li>
                     </ul>
                 </div>
@@ -63,4 +66,8 @@
             </div>
         </div>
     </body>
+<footer style="margin-top: 1rem; position: relative ;">
+    <com-footer></com-footer>
+</footer>
+<script type="text/javascript" src="dist/portUrlVue.js"></script>
 </html>
