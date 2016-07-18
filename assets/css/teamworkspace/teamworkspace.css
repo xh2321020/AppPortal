@@ -1,0 +1,310 @@
+.container .container {
+	width: 88%;
+	/*! padding-top: 10px; */
+}
+
+.container .img_left {
+	float: left;
+}
+
+.discussion{
+	/*! float: left; */
+}
+
+.container .img_right {
+	float: right;
+}
+
+.container .img_right input {
+	background: url(../../images/teamworkspace/u310.png) no-repeat right bottom;
+}
+
+.container .img_left label {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#subheading {
+	border-top: 4px solid #A7C528;
+	width: 88%;
+}
+
+#subheading a {
+	color: rgba(59, 51, 49, 0.86);
+	font-size: 12px;
+}
+
+#main-content {
+	padding: 0;
+	width: 88%;
+	border: 1px solid rgba(59, 51, 49, 0.27);
+}
+
+.container .main-content-left {
+	float: left;
+	width: 18%;
+	margin: 0 auto;
+}
+
+.container .main-content-left img {
+	height: 140px;
+	width: 68%;
+	margin: 0 auto;
+}
+
+.container .main-content-left .img-line-left01 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 5.5%;
+	float: left;
+}
+
+.container .main-content-left .img-line-left02 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 66%;
+	float: left;
+}
+
+.container .main-content-left .obligation .img-line-left02 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 51%;
+	float: left;
+}
+
+.container .main-content-left .regime .img-line-left02 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 58%;
+	float: left;
+}
+
+.container .main-content-left .img-u164 img {
+	height: 40px;
+	width: 40px;
+	margin: 0 auto;
+	margin: 0 auto 0 5px;
+}
+
+.container .main-content-left .obligation {
+	float: left;
+	padding-bottom: 20px;
+}
+
+.container .main-content-mid {
+	float: left;
+	width: 60%;
+	border-left: 1px solid rgba(59, 51, 49, 0.27);
+	border-right: 1px solid rgba(59, 51, 49, 0.27);
+	padding-left: 5px;
+	/*! padding: 10px; */
+	padding-right: 30px;
+}
+
+.container .main-content-mid .img-line-mid01 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u278_line.png) no-repeat top;
+	width: 2%;
+	float: left;
+}
+.container .main-content-mid .community{margin-top: 20px; padding-bottom: 20px;}
+
+.container .main-content-mid .community .img-line-mid02 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u278_line.png) no-repeat top;
+	width: 87%;
+	float: left;
+	padding-bottom: 10px;
+}
+
+.container .main-content-mid .document .img-line-mid02 {
+	margin-top: 10px;
+	height: 2px;
+	background: url(../../images/teamworkspace/u278_line.png) no-repeat top;
+	width: 92%;
+	float: left;
+	padding-bottom: 10px;
+}
+
+.container .main-content-mid .topic .img-line-mid02 {
+	margin-top: 10px;
+	height: 2px;
+	background: url(../../images/teamworkspace/u278_line.png) no-repeat top;
+	width: 92%;
+	float: left;
+	padding-bottom: 10px;
+}
+
+.container .main-content-mid .document .img-u265{
+	float: right; height:31px; width:20px;
+	/*! margin-left: 12px; */
+	/*! margin-right: 25px; */
+}
+.container .main-content-mid .discussion .img-u265{
+	float: right; height:31px; width:20px;
+	/*! margin-left: 12px; */
+	/*! margin-right: 25px; */
+}
+.container .main-content-mid .document .check-all{
+	padding: 10px 20px;
+}
+.container .main-content-mid .task .img-line-mid02 {
+	margin-top: 10px;
+	height: 2px;
+	background: url(../../images/teamworkspace/u278_line.png) no-repeat top;
+	width: 87%;
+	float: left;
+	padding-bottom: 10px;
+}
+
+.container .main-content-mid .discussion .img-line-mid02 {
+	margin-top: 10px;
+	height: 2px;
+	background: url(../../images/teamworkspace/u278_line.png) no-repeat top;
+	width: 89%;
+	float: left;
+	padding-bottom: 10px;
+}
+
+.container .main-content-mid .discussion .check-all{
+	padding: 10px 20px; 
+}
+
+.container .main-content-mid .community img {
+	height: 71px;
+	width: 532px;
+	margin: 0 auto;
+}
+
+.container .main-content-mid .document {
+	/*! float: left; */
+}
+
+#document-path {
+	float: left;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#document-path img {
+	height: 29px;
+	width: 20px;
+	float: left;
+}
+
+#document-path a {
+	margin-top: 5px;
+	float: left;
+	font-size: 12px
+}
+
+#document-text {
+	font-size: 12px;
+	float: left;
+	border-bottom: 1px solid rgb(202, 200, 199);
+	width: 562px;
+}
+
+.container .main-content-mid .task {
+	padding-bottom: 20px;
+	/*! float: left; */
+}
+
+.container .main-content-mid .task .img-responsive {
+	height: 124px;
+	margin: 0 auto;
+}
+
+.container .main-content-mid .task .img-u265 {
+	float: right; 
+	height:31px; 
+	width:20px;
+	/*! margin-left: 12px; */
+	/*! margin-right: 25px; */
+}
+#discussion-path img {
+	height: 19px;
+	width: 21px;
+	float: left;
+	margin-top: 5px;
+}
+
+#discussion-path a {
+	margin-top: 5px;
+	float: left;
+	font-size: 12px;
+}
+
+#discussion-text {
+	font-size: 12px;
+	float: left;
+	border-bottom: 1px solid rgb(202, 200, 199);
+	width: 562px;
+	padding-top: 0px;
+}
+
+#main-content-right {
+	width: 22%;
+	float: left;
+	padding-top: 20px;
+}
+
+#main-content-right .member {
+	/*! float: left; */
+	padding-bottom: 20px;
+}
+
+#main-content-right .member .img-line-right01 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 4%;
+	float: left;
+}
+
+#main-content-right .member .img-line-right02 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 70%;
+	float: left;
+}
+
+#main-content-right .img-line-right01 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 4%;
+	float: left;
+}
+
+#main-content-right .img-line-right02 {
+	margin-top: 10px;
+	height: 16px;
+	background: url(../../images/teamworkspace/u306_line.png) no-repeat top;
+	width: 41%;
+	float: left;
+}
+
+#main-content-right .member img {
+	height: 40px;
+	width: 40px;
+	margin: 0 auto;
+	margin-left: 10px;
+}
+
+.workspace-img img {
+	height: 40px;
+	width: 46px;
+	margin: 0 auto;
+	float: left;
+}
