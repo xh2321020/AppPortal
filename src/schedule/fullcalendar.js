@@ -464,6 +464,8 @@ function Calendar(element, options, eventSources) {
 		}
 		else {
 			suggestedViewHeight = Math.round(content.width() / Math.max(options.aspectRatio, .5));
+			//canice
+			suggestedViewHeight = 8000;
 		}
 	}
 	
