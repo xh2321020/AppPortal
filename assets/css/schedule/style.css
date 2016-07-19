@@ -158,7 +158,8 @@
 
 .span-org-selected   {
     background:#99ffff;
-    padding: 2px 6px 2px 6px;
+    padding: 4px 8px 4px 8px;
+    border-radius: 4px;
 }
 
 .fc-agenda-allday::before{

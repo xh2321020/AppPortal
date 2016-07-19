@@ -11,11 +11,13 @@
         <link rel="stylesheet" href="/assets/css/schedule/style.css">
     </head>
     <body ng-app="eventApp">
+    <header><com-header></com-header></header>
+    
     <div ng-controller="AllCtrl">
-        <div class="container">
+        <div class="container" style="min-height: 500px">
             <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <br><br><br>
+                <div class="col-md-12">
+                    <br>
 
                     <h3>日程管理</h3>
                     <div id="myTabContent2" class="tab-content">
@@ -102,6 +104,8 @@
             </div>
         </div>
     </div>
+    
+    <footer><com-footer></com-footer></footer>
 
         <script src="/assets/libs/angular/angular.min.js"></script>
         <script src="/assets/libs/jquery-1.11.1.min.js"></script>
@@ -113,5 +117,6 @@
         <script src="/src/schedule/eventservice.js"></script>
         <script src="/src/schedule/all.js"></script>
         <script src='/assets/libs/jquery.blockUI.js'></script>
+        <script src='/src/componets/header-footer.js'></script>
     </body>
 </html>
