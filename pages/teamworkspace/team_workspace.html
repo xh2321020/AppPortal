@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>协作空间</title>
-	<base href="../../">
-<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<base href="http://172.16.51.144/">
+<link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/teamworkspace/teamworkspace.css" rel="stylesheet">
 
 </head>
@@ -229,8 +229,8 @@
 		</div>
 		<!-- 主要内容   开始 -->
 	</div>
-<script src="assets/libs/jquery-2.1.1.min.js"></script>
-<script src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/jquery-1.11.1.min.js"></script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
 <script src="assets/libs/teamworkspace/vue.min.js"></script>
 <script src="assets/libs/teamworkspace/moment.min.js"></script>
 <script type="text/javascript">
@@ -286,7 +286,7 @@ var documentvm = new Vue({
 			        success(result, state, jqxhr)
 			    	{	
 			        	var items = [];
-			        	let eitems=[];
+			        	var eitems=[];
 			    		if (result==null) {return;};
 			    		
 			    		//datajson为测试环境,在正式环境下,换成result即可
