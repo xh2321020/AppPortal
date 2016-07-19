@@ -305,9 +305,9 @@
     cursor: pointer;
 }
 .xc-org-chain-member-a:hover{
-    cursor: pointer;
     color: #A7C528;
     text-decoration: underline;
+    cursor: pointer;
 }
 .cover {
 
@@ -318,7 +318,7 @@
     width: 16rem;
     height: 16rem;
     left: calc(60% - 8rem);
-    top: calc(50%);
+    top: calc(60% + 8rem);
     display: table-cell;
     vertical-align: middle;
     margin: 0 auto;
