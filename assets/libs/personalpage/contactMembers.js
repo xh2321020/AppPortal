@@ -54,6 +54,16 @@ function editSave(parmar,parmarKey){
                 $(span).text($(input).val());
                 $(btn).show();
                 alert("保存成功！");
+            }else{
+                var buttonDiv = "#button"+parmar;
+                var span = "#span"+parmar;
+                var btn = "#btn"+parmar;
+                $(buttonDiv).hide();
+                $(input).hide();
+                $(span).show();
+                $(span).text(cancelText);
+                $(btn).show();
+                alert("保存失败！");
             }
         },
         error: function (err) {
@@ -83,6 +93,7 @@ $(document).ready(function () {
     var pageUser=window.pageUserUid;
     if(pageUser == null){
         pageUser = window.currentUserId;
+        window.pageUserUid=window.currentUserId;
     }
     var currentUser=window.currentUserId;
     var sameOrgOu = "";
@@ -96,6 +107,9 @@ $(document).ready(function () {
             var countLeaders=0;
             var countMembers=0;
             for (var i = 0; i < data.length; i++) {
+                var personalhtml='<span class="font-fam">个人工作台 >'+data[i].displayname+ '</span>';
+                $("#defaultTitle").remove();
+                $("#personalPageId").html(personalhtml);
                 var iconImages = "";
                 var department = "";
                 if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
@@ -293,7 +307,7 @@ $(document).ready(function () {
                     $("#sameOrgId").remove();
                     $("#sameOrgMember").html(sameOrgMemberDiv+sameOrgLineHtml+sameOrgHtml + moreHtml+ '</div></div>');
                 }else{
-
+                    //$("#sameOrgMember").hide();
                 }
             },
             error: function (err) {
