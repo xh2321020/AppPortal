@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>统一待办</title>
     <base href="http://172.16.51.144/"/>
+    <!--<base href="../../">-->
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal-workspace.css"/>
@@ -139,7 +140,7 @@
                             </a>
                         </li>
                     </ul>
-                    <a href="#" style="cursor: pointer;">
+                    <a style="cursor: pointer;">
                         <div class="bodySectionLeftPortalMoreSys" id="showPopViw">更多系统 >></div>
                     </a>
                 </div>
@@ -220,25 +221,35 @@
                     <div style="height: 50%;">
                         <div style="width: 100%; height: 2rem;">
                             <div class="bodySectionRightPlanDiv">
-                                <span class="bodySectionRightPlanSpan">明日计划</span>
+                                <span class="bodySectionRightPlanSpan">七日内督办提醒</span>
                             </div>
                         </div>
 
                         <div class="task-item">
-                            <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察1号机组</span></br><span>【会议】下午2:30~5:00</span></div>
-                            <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察</span></br><span>【会议】下午2:30~5:00</span></div>
+                            <div class="task-list-detail-title-tomorrow">
+                                <a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" style="color: black; text-decoration:none; cursor: pointer;"><span>【集团经济运行分析会】核电定价机制调整问题。</span></br><!-- <span>【会议】下午2:30~5:00</span> -->
+                                    <span>负责人：徐帆 2016-12-30</span></a>
+                            </div>
+                            <div class="task-list-detail-title-tomorrow">
+                                <a href="pages/supervision/supervision-detail.html?id=1000&amp;previous=all" style="color: black; text-decoration:none; cursor: pointer;"><span>【集团经济运行分析会】海南核电电价问题。按照双方高层会谈精神及毛超峰常务副省长的“三个一点”的原则，组织海南核电，对接省发改委、物价局，促成“三个一点”原则的落实。</span></br><!-- <span>【会议】下午2:30~5:00</span> -->
+                                    <span>负责人：徐帆 2016-10-31</span></a>
+                            </div>
+                            <!-- <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察</span></br><span>【会议】下午2:30~5:00</span></div> -->
+
+                            <div><a href="pages/supervision/supervision-mine.html">查看更多</a></div>
                         </div>
                     </div>
                     <!-- 后天计划-->
                     <div style="height: 50%; margin-top: 1rem;">
                         <div style="width: 100%; height: 2rem;">
                             <div class="bodySectionRightPlanDiv">
-                                <span class="bodySectionRightPlanSpan">明日计划</span>
+                                <span class="bodySectionRightPlanSpan">七日内日程提醒</span>
                             </div>
                         </div>
                         <div class="task-item">
                             <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察1号机组</span></br><span>【会议】下午2:30~5:00</span></div>
                             <div class="task-list-detail-title-tomorrow"><span>陪同张三丰领导视察</span></br><span>【会议】下午2:30~5:00</span></div>
+                            <div><a href="pages/supervision/supervision-mine.html">查看更多</a></div>
                         </div>
                     </div>
                 </div>
@@ -345,7 +356,7 @@
                                     </table>
                                 </section>
                                 <!--<a :href="{{personalread[0].moreUrl}}" class="moreURL">-->
-                                    <!--<div class="moreURL-div">更多 >></div>-->
+                                <!--<div class="moreURL-div">更多 >></div>-->
                                 <!--</a>-->
                             </div>
                             <!-- 办公待阅 publicread-->
@@ -354,6 +365,9 @@
                                     <div class="line-tasktype-wedigt-arrow-label">
                                         <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/personal/arrow.png" style="margin-left: 17%;"/>
                                     </div>
+                                </div>
+                                <div class="todoIsNull">
+                                    <img src="assets/images/portal/personal/todoIsNull.png" class="todoIsNull-img"/>
                                 </div>
                             </div>
                             <!-- 个人待办 personal-->
@@ -391,29 +405,9 @@
                                         <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/personal/arrow.png" style="margin-left: 42%;"/>
                                     </div>
                                 </div>
-                                <section class="grid-table">
-                                    <table class="table table-condensed head-title">
-                                        <thead>
-                                        <tr>
-                                            <th > 事项名称 </th>
-                                            <th > 创建人员 </th>
-                                            <th> 创建时间 </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <template  v-for="item in public">
-                                            <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
-                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
-                                                <td class="">{{item.creator}}</td>
-                                                <td class="">{{item.created}}</td>
-                                            </tr>
-                                        </template>
-                                        </tbody>
-                                    </table>
-                                </section>
-                                <!--<a :href="{{personal[0].moreUrl}}" style="cursor: pointer; padding-bottom: 1rem;">-->
-                                    <!--<div class="moreURL-div">更多 >></div>-->
-                                <!--</a>-->
+                                <div class="todoIsNull">
+                                    <img src="assets/images/portal/personal/todoIsNull.png" class="todoIsNull-img"/>
+                                </div>
                             </div>
                             <!-- 受托待办-->
                             <div class="line-tasktype-wedigt" id="shoutuodaiban">
@@ -434,29 +428,31 @@
                                     </div>
                                 </div>
                                 <div id="Data">
-                                    <!--<section class="grid-table">-->
-                                        <!--<table class="table table-condensed head-title">-->
-                                            <!--<thead>-->
-                                            <!--<tr>-->
-                                                <!--<th > 事项名称 </th>-->
-                                                <!--<th > 创建人员 </th>-->
-                                                <!--<th> 创建时间 </th>-->
-                                            <!--</tr>-->
-                                            <!--</thead>-->
-                                            <!--<tbody>-->
-                                            <!--<template  v-for="item in personalread">-->
-                                                <!--<tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">-->
-                                                    <!--<td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>-->
-                                                    <!--<td class="">{{item.creator}}</td>-->
-                                                    <!--<td class="">{{item.created}}</td>-->
-                                                <!--</tr>-->
-                                            <!--</template>-->
-                                            <!--</tbody>-->
-                                        <!--</table>-->
-                                    <!--</section>-->
-                                    <!--<a :href="{{personalread[0].moreUrl}}" style="cursor: pointer; padding-bottom: 1rem;">-->
-                                        <!--<div class="moreURL-div">更多 >></div>-->
-                                    <!--</a>-->
+                                    <section class="grid-table">
+                                        <table class="table table-condensed head-title">
+                                            <thead>
+                                            <tr>
+                                                <th> 事项名称</th>
+                                                <th> 创建人员</th>
+                                                <th> 创建时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <template v-for="item in personalread">
+                                                <tr class="grid-content"
+                                                    style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
+                                                    <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                    <td class="">{{item.creator}}</td>
+                                                    <td class="">{{item.created}}</td>
+                                                </tr>
+                                            </template>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                    <a :href="{{personalread[0].moreUrl}}"
+                                       style="cursor: pointer; padding-bottom: 1rem;">
+                                        <div class="moreURL-div">更多 >></div>
+                                    </a>
                                 </div>
 
                             </div>
@@ -499,7 +495,7 @@
                 工作快捷入口
             </div>
             <div style="width: 4rem; height: 4rem;float: right" id="closePopView">
-                <a href="#" style="cursor: pointer"> <img src="assets/images/portal/personal/close.png" style="width: 4rem; height: 4rem;"/></a>
+                <a style="cursor: pointer"> <img src="assets/images/portal/personal/close.png" style="width: 4rem; height: 4rem;"/></a>
             </div>
         </div>
         <ul class="ul-wedigt">
