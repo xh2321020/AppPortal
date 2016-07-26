@@ -119,41 +119,41 @@
 	            "created": "2016-05-24",
 	            "creator": "20120013",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于中国核能电力股份有限公司部门职责调整的�1�7�知"
+	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=E73CF306A22E4440827CEE6A97249412&workflowName=SendAdminLetterProcess&handID=1008151",
 	            "created": "2016-05-30",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于报�1�7�中核集团核电厂核事故场内应急支援基地项目建议书的请礄1�7"
+	            "subject": "关于报送中核集团核电厂核事故场内应急支援基地项目建议书的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //个人待办
-	        personal: [{ "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=6DC48F211B80D54A9F8581D5F919D4F0&stepName=Application", "created": "2013-09-11", "creator": "20120014", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司N1-ECM系统管理规定" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=90C582442BD0394BBEB8BC4379E7E8F9&stepName=Undertake", "created": "2014-06-18", "creator": "htnpcws_z", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于工程建设项目造价审核情况的复凄1�7" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=7E9286F1209EBC45A24EBA4EC89A0380&stepName=Establishment", "created": "2014-12-22", "creator": "20120014", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司投资管理制度" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=2AEC6D7FBB2B6A45B2EEABDAD915F81F&stepName=Undertake", "created": "2015-08-20", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于征求《中国核工业集团公司对外战略合作协议管理办法(征求意见稄1�7)》意见的凄1�7" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=14F3697106CF2D43801E83A691206E37&stepName=Undertake", "created": "2015-08-19", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于上报秦山核电有限公司国光宾馆改单身公寓可行�1�7�研究报告（代初步设计）的报呄1�7" }],
+	        personal: [{ "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=6DC48F211B80D54A9F8581D5F919D4F0&stepName=Application", "created": "2013-09-11", "creator": "20120014", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司N1-ECM系统管理规定" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=90C582442BD0394BBEB8BC4379E7E8F9&stepName=Undertake", "created": "2014-06-18", "creator": "htnpcws_z", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于工程建设项目造价审核情况的复函" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=7E9286F1209EBC45A24EBA4EC89A0380&stepName=Establishment", "created": "2014-12-22", "creator": "20120014", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司投资管理制度" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=2AEC6D7FBB2B6A45B2EEABDAD915F81F&stepName=Undertake", "created": "2015-08-20", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于征求《中国核工业集团公司对外战略合作协议管理办法(征求意见稿)》意见的函" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=14F3697106CF2D43801E83A691206E37&stepName=Undertake", "created": "2015-08-19", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于上报秦山核电有限公司国光宾馆改单身公寓可行性研究报告（代初步设计）的报告" }],
 	        //公办待办
 	        public: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //公办待阅
 	        publicread: [{
@@ -161,32 +161,32 @@
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //领导批示
 	        find: [{
 	            "recipient": "20120014",
-	            "subject": "关于中国核能电力股份有限公司部门职责调整的�1�7�知",
+	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知",
 	            "signDate": "2016-06-07"
 	        }, {
 	            "recipient": "20120014",
-	            "subject": "关于中国核能电力股份有限公司部门职责调整的�1�7�知",
+	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知",
 	            "signDate": "2016-06-07"
 	        }, {
 	            "recipient": "20120014",
-	            "subject": "关于中国核能电力股份有限公司部门职责调整的�1�7�知",
+	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知",
 	            "signDate": "2016-06-07"
 	        }],
 	        //受托待办
@@ -195,7 +195,7 @@
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //委托待办
 	        memberStates: [{
@@ -203,7 +203,7 @@
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //消息提醒
 	        cultureColumn: [{
@@ -211,7 +211,7 @@
 	            "created": "2016-06-02",
 	            "creator": "20067119",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
-	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见�1�7�的请示"
+	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        dubanshixiang: [{
 	            "id": 1003,
@@ -219,7 +219,7 @@
 	            "pid": 0,
 	            "pcode": null,
 	            "pname": null,
-	            "name": "＄1�7�组织成员公司与地方物价屄1�7、电网地方层面的沟�1�7�汇报与交流，争取理解与支持；（2）争取能源局的支持，并�1�7�过能源屄1�7影响价格司的决策；（3）进丄1�7步加强降本增效管理，努力减轻电价可能下调的不利影响�1�7�\"",
+	            "name": "（1）组织成员公司与地方物价局、电网地方层面的沟通汇报与交流，争取理解与支持；（2）争取能源局的支持，并通过能源局影响价格司的决策；（3）进一步加强降本增效管理，努力减轻电价可能下调的不利影响。\"",
 	            "source": "MEETING",
 	            "area": "HR",
 	            "status": 0,
@@ -240,7 +240,7 @@
 	                "operatorsn": null,
 	                "operatorname": null,
 	                "rate": 30,
-	                "description": "工作略微滞后，整体按照计划进衄1�7",
+	                "description": "工作略微滞后，整体按照计划进行",
 	                "updatetime": "2016-06-18"
 	            }
 	        }]
@@ -402,7 +402,7 @@
 
 
 	// module
-	exports.push([module.id, "\n*,article,section,ul,div,p,td,li{\n    margin: 0;padding: 0;\n}\nhtml {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}\nbody {font-size: 1.4rem;/*1.4 × 10px = 14px */\n    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    min-width: 1024px;\n    max-width: 80%;\n    margin: 0 auto;\n}\nh1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}\n\n\n/*顶部导航弄1�7姄1�7*/\n.navbar{\n    width: 100%;\n    margin: 0 auto;\n}\n\n.navbar .container-fluid{\n    position: relative;\n    padding: 0;\n    background: #ffffff;\n}\n.brand{\n    float: left;\n    width: 25.8rem;\n    height: 5.2rem;\n}\n\n.nav-list{\n    list-style: none;\n    float: left;\n    border-left: 1px solid lightgrey;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n}\n.navbar-link.com-portal:hover{\n    background: #00a2e5;\n    color: #ffffff;\n}\n.dep-portal:hover{\n    background: #FFB341;\n    color: #ffffff;\n}\n.navbar-link.workbench:hover{\n    background: #ABCB27;\n    color: #ffffff;\n}\n.navbar-link{\n    display: inline-block;\n    height: 100%;\n    position: relative;\n    padding:0 3rem;\n    color: #797979;\n    width: 100%;\n}\n\n.nav-list .navbar-link:hover{\n    color: #ffffff;\n    text-decoration: none;\n\n}\n.nav-list .active{\n    color: #0066cc;\n}\n.nav-list-item{\n    float: left;\n    border-right: 1px solid lightgrey;\n    line-height: 5.2rem;\n    text-align: center;\n    width: 20rem;\n}\n#depPortalNav{\n    display: none;\n}\n.nav-action{\n    /*border: 1px solid blue;*/\n    position: absolute;\n    top: 0;\n    right: 0;\n    line-height: 3.2rem;\n    list-style: none;\n    font-size: 1.6rem;\n    font-weight: 700;\n    color: grey;\n}\n.nav-action .login{\n    min-width:12rem;\n    text-align: center;\n}\n.nav-action .search{\n    min-width: 22rem;\n    border-left: solid 1px lightgrey;\n    text-align: left;\n}\n.nav-action .form-control{\n    display: inline;\n    /*width: auto;*/\n    width: 15rem;\n}\n.nav-action .search{\n    padding-left: 3rem;\n}\n.nav-link{\n    position: relative;\n}\n.nav-panel{\n    background-color: white;\n    display: none;\n    left: 0;\n    top: 0;\n    position: absolute;\n    margin-top: 5.2rem;\n    width: 100%;\n    height: 16.5rem;\n    z-index: 1030;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n    margin-left: 0!important;\n    margin-right: 0!important;\n    border: 1px solid lightgrey;\n}\n.company>ul:first-child{\n    padding-top: 2rem;\n}\n.nav-panel .list{\n    border-top: 1px solid lightgrey;\n\n}\n.nav-panel ul{\n    padding: 0 2rem;\n    list-style: none;\n}\n\n.nav-panel .list-item{\n    float: left;\n    width: 14%;\n    text-align: center;\n}\n.company .btn:hover{\n    background-color: #00a2e5;\n    color:#fff\n}\n.dept-subj .btn:hover{\n    background-color: #FFB341;\n    color:#fff\n}\n.dept-subj .list-item{\n    width: 25%;\n    margin-bottom: -1rem;\n}\n.dept-subj .title{\n    margin-bottom: -2rem;\n}\n\n.list.dept{\n    position: relative;\n}\n.dept .split{\n    position: absolute;\n    top: 0;\n    right: 0;\n}\n/*顶部导航结束*/\n/*logo*/\n.logo{\n    width: 100%;\n    padding: 0 1px;\n}\n/*logo end*/\n", ""]);
+	exports.push([module.id, "\n*,article,section,ul,div,p,td,li{\n    margin: 0;padding: 0;\n}\nhtml {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}\nbody {font-size: 1.4rem;/*1.4 × 10px = 14px */\n    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    min-width: 1024px;\n    max-width: 80%;\n    margin: 0 auto;\n}\nh1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}\n\n\n/*顶部导航开始*/\n.navbar{\n    width: 100%;\n    margin: 0 auto;\n}\n\n.navbar .container-fluid{\n    position: relative;\n    padding: 0;\n    background: #ffffff;\n}\n.brand{\n    float: left;\n    width: 25.8rem;\n    height: 5.2rem;\n}\n\n.nav-list{\n    list-style: none;\n    float: left;\n    border-left: 1px solid lightgrey;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n}\n.navbar-link.com-portal:hover{\n    background: #00a2e5;\n    color: #ffffff;\n}\n.dep-portal:hover{\n    background: #FFB341;\n    color: #ffffff;\n}\n.navbar-link.workbench:hover{\n    background: #ABCB27;\n    color: #ffffff;\n}\n.navbar-link{\n    display: inline-block;\n    height: 100%;\n    position: relative;\n    padding:0 3rem;\n    color: #797979;\n    width: 100%;\n}\n\n.nav-list .navbar-link:hover{\n    color: #ffffff;\n    text-decoration: none;\n\n}\n.nav-list .active{\n    color: #0066cc;\n}\n.nav-list-item{\n    float: left;\n    border-right: 1px solid lightgrey;\n    line-height: 5.2rem;\n    text-align: center;\n    width: 20rem;\n}\n#depPortalNav{\n    display: none;\n}\n.nav-action{\n    /*border: 1px solid blue;*/\n    position: absolute;\n    top: 0;\n    right: 0;\n    line-height: 3.2rem;\n    list-style: none;\n    font-size: 1.6rem;\n    font-weight: 700;\n    color: grey;\n}\n.nav-action .login{\n    min-width:12rem;\n    text-align: center;\n}\n.nav-action .search{\n    min-width: 22rem;\n    border-left: solid 1px lightgrey;\n    text-align: left;\n}\n.nav-action .form-control{\n    display: inline;\n    /*width: auto;*/\n    width: 15rem;\n}\n.nav-action .search{\n    padding-left: 3rem;\n}\n.nav-link{\n    position: relative;\n}\n.nav-panel{\n    background-color: white;\n    display: none;\n    left: 0;\n    top: 0;\n    position: absolute;\n    margin-top: 5.2rem;\n    width: 100%;\n    height: 16.5rem;\n    z-index: 1030;\n    font-size: 14px;\n    font-weight: 400;\n    color: #797979!important;\n    margin-left: 0!important;\n    margin-right: 0!important;\n    border: 1px solid lightgrey;\n}\n.company>ul:first-child{\n    padding-top: 2rem;\n}\n.nav-panel .list{\n    border-top: 1px solid lightgrey;\n\n}\n.nav-panel ul{\n    padding: 0 2rem;\n    list-style: none;\n}\n\n.nav-panel .list-item{\n    float: left;\n    width: 14%;\n    text-align: center;\n}\n.company .btn:hover{\n    background-color: #00a2e5;\n    color:#fff\n}\n.dept-subj .btn:hover{\n    background-color: #FFB341;\n    color:#fff\n}\n.dept-subj .list-item{\n    width: 25%;\n    margin-bottom: -1rem;\n}\n.dept-subj .title{\n    margin-bottom: -2rem;\n}\n\n.list.dept{\n    position: relative;\n}\n.dept .split{\n    position: absolute;\n    top: 0;\n    right: 0;\n}\n/*顶部导航结束*/\n/*logo*/\n.logo{\n    width: 100%;\n    padding: 0 1px;\n}\n/*logo end*/\n", ""]);
 
 	// exports
 
@@ -705,7 +705,7 @@
 	//     h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
 	//
 	//
-	//     /*顶部导航弄1�7姄1�7*/
+	//     /*顶部导航开始*/
 	//     .navbar{
 	//         width: 100%;
 	//         margin: 0 auto;
@@ -880,10 +880,10 @@
 	//                         <div class="nav-panel company">
 	//                             <ul class="list">
 	//                                 <li class="list-item"><a class="btn" href="http://bjportal.cnnp.com.cn/wps/portal"
-	//                                                          target="_blank">中国核电旧主顄1�7/a></li>
+	//                                                          target="_blank">中国核电旧主页</a></li>
 	//                                 <!-- /.list-item -->
 	//                                 <li class="list-item"><a class="btn" href="http://www.cnnc.com.cn"
-	//                                                          target="_blank">中国核工业集团公叄1�7/a></li>
+	//                                                          target="_blank">中国核工业集团公司</a></li>
 	//                                 <!-- /.list-item -->
 	//                                 <li class="list-item"><a class="btn" href="http://10.16.15.38"
 	//                                                          target="_blank">中核运行</a></li>
@@ -892,7 +892,7 @@
 	//                                 <!-- /.list-item -->
 	//                                 <li class="list-item"><a class="btn"
 	//                                                          href="http://10.16.15.38:10039/wps/portal/Home/cnnc_index"
-	//                                                          target="_blank">秦山(筄1�7)</a></li>
+	//                                                          target="_blank">秦山(筹)</a></li>
 	//                                 <!-- /.list-item -->
 	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">江苏核电</a></li>
 	//                                 <!-- /.list-item -->
@@ -905,7 +905,7 @@
 	//                                                          target="_blank">福清核电</a></li>
 	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">海南核电</a></li>
 	//                                 <!-- /.list-item -->
-	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">桃花江核甄1�7/a></li>
+	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">桃花江核电</a></li>
 	//                                 <!-- /.list-item -->
 	//                                 <li class="list-item"><a class="btn" href="#" target="_blank">辽宁核电</a></li>
 	//                                 <!-- /.list-item -->
@@ -921,40 +921,40 @@
 	//                         </div>
 	//                     </li>
 	//                     <li class="nav-list-item dept-subj" id="depPortalNav">
-	//                         <a class="navbar-link dep-portal">部门及专题门戄1�7/a>
+	//                         <a class="navbar-link dep-portal">部门及专题门户</a>
 	//
 	//                         <div class="nav-panel row">
 	//                             <div class="list dept col-md-6">
 	//                                 <p class="title">部门门户</p>
 	//                                 <!-- /.title -->
 	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
-	//                                     <!-- /.list-item -->
-	//                                 </ul>
-	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
-	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
 	//                                 </ul>
 	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                 </ul>
+	//                                 <ul>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+	//                                     <!-- /.list-item -->
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
 	//                                 </ul>
 	//                                 <img :src="'assets/images/portal/dash_line.png'" alt="" class="split"/>
@@ -965,30 +965,30 @@
 	//                                 <p class="title">专题门户</p>
 	//                                 <!-- /.title -->
 	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
 	//                                 </ul>
 	//                                 <ul>
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
-	//                                     <li class="list-item"><a href="" class="btn">计划发展郄1�7/a></li>
+	//                                     <li class="list-item"><a href="" class="btn">计划发展部</a></li>
 	//                                     <!-- /.list-item -->
 	//                                 </ul>
 	//                             </div>
 	//                             <!-- /.list -->
 	//                         </div>
 	//                     </li>
-	//                     <li class="nav-list-item"><a class="navbar-link workbench" href="pages/portal/workspace.html">个人工作叄1�7/a></li>
+	//                     <li class="nav-list-item"><a class="navbar-link workbench" href="pages/portal/workspace.html">个人工作台</a></li>
 	//                 </ul>
 	//             </div>
 	//             <!-- /.nav-link -->
@@ -1042,7 +1042,7 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"pages/portal/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主顄1�7/a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公叄1�7/a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筄1�7)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核甄1�7/a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门戄1�7/a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展郄1�7/a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/workspace.html\">个人工作叄1�7/a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!--<base href=\"../../../\">-->\n<div class=\"navbar navbar-default\">\n    <div class=\"container-fluid nav-header\">\n        <img class=\"brand\" :src=\"'assets/images/portal/brand_big.png'\" />\n\n        <div class=\"nav-link\" id=\"navLink\">\n            <ul class=\"nav-list\">\n                <li class=\"nav-list-item\" id=\"comPortalNav\">\n                    <a class=\"navbar-link com-portal\" href=\"pages/portal/index.html\">公司门户</a>\n\n                    <div class=\"nav-panel company\">\n                        <ul class=\"list\">\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://bjportal.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">中国核电旧主页</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://www.cnnc.com.cn\"\n                                                     target=\"_blank\">中国核工业集团公司</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://10.16.15.38\"\n                                                     target=\"_blank\">中核运行</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"\" target=\"_blank\">中浙能源</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\"\n                                                     href=\"http://10.16.15.38:10039/wps/portal/Home/cnnc_index\"\n                                                     target=\"_blank\">秦山(筹)</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">江苏核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">三门核电</a></li>\n                            <!-- /.list-item -->\n                        </ul>\n                        <ul>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fqecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">福清核电</a></li>\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">海南核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">桃花江核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"#\" target=\"_blank\">辽宁核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://fsecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">三明核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\"><a class=\"btn\" href=\"http://zgecm.cnnp.com.cn/wps/portal\"\n                                                     target=\"_blank\">漳州核电</a></li>\n                            <!-- /.list-item -->\n                            <li class=\"list-item\">&nbsp;</li>\n                            <!-- /.list-item -->\n                        </ul>\n                    </div>\n                </li>\n                <li class=\"nav-list-item dept-subj\" id=\"depPortalNav\">\n                    <a class=\"navbar-link dep-portal\">部门及专题门户</a>\n\n                    <div class=\"nav-panel row\">\n                        <div class=\"list dept col-md-6\">\n                            <p class=\"title\">部门门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <img :src=\"'assets/images/portal/dash_line.png'\" alt=\"\" class=\"split\"/>\n                            <!-- /.split -->\n                        </div>\n                        <!-- /.list -->\n                        <div class=\"list col-md-6\">\n                            <p class=\"title\">专题门户</p>\n                            <!-- /.title -->\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                            <ul>\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                                <li class=\"list-item\"><a href=\"\" class=\"btn\">计划发展部</a></li>\n                                <!-- /.list-item -->\n                            </ul>\n                        </div>\n                        <!-- /.list -->\n                    </div>\n                </li>\n                <li class=\"nav-list-item\"><a class=\"navbar-link workbench\" href=\"pages/portal/workspace.html\">个人工作台</a></li>\n            </ul>\n        </div>\n        <!-- /.nav-link -->\n\n        <ul class=\"nav-action\" id=\"nav-action\">\n            <li class=\"nav-list-item search\"><input type=\"text\" class=\"form-control\" placeholder=\"搜索\" v-model=\"searchInputVal\"/>\n                <a class=\"btn-search\" @click=\"doSearch\"><span class=\"glyphicon glyphicon-search\"></span>\n                    <!-- /.glyphicon glyphicon-search --></a>\n                <!-- /.search -->\n            </li>\n            <!-- <li class=\"nav-list-item login\"><a :href=\"f2000\"></a></li> -->\n        </ul>\n        <!-- /.nav-action -->\n    </div>\n    <!-- /.container -->\n\n    <!-- /.nav-panel -->\n</div>\n<div>\n    <img :src=\"'assets/images/portal/portal-logo1.jpg'\" alt=\"\" class=\"logo\" />\n    <!-- /.logo -->\n</div>\n";
 
 /***/ },
 /* 13 */
@@ -1112,7 +1112,7 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持＄1�784 5483</p>\n\n            <p>抄1�7术支持：核工业计算机应用研究扄1�7</p>\n\n            <p>版权扄1�7有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n <div class=\"footer\">\n    <div class=\"footer_content\">\n        <div class=\"sina\">\n            <p><img :src=\"'assets/images/portal/sina.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>新浪微博</a>\n        </div>\n        <div class=\"con\">\n            <p>运维支持：5484 5483</p>\n\n            <p>技术支持：核工业计算机应用研究所</p>\n\n            <p>版权所有：中国核能电力股份有限公司</p>\n        </div>\n        <div class=\"weixin\">\n            <p><img :src=\"'assets/images/portal/weixin.jpg'\" width=\"50\" height=\"50\"></p>\n            <a>微信公众平台</a>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 17 */
