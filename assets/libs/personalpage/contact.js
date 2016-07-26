@@ -133,6 +133,7 @@ $(document).ready(function () {
                     }
                     $("#loadingimg").hide();
                 }
+                $("#defaultLeader").remove();
                 if(countLeaders>0){
                     $("#leaderArea").html(leaderHtml+'</div>');
                 }
