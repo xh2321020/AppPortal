@@ -16,28 +16,48 @@
     font-family: "microsoft yahei";
     font-weight: bold;
 }
-
-    .inner-tab li{
-        padding: .5rem 1rem;
-    }
-    .inner-tab .pagination li{
+.statistics{
+    width: 100%;
+    margin:0 auto;   
+}
+.statistics-content{
+    width: 14rem;
+    height: 5.8rem;/*6.2rem*/
+    border: 1px solid  lightgray;
+    margin-top:3px;
+    float: right;
+    text-align: center;
+    border-radius: 5px;
+    color: #953595;
+}
+.statistics-title{
+    /*text-align: center;*/
+    margin:5px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid skyblue;
+    font-weight: 500;
+}
+.statistics-data{
+    color: #953595;
+}
+.inner-tab{
+    margin-top: 1rem;
+}
+.inner-tab li{
+        padding: 0 5px;
+}
+.inner-tab .pagination li{
         padding: 0;
-    }
+}
 .inner-tab .tip{
     color:grey;
-    /*margin-left: 4rem;*/
 }
-/*.tab-content{
-    margin:0 4rem;
-}*/
 .filter{
     border: 1px solid lightgray;
     width: 95%;
     border-right: none;
 }
 .filter-item{
-    /*overflow: hidden;*/
-
     list-style: none;
     width: 100%;
     display: -ms-flexbox;
@@ -78,7 +98,6 @@
     max-height: 17.5rem;
     height: auto;
     overflow-y: scroll;
-    /*overflow-x:hidden;*/
 }
 .more .dropdown-menu .btn{
    text-overflow: ellipsis;
@@ -89,7 +108,6 @@
     align-content: center;
 }
 .date-select *{
-    /*display: inline-block;*/
     width: auto;
     float: left;
 }
@@ -144,24 +162,24 @@ font-weight: bold;
 margin: 1rem 0;
 }
 
-.grid-table .head-title th{
-    width: 10%;
+.grid-table  th{
+    /*width: 10%;*/
 }
 .grid-table  th:hover{
     cursor: pointer;
 }
-.grid-table .head-title th:nth-child(2){
-    width: 25%;
-}.grid-table .head-title th:nth-child(8){
+.grid-table  th:nth-child(2){
+    width: 27%;
+}.grid-table  th:nth-child(8){
     width: 20%;
 }.grid-table tbody td{
 text-align: center;
-    width: 10%;
       vertical-align: middle!important;
 }
+
 .grid-table tbody td:nth-child(2){
     text-align: left;
-    width: 20%;
+    width: 27%;
 }.grid-table tbody td:nth-child(8){
     text-align: left;
     width: 20%;
@@ -194,6 +212,7 @@ text-align: center;
     height:4rem;
     line-height: 4rem;
     border-radius:50%!important;
+    color:#FFF;
 }
 .grid-table .progress{
    width: 70%;
