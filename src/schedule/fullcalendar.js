@@ -158,7 +158,7 @@ $.fn.fullCalendar = function(options) {
 	if(options.names){
 		names = options.names;
 	}
-	if(options.names && options.names.length > 1){
+	if(options.names && options.names.length > 0){
 		isMultiType = true;
 	}
 
@@ -433,8 +433,8 @@ function Calendar(element, options, eventSources) {
 	
 	/* Resizing
 	-----------------------------------------------------------------------------*/
-	
-	
+
+
 	function updateSize() {
 		markSizesDirty();
 		if (elementVisible()) {
@@ -446,29 +446,34 @@ function Calendar(element, options, eventSources) {
 			currentView.sizeDirty = false;
 		}
 	}
-	
-	
+
+
 	function markSizesDirty() {
 		$.each(viewInstances, function(i, inst) {
 			inst.sizeDirty = true;
 		});
 	}
-	
+
 	
 	function calcSize() {
 		if (options.contentHeight) {
 			suggestedViewHeight = options.contentHeight;
+			console.log(suggestedViewHeight + "  1");
 		}
 		else if (options.height) {
 			suggestedViewHeight = options.height - (headerElement ? headerElement.height() : 0) - vsides(content);
+			console.log(suggestedViewHeight + "  2");
 		}
 		else {
 			suggestedViewHeight = Math.round(content.width() / Math.max(options.aspectRatio, .5));
 			//canice
-			suggestedViewHeight = 8000;
+			if(JSON.stringify(options.header.right).indexOf("month") < 0){
+				suggestedViewHeight = 8000;
+			}
+			//console.log("content:" + content.width() + "  ratio:" + options.aspectRatio + "  height:" + suggestedViewHeight);
 		}
 	}
-	
+
 	
 	function setSize(dateChanged) { // todo: dateChanged?
 		ignoreWindowResize++;
@@ -2439,6 +2444,8 @@ function BasicView(element, calendar, viewName) {
 			
 		if (opt('weekMode') == 'variable') {
 			rowHeight = rowHeightLast = Math.floor(bodyHeight / (rowCnt==1 ? 2 : 6));
+			console.log(rowHeight + "rowHeight");
+			console.log(rowHeight + "rowHeight" + ":bodyHeight" + bodyHeight);
 		}else{
 			rowHeight = Math.floor(bodyHeight / rowCnt);
 			rowHeightLast = bodyHeight - rowHeight * (rowCnt-1);

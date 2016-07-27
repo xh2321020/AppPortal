@@ -1,9 +1,15 @@
 eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService) {
+      //var urlParams = {
+      //      'userid': '10086',
+      //      'companyid': '10',
+      //      'collid': '',
+      //      'type': '0',
+      //      'startdate': "",
+      //      'enddate': "",
+      //};
+
       var urlParams = {
-            'userid': '10086',
-            'companyid': '10',
-            'collid': '',
-            'type': '0',
+            'userid': '',
             'startdate': "",
             'enddate': "",
       };
@@ -11,9 +17,10 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
       EventService.showLoading('数据请求中，请稍后... ...');
       $http.get( 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845', '')
       .success(function(response){
+          $.unblockUI();
             if(true){
                   $scope.orgs = response;
-                  $scope.orgClick($scope.orgs[0]);
+                  $scope.orgClick2($scope.orgs[0]);
             }
       });
 
@@ -39,7 +46,9 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                         urlParams.startdate = start.format("yyyy-MM-dd");
                         urlParams.enddate = end.format("yyyy-MM-dd");
                         EventService.showLoading('数据获取中，请稍后... ...');
-                        EventService.getEvents(EventService.parseParam(urlParams), true, callback);
+                        //EventService.getEvents(EventService.parseParam(urlParams), true, callback);
+                        EventService.getEventsByPeople(urlParams, callback);
+
                         $timeout(
                             function() {
                                   document.getElementsByClassName('fc-button-agendaWeek')[0].click();
@@ -61,6 +70,43 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
             urlParams.companyid = org.id;
             $("#calendar").empty();
             EventService.getPeoples(EventService.parseParam(urlParams), callback);
+      };
+
+      $scope.orgClick2 = function (org) {
+            for(var i = 0, j = $scope.orgs.length; i < j; i++){
+                  if(org.id == $scope.orgs[i].id){
+                        $scope.orgs[i].isSelected = true;
+                  } else{
+                        $scope.orgs[i].isSelected = false;
+                  }
+            }
+            EventService.showLoading('数据获取中，请稍后... ...');
+            //$http.get( 'http://172.16.51.137:8010/api/contact/getuserlist?apikey=e71982d5401b488da4acef8827c41845&ou=' + org.id, '')
+            $http.get( 'http://172.16.51.137:8010/api/contact/getleader?apikey=e71982d5401b488da4acef8827c41845&ou=' + org.id, '')
+                .success(function(response){
+                      if(true){
+                            var userIds = [];
+                            var leaders = [];
+                            console.log("response:" + response.length);
+                            for(var i = 0, j = response.length; i < j; i++){
+                                  var user =  response[i];
+                                  user.id = user.uid;
+                                  user.username = user.displayname;
+                            //      //if(('isleader' in user) && user.isleader == '1' && user.orgtree.length == 2){
+                            //      if(user.orgtree.length < 3){
+                                        userIds.push({"userid": user.id});
+                                        leaders.push(user);
+                            //      }
+                            }
+                            //console.log("userIds:" + userIds.length);
+                            $.unblockUI();
+                            EventService.setPeoples(leaders);
+                            $("#calendar").empty();
+                            urlParams.userid = userIds;
+                            callback();
+                      }
+                }
+            );
       };
 
       $scope.scheduletype = [true, true, true, true, true];
