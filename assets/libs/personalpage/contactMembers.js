@@ -107,7 +107,7 @@ $(document).ready(function () {
             var countLeaders=0;
             var countMembers=0;
             for (var i = 0; i < data.length; i++) {
-                var personalhtml='<span class="font-fam">个人工作台 >'+data[i].displayname+ '</span>';
+                var personalhtml='<span class="font-fam">个人工作台 >个人页面>'+data[i].displayname+ '</span>';
                 $("#defaultTitle").remove();
                 $("#personalPageId").html(personalhtml);
                 var iconImages = "";
