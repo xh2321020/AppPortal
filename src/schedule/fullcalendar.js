@@ -458,11 +458,9 @@ function Calendar(element, options, eventSources) {
 	function calcSize() {
 		if (options.contentHeight) {
 			suggestedViewHeight = options.contentHeight;
-			console.log(suggestedViewHeight + "  1");
 		}
 		else if (options.height) {
 			suggestedViewHeight = options.height - (headerElement ? headerElement.height() : 0) - vsides(content);
-			console.log(suggestedViewHeight + "  2");
 		}
 		else {
 			suggestedViewHeight = Math.round(content.width() / Math.max(options.aspectRatio, .5));
@@ -2444,8 +2442,6 @@ function BasicView(element, calendar, viewName) {
 			
 		if (opt('weekMode') == 'variable') {
 			rowHeight = rowHeightLast = Math.floor(bodyHeight / (rowCnt==1 ? 2 : 6));
-			console.log(rowHeight + "rowHeight");
-			console.log(rowHeight + "rowHeight" + ":bodyHeight" + bodyHeight);
 		}else{
 			rowHeight = Math.floor(bodyHeight / rowCnt);
 			rowHeightLast = bodyHeight - rowHeight * (rowCnt-1);
