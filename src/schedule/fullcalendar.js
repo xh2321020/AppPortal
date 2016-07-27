@@ -158,7 +158,7 @@ $.fn.fullCalendar = function(options) {
 	if(options.names){
 		names = options.names;
 	}
-	if(options.names && options.names.length > 1){
+	if(options.names && options.names.length > 0){
 		isMultiType = true;
 	}
 
@@ -433,8 +433,8 @@ function Calendar(element, options, eventSources) {
 	
 	/* Resizing
 	-----------------------------------------------------------------------------*/
-	
-	
+
+
 	function updateSize() {
 		markSizesDirty();
 		if (elementVisible()) {
@@ -446,14 +446,14 @@ function Calendar(element, options, eventSources) {
 			currentView.sizeDirty = false;
 		}
 	}
-	
-	
+
+
 	function markSizesDirty() {
 		$.each(viewInstances, function(i, inst) {
 			inst.sizeDirty = true;
 		});
 	}
-	
+
 	
 	function calcSize() {
 		if (options.contentHeight) {
@@ -465,10 +465,13 @@ function Calendar(element, options, eventSources) {
 		else {
 			suggestedViewHeight = Math.round(content.width() / Math.max(options.aspectRatio, .5));
 			//canice
-			suggestedViewHeight = 8000;
+			if(JSON.stringify(options.header.right).indexOf("month") < 0){
+				suggestedViewHeight = 8000;
+			}
+			//console.log("content:" + content.width() + "  ratio:" + options.aspectRatio + "  height:" + suggestedViewHeight);
 		}
 	}
-	
+
 	
 	function setSize(dateChanged) { // todo: dateChanged?
 		ignoreWindowResize++;

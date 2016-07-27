@@ -28,17 +28,16 @@
     float: right;
     text-align: center;
     border-radius: 5px;
-    color: #953595;
-}
-.statistics-title{
-    /*text-align: center;*/
-    margin:5px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid skyblue;
-    font-weight: 500;
 }
 .statistics-data{
-    color: #953595;
+    padding: 5px;
+    border-bottom: 1px solid skyblue;
+    font-weight: 500;
+    background-color: #A1C636;
+    color: #fff;
+}
+.statistics-title{
+    color: #000;
 }
 .inner-tab{
     margin-top: 1rem;
