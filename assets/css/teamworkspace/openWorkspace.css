@@ -1,0 +1,158 @@
+.co-view{
+    min-height: 68.5rem;
+}
+.co-openco-section{
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    float: left;
+    min-width: 13rem;
+    min-height: 68.5rem;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    width: 15%;
+}
+.co-openco-imgdiv{
+    text-align: center;
+    width: 8rem;
+    height: 8rem;
+    position: relative;
+    margin-left: 33%;
+}
+.co-openco-imgdiv-img{
+    width: 50%;
+    height: 50%;
+    margin-top: 20%;
+}
+.co-leftDiv-doc{
+    height: auto;
+    min-height:14rem;
+}
+.co-leftDiv-doc-title{
+    width: 100%;
+    height: 1.5rem;
+}
+.co-leftDiv-doc-title-bgLine{
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid #A6CC38;
+    vertical-align: top;
+}
+.co-leftDiv-doc-title-char{
+    background-color: white;
+    color: black;
+    float: left;
+    margin-left: 2rem;
+    height: 1.4rem;
+}
+.co-leftDiv-doc-owner{
+    list-style: none;
+    margin-top: 1rem;
+    width: 100%;
+}
+.co-leftDiv-doc-owner-img{
+    width: 25%;
+    height: 25%;
+    margin: 2.5%;
+    float: left;
+}
+.co-leftDiv-doc-owner-respons{
+    width: 100%;
+    height: auto;
+    min-height:11.5rem;
+}
+.co-leftDiv-doc-owner-comm{
+    width: 100%;
+    height: auto;
+    min-height:26rem;
+}
+.co-main-body-div{
+    height: 68.5rem;
+    width: 65%;
+    float: left;
+    border-top: 1px solid lightgrey;
+    min-height: 49rem;
+    text-align: center
+}
+.co-mainBody-comDes{
+    height: 15rem;
+    width: 98%;
+    margin-top: 1rem;
+    margin-left: 1%;
+    min-height: 12rem;
+}
+.co-mainBody-comDes-img{
+    width: 70rem;
+    height: 6rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+.co-mainBody-doc{
+    min-height: 18rem;
+    width: 98%;
+    margin-left: 1%;
+    margin-top: 0.25rem;
+    position: relative;
+}
+.co-mainBody-task{
+    height: 20rem;
+    width: 98%;
+    margin-left: 1%;
+    min-height: 12rem;
+    margin-top: 0.25rem;
+}
+.co-mainBody-team{
+    height: 13rem;
+    width: 98%;
+    margin-left: 1%;
+    min-height: 12rem;
+    margin-top: 0.25rem;
+}
+.co-rightDiv{
+    min-height: 23rem;
+    height: auto;
+}
+.co-rightDiv-doc-owner-img{
+    width: 20%;
+    height: 20%;
+    margin: 2.5%;
+    float: left;
+}
+.co-rightDiv-related{
+    width: 100%;
+    height: auto;
+    min-height: 45rem;
+}
+.co-sharePoint{
+    width: 100%;
+    height: 1.5rem;
+    text-align: right;
+}
+.co-mainBody-doc-div{
+    border-bottom: 1px solid lightgrey;
+    min-height: 4.25rem;
+}
+.co-mainBody-doc-div-img{
+    width: 2rem;
+    height: 2rem;
+    float: left;
+}
+.co-mainBody-doc-div-title{
+    font-size: 1.4rem;
+    height: 2rem;
+    width: 100%;
+    text-align: left;
+}
+.co-mainBody-doc-div-title .a{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.co-mainBody-doc-div-details{
+    width: 70%;
+    height: 2rem;
+    float: left;
+    text-align: left;
+    color: black;
+    font-size: 1.4rem;
+}

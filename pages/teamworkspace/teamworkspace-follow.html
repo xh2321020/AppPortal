@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>查找空间</title>
+    <base href="http://172.16.51.144/"/>
+    <!-- <base href="../../"> -->
+    <!-- Bootstrap -->
+    <link href="assets/css//bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/team-workspace.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/bootstrap.minv2.3.1.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/bootstrap-responsiv.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/teamworkspace/dataTables.bootstra.css">
+</head>
+<body>
+<header>
+    <com-header></com-header>
+</header>
+<article class="container-fluid article" id="tbody" style="position: relative; min-width: 1024px; height: auto;">
+    <div class="co-title-div">
+        <div class="co-title">
+            <img src="assets/images/portal/workspace/u204.png" class="co-title-img"><span class="co-title-span">协作空间</span>
+        </div>
+    </div>
+    <div style="width: 100%; height: 3rem; min-width: 1024px; margin-top: 1rem;">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="pages/teamworkspace/workspace-follow.html">查找空间</a></li>
+            <li role="presentation"><a href="pages/teamworkspace/team-workspace.html">进入空间</a></li>
+            <li role="presentation"><a href="pages/teamworkspace/teamworkspace-edit.html">新建空间</a></li>
+        </ul>
+    </div>
+    <div class="co-grideview">
+        <div class="panel-tool-bottom-right">
+            <div class="co-section">
+                <div class="co-section-imgdiv" >
+                    <img src="assets/images/portal/workspace/u164.png" class="co-section-imgdiv-img"/>
+                    <div>陈道明</div>
+                </div>
+                <div >
+                    <ul class="co-section-listdiv-ul">
+                        <li class="co-section-listdiv-ul-li" id="myOwnLi">
+                            <a href="pages/teamworkspace/teamworkspace-owner.html">我管理的协作空间</a>
+                        </li>
+                        <li class="co-section-listdiv-ul-li" id="followedLi" style="background-color: #A6CC38;">
+                            <a style="color: white" href="pages/teamworkspace/teamworkspace-follow.html">我加入的协作空间</a>
+                        </li>
+                        <li class="co-section-listdiv-ul-li" id="publicSpaceLi">
+                            <a  href="pages/teamworkspace/teamworkspace-public.html">公共协作空间</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="co-itemlist" style="height: auto;">
+                <div class="row-fluid" style="height: auto;" id="followed">
+                    <table class="table table-striped table-bordered table-hover datatable" style="border: 0; border-radius: 0;">
+                        <thead>
+                        <tr class="co-tr">
+                            <th style="width: 7%; min-width: 2rem; border: 0;" >图标</th>
+                            <th style="border: 0; width: 30%;">社区名称</th>
+                            <th style="border: 0;">加入人数</th>
+                            <th style="border: 0;">创建时间</th>
+                            <th style="border: 0;">创建人</th>
+                            <th style="border: 0;">最近更新</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tdbodys">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pageType" style="display: none;">follow</div>
+</article>
+<footer style="margin-top: 1rem; position: relative ;">
+    <com-footer></com-footer>
+</footer>
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="assets/libs/teamworkspace/jquery.dataTables.js"></script>
+<script type="text/javascript" src="assets/libs/teamworkspace/bootstrap.minv1.9.js"></script>
+<script type="text/javascript" src="assets/libs/teamworkspace/dataTables.bootstrap.js"></script>
+<script src="dist/portUrlVue.js"></script>
+<script>
+    $(document).ready(function() {
+        if(window.localStorage){
+            window.localStorage.setItem("userId","123");
+        }else{
+            alert('This browser does NOT support localStorage');
+        }
+    } );
+</script>
+</body>
+</html>
