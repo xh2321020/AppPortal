@@ -8,11 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-全部督办</title>
-   	<base href="http://172.16.51.144/"/>
+    <base href="../../">
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
-    <link href="assets/css/supervision.css" rel="stylesheet">
+    <link href="assets/css/supervision.css" rel="stylesheet">   
+    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css"/>
+    <script src="assets/libs/vue.min.js"></script>
     
 </head>
 <body>
@@ -24,13 +26,13 @@
 <article>
     <section>
 
-        <div role="tabpanel" class="tab-pane fade in active">
-            <img class="horizontal-line" src="assets/images/hori-line.png"/>
-            
-           <div class="btn-group" role="group" aria-label="...">
+        <div role="tabpanel" class="tab-pane fade in active">         
+           <div class="btn-group" role="group" aria-label="..."  style="margin-top: 1rem;">
            督办管理
               ><a type="button">全部督办</a>
             </div>
+            
+            <img class="horizontal-line" src="assets/images/hori-line.png"/>    
             <!-- <p>督办管理</p> -->
             <section class="inner-tab ">
                 <ul class="nav nav-tabs">
@@ -233,6 +235,8 @@
 <!--<script data-main="assetsjs/main" src="assetsjs/require.js"></script>-->
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="dist/header-footer.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="assets/libs/jquery.blockUI.js"></script>
