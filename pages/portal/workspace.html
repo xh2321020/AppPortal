@@ -5,18 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>工作空间</title>
-  <base href="http://172.16.51.144/"/>
+    <!-- <base href="http://172.16.51.144/"/> -->
     <!-- Bootstrap -->
-    <!-- <base href="../../"> -->
+  <base href="http://172.16.51.144/"/>
+    <!-- <base href="../../">
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
     <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css">
+    <script src="assets/libs/vue.min.js"></script>
     <style type="text/css">
         .title-hover{
 
         }
         .default-font{
-            font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+            font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
         }
         .title-hover:hover{
             cursor: pointer;
@@ -99,7 +102,7 @@
                             </a>
                         </li>
                         <li class="article-list-item">
-                            <a href="pages/teamworkspace/team_workspace.html" target="_blank">
+                            <a href="pages/teamworkspace/team-workspace.html" target="_blank">
                                 <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
                                 <span class="article-list-item-span">协作空间</span>
                             </a>
@@ -177,7 +180,7 @@
                         </li>
                     </ul>
                     <a style="cursor: pointer;">
-                        <div class="bodySectionLeftPortalMoreSys" id="showPopViw">更多系统 >></div>
+                        <div class="bodySectionLeftPortalMoreSys" id="showPopViw" style="color:#337ab7;">更多 ></div>
                     </a>
                 </div>
             </div>
@@ -192,10 +195,10 @@
                 <div style="width: 65%; float: left;">
                     <div style="width: 100%; padding-left: 2rem;">
                         <div style="width: 100%; height: 2rem; min-width: 48rem;">
-                            <div class="bodySectionRightCurrentTabSubTitle">
-                                <span class="bodySectionRightCurrentTabSubTitleSpan">今日工作</span>
+                            <div class="workHalfLine-div">
+                                    <span class="workHalfLine-span">今日工作</span>
+                                </div>                        
                             </div>
-                        </div>
                         <div class="important-task-title">
                             <span class="bodySectionRightCurrentTabSubTitleImp">重点事宜提醒</span>
                             <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日会议和超期事项提醒）</span>
@@ -207,7 +210,7 @@
                                     <div class="task-list-meet">
                                         <div>会议</div>
                                     </div>
-                                    <div class="task-list-detail">
+                                    <div class="task-list-detail" style="border: 1px dashed #a6cc38">
                                         <div><span class="task-list-detail-title default-font">人力资源部年度计划讨论</span></div>
                                         <div><span class="task-list-detail-subtitle default-font">上午9:30~10:00</span></div>
                                     </div>
@@ -217,7 +220,7 @@
                                     <div class="task-list-meet">
                                         <div>会议</div>
                                     </div>
-                                    <div class="task-list-detail">
+                                    <div class="task-list-detail" style="border: 1px dashed #a6cc38">
                                         <div style="height: 1.6rem;"><span class="task-list-detail-title default-font">陪同公司领导视察1号发电机组</span></div>
                                         <div style="height: 1.4rem; "><span class="task-list-detail-subtitle default-font">下午2:30~5:00</span></div>
                                     </div>
@@ -227,7 +230,7 @@
                                     <div class="task-list-meet">
                                         <div>公文</div>
                                     </div>
-                                    <div class="task-list-detail">
+                                    <div class="task-list-detail" style="border: 1px dashed #a6cc38">
                                         <div><span class="task-list-detail-title default-font">关于行动计划审批意见征求稿</span></div>
                                         <div><span class="task-list-detail-subtitle default-font">2016/08/05</div>
                                     </div>
@@ -238,7 +241,7 @@
                                         <div class="task-list-meet">
                                             <div class="default-font">督办</div>
                                         </div>
-                                        <div class="task-list-detail">
+                                        <div class="task-list-detail" style="border: 1px dashed #a6cc38">
                                             <div style="overflow: hidden; position: relative;">
                                                 <span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; display: block; padding-top:0;" :title="item.name">{{item.name}}</span>
                                             </div>
@@ -258,8 +261,8 @@
                     <!-- 明日计划-->
                     <div style="height: 50%;">
                         <div style="width: 100%; height: 2rem;">
-                            <div class="bodySectionRightPlanDiv">
-                                <span class="bodySectionRightPlanSpan default-font">七日内督办提醒(2)</span>
+                            <div class="workHalfLine-div">
+                                <span class="workHalfLine-span">七日内督办提醒(2)</span>
                             </div>
                         </div>
 
@@ -274,15 +277,16 @@
                                 </a>
                             </div>
                             <div style="width:100%;margin-top:0.5rem;">
-                                <a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;">查看更多</a>
+                                <a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;">更多 ></a>
                             </div>
                         </div>
                     </div>
                     <!-- 后天计划-->
                     <div style="height: 50%; margin-top: 0.5rem;">
+                        
                         <div style="width: 100%; height: 2rem;">
-                            <div class="bodySectionRightPlanDiv">
-                                <span class="bodySectionRightPlanSpan default-font">七日内日程提醒(2)</span>
+                            <div class="workHalfLine-div">
+                                <span class="workHalfLine-span">七日内日程提醒(2)</span>
                             </div>
                         </div>
 
@@ -302,7 +306,7 @@
                                 </a>
                             </div>
                             <div style="width:100%;margin-top:0.5rem;">
-                                <a class="default-font" href="pages/schedule/personal.html" style="float:right;">查看更多</a>
+                                <a class="default-font" href="pages/schedule/personal.html" style="float:right;">更多 ></a>
                             </div>
                         </div>
                     </div>
@@ -401,7 +405,7 @@
                                         <tbody>
                                         <template  v-for="item in personalread">
                                             <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
-                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class=""><a :href="item.affairUrl" style="color: black;">{{item.subject}}</a></td>
                                                 <td class="">{{item.creator}}</td>
                                                 <td class="">{{item.created}}</td>
                                             </tr>
@@ -410,7 +414,7 @@
                                     </table>
                                 </section>
                                 <a :href="{{personalread[0].moreUrl}}" class="moreURL">
-                                    <div class="moreURL-div">更多 >></div>
+                                    <div class="moreURL-div" style="float: right; padding-right:2rem;">更多 ></div>
                                 </a>
                             </div>
                             <!-- 办公待阅 publicread-->
@@ -443,7 +447,7 @@
                                         <tbody>
                                         <template  v-for="item in personal">
                                             <tr class="grid-content" style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
-                                                <td class=""><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                <td class=""><a :href="item.affairUrl" style="color: black;">{{item.subject}}</a></td>
                                                 <td class="">{{item.creator}}</td>
                                                 <td class="">{{item.created}}</td>
                                             </tr>
@@ -495,7 +499,7 @@
                                             <template v-for="item in personalread">
                                                 <tr class="grid-content"
                                                     style="height: 6rem; border-bottom: 0.5px solid lightgrey;">
-                                                    <td class=" default-font"><a :href="item.affairUrl">{{item.subject}}</a></td>
+                                                    <td class=" default-font"><a :href="item.affairUrl" style="color: black;">{{item.subject}}</a></td>
                                                     <td class=" default-font">{{item.creator}}</td>
                                                     <td class=" default-font">{{item.created}}</td>
                                                 </tr>
@@ -505,7 +509,7 @@
                                     </section>
                                     <a :href="{{personalread[0].moreUrl}}"
                                        style="cursor: pointer; padding-bottom: 1rem;">
-                                        <div class="moreURL-div default-font">更多 >></div>
+                                        <div class="moreURL-div default-font" style="float: right; padding-right:2rem;">更多 ></div>
                                     </a>
                                 </div>
 
@@ -543,7 +547,7 @@
     </div>
 </article>
 <div style="position: absolute; top: 0px; background-color:rgba(0,0,0,0.5); z-index: 2; left: 0px; width: 100%; height: 200rem; display: none;" id="hidePopView">
-    <div class="popDiv">
+    <div class="popDiv" style="padding-top: 25%;">
         <div class="popViewTitle">
             <div class="popViewTitleLabel" style="padding-top: 0.5rem;">
                 工作快捷入口
@@ -777,7 +781,10 @@
 </footer>
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="dist/header-footer.js"></script>
 <script src="dist/builds.js"></script>
+
 <script>
     $(function () {
         $("#comPortalNav").hover(function (ev) {

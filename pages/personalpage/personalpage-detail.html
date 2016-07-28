@@ -5,13 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <base href="http://172.16.51.144"/>
-        <!--<base href="../../">-->
+        <!-- <base href="http://172.16.51.144"/> -->
+      <base href="http://172.16.51.144/"/>
+    <!-- <base href="../../">
         <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="assets/libs/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="assets/libs/personalpage/portUrl.js"></script>
         <script type="text/javascript" src="assets/libs/personalpage/contactMembers.js"></script>
+        <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css">
+    <script src="assets/libs/vue.min.js"></script>
         <!--<script type="text/javascript" src="dist/portUrlVue.js"></script>-->
         <style>
             .xc-title{
@@ -27,10 +30,10 @@
     </header>
     <body style="min-width: 1024px;">
         <div class="container" style="min-width: 1024px; width: 100%; padding: 0px;">
-            <div style="float: left; width: 79.1%; margin-left: 0px;">
-                <div id="personalPageId" style="width: 100%; padding-top:0.5rem;">
+            <div id="personalPageId" style="width: 100%; padding-top:0.5rem;">
                     <span class="font-fam" id="defaultTitle">个人工作台 >个人页面</span>
-                </div>
+            </div>
+            <div style="float: left; width: 78.1%; margin-left: 0px;">
                 <div class="col-center-block container-div font-fam">
                     <div class="org-tab-li">
                         <ul class="nav nav-tabs" style="clear: both;margin-left: 1rem;width: 80%;">
@@ -44,25 +47,25 @@
                         </ul>
                     </div>
 
-                    <div style="width: 100%;" id="userInfo">
+                    <div style="width: 100%; margin-top:1.5rem;" id="userInfo">
                     </div>
 
                     <div class="clear-float" style="width: 100%;">
                         <div class="xc-title">
                             <div style="margin-top: 40px;">
-                                <img class="img " style="width: 2%;height: 2px" src="assets/images/personalpage/u271_line.png"/>
-                                <span class="font-fam">行程</span>
+                                <img class="img " style="width: 6%;height: 2px" src="assets/images/personalpage/u271_line.png"/>
+                                <span class="font-fam" style="font-weight:600;">行程</span>
                                 <img class="img" style="width: 70%;height: 2px;" src="assets/images/personalpage/u271_line.png"/>
                             </div>
-							<div>暂无相关行程</div>
+                            <div>暂无相关行程</div>
                             <div class="xc-date" id="xinChengDate">
                             </div>
                         </div>
 
                         <div style="float: left;width: 30%;margin-left: 10px;">
                             <div style="margin-top: 40px;">
-                                <img class="img " style="width: 2%;height: 2px" src="assets/images/personalpage/u271_line.png"/>
-                                <span>会议</span>
+                                <img class="img " style="width: 6%;height: 2px" src="assets/images/personalpage/u271_line.png"/>
+                                <span class="font-fam" style="font-weight:600;">会议</span>
                                 <img class="img" style="width: 70%;height: 2px;" src="assets/images/personalpage/u271_line.png"/>
                             </div>
                             <div style="margin-top: 10px;">
@@ -98,9 +101,9 @@
                         </div>
                         <div style="float: left;width: 30%;margin-left: 10px;">
                             <div style="margin-top: 40px;">
-                                <img class="img " style="width: 2%;height: 2px;" src="assets/images/personalpage/u271_line.png"
+                                <img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png"
                                      alt="u271_line"/>
-                                <span>值班</span>
+                                <span  class="font-fam" style="font-weight:600;">值班</span>
                                 <img id="u225_line" class="img" style="width: 70%;height: 2px;"
                                      src="assets/images/personalpage/u271_line.png" alt="u271_line"/>
                             </div>
@@ -123,7 +126,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right" style="margin-top:2.5rem;">
+            <div class="right" style="margin-top:0;">
 
                 <div id="userChains">
                 </div>
@@ -137,5 +140,6 @@
     <footer style="margin-top: 1rem; position: relative ;">
         <com-footer></com-footer>
     </footer>
-    <script type="text/javascript" src="dist/portUrlVue.js"></script>
+    <script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="dist/header-footer.js"></script>
 </html>

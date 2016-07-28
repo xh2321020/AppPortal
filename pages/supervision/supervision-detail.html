@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base href="http://172.16.51.144/">
+  <base href="http://172.16.51.144/"/>
+    <!-- <base href="../../">
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">   
-    <link href="assets/css/supervision.css" rel="stylesheet">
+    <link href="assets/css/supervision.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css"/>
+    <script src="assets/libs/vue.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,14 +29,14 @@
     <com-header></com-header>
 </header>
 <!--head end-->
-<img class="horizontal-line" src="assets/images/hori-line.png"/>
 <article id="article">
-	      <div class="btn-group" role="group" aria-label="...">
+	      <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
            督办管理
               <template v-if="previous=='all'">><a type="button" href="pages/supervision/supervision-all.html">全部督办</a></template>
               <template v-if="previous=='mine'">><a type="button" href="pages/supervision/supervision-mine.html">我的督办</a></template>
               ><a type="button">督办详情</a>
-            </div>
+            </div>            
+<img class="horizontal-line" src="assets/images/hori-line.png"/>
     <section class="details">
 	<ul class="nav nav-tabs" role="tablist" >
 	    <li role="presentation" :class="{'active':actpage=='mine'}"><a href="pages/supervision/supervision-mine.html" >我的督办</a></li>
@@ -261,9 +264,11 @@
 </footer>
 
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
-<script type="text/javascript" src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
+<script src="dist/header-footer.js"></script>
 <script src="dist/supervision-detail.js"></script>
 </body>
 </html>

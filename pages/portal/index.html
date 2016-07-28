@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="http://172.16.51.144/"/>
+    <!-- <base href="../../"/>
     <title>公司门户</title>
     <!-- Bootstrap -->
-    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/portal/portal.css"/>
-    <!--<link rel="stylesheet" href="assets/css/header.css"/>-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/portal.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css"/>
+    <script src="assets/libs/vue.min.js"></script>
 </head>
 <body>
 <header>
-    <nav-header></nav-header>
+    <com-header></com-header>
 </header>
 
 <article class="container-fluid article" id="article">
@@ -34,8 +36,7 @@
                                                                      style="width: 100%;height: 36rem;" alt="...">
                         </a>
 
-                        <div class="carousel-caption">
-                            {{car.title}}
+                        <div class="carousel-caption" v-text="car.title">
                         </div>
                     </div>
                 </template>
@@ -228,7 +229,7 @@
                     <!-- iframe part-->
                     <div id="iframess" style="width: 50rem; height: 30rem; border: 0; margin-left: 2.5rem;">
                         <div style="width: 50rem; height: 30rem;">
-                            <iframe src="http://10.15.251.126:8080/EchartsCaini/ProdDataAction?strdate=2016-06-24&rid=1"
+                            <iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=2016-06-07&rid=1"
                                     width="100%" height="495px" frameborder="no" border="0" marginwidth="0"
                                     marginheight="0" scrolling="no"></iframe>
                         </div>
@@ -382,28 +383,12 @@
     <!-- /.panel right -->
 </article>
 <footer>
-    <div class="footer">
-        <div class="footer_content">
-            <div class="sina">
-                <p><img src="assets/images/portal/sina.jpg" width="50" height="50"></p>
-                <a>新浪微博</a>
-            </div>
-            <div class="con">
-                <p>运维支持：5484 5483</p>
-
-                <p>技术支持：核工业计算机应用研究所</p>
-
-                <p>版权所有：中国核能电力股份有限公司</p>
-            </div>
-            <div class="weixin">
-                <p><img src="assets/images/portal/weixin.jpg" width="50" height="50"></p>
-                <a>微信公众平台</a>
-            </div>
-        </div>
-    </div>
+  <com-footer></com-footer>
 </footer>
-<script src="assets/libs/jquery/jquery.min.js"></script>
-<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src="assets/libs/jquery.min.js"></script>
+<script src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="dist/header-footer.js"></script>
 
 <script>
     $(function () {
@@ -424,16 +409,9 @@
         var currenIndex = 0;
         var dat = new Date();
         var formateDat = "";
-        var moth=dat.getMonth()+1;
-        var amonth;
-        if(moth<10){
-        amonth='0'+moth;
-        }else{
-        amonth=moth;
-        }
-        formateDat = dat.getFullYear() + "-" + amonth + "-" + dat.getDate();
+        formateDat = dat.getFullYear() + "-" + (dat.getMonth() + 1) + "-" + dat.getDate();
         document.getElementById("iframess").innerHTML = '<div style="width: 50rem; height: 30rem;">' +
-                '<iframe src="http://10.15.251.126:8080/EchartsCaini/ProdDataAction?strdate=' + formateDat + '&rid=1"  width="100%" height="495px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>' +
+                '<iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=' + formateDat + '&rid=1"  width="100%" height="495px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>' +
                 '</div>';
 
         $("#location").on("click", "li", function (ev) {
@@ -450,7 +428,7 @@
             var formateDate = "";
             formateDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
             document.getElementById("iframess").innerHTML = '<div style="width: 50rem; height: 30rem;">' +
-                    '<iframe src="http://10.15.251.126:8080/EchartsCaini/ProdDataAction?strdate=' + formateDate + '&rid=' +
+                    '<iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=' + formateDate + '&rid=' +
                     id + '"  width="100%" height="495px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>' +
                     '</div>';
         });
