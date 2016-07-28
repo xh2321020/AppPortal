@@ -3,7 +3,7 @@
  */
 function myFunction(parmar){
     var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
-    window.open(url,"fullscreen=0");
+    window.open(url,"_blank");
 }
 $(document).ready(function () {
     function getQueryString(name) {

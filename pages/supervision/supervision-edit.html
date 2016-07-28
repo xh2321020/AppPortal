@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-   <base href="http://172.16.51.144/">
+    <base href="../../" id="baseTag">
     <!-- Bootstrap -->
-    <link href="assets/css/font-awesome-4.5.0/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">   
     <link href="assets/css/supervision.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -80,7 +80,7 @@
 			<td width="13%" class="al-right">责任领导(A)</td>
 			<td width="40%">    
                         <style scoped>.outer-container{float: left;}</style>                            
-                                <leader-select :given-params="leaderParams"  :selected.sync="leaders" leader-only="true"></><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
+                                <leader-select :given-params="leaderParams"  :selected-users.sync="leaders" ></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
                             </td>
 			<td width="13%" class="al-right">紧急程度</td>
 			<td width="34%">
@@ -108,7 +108,7 @@
 			<td width="13%" class="al-right">责任人(R)</td>
 			<td width="40%">
 			 <style scoped>.outer-container{float: left;}</style>                            
-                                <leader-select :given-params="responsibleParams"  :selected.sync="responsibleOptions"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
+                                <leader-select :given-params="responsibleParams"  :selected-users.sync="responsibleOptions"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
 			</td>
 			<td width="13%" class="al-right">公开范围</td>
 			<td width="34%">
@@ -151,7 +151,7 @@
 </footer>
 
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
-<script type="text/javascript" src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="dist/supervision-edit.js"></script>

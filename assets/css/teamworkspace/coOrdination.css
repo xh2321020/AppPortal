@@ -173,7 +173,7 @@ div.scroll-panel{
     height: 4rem;
 }
 .article-list-item-span{
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 1.4rem;
     /*margin-bottom: -2rem;*/
@@ -277,7 +277,7 @@ div.scroll-panel{
     width: 100%;
     vertical-align: middle;
     text-align: left;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 1.4rem;
     padding-left: 20%;

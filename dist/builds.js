@@ -105,53 +105,53 @@
 	        personalread: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=1150278D0202A94B8E258ACE298E43C2&workflowName=SendAdminLetterProcess&handID=1003453",
 	            "created": "2016-05-30",
-	            "creator": "20120013",
+	            "creator": "谢波",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于恳请向商务部亚洲司报送对韩合作情况报告的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=E7CEFABD3B393B4FB4421B8112260B24&workflowName=ReceiveAdminLetterProcess&handID=1010930",
 	            "created": "2016-06-03",
-	            "creator": "20120013",
+	            "creator": "谢波",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于各相关部门（单位）报送与国家部委“十三五”规划对接进展情况的通知"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=0E1EAB0A8A4CCB499D9DDF54C37D5C33&workflowName=SendAdminLetterProcess&handID=1010893",
 	            "created": "2016-05-24",
-	            "creator": "20120013",
+	            "creator": "谢波",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=E73CF306A22E4440827CEE6A97249412&workflowName=SendAdminLetterProcess&handID=1008151",
 	            "created": "2016-05-30",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于报送中核集团核电厂核事故场内应急支援基地项目建议书的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //个人待办
-	        personal: [{ "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=6DC48F211B80D54A9F8581D5F919D4F0&stepName=Application", "created": "2013-09-11", "creator": "20120014", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司N1-ECM系统管理规定" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=90C582442BD0394BBEB8BC4379E7E8F9&stepName=Undertake", "created": "2014-06-18", "creator": "htnpcws_z", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于工程建设项目造价审核情况的复函" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=7E9286F1209EBC45A24EBA4EC89A0380&stepName=Establishment", "created": "2014-12-22", "creator": "20120014", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司投资管理制度" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=2AEC6D7FBB2B6A45B2EEABDAD915F81F&stepName=Undertake", "created": "2015-08-20", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于征求《中国核工业集团公司对外战略合作协议管理办法(征求意见稿)》意见的函" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=14F3697106CF2D43801E83A691206E37&stepName=Undertake", "created": "2015-08-19", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于上报秦山核电有限公司国光宾馆改单身公寓可行性研究报告（代初步设计）的报告" }],
+	        personal: [{ "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=6DC48F211B80D54A9F8581D5F919D4F0&stepName=Application", "created": "2013-09-11", "creator": "钟鸣", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司N1-ECM系统管理规定" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=90C582442BD0394BBEB8BC4379E7E8F9&stepName=Undertake", "created": "2014-06-18", "creator": "htnpcws_z", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于工程建设项目造价审核情况的复函" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=7E9286F1209EBC45A24EBA4EC89A0380&stepName=Establishment", "created": "2014-12-22", "creator": "钟鸣", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "中国核能电力股份有限公司投资管理制度" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=2AEC6D7FBB2B6A45B2EEABDAD915F81F&stepName=Undertake", "created": "2015-08-20", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于征求《中国核工业集团公司对外战略合作协议管理办法(征求意见稿)》意见的函" }, { "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=process&wobNum=14F3697106CF2D43801E83A691206E37&stepName=Undertake", "created": "2015-08-19", "creator": "20120010", "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/", "subject": "关于上报秦山核电有限公司国光宾馆改单身公寓可行性研究报告（代初步设计）的报告" }],
 	        //公办待办
 	        public: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
@@ -159,33 +159,33 @@
 	        publicread: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }, {
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
 	        //领导批示
 	        find: [{
-	            "recipient": "20120014",
+	            "recipient": "钟鸣",
 	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知",
 	            "signDate": "2016-06-07"
 	        }, {
-	            "recipient": "20120014",
+	            "recipient": "钟鸣",
 	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知",
 	            "signDate": "2016-06-07"
 	        }, {
-	            "recipient": "20120014",
+	            "recipient": "钟鸣",
 	            "subject": "关于中国核能电力股份有限公司部门职责调整的通知",
 	            "signDate": "2016-06-07"
 	        }],
@@ -193,7 +193,7 @@
 	        specialSuggest: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
@@ -201,7 +201,7 @@
 	        memberStates: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
@@ -209,7 +209,7 @@
 	        cultureColumn: [{
 	            "affairUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/processWorkflow.do?action=view&workflowNumber=7A6F1A0D42453C49ADE3BFDADF4DFDA0&workflowName=SendAdminLetterProcess&handID=1008141",
 	            "created": "2016-06-02",
-	            "creator": "20067119",
+	            "creator": "陈桦",
 	            "moreUrl": "http://bjecm.cnnp.com.cn:80/cnnpbpm/web/",
 	            "subject": "关于审查《中国核能电力股份有限公司核电项目前期准备工作指导意见》的请示"
 	        }],
