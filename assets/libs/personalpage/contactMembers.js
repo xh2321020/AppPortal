@@ -7,7 +7,7 @@ var pageUserUid="";
 var cancelText = "";
 function myFunction(parmar){
     var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
-    window.open(url,"fullscreen=0");
+    window.open(url,"_blank");
 }
 function editWork(parmar){
     var span = "#span"+parmar;
@@ -107,7 +107,7 @@ $(document).ready(function () {
             var countLeaders=0;
             var countMembers=0;
             for (var i = 0; i < data.length; i++) {
-                var personalhtml='<span class="font-fam">个人工作台 >个人页面>'+data[i].displayname+ '</span>';
+                var personalhtml='<span class="font-fam">个人工作台 >个人页面 >'+data[i].displayname+ '</span>';
                 $("#defaultTitle").remove();
                 $("#personalPageId").html(personalhtml);
                 var iconImages = "";
@@ -128,9 +128,9 @@ $(document).ready(function () {
                         }
                     }
                 }
-                var leaderHtml = '<img class="img " style="margin-left: 0.5rem;width: 80%; height: 0;" src=""/>';
-                leaderHtml = leaderHtml +'<div class="xc-main-image"> <img class="img xc-main-image-img" src="'+ iconImages +
-                '" alt="u229"/><p class="xc-main-image-p"><span> ' + data[i].displayname  + '</span></p></div><div class="ma-detail-suo">'+
+                var leaderHtml = '';
+                leaderHtml = leaderHtml +'<div class="xc-main-image" style="width:24%;"> <img class="img xc-main-image-img" src="'+ iconImages +
+                '" alt="u229"/><p class="xc-main-image-p"><span> ' + data[i].displayname  + '</span></p></div><div class="ma-detail-suo" style="padding-top:1.5rem;">'+
                 '<div class="ma-detail-suo-org"><div class="ma-detail-title-suo">组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;织：</div><div class="ma-detail-suo-org-title">'+department+'</div>';
                 var titleArray = ["Title","Tel","Mob","Mail","Loc","Work","Anno","Date"];
                 var keyArray = ["title","telephonenumber","mobile","mail","physicalDeliveryOfficeName","workitem","delegateannu","delegatedate"];

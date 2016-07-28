@@ -3,12 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>协作空间</title>
-<base href="http://172.16.51.144/"/>
-<!-- <base href="../../"> -->
+<!-- <base href="http://172.16.51.144/"/> -->
+<base href="../../">
 <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/teamworkspace/teamworkspace.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/teamworkspace/team-workspace.css"/>
 <link rel="stylesheet" href="assets/css/teamworkspace/openWorkspace.css"/>
+<link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css">
+    <script src="assets/libs/vue.min.js"></script>
 </head>
 <body style="width: 100%; min-width: 1200px;">
 	<header>
@@ -297,7 +299,8 @@
 <script src="assets/libs/teamworkspace/vue.min.js"></script>
 <script src="assets/libs/teamworkspace/moment.min.js"></script>
 <script src="assets/libs/teamworkspace/teamworkspaceUrl.js"></script>
-<script src="dist/portUrlVue.js"></script>
+<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="dist/header-footer.js"></script>
 <script type="text/javascript">
 	function showallDocuments(){
 		$("#documentsAll").show();
@@ -403,7 +406,6 @@ var documentvm = new Vue({
 			        			teamMembers = teamMembers +'<img src="'+iconImages+'" class="img-circle" v-for="item in eitems">';
 			        		}
 		        		}
-		        		alert(managers);
 		        		$("#mangerimg").html(managers);
 		        		$("#teamMembersDiv").html(teamMembers);
 			        	// var items = [];

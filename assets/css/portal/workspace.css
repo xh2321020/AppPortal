@@ -173,7 +173,7 @@ div.scroll-panel{
     height: 4rem;
 }
 .article-list-item-span{
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 1.4rem;
     /*margin-bottom: -2rem;*/
@@ -291,7 +291,7 @@ div.scroll-panel{
     height: 2rem;
     float: left;
     padding-left: 0.5rem;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     text-align: center;
@@ -322,7 +322,7 @@ div.scroll-panel{
     position: relative;
 
     padding-left: 0.5rem;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
 }
@@ -367,7 +367,7 @@ div.scroll-panel{
     float: left;
     background-color: #F3F2F0;
     color: #666666;
-    font-family: "Microsoft YaHei Light","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 200;
@@ -401,7 +401,7 @@ div.scroll-panel{
 .task-list-detail-title{
     vertical-align: top;
     color: #333333;
-    font-family: "Microsoft YaHei Bold","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: 700;
     padding-top: 0.2rem;
@@ -409,7 +409,7 @@ div.scroll-panel{
 .task-list-detail-title-tomorrow span{
     color: #666666;
     font-size: 12px;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
@@ -418,7 +418,7 @@ div.scroll-panel{
 .task-list-detail-subtitle{
     vertical-align: top;
     color: #666666;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
     font-weight: 400;
 
@@ -453,7 +453,7 @@ div.scroll-panel{
     padding-top: 0.5rem;
     vertical-align: bottom;
     color: #ffffff;
-    font-family: "Microsoft YaHei Bold","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -475,7 +475,7 @@ div.scroll-panel{
     min-width:3rem;
     vertical-align: top;
     color: #999999;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
@@ -554,7 +554,7 @@ div.scroll-panel{
     width: 16%;
     height: 2rem;
     /*font-size: 1.6rem;*/
-    font-family: "Microsoft YaHei Light","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 200;
@@ -566,7 +566,7 @@ div.scroll-panel{
     width: 80%;
     height: 2rem;
     /*font-size: 1.6rem;*/
-    font-family: "Microsoft YaHei Light","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 200;
@@ -578,7 +578,7 @@ div.scroll-panel{
     height: 2rem;
     float: left;
     color: #999999;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
@@ -590,7 +590,7 @@ div.scroll-panel{
 
     padding-right: 3rem;
     color: #999999;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
     font-style: normal;
     text-align: right;
@@ -666,7 +666,7 @@ div.scroll-panel{
     text-align: center;
     font-size: 2.4rem;
     float: left;
-    font-family: "Microsoft YaHei Regular","Microsoft YaHei";
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 }
 .bodySpace{
     height: 2rem;
@@ -738,12 +738,12 @@ div.scroll-panel{
 }
 .bodySectionRightCurrentTabSubTitleImp{
     color: #000000;
-    font-family: 'Microsoft YaHei Bold','Microsoft YaHei';
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-weight: 700;
 }
 .bodySectionRightCurrentTabSubTitleOverdue{
     color: #999999;
-    font-family: 'Microsoft YaHei Regular','Microsoft YaHei';
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-size: 1rem;
     font-weight: 400;
 }
@@ -772,4 +772,19 @@ div.scroll-panel{
     float: left;
     margin-left: 2rem;
     height: 1.4rem;
+}
+.workHalfLine-div{
+    border-bottom: 2px solid #a6cc38;
+    height: 50%;
+    vertical-align: top;
+    width: 100%;
+}
+.workHalfLine-span{
+    background-color: white; 
+    color: black;
+    float: left; 
+    height: 1.4rem;
+    margin-left: 2rem;
+    font-weight: 600;
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 }

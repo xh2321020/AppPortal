@@ -3,7 +3,7 @@
  */
 function myFunction(parmar){
     var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
-    window.open(url,"fullscreen=0");
+    window.open(url,"_blank");
 }
 $(document).ready(function () {
     var ou = "02";
@@ -61,11 +61,16 @@ $(document).ready(function () {
             data: "",
             url: getMember + parmar,
             success: function (data, state, jqxhr) {
-                var leaderHtml = '<div><span>领导/负责人</span><img style="width: 85%;height: 1px;" class="img " '+
-                    'src="assets/images/personalpage/u225_line.png" alt="u225_line"/></div><div style="float: left;width: 100%;margin-top: 5px;">';
-                var allMemberHtml = '<div style="margin-top: 130px; margin-left: 1.5rem;"><span>所有员工</span>'+
-                    '<img id="u225_line" style="width: 86%;height: 1px;" class="img" src="assets/images/personalpage/u225_line.png" alt="u225_line"/>'+
-                    '</div><div style="float: left;margin-top: 5px; margin-left: 1.5rem;">';
+                var leaderHtml = '<div style="margin-bottom:1rem;" id="defaultLeader">'+
+                    '<img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>'+
+                    '<span  class="font-fam" style="font-weight:600;">领导/负责人</span>'+
+                    '<img id="u225_line" class="img" style="width: 73%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/></div>'+
+                    '<div style="float: left;width: 100%;margin-top: 5px;" id="leaderResult">';
+                var allMemberHtml = '<div style="margin-bottom:1rem;margin-left: 1rem;" id="defaultAllMember">'+
+                    '<img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>'+
+                    '<span  class="font-fam" style="font-weight:600;">所有员工</span>'+
+                    '<img id="u225_line" class="img" style="width: 77%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/></div>'+
+                    '<div style="float: left;margin-top: 5px; margin-left: 1.5rem;" id="memberResult">';
                 var countLeaders=0;
                 var countMembers=0;
                 for (var i = 0; i < data.length; i++) {
@@ -134,15 +139,21 @@ $(document).ready(function () {
                     $("#loadingimg").hide();
                 }
                 $("#defaultLeader").remove();
+                $("#leaderResult").remove();
+                $("#defaultAllMember").remove();
+                $("#memberResult").remove();
                 if(countLeaders>0){
                     $("#leaderArea").html(leaderHtml+'</div>');
                 }
                 if(countMembers>0){
                     $("#member").html(allMemberHtml+'</div>');
                 }
-                if((countLeaders=0)&&(countMembers=0)){
-                    $("#leaderArea").html("暂无相关人员信息！");
-                    $("#member").html("");
+                if((countLeaders==0)&&(countMembers==0)){
+                    var noData='<div style="margin-bottom:1rem;" id="defaultLeader">'+
+                    '<img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>'+
+                    '<span  class="font-fam" style="font-weight:600;">所有员工</span>'+
+                    '<img id="u225_line" class="img" style="width: 77%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/></div>';
+                    $("#leaderArea").html(noData+"暂无相关人员信息！");
                 }
 
             },
