@@ -122,16 +122,22 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                       $scope.searchParams.result = response;
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
-                            var orgtree = people.orgtree;
-                            var title = '';
+                            var count = 0;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
-                                              title += orgtree[orgi][key];
+                                              if(count == 1){
+                                                    people.company = orgtree[orgi][key];
+                                              } else if(count == 2){
+                                                    people.office = orgtree[orgi][key];
+                                              } else if(count == 3){
+                                                    people.department = orgtree[orgi][key];
+                                              }
+                                              count++;
                                         }
                                   }
                             }
-                            people.orgtree = title;
+                        	people.orgtree = title;
                             people.isChecked = false;
                       }
                 });
