@@ -185,6 +185,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
                             var count = 0;
+                            var orgtree = people.orgtree;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
@@ -199,7 +200,6 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                                         }
                                   }
                             }
-                            people.orgtree = title;
                             people.isChecked = false;
                       }
                 });
