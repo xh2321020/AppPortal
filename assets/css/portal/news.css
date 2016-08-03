@@ -182,3 +182,12 @@ table.listTblOne tbody td a:hover{color:#000; text-decoration:underline}
     font-size:12px;
     font-family:'宋体';
 }
+.th-text {
+    text-align: center;
+    font-family: 'Arial Regular', 'Arial';
+    font-weight: 600;
+    height: 38px;
+    font-style: normal;
+    font-size: 15px;
+    color: #333;
+}

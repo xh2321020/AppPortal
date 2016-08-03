@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="http://172.16.51.144/"/>
+    <!--<base href="http://localhost:63342/AppPortal/"/>-->
+    <title>新闻-更多</title>
+    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/portal/news.css"/>
+</head>
+<body ng-app="newsApp">
+<header><com-header></com-header></header>
+
+<br>
+<div class="articleWrapper" ng-controller="newsMoreAppCtrl">
+    <br>
+
+    <h4 style="margin: 20px; font-weight: 800">首页 > 新闻分类</h4>
+    <div style="margin: 0px 20px 20px 20px; text-align: center" >
+        <table class="table table-striped table-bordered table-hover table-checkable order-column" >
+            <thead>
+            <tr style="background: #92d050">
+                <th class="th-text" width="800">标题</th>
+                <th class="th-text" width="150">分类</th>
+                <th class="th-text" width="150">发布单位</th>
+                <th class="th-text" width="300">发布时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div>
+                <tr class="odd gradeX" ng-repeat="news in curNewList">
+                    <td class="td-text" width="800" style="padding-left: 20px"><span ng-click="newsClick(news.id)" target='_blank'>{{news.title}}</span></td>
+                    <td class="td-text" width="150">{{news.newsfield}}</td>
+                    <td class="td-text" width="150">{{news.orgName}}</td>
+                    <td class="td-text" width="300">{{news.publishDate}}</td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+
+        <div style="text-align: center">
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a ng-click="pageClick(1)">1</a></li>
+                <li><a ng-click="pageClick(2)" ng-if="newsList.length > 20">2</a></li>
+                <li><a ng-click="pageClick(3)" ng-if="newsList.length > 40">3</a></li>
+                <li><a ng-click="pageClick(4)" ng-if="newsList.length > 60">4</a></li>
+                <li><a ng-click="pageClick(5)" ng-if="newsList.length > 80">5</a></li>
+                <li><a ng-click="pageClick(6)" ng-if="newsList.length > 100">6</a></li>
+                <li><a ng-click="pageClick(7)" ng-if="newsList.length > 120">7</a></li>
+                <li><a ng-click="pageClick(8)" ng-if="newsList.length > 140">8</a></li>
+                <li><a ng-click="pageClick(9)" ng-if="newsList.length > 160">9</a></li>
+                <li><a ng-click="pageClick(10)" ng-if="newsList.length > 180">10</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<footer><com-footer></com-footer></footer>
+
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src='/src/components/header-footer.js'></script>
+<script src="/assets/libs/angular/angular.min.js"></script>
+<script src='/src/portal/newsService.js'></script>
+<script src='/src/portal/news_more.js'></script>
+<script src='/assets/libs/jquery.blockUI.js'></script>
+</body>
+</html>

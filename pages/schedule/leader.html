@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>中国核电内网门户-日程管理</title>
 
-		<link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/schedule/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="/assets/css/schedule/fullcalendar.css">
         <link rel="stylesheet" href="/assets/css/schedule/style.css">
     </head>
     <body ng-app="eventApp">
     <header><com-header></com-header></header>
-    
+
     <div ng-controller="LeaderCtrl"  class="content-border">
         <div class="container">
             <div class="row">
@@ -30,20 +30,20 @@
                             </ul>
 
                             <div id="leader">
-                                <div class="text-tips">
-                                    <span>公司领导以及部门领导的日程展示，默认展示您所在公司的领导日程信息。</span>
-                                </div>
-
                                 <div class="org">
                                     <span style="float: left"><strong>组织：</strong></span>
                                     <ul class="ul-org">
+                                        <span class="span-org-selected" ng-show="org.isSelected">{{org.name}}</span>
+                                        <span class="span-org" ng-show="!org.isSelected">{{org.name}}</span>
                                         <li ng-repeat="org in orgs" ng-click="orgClick2(org)">
-                                            <span class="span-org-selected" ng-show="org.isSelected">{{org.name}}</span>
-                                            <span class="span-org" ng-show="!org.isSelected">{{org.name}}</span>
-                                        </li>
                                     </ul>
+                                    </li>
                                 </div>
-                                <br>
+
+                                <div class="text-tips">
+                                    <span>公司领导以及部门领导的日程展示，默认展示您所在公司的领导日程信息。</span>
+                                    <br>
+                                </div>
 
                                 <div>
                                     <button style="float: left; margin-top: 8px; margin-left: 10px" href="#add" data-toggle="tab" ng-click="addClick()">新建日程</button>
@@ -85,8 +85,8 @@
 
                         <div class="tab-pane fade" id="detail">
                             <div ng-include="'event-detail.html'"></div>
-                        </div>
 
+                        </div>
                         <div class="tab-pane fade" id="edit">
                             <div ng-include="'event-edit.html'"></div>
                         </div>
@@ -95,19 +95,20 @@
             </div>
         </div>
     </div>
-    
-    <footer><com-footer></com-footer></footer>
 
-		<script src="/assets/libs/angular/angular.min.js"></script>
-        <script src="/assets/libs/jquery-1.11.1.min.js"></script>
-        <script src='/assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
-        <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
-        <script src="/assets/libs/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-        <script src="/assets/libs/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
-        <script src='/src/schedule/fullcalendar.js'></script>
-        <script src="/src/schedule/eventservice.js"></script>
-        <script src="/src/schedule/leader.js"></script>
-        <script src='/assets/libs/jquery.blockUI.js'></script>
-        <script src='/src/components/header-footer.js'></script>
-    </body>
+
+    <footer><com-footer></com-footer></footer>
+    
+	    <script src="/assets/libs/angular/angular.min.js"></script>
+	    <script src="/assets/libs/jquery-1.11.1.min.js"></script>
+	    <script src='/assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
+	    <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+	    <script src="/assets/libs/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	    <script src="/assets/libs/datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+	    <script src='/src/schedule/fullcalendar.js'></script>
+	    <script src="/src/schedule/eventservice.js"></script>
+	    <script src="/src/schedule/leader.js"></script>
+	    <script src='/assets/libs/jquery.blockUI.js'></script>
+	    <script src='/src/components/header-footer.js'></script>
+	</body>
 </html>
