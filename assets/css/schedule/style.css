@@ -163,13 +163,15 @@
 }
 
 .span-org   {
-    padding: 2px 6px 2px 6px;
+    padding: 6px 10px 6px 10px;
 }
 
 .span-org-selected   {
-    background:#99ffff;
-    padding: 4px 8px 4px 8px;
+    background:#A1C636;
+    padding: 6px 10px 6px 10px;
     border-radius: 4px;
+    border-color: #4cae4c;
+    color: #fff;
 }
 
 .fc-agenda-allday::before{

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="http://172.16.51.144/"/>
+    <!--<base href="http://localhost:63342/AppPortal/"/>-->
+    <title>新闻详情</title>
+    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/portal/news.css"/>
+</head>
+<body ng-app="newsApp">
+<header><com-header></com-header></header>
+
+<br>
+<div class="articleWrapper" ng-controller="newsDetailAppCtrl">
+    <br>
+    <h2 class="articleTitle">{{newsDetail.title}}</h2>
+    <h3 class="subTitle"></h3>
+    <p class="authorT">
+        <span>作者：{{newsDetail.author}}</span>
+        <span>发布人：{{newsDetail.author_name}}</span>
+        <span>发布时间：{{newsDetail.audit_date}}</span>
+        <span>访问次数：{{newsDetail.access_count}}</span>
+    </p>
+
+    <div style="border-bottom: 1px solid #c3c3c3;margin-left: 7%;margin-right: 7%; margin-bottom: 25px; margin-top: 15px"></div>
+
+    <div class="articleCon" style="width: 85%">
+        <!--{{newsDetail.content}}-->
+        <div style="margin:0px auto; text-align:center" ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '主附件'">
+            <!--http://bjecm.cnnp.com.cn/publish2/attachment/show?fileId=7489-->
+            <img style="margin: 10px" ng-if="attachment.file_type == 'jpg'" ng-src="{{attachment.url}}" width="600" height="400">
+
+            <embed style="margin: 10px" ng-if="attachment.file_type == 'pdf'" src="http://172.16.51.144/assets/css/portal/IFC.pdf" width="100%" height="500px" type="application/pdf">
+        </div>
+        <div ng-bind-html="newsDetail.content"></div>
+
+        <table cellpadding="0" cellspacing="0" width="100%" border="0" class="articleRels" style="margin-top: 20px">
+            <tbody>
+                <tr>
+                    <td width="80" valign="top"><p>相关附件：</p></td>
+                    <td ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '附件区'">
+                        <div id="atch_p">
+                            <p class="atchWrapper" id="atchWrapper_7492">
+                                {{attachment.name}} (共{{attachment.size}}KB)<a class="link1" href="/publish2/attachment/down?eid=7492" target="_blank">具体内容</a>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer><com-footer></com-footer></footer>
+
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src='/src/components/header-footer.js'></script>
+<script src="/assets/libs/angular/angular.min.js"></script>
+<script src='/src/portal/newsService.js'></script>
+<script src='/src/portal/news_detail.js'></script>
+<script src='/assets/libs/jquery.blockUI.js'></script>
+</body>
+</html>
