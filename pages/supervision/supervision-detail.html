@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-  <base href="http://172.16.51.144/"/>
-    <!-- <base href="../../">
+<base href="http://172.16.51.144/">
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">   
-    <link href="assets/css/supervision.css" rel="stylesheet">    
-    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css"/>
+    <link href="assets/css/supervision.css" rel="stylesheet"> 
     <script src="assets/libs/vue.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +38,7 @@
     <section class="details">
 	<ul class="nav nav-tabs" role="tablist" >
 	    <li role="presentation" :class="{'active':actpage=='mine'}"><a href="pages/supervision/supervision-mine.html" >我的督办</a></li>
-	    <li role="presentation" :class="{'active':actpage=='all'}"><a href="pages/supervision/supervision-all.html" role="tab" data-toggle="tab">全部督办</a>
+	    <li role="presentation" :class="{'active':actpage=='all'}"><a href="pages/supervision/supervision-all.html" >全部督办</a>
 	    </li>
 	    <li role="presentation" :class="{'active':actpage=='new'}"><a href="pages/supervision/supervision-edit.html">新建督办</a></li>
 	</ul>
@@ -99,7 +97,7 @@
 			<td class="middle"><p>{{estimatedcompletetiontime}}</p></td>
 			<td class="middle">
 			    <a :href="'pages/supervision/supervision-edit.html?pid='+id" class="menu">新增子项</a>
-			    <a data-toggle="modal" type="button" @click="updateProgress('parent')">更新进度</a>
+			    <a data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
 			</td>
 		    </tr>
 
@@ -109,7 +107,7 @@
 			<td class="middle"><p>{{item.responsiblename}}</p></td>
 			<td class="middle"><p>{{item.estimatedcompletetiontime}}</p></td>
 			<td class="middle">
-			    <a href="" class="menu">编辑</a>
+			    <a :href="'pages/supervision/supervision-edit.html?id='+item.id+'&previous=detail'" class="menu">编辑</a>
 			    <!-- /.menu --><a @click="postphone(item)" class="menu">延期</a>
 			    <!-- /.menu --><a @click="revoke(item)"class="menu">撤销</a>
 			    <!-- /.menu --><a @click="close(item)" class="menu">关闭</a>
@@ -158,7 +156,7 @@
 		    <tr>
 			<td class="al-right">责任部门</td>
 			<!-- /.al-right -->
-			<td class="al-left">安全质量部</td>
+			<td class="al-left" v-text="scope"></td>
 			<!-- /.al-left -->
 			<td class="al-right" colspan="2">重要程度</td>
 			<!-- /.al-right -->
@@ -170,18 +168,15 @@
 			<!-- /.al-right -->
 			<td class="al-left">{{responsiblename}}</td>
 			<!-- /.al-left -->
-			<td class="al-right" colspan="2">公开程度</td>
+			<td class="al-right" colspan="2">协办及通知部门</td>
 			<!-- /.al-right -->
-			<td class="al-left" colspan="2">全部</td>
-			<!-- /.al-left -->
+			<td class="al-left" colspan="2">{{scope}}</td>
+
 		    </tr>
-		    <tr>
-			<td class="al-right">协办及通知部门</td>
-			<td colspan="5">{{scope}}</td>
-		    </tr>
+		   
 		    <tr>
 			<td class="al-right">备注</td>
-			<td colspan="5">请尽快完成</td>
+			<td colspan="5" v-text="comments"></td>
 		    </tr>
 		    <tr>
 			<td class="al-right">督办来源链接</td>
@@ -228,13 +223,13 @@
 									width: 100%;
 								}
 						    </style>
-						    	<progress-bar :rate.sync="progressRate.rate"></progress-bar>
+						    	<progress-bar :rate.sync="progressRate"></progress-bar>
 						    </div>
 					  </div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">更新原因</label>
 							<div class="col-sm-10">
-								<textarea class="form-control" v-model="progressRate.comment"></textarea>
+								<textarea class="form-control" v-model="comments"></textarea>
 							</div>
 							
 						</div>					
@@ -244,11 +239,13 @@
 						  <div class="form-group">
 						    <label  class="col-sm-2 control-label">撤销原因</label>
 						    <div class="col-sm-10">
-						   		<textarea class="form-control" id="revokeArea"></textarea>
+						   		<textarea class="form-control" id="revokeArea" v-model="comments"></textarea>
 						    </div>
 						  </div>
 				  	</form>
 				  	<div v-show="currentModal=='close'">确定要关闭此督办吗？(确定点保存)</div>
+				  	<p v-show="currentModal=='success'">保存成功</p>
+				  	<p v-show="currentModal=='fail'">保存失败</p>
 				</template>
 				  <button type="button" class="btn btn-primary" @click="saveChanges" slot="save">保存</button>
 		</modal-pop>
@@ -265,7 +262,6 @@
 
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
 <script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
-<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="dist/header-footer.js"></script>

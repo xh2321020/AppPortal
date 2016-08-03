@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-  <base href="http://172.16.51.144/"/>
-    <!-- <base href="../../" id="baseTag">
+<base href="http://172.16.51.144/">
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">  
     <link href="assets/css/daterangepicker.css" rel="stylesheet">   
-    <link href="assets/css/supervision.css" rel="stylesheet">      
-    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css"/>
+    <link href="assets/css/supervision.css" rel="stylesheet">  
     <script src="assets/libs/vue.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +31,8 @@
 <article id="article" class="create-supervision">
      <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
            督办管理
-              <template v-if="pid">><a type="button" :href="'pages/supervision/supervision-detail?id='+pid">督办详情</a></template>
+             <template v-if="previous">><a type="button" :href="'pages/supervision/supervision-detail.html?id='+id">督办详情</a></template>
+              <template v-if="pid">><a type="button" :href="'pages/supervision/supervision-detail.html?id='+pid">督办详情</a></template>
               ><a type="button">新建督办</a>
      </div>
      <img class="horizontal-line" src="assets/images/hori-line.png"/>
@@ -110,16 +109,12 @@
 		    </tr>
 		    <tr>
 			<td width="13%" class="al-right">责任人(R)</td>
-			<td width="40%">
+			<td colspan="3">
 			 <style scoped>.outer-container{float: left;}</style>                            
                                 <leader-select :given-params="responsibleParams"  :selected-users.sync="responsibleOptions"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
 			</td>
-			<td width="13%" class="al-right">公开范围</td>
-			<td width="34%">
-			    <select class="form-control" v-model="public">
-				<option v-for="option in publicOptions" :value="option.value">{{option.text}}</option>
-			    </select>
-			</td>
+			
+			
 		    </tr>
 		    <tr>
 			<td width="13%" class="al-right">协办及通知部门</td>
@@ -156,7 +151,6 @@
 
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
 <script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
-<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="dist/header-footer.js"></script>

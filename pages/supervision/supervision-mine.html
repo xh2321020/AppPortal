@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-我的督办</title>
-  <base href="http://172.16.51.144/"/>
-    <!-- <base href="../../">
+<base href="http://172.16.51.144/">
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
@@ -107,7 +106,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <ul class="filter-item field-res">
+                                <ul class="filter-item filter-field field-res">
                                     <li class="item-title filter-res">督办来源：</li>
                                     <li v-for="n in (source.length>7?7:source.length)"><a @click="changeArea($index,'source')"
                                             :class="['btn',{'btn-success':source[n].status=='1'}]">{{source[n].dicname}}</a></li>
@@ -118,13 +117,18 @@
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 更多 <span class="caret"></span>
                                             </button>
-                                            <ul class="dropdown-menu panel panel-default">
+                                            <ul class="dropdown-menu panel panel-default" style="width: 100%;">
                                                 <template v-for="n in (source.length-7)">
-                                                    <li ><a @click="changeArea($index,'source')">{{source[n+7].dicname}}</a></li>
+                                                    <li ><a :class="['btn','drop-menu-btn',{'btn-success':item.status=='1'}]" @click="changeArea($index+7,'source')">{{source[n+7].dicname}}</a></li>
                                                 </template>
                                             </ul>
                                         </div>
                                     </li>
+                                </ul>
+                                <ul class="filter-item field-res">
+                                  <li class="item-title filter-res">会议分类：</li>
+                                  <li v-for="item in derivedMeeting"><a @click="changeMeeting($index)"
+                                                    :class="['btn',{'btn-success':item.status=='1'}]">{{item.dicname}}</a></li>
                                 </ul>
                             </div>
                           
