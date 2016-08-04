@@ -2,13 +2,15 @@
  * Created by kingsinsd on 2016/7/11.
  */
 var Vue = require("vue");
-import leaderSelect from "../portal/components/personalpagesearch.vue";
+import LeaderSelect from "../../src/portal/components/personalpagesearch.vue";
+// alert(LeaderSelect)
 let headerVm=new Vue({
     el:"#article",
-    components:{leaderSelect},
     data(){
         return{
             leaders:[]
         };
-    }
+    },
+
+    components:{leaderSelect:LeaderSelect}
 });

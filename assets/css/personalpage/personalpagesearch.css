@@ -91,8 +91,10 @@ a {
 }
 
 .sameOrg-class-result{
-    width: 33%;
+    width: 24%;
     float: left;
+    height:10rem;
+    margin-top: 0.5rem;
 }
 
 .sameOrg-class-img {
@@ -103,7 +105,7 @@ a {
     margin-left: 1rem;
 }
 .sameOrg-class {
-     height: 8rem;
+     height: 100%;
      margin-left: 1.5rem;
      float: left;
      border: 1px solid #CCCCCC;
@@ -127,14 +129,20 @@ a {
 .sameOrg-class-div {
     color: #666666;
     font-size: 1rem;
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     float: left;
-    width: 17rem;
     margin-left: 0.5rem;
     margin-top:0.5rem;
 }
 
 .sameOrg-class-div-p-span {
     font-weight: bold;
+    font-size:15px;
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+.ma-detail-title-span-suo{
+    font-size:13px;
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 }
 .pls-tab-li{
     width: 100%;

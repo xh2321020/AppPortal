@@ -12,7 +12,50 @@ $(document).ready(function () {
     getMembers(ou);
     getDepartments();
     function getDepartments() {
-        $.ajax({
+        $.ajax({ 
+                type: "get",
+                // dataType:"json",//pid--项目id
+                url: 'src/org.json',//需换成正式环境的url//接口名 /contacts/getFileinfo
+                success(data, state, jqxhr){  
+                    // var docuitems =[];
+                    var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        {name: 'ou'},
+                        {name: 'pid'},
+                        {name: 'name'},
+                        {name: 'id'}
+                    ],
+                    id: 'ou',
+                    localdata: data
+                };
+
+                // create data adapter.
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // perform Data Binding.
+                dataAdapter.dataBind();
+                // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
+                // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
+                // specifies the mapping between the 'text' and 'label' fields.
+                var records = dataAdapter.getRecordsHierarchy('ou', 'pid', 'items', [{
+                    name: 'name',
+                    map: 'label'
+                }]);
+                $('#jqxWidget').jqxTree({source: records, width: '300px'});
+                $('#jqxWidget').on('select', function (event) {
+                    var args = event.args;
+                    var item = $('#jqxWidget').jqxTree('getItem', args.element);
+                    getMembers(item.id);
+                });
+                $("#loadingImgs").remove();
+                },error(result, state, jqxhr)
+                {
+                    console.log("error", jqxhr);
+                }
+                
+            });
+        /*$.ajax({
             type: "get",
             dataType: "json",
             url: getDepartment,
@@ -52,7 +95,7 @@ $(document).ready(function () {
             error: function (err) {
                 console.log(err);
             }
-        });
+        });*/
     };
     function getMembers(parmar) {
         $.ajax({
@@ -62,14 +105,10 @@ $(document).ready(function () {
             url: getMember + parmar,
             success: function (data, state, jqxhr) {
                 var leaderHtml = '<div style="margin-bottom:1rem;" id="defaultLeader">'+
-                    '<img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>'+
-                    '<span  class="font-fam" style="font-weight:600;">领导/负责人</span>'+
-                    '<img id="u225_line" class="img" style="width: 73%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/></div>'+
+                    '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">领导/负责人</span></div></div></div>'+
                     '<div style="float: left;width: 100%;margin-top: 5px;" id="leaderResult">';
                 var allMemberHtml = '<div style="margin-bottom:1rem;margin-left: 1rem;" id="defaultAllMember">'+
-                    '<img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>'+
-                    '<span  class="font-fam" style="font-weight:600;">所有员工</span>'+
-                    '<img id="u225_line" class="img" style="width: 77%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/></div>'+
+                    '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">所有员工</span></div></div></div>'+
                     '<div style="float: left;margin-top: 5px; margin-left: 1.5rem;" id="memberResult">';
                 var countLeaders=0;
                 var countMembers=0;
@@ -101,7 +140,7 @@ $(document).ready(function () {
                     for (var j = 1; j < data[i].orgtree.length; j++) {
                         for (var key in data[i].orgtree[j]) {
                             if(j<=3){
-                                department = department + '<span>' + data[i].orgtree[j][key] + '</span><br>';
+                                department = department + '<span class="emp-class-div-span">' + data[i].orgtree[j][key] + '</span><br>';
                             }
                         }
                     }
@@ -150,9 +189,7 @@ $(document).ready(function () {
                 }
                 if((countLeaders==0)&&(countMembers==0)){
                     var noData='<div style="margin-bottom:1rem;" id="defaultLeader">'+
-                    '<img class="img " style="width: 6%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/>'+
-                    '<span  class="font-fam" style="font-weight:600;">所有员工</span>'+
-                    '<img id="u225_line" class="img" style="width: 77%;height: 2px;" src="assets/images/personalpage/u271_line.png" alt="u271_line"/></div>';
+                    '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">所有员工</span></div></div></div>';
                     $("#leaderArea").html(noData+"暂无相关人员信息！");
                 }
 

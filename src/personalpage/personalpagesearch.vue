@@ -17,8 +17,15 @@
             font-size:1.2rem;
             font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
         }
+        .emp-note{
+            margin-left:10%;
+            float:left; 
+            font-size:1.4rem;
+            width: 80%;
+            font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+        }
         .emp-class {
-             height: 8rem;
+             height: 100%;
            /* margin-left: 1.5rem;
             float: left;
             border: 1px solid #CCCCCC;
@@ -27,12 +34,13 @@
             border-right: 2px solid #CCCCCC;*/
         }
         .emp-class-result{
-            border: 1px solid grey;
+            border: 1px solid lightgrey;
             float: left;
-                margin-left: 0.5rem;
-                margin-top: 0.5rem;
-                width: 32%;
-                cursor: pointer
+            margin-left: 0.5rem;
+            margin-top: 0.5rem;
+            width: 24%;
+            cursor: pointer;
+            height: 10rem;
         }
         .emp-class-result:hover{
             box-shadow: 0  15px 30px rgba(0,0,0,.1);
@@ -49,14 +57,20 @@
         .emp-class-div {
             color: #666666;
             font-size: 1rem;
+            font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
             float: left;
-            width: 17rem;
             margin-left: 1rem;
             margin-top:0.5rem;
         }
 
         .emp-class-div-p-span {
             font-weight: bold;
+            font-size:15px;
+            font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+        }
+        .emp-class-div-p-span-org {
+            font-size:13px;
+            font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
         }
         .dropdown-menu.open {
             width: 100%;
@@ -111,12 +125,8 @@
             width:100%;
         }
         /*遮罩start*/
-            @keyframes loadingRotate
-        {
-         100%   {transform: rotate(360deg)};
-        }
-         .cover{
-          /*  position:absolute;
+        .cover{
+            /*position:absolute;
             width: 100%;
             height: 100%;
             z-index: 100;
@@ -133,65 +143,54 @@
 
             width: 16rem;
             height: 16rem;
-             left: calc( 50% - 8rem);
-             top: calc( 25%);
+              left: calc( 50% - 8rem);
+             top: calc( 50% - 1rem);
             display: table-cell;
             vertical-align: middle;
             margin:0 auto ;
             border-radius: 50%;
             background: none;
-            opacity: 0.6;
+            opacity: 0.8;
         /*animation: loadingRotate 1s linear 0.05s  infinite;*/
          }
          /*cover end*/
-
-    .form-control{
-    display:block;
-    height:34px;
-    padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)}.form-control::-moz-placeholder{color:#999;opacity:1}.form-control:-ms-input-placeholder{color:#999}.form-control::-webkit-input-placeholder{color:#999}.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{background-color:#eee;opacity:1}.form-control[disabled],fieldset[disabled] .form-control{cursor:not-allowed}textarea.form-control{height:auto}input[type=search]{-webkit-appearance:none}@media screen and (-webkit-min-device-pixel-ratio:0){input[type=date].form-control,input[type=time].form-control,input[type=datetime-local].form-control,input[type=month].form-control{line-height:34px}.input-group-sm input[type=date],.input-group-sm input[type=time],.input-group-sm input[type=datetime-local],.input-group-sm input[type=month],input[type=date].input-sm,input[type=time].input-sm,input[type=datetime-local].input-sm,input[type=month].input-sm{line-height:30px}.input-group-lg input[type=date],.input-group-lg input[type=time],.input-group-lg input[type=datetime-local],.input-group-lg input[type=month],input[type=date].input-lg,input[type=time].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg{line-height:46px}}
 </style>
 <template>  
 <div class="outer-container">
-    <!--<div class="input-grout" style="width: 50%;position: relative;">-->
-     <!--<button type="button" class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">请选择</button>-->
-    <!--</div>-->
-    <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body" style="margin-top:1rem;">
-                        <div class="input" style="width: 100%;float: left; ">
-                            <input id="inputField" type="text" class="form-control inputSuccess1" v-model="input"
-                                              @keyup="searchInput" style="border-radius: 0.5rem; min-width: 80%;min-height: 2rem; float:left; margin-left:5%;margin-bottom: 0.5rem;"></ br>
+    <div class="modal-dialog" role="document"style="width:100%; height:100%; margin-top: 2rem;">
+        <div style="width:100%; height:100%;">
+            <div style="width: 100%;float: left;">
+                <div class="input" >
+                    <input id="inputField" type="text" class="form-control inputSuccess1" v-model="input"
+                          @keyup="searchInput" style="border-radius: 0.5rem; width: 80%; height: 4rem; float:left; margin-left:10%;margin-bottom: 0.5rem;"></ br>
+                    </div>
+                    <div class="emp-note">
+                        <div class="vue-font">
+                            注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。
                         </div>
-
-                        <div style=" margin-left:10%;float:left; font-size:1.4rem;width: 100%;">
-                            <div class="vue-font">
-                                注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。
+                    </div>
+                </div>
+                <section class="search-result" style="width:100%; float:left; padding-left:1%;">
+                    <div class="cover">
+                        <img class="loading" :src="'assets/images/loading3.gif'"></img>
+                    </div>
+                    <div v-for="member in members" class="emp-class-result">
+                        <div class="emp-class" onclick="myFunction(\'{{member.employeeid}}\')">
+                            <img class="img emp-class-img" :src="member.imageurl"/>
+                            <div class="emp-class-div">
+                                <span class="emp-class-div-p-span">{{member.displayname}}</span><br>
+                                <div>
+                                    <div v-for="n in 4" class="emp-class-div-p-span-org">
+                                        {{member.orgtree[n+1]?member.orgtree[n+1].name:""}}
+                                    </div>
+                                </div>
+                                <span>{{member.mail}}</span>
                             </div>
                         </div>
-                   <section class="search-result">
-                       <div class="cover">
-                           <img class="loading" :src="'assets/images/loading3.gif'"></img>
-                       </div>
-                       <div v-for="member in members" class="emp-class-result">
-                           <div class="emp-class" onclick="myFunction(\'{{member.employeeid}}\')">
-                               <img class="img emp-class-img" :src="member.imageurl"/>
-                               <div class="emp-class-div">
-                                   <span class="emp-class-div-p-span">{{member.displayname}}</span><br>
-                                   <div>
-                                        <div v-for="n in 4">
-                                            {{member.orgtree[n+1]?member.orgtree[n+1].name:""}}
-                                        </div>
-                                   </div>
-                                   <span>{{member.mail}}</span>
-                               </div>
-                           </div>
-                       </div>
-                   </section>
-                </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </div>
     </div>
 </template>
 <script>
@@ -201,14 +200,12 @@
         return {
             modal_id:"modal"+(new Date().getTime()),
             members: [],
-            // options:[],
             input: "",
             request: {}
         };
     }
     ,
-    props:["supervisionRequest", "multiple", 'leaderOnly','selected'],
-           
+    props:["supervisionRequest", "multiple", 'leaderOnly','selected'],     
     created()
     {
         if (this.multiple == "false")this.multiple = false;
@@ -219,7 +216,7 @@
     ,
     ready()
     {
-
+        $("#"+this.modal_id).modal("show");
     }
     ,
     methods:{
@@ -244,19 +241,15 @@
                         $(".cover").hide();
                     }
                     $(".cover").show();
+                    $("#userInfo").html("");
                     _this.request = $.ajax({
                         type: "get",
                         url: "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845" + "&q=" + inputVal,
                         success(result, state, jqxhr)
                     {
-                        $("#userInfo").hide();
                         let members = [];
                         let count = 0;
                         for (let i = 0, len = result.length; i < len; i++) {
-                            //leaders only
-                            if (_this.leaderOnly && (typeof result[i].isleader =="undefined"||result[i].isleader != 1)) {
-                                continue;
-                            }
                             if ((typeof(result[i].imageurl) == "undefined") || (typeof(result[i].imageurl) == "")) {
                                 result[i].imageurl = "assets/images/personalpage/defaultUserPhoto.png";
                             } else {
@@ -278,7 +271,8 @@
                     }
                 ,
                     error(result, state, jqxhr)
-                    {   $(".cover").hide();
+                    {   
+                        $(".cover").hide();
                         console.log("error", jqxhr);
                     }
                 }
@@ -286,7 +280,7 @@
             }
         }
     ,
-        1000
+        500
     )
         ;
     }
@@ -314,5 +308,4 @@
     }
 
 </script>
-</body>
-</html>
+
