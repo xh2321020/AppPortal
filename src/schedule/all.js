@@ -132,7 +132,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": "10086",
+                  "createuserid": EventService.getCookie('userid'),
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
