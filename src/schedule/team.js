@@ -7,6 +7,10 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
             'startdate': '',
             'enddate': '',
       };
+      var userid = EventService.getCookie('userid');
+      if(userid && userid.length > 0){
+            urlParams.userid = userid;
+      }
 
       var callback = function() {
             $('#calendar').fullCalendar({
@@ -120,7 +124,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": "10086",
+                  "createuserid": urlParams.userid,
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",

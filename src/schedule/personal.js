@@ -3,6 +3,10 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             'userid': '10086',
             'startdate': '',
             'enddate': '',
+      };
+      var userid = EventService.getCookie('userid');
+      if(userid && userid.length > 0){
+            urlParams.userid = userid;
       }
 
       $scope.scheduletype = [true, true, true, true, true];
@@ -57,7 +61,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": "10086",
+                  "userid": "",
                   "username": "",
                   "startdate": "2016-06-28",
                   "description": "",
@@ -70,7 +74,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": "10086",
+                  "createuserid": urlParams.userid,
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
