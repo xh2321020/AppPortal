@@ -32,7 +32,8 @@ $(document).ready(function () {
                         sameOrgOu = key;
                         sameOrgName = data[i].orgtree[j][key];
                         if(j == "1"){
-                            department = department + '<span>' + sameOrgName + '</span><br>'
+                            // department = department + '<span>' + sameOrgName + '</span><br>'
+                            department = department + '<span class="ma-detail-title-span-suo">' + sameOrgName + '</span><br>'
                         }else{
                             department = department + '<span class="ma-detail-title-span-suo">' + sameOrgName + '</span><br>'
                         }

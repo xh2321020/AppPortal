@@ -44,22 +44,16 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2);
+	module.exports = __webpack_require__(1);
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	module.exports = jQuery;
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _personalpagesearch = __webpack_require__(3);
+	var _personalpagesearch = __webpack_require__(2);
 
 	var _personalpagesearch2 = _interopRequireDefault(_personalpagesearch);
 
@@ -70,27 +64,30 @@
 	 */
 	var Vue = __webpack_require__(10);
 
+	// alert(LeaderSelect)
 	var headerVm = new Vue({
 	    el: "#article",
-	    components: { leaderSelect: _personalpagesearch2.default },
 	    data: function data() {
 	        return {
 	            leaders: []
 	        };
-	    }
+	    },
+
+
+	    components: { leaderSelect: _personalpagesearch2.default }
 	});
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(4)
-	__vue_script__ = __webpack_require__(8)
+	__webpack_require__(3)
+	__vue_script__ = __webpack_require__(7)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] assets\\src\\portal\\components\\personalpagesearch.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\portal\\components\\personalpagesearch.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(9)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -110,23 +107,23 @@
 	})()}
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(5);
+	var content = __webpack_require__(4);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(6)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-5bb76673&scoped=true!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./personalpagesearch.vue", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-5bb76673&scoped=true!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./personalpagesearch.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-00a802c0&scoped=true!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./personalpagesearch.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-00a802c0&scoped=true!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./personalpagesearch.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -136,21 +133,21 @@
 	}
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(6)();
+	exports = module.exports = __webpack_require__(5)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n.inner[_v-5bb76673] {\n        position: static;\n        float: none;\n        border: 0;\n        padding: 0;\n        margin: 0;\n        border-radius: 0;\n        max-height: 16rem;\n        overflow-y: auto;\n        /*min-height: 80px;*/\n    }\n    .vue-font[_v-5bb76673]{\n        margin-left:5%;\n        color:lightgrey;\n        width:100%;\n        font-size:1.2rem;\n        font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    }\n    .emp-class[_v-5bb76673] {\n         height: 8rem;\n       /* margin-left: 1.5rem;\n        float: left;\n        border: 1px solid #CCCCCC;\n        margin: 0.25rem;\n        border-right-style: groove;\n        border-right: 2px solid #CCCCCC;*/\n    }\n    .emp-class-result[_v-5bb76673]{\n        border: 1px solid grey;\n        float: left;\n        margin-left: 1rem;\n        margin-top: 1rem;\n        width: 32%;\n        cursor: pointer\n    }\n    .emp-class-result[_v-5bb76673]:hover{\n        box-shadow: 0  15px 30px rgba(0,0,0,.1);\n        -webkit-transform: translate3d(0,-2px,0);\n                transform: translate3d(0,-2px,0);\n        cursor: pointer;\n    }\n    .emp-class-img[_v-5bb76673] {\n        width: 60px;\n        float: left;\n        margin-top: 1rem;\n        border-radius: 50%;\n        margin-left: 1.5rem;\n    }\n    .emp-class-div[_v-5bb76673] {\n        color: #666666;\n        font-size: 1rem;\n        float: left;\n        width: 17rem;\n        margin-left: 1rem;\n        margin-top:0.5rem;\n    }\n\n    .emp-class-div-p-span[_v-5bb76673] {\n        font-weight: bold;\n    }\n    .dropdown-menu.open[_v-5bb76673] {\n        width: 100%;\n    }\n\n    .dropdown-toggle .fa[_v-5bb76673] {\n        float: right;\n        margin-right: -6px;\n    }\n\n    .bs-searchbox .form-control[_v-5bb76673] {\n        border: 1px solid skyblue;\n        border-radius: 5px;\n    }\n\n    .btn[_v-5bb76673] {\n        width: 100%;\n        text-align: left;\n        background: white;\n    }\n\n    .result[_v-5bb76673] {\n        border: 1px solid lightgrey;\n        width: 100%;\n        margin: 2rem 0 0;\n        padding: 0.5rem 0.5rem;\n        height: 4.5rem;\n        border-radius: 0.5rem;\n    }\n\n    .list[_v-5bb76673] {\n        list-style: none;\n    }\n\n    .table th[_v-5bb76673] {\n        width: 25%;\n        text-align: center;\n    }\n\n    .table td[_v-5bb76673] {\n        text-align: center;\n        vertical-align: middle;\n    }\n    .outer-container[_v-5bb76673]{\n    \tdisplay: inline-block;\n    \twidth:100%;\n    }\n    .search-result[_v-5bb76673]{\n        position: relative;\n        z-index: 1;\n        margin-top:1rem;\n        width:100%;\n    }\n    /*遮罩start*/\n        @-webkit-keyframes loadingRotate\n    {\n     100%   {-webkit-transform: rotate(360deg);transform: rotate(360deg)};\n    }\n        @keyframes loadingRotate\n    {\n     100%   {-webkit-transform: rotate(360deg);transform: rotate(360deg)};\n    }\n     .cover[_v-5bb76673]{\n      /*  position:absolute;\n        width: 100%;\n        height: 100%;\n        z-index: 100;\n        background: #fff;\n        opacity: 0;\n        text-align: center;\n        display: table;\n        left: 0;\n        top: 0;*/\n        display: none;\n     }\n     .cover .loading[_v-5bb76673]{\n         position:absolute;\n\n        width: 16rem;\n        height: 16rem;\n         left: calc( 50% - 8rem);\n         top: calc( 25%);\n        display: table-cell;\n        vertical-align: middle;\n        margin:0 auto ;\n        border-radius: 50%;\n        background: none;\n        opacity: 0.6;\n    /*animation: loadingRotate 1s linear 0.05s  infinite;*/\n     }\n     /*cover end*/\n\n.form-control[_v-5bb76673]{\ndisplay:block;\nheight:34px;\npadding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control[_v-5bb76673]:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)}.form-control[_v-5bb76673]::-moz-placeholder{color:#999;opacity:1}.form-control[_v-5bb76673]:-ms-input-placeholder{color:#999}.form-control[_v-5bb76673]::-webkit-input-placeholder{color:#999}.form-control[disabled][_v-5bb76673],.form-control[readonly][_v-5bb76673],fieldset[disabled] .form-control[_v-5bb76673]{background-color:#eee;opacity:1}.form-control[disabled][_v-5bb76673],fieldset[disabled] .form-control[_v-5bb76673]{cursor:not-allowed}textarea.form-control[_v-5bb76673]{height:auto}input[type=search][_v-5bb76673]{-webkit-appearance:none}@media screen and (-webkit-min-device-pixel-ratio:0){input[type=date].form-control[_v-5bb76673],input[type=time].form-control[_v-5bb76673],input[type=datetime-local].form-control[_v-5bb76673],input[type=month].form-control[_v-5bb76673]{line-height:34px}.input-group-sm input[type=date][_v-5bb76673],.input-group-sm input[type=time][_v-5bb76673],.input-group-sm input[type=datetime-local][_v-5bb76673],.input-group-sm input[type=month][_v-5bb76673],input[type=date].input-sm[_v-5bb76673],input[type=time].input-sm[_v-5bb76673],input[type=datetime-local].input-sm[_v-5bb76673],input[type=month].input-sm[_v-5bb76673]{line-height:30px}.input-group-lg input[type=date][_v-5bb76673],.input-group-lg input[type=time][_v-5bb76673],.input-group-lg input[type=datetime-local][_v-5bb76673],.input-group-lg input[type=month][_v-5bb76673],input[type=date].input-lg[_v-5bb76673],input[type=time].input-lg[_v-5bb76673],input[type=datetime-local].input-lg[_v-5bb76673],input[type=month].input-lg[_v-5bb76673]{line-height:46px}}\n", ""]);
+	exports.push([module.id, "\n.inner[_v-00a802c0] {\n        position: static;\n        float: none;\n        border: 0;\n        padding: 0;\n        margin: 0;\n        border-radius: 0;\n        max-height: 16rem;\n        overflow-y: auto;\n        /*min-height: 80px;*/\n    }\n    .vue-font[_v-00a802c0]{\n        margin-left:5%;\n        color:lightgrey;\n        width:100%;\n        font-size:1.2rem;\n        font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    }\n    .emp-note[_v-00a802c0]{\n        margin-left:10%;\n        float:left; \n        font-size:1.4rem;\n        width: 80%;\n        font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    }\n    .emp-class[_v-00a802c0] {\n         height: 100%;\n       /* margin-left: 1.5rem;\n        float: left;\n        border: 1px solid #CCCCCC;\n        margin: 0.25rem;\n        border-right-style: groove;\n        border-right: 2px solid #CCCCCC;*/\n    }\n    .emp-class-result[_v-00a802c0]{\n        border: 1px solid lightgrey;\n        float: left;\n        margin-left: 0.5rem;\n        margin-top: 0.5rem;\n        width: 24%;\n        cursor: pointer;\n        height: 10rem;\n    }\n    .emp-class-result[_v-00a802c0]:hover{\n        box-shadow: 0  15px 30px rgba(0,0,0,.1);\n        -webkit-transform: translate3d(0,-2px,0);\n                transform: translate3d(0,-2px,0);\n        cursor: pointer;\n    }\n    .emp-class-img[_v-00a802c0] {\n        width: 60px;\n        float: left;\n        margin-top: 1rem;\n        border-radius: 50%;\n        margin-left: 1.5rem;\n    }\n    .emp-class-div[_v-00a802c0] {\n        color: #666666;\n        font-size: 1rem;\n        font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n        float: left;\n        margin-left: 1rem;\n        margin-top:0.5rem;\n    }\n\n    .emp-class-div-p-span[_v-00a802c0] {\n        font-weight: bold;\n        font-size:15px;\n        font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    }\n    .emp-class-div-p-span-org[_v-00a802c0] {\n        font-size:13px;\n        font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;\n    }\n    .dropdown-menu.open[_v-00a802c0] {\n        width: 100%;\n    }\n\n    .dropdown-toggle .fa[_v-00a802c0] {\n        float: right;\n        margin-right: -6px;\n    }\n\n    .bs-searchbox .form-control[_v-00a802c0] {\n        border: 1px solid skyblue;\n        border-radius: 5px;\n    }\n\n    .btn[_v-00a802c0] {\n        width: 100%;\n        text-align: left;\n        background: white;\n    }\n\n    .result[_v-00a802c0] {\n        border: 1px solid lightgrey;\n        width: 100%;\n        margin: 2rem 0 0;\n        padding: 0.5rem 0.5rem;\n        height: 4.5rem;\n        border-radius: 0.5rem;\n    }\n\n    .list[_v-00a802c0] {\n        list-style: none;\n    }\n\n    .table th[_v-00a802c0] {\n        width: 25%;\n        text-align: center;\n    }\n\n    .table td[_v-00a802c0] {\n        text-align: center;\n        vertical-align: middle;\n    }\n    .outer-container[_v-00a802c0]{\n    \tdisplay: inline-block;\n    \twidth:100%;\n    }\n    .search-result[_v-00a802c0]{\n        position: relative;\n        z-index: 1;\n        margin-top:1rem;\n        width:100%;\n    }\n    /*遮罩start*/\n    .cover[_v-00a802c0]{\n        /*position:absolute;\n        width: 100%;\n        height: 100%;\n        z-index: 100;\n        background: #fff;\n        opacity: 0;\n        text-align: center;\n        display: table;\n        left: 0;\n        top: 0;*/\n        display: none;\n     }\n     .cover .loading[_v-00a802c0]{\n         position:absolute;\n\n        width: 16rem;\n        height: 16rem;\n          left: calc( 50% - 8rem);\n         top: calc( 50% - 1rem);\n        display: table-cell;\n        vertical-align: middle;\n        margin:0 auto ;\n        border-radius: 50%;\n        background: none;\n        opacity: 0.8;\n    /*animation: loadingRotate 1s linear 0.05s  infinite;*/\n     }\n     /*cover end*/\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	/*
@@ -206,7 +203,7 @@
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -428,7 +425,7 @@
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -455,8 +452,15 @@
 	//             font-size:1.2rem;
 	//             font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 	//         }
+	//         .emp-note{
+	//             margin-left:10%;
+	//             float:left;
+	//             font-size:1.4rem;
+	//             width: 80%;
+	//             font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+	//         }
 	//         .emp-class {
-	//              height: 8rem;
+	//              height: 100%;
 	//            /* margin-left: 1.5rem;
 	//             float: left;
 	//             border: 1px solid #CCCCCC;
@@ -465,12 +469,13 @@
 	//             border-right: 2px solid #CCCCCC;*/
 	//         }
 	//         .emp-class-result{
-	//             border: 1px solid grey;
+	//             border: 1px solid lightgrey;
 	//             float: left;
-	//             margin-left: 1rem;
-	//             margin-top: 1rem;
-	//             width: 32%;
-	//             cursor: pointer
+	//             margin-left: 0.5rem;
+	//             margin-top: 0.5rem;
+	//             width: 24%;
+	//             cursor: pointer;
+	//             height: 10rem;
 	//         }
 	//         .emp-class-result:hover{
 	//             box-shadow: 0  15px 30px rgba(0,0,0,.1);
@@ -487,14 +492,20 @@
 	//         .emp-class-div {
 	//             color: #666666;
 	//             font-size: 1rem;
+	//             font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 	//             float: left;
-	//             width: 17rem;
 	//             margin-left: 1rem;
 	//             margin-top:0.5rem;
 	//         }
 	//
 	//         .emp-class-div-p-span {
 	//             font-weight: bold;
+	//             font-size:15px;
+	//             font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+	//         }
+	//         .emp-class-div-p-span-org {
+	//             font-size:13px;
+	//             font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 	//         }
 	//         .dropdown-menu.open {
 	//             width: 100%;
@@ -549,12 +560,8 @@
 	//             width:100%;
 	//         }
 	//         /*遮罩start*/
-	//             @keyframes loadingRotate
-	//         {
-	//          100%   {transform: rotate(360deg)};
-	//         }
-	//          .cover{
-	//           /*  position:absolute;
+	//         .cover{
+	//             /*position:absolute;
 	//             width: 100%;
 	//             height: 100%;
 	//             z-index: 100;
@@ -571,65 +578,54 @@
 	//
 	//             width: 16rem;
 	//             height: 16rem;
-	//              left: calc( 50% - 8rem);
-	//              top: calc( 25%);
+	//               left: calc( 50% - 8rem);
+	//              top: calc( 50% - 1rem);
 	//             display: table-cell;
 	//             vertical-align: middle;
 	//             margin:0 auto ;
 	//             border-radius: 50%;
 	//             background: none;
-	//             opacity: 0.6;
+	//             opacity: 0.8;
 	//         /*animation: loadingRotate 1s linear 0.05s  infinite;*/
 	//          }
 	//          /*cover end*/
-	//
-	//     .form-control{
-	//     display:block;
-	//     height:34px;
-	//     padding:6px 12px;font-size:14px;line-height:1.42857143;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);box-shadow:inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)}.form-control::-moz-placeholder{color:#999;opacity:1}.form-control:-ms-input-placeholder{color:#999}.form-control::-webkit-input-placeholder{color:#999}.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{background-color:#eee;opacity:1}.form-control[disabled],fieldset[disabled] .form-control{cursor:not-allowed}textarea.form-control{height:auto}input[type=search]{-webkit-appearance:none}@media screen and (-webkit-min-device-pixel-ratio:0){input[type=date].form-control,input[type=time].form-control,input[type=datetime-local].form-control,input[type=month].form-control{line-height:34px}.input-group-sm input[type=date],.input-group-sm input[type=time],.input-group-sm input[type=datetime-local],.input-group-sm input[type=month],input[type=date].input-sm,input[type=time].input-sm,input[type=datetime-local].input-sm,input[type=month].input-sm{line-height:30px}.input-group-lg input[type=date],.input-group-lg input[type=time],.input-group-lg input[type=datetime-local],.input-group-lg input[type=month],input[type=date].input-lg,input[type=time].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg{line-height:46px}}
 	// </style>
 	// <template> 
 	// <div class="outer-container">
-	//     <!--<div class="input-grout" style="width: 50%;position: relative;">-->
-	//      <!--<button type="button" class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">请选择</button>-->
-	//     <!--</div>-->
-	//     <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	//         <div class="modal-dialog" role="document">
-	//             <div class="modal-content">
-	//                 <div class="modal-body" style="margin-top:1rem;">
-	//                         <div class="input" style="width: 100%;float: left; ">
-	//                             <input id="inputField" type="text" class="form-control inputSuccess1" v-model="input"
-	//                                               @keyup="searchInput" style="border-radius: 0.5rem; min-width: 80%;min-height: 2rem; float:left; margin-left:5%;margin-bottom: 0.5rem;"></ br>
+	//     <div class="modal-dialog" role="document"style="width:100%; height:100%; margin-top: 2rem;">
+	//         <div style="width:100%; height:100%;">
+	//             <div style="width: 100%;float: left;">
+	//                 <div class="input" >
+	//                     <input id="inputField" type="text" class="form-control inputSuccess1" v-model="input"
+	//                           @keyup="searchInput" style="border-radius: 0.5rem; width: 80%; height: 4rem; float:left; margin-left:10%;margin-bottom: 0.5rem;"></ br>
+	//                     </div>
+	//                     <div class="emp-note">
+	//                         <div class="vue-font">
+	//                             注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。
 	//                         </div>
-	//
-	//                         <div style="margin-left: 1rem; margin-left:10%;float:left; font-size:1.4rem; width:90%;">
-	//                             <div class="vue-font">
-	//                                 注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。
+	//                     </div>
+	//                 </div>
+	//                 <section class="search-result" style="width:100%; float:left; padding-left:1%;">
+	//                     <div class="cover">
+	//                         <img class="loading" :src="'assets/images/loading3.gif'"></img>
+	//                     </div>
+	//                     <div v-for="member in members" class="emp-class-result">
+	//                         <div class="emp-class" onclick="myFunction(\'{{member.employeeid}}\')">
+	//                             <img class="img emp-class-img" :src="member.imageurl"/>
+	//                             <div class="emp-class-div">
+	//                                 <span class="emp-class-div-p-span">{{member.displayname}}</span><br>
+	//                                 <div>
+	//                                     <div v-for="n in 4" class="emp-class-div-p-span-org">
+	//                                         {{member.orgtree[n+1]?member.orgtree[n+1].name:""}}
+	//                                     </div>
+	//                                 </div>
+	//                                 <span>{{member.mail}}</span>
 	//                             </div>
 	//                         </div>
-	//                    <section class="search-result">
-	//                        <div class="cover">
-	//                            <img class="loading" :src="'assets/images/loading3.gif'"></img>
-	//                        </div>
-	//                        <div v-for="member in members" class="emp-class-result">
-	//                            <div class="emp-class" onclick="myFunction(\'{{member.employeeid}}\')">
-	//                                <img class="img emp-class-img" :src="member.imageurl"/>
-	//                                <div class="emp-class-div">
-	//                                    <span class="emp-class-div-p-span">{{member.displayname}}</span><br>
-	//                                    <div>
-	//                                         <div v-for="n in 4">
-	//                                             {{member.orgtree[n+1]?member.orgtree[n+1].name:""}}
-	//                                         </div>
-	//                                    </div>
-	//                                    <span>{{member.mail}}</span>
-	//                                </div>
-	//                            </div>
-	//                        </div>
-	//                    </section>
-	//                 </div>
+	//                     </div>
+	//                 </section>
 	//             </div>
 	//         </div>
-	//     </div>
 	//     </div>
 	// </template>
 	// <script>
@@ -638,19 +634,19 @@
 	        return {
 	            modal_id: "modal" + new Date().getTime(),
 	            members: [],
-	            // options:[],
 	            input: "",
 	            request: {}
 	        };
 	    },
 
 	    props: ["supervisionRequest", "multiple", 'leaderOnly', 'selected'],
-
 	    created: function created() {
 	        if (this.multiple == "false") this.multiple = false;else this.multiple = true;
 	        if (this.leaderOnly == "false") this.leaderOnly = false;else this.leaderOnly = true;
 	    },
-	    ready: function ready() {},
+	    ready: function ready() {
+	        $("#" + this.modal_id).modal("show");
+	    },
 
 	    methods: {
 	        selectMember: function selectMember(item) {
@@ -674,18 +670,14 @@
 	                        $(".cover").hide();
 	                    }
 	                    $(".cover").show();
+	                    $("#userInfo").html("");
 	                    _this.request = $.ajax({
 	                        type: "get",
 	                        url: "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845" + "&q=" + inputVal,
 	                        success: function success(result, state, jqxhr) {
-	                            $("#userInfo").hide();
 	                            var members = [];
 	                            var count = 0;
 	                            for (var i = 0, len = result.length; i < len; i++) {
-	                                //leaders only
-	                                //if (_this.leaderOnly && (typeof result[i].isleader == "undefined" || result[i].isleader != 1)) {
-	                                //    continue;
-	                                //}
 	                                if (typeof result[i].imageurl == "undefined" || typeof result[i].imageurl == "") {
 	                                    result[i].imageurl = "assets/images/personalpage/defaultUserPhoto.png";
 	                                } else {
@@ -711,7 +703,7 @@
 	                        }
 	                    });
 	                }
-	            }, 1000);
+	            }, 500);
 	        },
 	        addUser: function addUser(item) {
 	            if (item.selected) {
@@ -733,15 +725,20 @@
 	};
 
 	// </script>
-	// </body>
-	// </html>
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+	//
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = jQuery;
 
 /***/ },
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n<div class=\"outer-container\" _v-5bb76673=\"\">\n    <!--<div class=\"input-grout\" style=\"width: 50%;position: relative;\">-->\n     <!--<button type=\"button\" class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\">请选择</button>-->\n    <!--</div>-->\n    <div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-5bb76673=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-5bb76673=\"\">\n            <div class=\"modal-content\" _v-5bb76673=\"\">\n                <div class=\"modal-body\" style=\"margin-top:1rem;\" _v-5bb76673=\"\">\n                        <div class=\"input\" style=\"width: 100%;float: left; margin-top:1rem;\" _v-5bb76673=\"\">\n                            <input id=\"inputField\" type=\"text\" class=\"form-control inputSuccess1\" v-model=\"input\" @keyup=\"searchInput\" style=\"border-radius: 0.5rem; min-width: 80%;min-height: 2rem; float:left; margin-left:5%;margin-bottom: 0.5rem;\" _v-5bb76673=\"\"><!-- br-->\n                        </div>\n\n                        <div style=\"margin-left: 1rem; margin-left:10%;float:left; font-size:1.4rem; width:90%;\" _v-5bb76673=\"\">\n                            <div class=\"vue-font\" _v-5bb76673=\"\">\n                                注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。\n                            </div>\n                        </div>\n                   <section class=\"search-result\" _v-5bb76673=\"\">\n                       <div class=\"cover\" _v-5bb76673=\"\">\n                           <img class=\"loading\" :src=\"'assets/images/loading3.gif'\" _v-5bb76673=\"\">\n                       </div>\n                       <div v-for=\"member in members\" class=\"emp-class-result\" _v-5bb76673=\"\">\n                           <div class=\"emp-class\" onclick=\"myFunction(\\'{{member.employeeid}}\\')\" _v-5bb76673=\"\">\n                               <img class=\"img emp-class-img\" :src=\"member.imageurl\" _v-5bb76673=\"\">\n                               <div class=\"emp-class-div\" _v-5bb76673=\"\">\n                                   <span class=\"emp-class-div-p-span\" _v-5bb76673=\"\">{{member.displayname}}</span><br _v-5bb76673=\"\">\n                                   <div _v-5bb76673=\"\">\n                                        <div v-for=\"n in 4\" _v-5bb76673=\"\">\n                                            {{member.orgtree[n+1]?member.orgtree[n+1].name:\"\"}}\n                                        </div>\n                                   </div>\n                                   <span _v-5bb76673=\"\">{{member.mail}}</span>\n                               </div>\n                           </div>\n                       </div>\n                   </section>\n                </div>\n            </div>\n        </div>\n    </div>\n    </div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n<div class=\"outer-container\" _v-00a802c0=\"\">\n    <div class=\"modal-dialog\" role=\"document\" style=\"width:100%; height:100%; margin-top: 2rem;\" _v-00a802c0=\"\">\n        <div style=\"width:100%; height:100%;\" _v-00a802c0=\"\">\n            <div style=\"width: 100%;float: left;\" _v-00a802c0=\"\">\n                <div class=\"input\" _v-00a802c0=\"\">\n                    <input id=\"inputField\" type=\"text\" class=\"form-control inputSuccess1\" v-model=\"input\" @keyup=\"searchInput\" style=\"border-radius: 0.5rem; width: 80%; height: 4rem; float:left; margin-left:10%;margin-bottom: 0.5rem;\" _v-00a802c0=\"\"><!-- br-->\n                    </div>\n                    <div class=\"emp-note\" _v-00a802c0=\"\">\n                        <div class=\"vue-font\" _v-00a802c0=\"\">\n                            注：可以用多种方式搜索（无需回车）。如查找“张三”，可输入“张三”、“张”、“zhangsan”、“zs”等。\n                        </div>\n                    </div>\n                </div>\n                <section class=\"search-result\" style=\"width:100%; float:left; padding-left:1%;\" _v-00a802c0=\"\">\n                    <div class=\"cover\" _v-00a802c0=\"\">\n                        <img class=\"loading\" :src=\"'assets/images/loading3.gif'\" _v-00a802c0=\"\">\n                    </div>\n                    <div v-for=\"member in members\" class=\"emp-class-result\" _v-00a802c0=\"\">\n                        <div class=\"emp-class\" onclick=\"myFunction(\\'{{member.employeeid}}\\')\" _v-00a802c0=\"\">\n                            <img class=\"img emp-class-img\" :src=\"member.imageurl\" _v-00a802c0=\"\">\n                            <div class=\"emp-class-div\" _v-00a802c0=\"\">\n                                <span class=\"emp-class-div-p-span\" _v-00a802c0=\"\">{{member.displayname}}</span><br _v-00a802c0=\"\">\n                                <div _v-00a802c0=\"\">\n                                    <div v-for=\"n in 4\" class=\"emp-class-div-p-span-org\" _v-00a802c0=\"\">\n                                        {{member.orgtree[n+1]?member.orgtree[n+1].name:\"\"}}\n                                    </div>\n                                </div>\n                                <span _v-00a802c0=\"\">{{member.mail}}</span>\n                            </div>\n                        </div>\n                    </div>\n                </section>\n            </div>\n        </div>\n    </div>\n";
 
 /***/ },
 /* 10 */
@@ -10777,7 +10774,7 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(11), __webpack_require__(1)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(11), __webpack_require__(8)))
 
 /***/ },
 /* 11 */
