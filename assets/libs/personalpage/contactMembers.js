@@ -2,7 +2,15 @@
  * Created by kingsinsd on 2016/7/8.
  */
     //get current UserId from Section
-var currentUserId="20116636";
+
+function getUserCookies(name){
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+var currentUserId=getUserCookies("username");
 var pageUserUid="";
 var cancelText = "";
 function myFunction(parmar){
