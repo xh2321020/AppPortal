@@ -127,7 +127,7 @@ var personalVm = new Vue({
                                 description = data[j].description;
                             }
                             dubanshixiang=dubanshixiang+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">督办</div></div>'+
-                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38"><div style="overflow: hidden; position: relative;">'+
+                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\''+data[j].id+'\')"><div style="overflow: hidden; position: relative;">'+
                             '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
                             'white-space: nowrap; width: 100%; display: block; padding-top:0;" title="'+data[j].name+'">'+
                             data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font">'+description+
