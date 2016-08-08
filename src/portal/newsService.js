@@ -4,8 +4,8 @@
 var newsApp = angular.module("newsApp", []);
 
 newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $http) {
-    //var hostName = 'http://172.16.51.137:8010/';
-    var hostName = 'http://192.168.252.1:8000/';
+    var hostName = 'http://172.16.51.144:8000/';
+    //var hostName = 'http://192.168.252.1:8000/';
 
     var showAlert = function(content){
         $.blockUI({
