@@ -1,5 +1,9 @@
 var currentSel = null;
 var usersid = getCookie("username")
+function opentask(parmar){
+    var url = "pages/supervision/supervision-detail.html?id="+parmar;
+    window.open(url,"_blank");
+}
     function setButton(obj){  
         if(obj.length==0) return;
         currentSel = obj;
