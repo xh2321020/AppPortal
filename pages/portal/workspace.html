@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>工作空间</title>
-    <base href="http://172.16.51.144"/>
-    <!-- Bootstrap
-    <base href="../../"> -->
+    <base href="http://172.16.51.144/"/>
+    <!-- Bootstrap -->
+    <!-- <base href="../../"> -->
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
     <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
@@ -282,26 +282,6 @@
                         <!-- data list-->
                         <div class="bodySectionRightMeeting">
                             <ul id="worksoftodayUl">
-                                <!-- <li class="li-task-list">
-                                    <div class="task-list-meet">
-                                        <div>会议</div>
-                                    </div>
-                                    <div class="task-list-detail" style="border: 1px dashed #a6cc38">
-                                        <div><span class="task-list-detail-title default-font">人力资源部年度计划讨论</span></div>
-                                        <div><span class="task-list-detail-subtitle default-font">上午9:30~10:00</span></div>
-                                    </div>
-                                    <div class="task-list-spack"></div>
-                                </li>
-                                <li class="li-task-list">
-                                    <div class="task-list-meet">
-                                        <div>会议</div>
-                                    </div>
-                                    <div class="task-list-detail" style="border: 1px dashed #a6cc38">
-                                        <div style="height: 1.6rem;"><span class="task-list-detail-title default-font">陪同公司领导视察1号发电机组</span></div>
-                                        <div style="height: 1.4rem; "><span class="task-list-detail-subtitle default-font">下午2:30~5:00</span></div>
-                                    </div>
-                                    <div class="task-list-spack"></div>
-                                </li> -->
                                 <li class="li-task-list">
                                     <div class="task-list-meet">
                                         <div>公文</div>
@@ -349,7 +329,7 @@
     </div>
 </article>
 <div style="position: absolute; top: 0px; background-color:rgba(0,0,0,0.5); z-index: 2; left: 0px; width: 100%; height: 200rem; display: none;" id="hidePopView">
-    <div class="popDiv" style="padding-top: 25%;">
+    <div class="popDiv" style="padding-top: 2%;">
         <div class="popViewTitle">
             <div class="popViewTitleLabel" style="padding-top: 0.5rem;">
                 工作快捷入口
@@ -368,7 +348,7 @@
     </div>
 </div>
 <div style="position: absolute; top: 0px; background-color:rgba(0,0,0,0.5); z-index: 2; left: 0px; width: 100%; height: 200rem; display: none;" id="hideEditPopView">
-    <div class="popDiv" style="padding-top: 25%;">
+    <div class="popDiv" style="padding-top: 2%;">
         <div class="popViewTitle">
             <div class="popViewTitleLabel" style="padding-top: 0.5rem;">
                 编辑工作快捷入口
@@ -418,8 +398,8 @@
 <script src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="dist/header-footer.js"></script>
-<script src="dist/personalWorkspace.js"></script>
-<script src="assets/libs/workspace/builds.js"></script>
+<script src="assets/libs/workspace/workspacePopView.js"></script>
+<script src="dist/builds.js"></script>
 <script>
     $(function () {
         $("#comPortalNav").hover(function (ev) {
