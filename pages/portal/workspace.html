@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>工作空间</title>
-    <base href="http://172.16.51.137/"/>
-    <!-- Bootstrap 
-    <base href="../../">-->
+    <base href="http://172.16.51.144"/>
+    <!-- Bootstrap
+    <base href="../../"> -->
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
     <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
@@ -105,7 +105,7 @@
                         <div class="task-btntype" style="padding-left: 0.5rem;padding-top:0.5rem;">
                             <div  onclick="changeView('lingdaopishi')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span id="lingdaopishiSpan"></span>
+                                    <span id="lingdaopishiSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle">
                                     <span>领导批示</span>
@@ -113,7 +113,7 @@
                             </div>
                             <div  onclick="changeView('gongbandaiyue')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span style="width: 7rem; height: 1rem;" id="gongbandaiyueSpan"></span>
+                                    <span style="width: 7rem; height: 1rem;" id="gongbandaiyueSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle">
                                     <span>公办待阅</span>
@@ -121,7 +121,7 @@
                             </div>
                             <div  onclick="changeView('gerendaiban')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span id="gerendaibanSpan"></span>
+                                    <span id="gerendaibanSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle">
                                     <span>个人待办</span>
@@ -129,7 +129,7 @@
                             </div>
                             <div onclick="changeView('gongbandaiban')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span id="gongbandaibanSpan"></span>
+                                    <span id="gongbandaibanSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle">
                                     <span>公办待办</span>
@@ -137,7 +137,7 @@
                             </div>
                             <div onclick="changeView('shoutuodaiban')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span id="shoutuodaibanSpan"></span>
+                                    <span id="shoutuodaibanSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle" class="title-hover">
                                     <span>受托待办</span>
@@ -145,7 +145,7 @@
                             </div>
                             <div onclick="changeView('gerendaiyue')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span id="gerendaiyueSpan"></span>
+                                    <span id="gerendaiyueSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle">
                                     <span>个人待阅</span>
@@ -153,7 +153,7 @@
                             </div>
                             <div onclick="changeView('weituodaiban')" class="title-hover">
                                 <div class="task-btntype-title">
-                                    <span id="weituodaibanSpan"></span>
+                                    <span id="weituodaibanSpan">0</span>
                                 </div>
                                 <div class="task-btntype-subtitle">
                                     <span>委托待办</span>
@@ -282,7 +282,7 @@
                         <!-- data list-->
                         <div class="bodySectionRightMeeting">
                             <ul id="worksoftodayUl">
-                                <li class="li-task-list">
+                                <!-- <li class="li-task-list">
                                     <div class="task-list-meet">
                                         <div>会议</div>
                                     </div>
@@ -301,7 +301,7 @@
                                         <div style="height: 1.4rem; "><span class="task-list-detail-subtitle default-font">下午2:30~5:00</span></div>
                                     </div>
                                     <div class="task-list-spack"></div>
-                                </li>
+                                </li> -->
                                 <li class="li-task-list">
                                     <div class="task-list-meet">
                                         <div>公文</div>
@@ -419,7 +419,7 @@
 <script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script src="dist/header-footer.js"></script>
 <script src="dist/personalWorkspace.js"></script>
-<script src="assets/libs/workspace/workspacePopView.js"></script>
+<script src="assets/libs/workspace/builds.js"></script>
 <script>
     $(function () {
         $("#comPortalNav").hover(function (ev) {

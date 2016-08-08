@@ -9,6 +9,7 @@ $(document).ready(function () {
     var ou = "02";
     var loadingImg='<div style="width:10rem; height:10rem; margin-left: 3rem;"><img src="assets/images/loading3.gif"></img> </div>';
     $("#loadingImgs").html(loadingImg);
+
     getMembers(ou);
     getDepartments();
     function getDepartments() {
