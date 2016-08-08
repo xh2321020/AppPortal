@@ -116,7 +116,7 @@ div.scroll-panel{
     /*list-style: disc inside;*/
 }
 .catalog-panel .list-item .title::before{
-    /*content: "·";*/
+    /*content: "路";*/
     /*display: inline-block;*/
     /* width: 5px;
      height: 5px;
@@ -161,7 +161,7 @@ div.scroll-panel{
 .article-list-item{
     height: 5rem;
     list-style: none;
-    padding-left: 3rem;
+    padding-left: 2rem;
     padding-top: 0.5rem;
 }
 .article-list-item a{
@@ -434,7 +434,7 @@ div.scroll-panel{
 .task-btntype>div{
     min-width: 3.5rem;
     width: 10%;
-    height: 4rem;
+    height: 5rem;
     margin-left:1rem;
     float: left;
     vertical-align: top;
@@ -466,7 +466,7 @@ div.scroll-panel{
     line-height: normal;
     min-width: 3.5rem;
     width: 100%;
-    height: 1.5rem;
+    height: 2.5rem;
     border: 1px solid #A6CC38;
     padding-bottom: 0.5rem;
 }
@@ -474,9 +474,10 @@ div.scroll-panel{
     line-height: normal;
     min-width:3rem;
     vertical-align: top;
-    color: #999999;
+    /*color: #999999;*/
+    color: black;
     font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     /*line-height: 16px;*/
@@ -602,6 +603,7 @@ div.scroll-panel{
     padding-left: calc(50% - 42rem);
     padding-top: 0;
     width: 84rem;
+    padding-top: 25%;
 }
 .ul-wedigt{
     /*padding-top: rem;*/
@@ -661,12 +663,15 @@ div.scroll-panel{
     background-color: white;
 }
 .popViewTitleLabel{
-    width: 80rem;
+    /*width: 80rem;*/
     height: 5rem;
     text-align: center;
     font-size: 2.4rem;
     float: left;
     font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+    padding-left: 10rem;
+    width: 70rem;
+    padding-top: 0.5rem;
 }
 .bodySpace{
     height: 2rem;
@@ -707,7 +712,7 @@ div.scroll-panel{
 .bodySectionLeftPortalMoreSys{
     color: #00a2e5;
     float: right;
-    padding-top: 2rem;
+    padding-top: 3rem;
     padding-right: 2rem;
 }
 .bodySectionRight{
@@ -787,4 +792,84 @@ div.scroll-panel{
     margin-left: 2rem;
     font-weight: 600;
     font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+.moreURL{
+
+}
+.moreURL:hover{
+    cursor: pointer;
+}
+.ws-edit-pop-div{
+    width:100%; 
+    background-color: white;
+    height:58rem;
+}
+.ws-edit-pop-div-table{
+    width:100%; 
+    align:center; 
+}
+.ws-edit-pop-div-table-tr{
+    heigth:100rem;
+}
+.ws-edit-pop-div-table-LBtn-td{
+    margin-left: 4rem;
+    padding-top: 2rem; 
+    height: 30rem; 
+    width: 30rem; 
+    float: left;
+}
+.ws-edit-pop-div-table-btn-td{
+    float: left; 
+    padding-top: 5rem; 
+    width: 10rem; 
+    margin-left: 3rem;
+    height: 30rem;
+}
+.ws-edit-pop-div-table-btn-td-input{
+    width:65px;
+}
+.ws-edit-pop-div-table-Rbtn-td{
+    padding-top: 2rem; 
+    height: 30rem; 
+    width: 15rem; 
+    float: left;
+}
+.ws-edit-pop-div-table-select{
+    height: 100%;
+    float: right; 
+    width: 15rem;
+}
+.title-hover{
+
+}
+.default-font{
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+.title-hover:hover{
+    cursor: pointer;
+}
+.qiRiTiXing{
+    background-color: #f3f2f0; 
+    border-color: #a6cc3a; 
+    border-image: none;
+    border-style: dashed dashed dashed solid;
+    border-width: 1px 1px 1px 10px;
+    margin-top: 0.5rem;
+    min-width: 18rem;
+    width: 100%;
+    height: 4rem; 
+    overflow: hidden;
+}
+.qiRiTiXing-a{
+    color: black; 
+    text-decoration:none; 
+    cursor: pointer;
+}
+.qiRiTiXing-a-div{
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 100%; 
+    color: black; 
+    height: 4rem; 
+    padding-left: 1rem;
 }

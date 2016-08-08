@@ -113,8 +113,7 @@
 	        var fetchArray = ["USERKUAIJIERUKOU", "DUBANSHIXIANG", "QIRINEIRICHENG", "1", "2", "3", "4", "5", "6", "7", "8", "USERKUAIJIERUKOUAll"];
 	        var nameArray = ["findcount", "dubanshixiang", "find1", "find2", "find3", "find4", "find5", "find6", "find7", "find8"];
 	        var userid = _this.etCookie("username");
-	        userid = "19986054";
-	        for (var i = 0, len = fetchArray.length + 1; i < len; i++) {
+	        for (var i = 0, len = fetchArray.length + 1; i < len - 1; i++) {
 	            var url = "";
 	            var datas = "";
 	            var contentTypes = "application/json";
@@ -141,7 +140,7 @@
 	                types = "get";
 	                datatypes = "json", url = "http://172.16.51.137:8000/api/V1.0/work/work/link";
 	            } else {
-	                url = "http://172.16.51.135/cnnpbpm/web/interfaceTaskListService.action";
+	                url = "http://172.16.51.137:8010/api/task/web/interfaceTaskListService.action";
 	                datas = (0, _stringify2.default)({ F_BOUNDUSER: userid, Type: fetchArray[i] });
 	            }
 	            $.ajax({
@@ -151,7 +150,7 @@
 	                url: url,
 	                data: datas,
 	                success: function success(data, state, jqxhr) {
-	                    var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead><tr><th > 事项名称 </th><th > 创建人员 </th><th> 创建时间 </th></tr></thead><tbody>";
+	                    var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>" + "<tr><th style='text-align: center;'> 事项名称 </th>" + "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
 	                    var tableFooter = "</tbody></table></section>";
 	                    if (fetchArray[jqxhr.index] == "DUBANSHIXIANG") {
 	                        var dubanshixiang = "";
@@ -268,7 +267,7 @@
 	            return myDate.getFullYear() + "-" + myDate.getMonth() + "-" + myDate.getDate();
 	        },
 	        htmlcode: function htmlcode(data) {
-	            var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead><tr><th > 事项名称 </th><th > 创建人员 </th><th> 创建时间 </th></tr></thead><tbody>";
+	            var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>" + "<tr><th style='text-align: center; width:60%;'> 事项名称 </th>" + "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
 	            var tableFooter = "</tbody></table></section>";
 	            var initHtml = "";
 	            var moreUrlHtml = "";
@@ -276,14 +275,14 @@
 	            if (data.length == 0) {
 	                initHtml = '<div class="todoIsNull">' + '<img src="assets/images/portal/workspace/todoIsNull.png" class="todoIsNull-img"/></div>';
 	            } else {
-	                if (data.length > 5) {
-	                    count = 5;
+	                if (data.length > 10) {
+	                    count = 10;
 	                    moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL">' + '<div class="moreURL-div" style="float: right; padding-right:2rem;">更多 ></div></a>';
 	                } else {
 	                    count = data.length;
 	                }
 	                for (var j = 0; j < count; j++) {
-	                    initHtml = initHtml + '<tr class="grid-content"style="height: 6rem; border-bottom: 1px solid lightgrey;">' + '<td class=" default-font"><a href="' + data[j].f_URL + '" style="color: black;">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font">' + data[j].f_SOURCE + '</td><td class=" default-font">' + this.dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+	                    initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font"><a href="' + data[j].f_URL + '" style="color: black;">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + this.dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
 	                }
 	                initHtml = tableHeader + initHtml + tableFooter;
 	            }
