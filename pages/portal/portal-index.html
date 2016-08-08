@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="http://172.16.51.144/"/>
+    <title>公司门户</title>
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/portal.css"/>
+    <script src="assets/libs/vue.min.js"></script>
+</head>
+<body>
+<header>
+    <com-header></com-header>
+</header>
+
+<article class="container-fluid article" id="article">
+   
+    <com-catalog v-for="item in catalogs" :catalog="item"></com-catalog>
+    <!-- <com-catalog  :catalog="catalogs[0]"></com-catalog> -->
+
+    <!-- /.carousel -->
+    <!-- <div class="panel col-md-4">
+        <div class="scroll-panel">
+            <div class="scroll-icon up" v-on:click="scrollPanel">
+                <em class="glyphicon glyphicon-menu-up"></em>
+                /.glyphicon glyphicon-menu-up
+            </div>
+            <div class="list" id="scrollList" data-index="0">
+                /.list
+                <div v-for="item in scrollList" class="row scroll-item">
+                    <img v-bind:src="item.imagePath" alt="" class="col-md-4" @error="imgErrorLoad"/>
+    
+                    <div class="col-md-8">
+                        <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr"
+                                                   target="_blank">{{item.title}}</a></p>
+    
+                        <div class="desc-font">
+                            <span class="site">{{item.site}}</span>
+                            <span class="date">{{item.publishDate}}</span>
+                        </div>
+                        /.mark
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-icon down" @click="scrollPanel">
+                <em class="glyphicon glyphicon-menu-down"></em>
+                /.glyphicon glyphicon-menu-up
+            </div>
+            /.scroll-up
+            /.scroll-up
+        </div>
+    </div>
+    /.scroll-panel
+    <div class="panel col-md-4">
+        <div class="catalog-panel cnnp-trends">
+            <div class="catalog">
+                <span>中国核电动态</span>
+                <a class="btn btn-sm find-more" data-index="2">更多>>
+                </a>
+            </div>
+            /.catalog
+            <div class="material list-item">
+                <a :href="cnnpTrends[0].linkAddr" target="_blank">
+                    <img v-bind:src="cnnpTrends[0].imagePath" alt="" @error="imgErrorLoad"/>
+    
+                    <p :class="['subject-font','subject',{'latest':cnnpTrends[0].latest}]">{{cnnpTrends[0].title}}</p>
+    
+                    <div class="desc-font desc">{{cnnpTrends[0].subTitle}}
+                        <span class="date">{{cnnpTrends[0].publishDate}}</span>
+                    </div>
+                </a>
+            </div>
+            /.material
+            <template v-for="item in cnnpTrends|limitBy  2 1">
+                <div class="list-item simple-item">
+                    <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                        <span class="date desc-font">{{item.publishDate}}</span></p>
+                </div>
+            </template>
+        </div>
+    </div>
+    /.panel left
+    <div class="panel mid col-md-4">
+        <div class="catalog-panel txt">
+            <div class="catalog">
+                <span>通知公告</span>
+                <a class="btn btn-sm find-more" data-index="3">更多>>
+                </a>
+            </div>
+            /.catalog
+            <ul class="list subject-font">
+                <li v-for="item in bulletin" class="list-item">
+                    <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                    </p>
+                    /.title<span class="date">{{item.publishDate}}</span>
+                </li>
+    
+            </ul>
+            /.list
+        </div>
+    </div>
+    /.panel mid
+    <div class="panel right col-md-4">
+        <div class="catalog-panel panel5">
+            <div class="catalog">
+                <span>特别推荐</span>
+                <a class="btn btn-sm find-more" data-index="4">更多>>
+                </a>
+            </div>
+            /.catalog
+            <template v-for="item in specialSuggest">
+                <div class="row scroll-item">
+                    <img v-bind:src="item.imagePath" alt="" class="col-md-4" @error="imgErrorLoad"/>
+                    /.col-md-4
+                    <div class="col-md-8">
+                        <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr"
+                                                   target="_blank">{{item.title}}</a></p>
+    
+                        <div class="desc-font">
+                            <span class="site">{{item.site}}</span>
+                            <span class="date">{{item.publishDate}}</span>
+                        </div>
+                        /.mark
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    /.panel right
+    <div class="panel right col-md-4">
+        <div class="catalog-panel panel5">
+            <div class="catalog">
+                <span>成员公司动态</span>
+                <a class="btn btn-sm find-more" data-index="5">更多>>
+                </a>
+            </div>
+            /.catalog
+            /.catalog
+            <template v-for="item in memberStates">
+                <div class="row scroll-item">
+                    <img v-bind:src="item.imagePath" alt="" class="col-md-4" @error="imgErrorLoad"/>
+                    /.col-md-4
+                    <div class="col-md-8">
+                        <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr"
+                                                   target="_blank">{{item.title}}</a></p>
+    
+                        <div class="desc-font">
+                            <span class="site">{{item.site}}</span>
+                            <span class="date">{{item.publishDate}}</span>
+                        </div>
+                        /.mark
+                    </div>
+                </div>
+            </template>
+    
+        </div>
+    </div>
+    /.panel
+    <div class="panel right col-md-8">
+        <div class="catalog-panel">
+            <div class="catalog">
+                <span>核电在线</span>
+    
+                <div class="panel-online" style="margin-top: 0.5rem;">
+                    <div class="catalog-online" style="margin-top: 1rem;">
+                        <div class="scroll-panel-online">
+                            <div class="scroll-icon-online up" id="goingUp">
+                                <em class="glyphicon-online glyphicon-menu-up"></em>
+                            </div>
+                            <div class="online-list-div">
+                                <ul class="online-list-ul" style="height: 79.5rem;" id="location">
+                                    <li id="tag01" name="1" class="selected-li" style="display: block;">秦山一期1#</li>
+                                    <li id="tag02" name="4">秦山二期1#</li>
+                                    <li id="tag03" name="5">秦山二期2#</li>
+                                    <li id="tag04" name="14">秦山二期3#</li>
+                                    <li id="tag05" name="15">秦山二期4#</li>
+                                    <li id="tag06" name="8">秦山三期1#</li>
+                                    <li id="tag07" name="9">秦山三期2#</li>
+                                    <li id="tag08" name="10">田湾核电1#</li>
+                                    <li id="tag09" name="11">田湾核电2#</li>
+                                    <li id="tag10" name="20">福清核电1#</li>
+                                    <li id="tag11" name="21">福清核电2#</li>
+                                    <li id="tag12" name="24">方家山1#</li>
+                                    <li id="tag13" name="25">方家山2#</li>
+                                    <li id="tag14" name="36">海南核电1#</li>
+                                </ul>
+                            </div>
+    
+                            <div class="scroll-icon-online down" id="goingDown">
+                                <em class="glyphicon-online glyphicon-menu-down"></em>
+                                /.glyphicon glyphicon-menu-up
+                            </div>
+                        </div>
+                    </div>
+                    iframe part
+                    <div id="iframess" style="width: 50rem; height: 30rem; border: 0; margin-left: 2.5rem;">
+                        <div style="width: 50rem; height: 30rem;">
+                            <iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=2016-06-07&rid=1"
+                                    width="100%" height="495px" frameborder="no" border="0" marginwidth="0"
+                                    marginheight="0" scrolling="no"></iframe>
+                        </div>
+                    </div>
+                    <div style="width: 12rem; height: 100%; float: left; border: 0px;">
+                        <div class="online-power">
+                            <div class="online-power-amount">
+                                <span style="color:#00a2e5 ; font-size: 1.3rem;">总电功率</span>
+                                <span id="p1" style="color:#0B0D8C; font-size: 1rem;">0.00MW</span>
+                                <span id="p11" style="color:#0B0D8C; font-size: 1rem;">0.00%</span>
+                                <span style="color:#00a2e5 ; font-size: 1.3rem;">总发电量</span>
+                                <span id="p2" style="color:#0B0D8C; font-size: 1rem;">0.00亿度</span>
+                                <span id="p22" style="color:#0B0D8C; font-size: 1rem;">0.00%</span>
+                            </div>
+                        </div>
+                        <div class="online-power">
+                            <div class="online-power-amount" style="padding-top: 2rem;">
+                                <span style="color:#00a2e5 ; font-size: 1.3rem; ">中国核电</span>
+                                <span style="color:#00a2e5 ; font-size: 1.3rem;">［601985］</span>
+                                <span id="stock" style="color:#0B0D8C; font-size: 1rem;">0.00</span>
+                                <span id="stock1" style="color:#0B0D8C; font-size: 1rem;">0.00（0.00%）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            /.catalog
+        </div>
+    </div>
+    
+    <div class="panel left col-md-4">
+        <div class="catalog-panel txt">
+            <div class="catalog">
+                <span>文化动态</span>
+                <a class="btn btn-sm find-more" data-index="8">更多>>
+                </a>
+            </div>
+            /.catalog
+            <ul class="list subject-font">
+                <li v-for="item in cultureStates" class="list-item">
+                    <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                    </p>
+                    /.title<span class="date">{{item.publishDate}}</span>
+                </li>
+    
+            </ul>
+        </div>
+    </div>
+    /.panel left
+    <div class="panel mid col-md-4">
+        <div class="catalog-panel poster">
+            <div class="catalog">
+                <span>文化专栏</span>
+    
+            </div>
+            /.catalog
+            <a href="http://bjecm.cnnp.com.cn/publish2/newsShow/list?catId=17037" target="_blank">
+                <img src="assets/images/portal/culture.jpg" alt=""/>
+            </a>
+            <ul class="list">
+                <li class="list-item" v-for="item in cultureColumn">
+                    <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                    </p>
+                    <span class="date">{{item.publishDate}}</span>
+                    /.date
+                </li>
+            </ul>
+            /.list
+        </div>
+    </div>
+    /.panel mid
+    <div class="panel right col-md-4">
+        <div class="catalog-panel txt">
+            <div class="catalog">
+                <span>党建专区</span>
+                <a class="btn btn-sm find-more" data-index="9">更多>>
+                </a>
+            </div>
+            /.catalog
+            <ul class="list subject-font">
+                <li v-for="part in partyZone" class="list-item">
+                    <p class="title"><a :class="{'latest':part.latest}" :href="part.linkAddr" target="_blank">{{part.title}}</a>
+                    </p>
+                    /.title<span class="date">{{part.publishDate}}</span>
+                </li>
+    
+            </ul>
+        </div>
+    </div>
+    /.panel right
+    <div class="panel left col-md-4">
+        <div class="catalog-panel poster">
+            <div class="catalog">
+                <span>企业内刊</span>
+    
+            </div>
+            /.catalog
+            <a href="http://bjecm.cnnp.com.cn/publish2/newsShow/list?catId=17037" target="_blank">
+                <img src="assets/images/portal/u402.png" alt=""/>
+            </a>
+            <ul class="list">
+                <li class="list-item" v-for="item in innerReadding">
+                    <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                    </p>
+                    <span class="date">{{item.publishDate}}</span>
+                    /.date
+                </li>
+            </ul>
+            /.list
+        </div>
+    </div>
+    /.panel left
+    <div class="panel mid col-md-4">
+        <div class="catalog-panel movie-panel">
+            <div class="catalog">
+                <span>视频宣传</span>
+    
+            </div>
+            /.catalog
+            <video width="370" height="240" controls="controls"
+                   :poster="'assets/images/default-pics/'+Math.round(Math.random()*50)+'.png'">
+                <source v-bind:src="movie[0].imagePath" type="video/ogg">
+                <source v-bind:src="movie[0].imagePath+'.mp4'" type="video/mp4">
+                <source v-bind:src={{movie[0].imagePath}} type="video/mp4">
+    
+                Your browser does not support the video tag.
+            </video>
+            <p class="subject-font title"><a :class="{'latest':movie[0].latest}" :href="movie[0].linkAddr"
+                                             target="_blank">{{movie[0].title}}</a></p>
+        </div>
+    </div> -->
+    <!-- /.panel mid -->
+   <!--  <div class="panel right col-md-4">
+       <div class="catalog-panel txt">
+           <div class="catalog">
+               <span>媒体报道</span>
+               <a class="btn btn-sm find-more" data-index="12">更多>>
+               </a>
+           </div>
+           /.catalog
+           <ul class="list subject-font">
+               <li v-for="item in mediaNews" class="list-item">
+                   <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                   </p>
+                   /.title<span class="date">{{item.publishDate}}</span>
+               </li>
+   
+           </ul>
+       </div>
+   </div> -->
+    <!-- /.panel right -->
+</article>
+<footer>
+    <com-footer></com-footer>
+</footer>
+<script src="assets/libs/jquery.min.js"></script>
+<script src="assets/libs/bootstrap.min.js"></script>
+<script src="dist/header-footer.js"></script>
+
+<script>
+ 
+
+</script>
+<script src="dist/portal.js"></script>
+</body>
+</html>
