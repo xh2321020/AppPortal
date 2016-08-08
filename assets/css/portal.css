@@ -26,20 +26,16 @@
     color: #1c88b9;
     text-decoration: none;
 }
-.panel>div{
+.inner-border{
     transition: all .2s linear;
     min-height: 36rem;
     height: 36rem;
     border: 1px solid lightgrey;
-    border-top: 3px solid #00A2E5;
     overflow: hidden;
 }
-.panel>div:hover{
+.inner-border:hover{
     box-shadow: 0  15px 30px rgba(0,0,0,.1);
     transform: translate3d(0,-2px,0);
-}
-.carousel.slide{
-    border-top: none;
 }
 .carousel-caption{
     left: 0;
@@ -65,44 +61,9 @@
 div.scroll-panel{
     border: none;
     position: relative;
-    padding: 5px;
-}
-.scroll-panel .list{
-    position: absolute;
-    left:0;
-    top: 0;
-    padding-top: 1.2rem;
-        width: 100%;
 }
 
-.scroll-icon{
-    background: #E5E5E5;
-    width:100% ;
-    text-align: center;
-    height: 1.2rem;
-    position: absolute;
-    left: 0;
-    z-index: 1000;
-}
-.scroll-icon .glyphicon{
-    color: #ffffff;
-    line-height: 0.5rem;
-    font-size: 2rem;
-}
-.scroll-icon:hover{
-    background-color: #00a2e5;
-    cursor: pointer;
-}
-
-.scroll-icon.up{
-    top: 0;
-}
-.scroll-icon.down{
-    bottom: 0;
-}
 .scroll-panel .scroll-item{
-    height: 8rem;
-    margin: 0.3rem 0;
     width: 100%;
     border: 1px solid lightgrey;
 }
@@ -147,69 +108,26 @@ div.scroll-panel{
 /*滚动新闻end*/
 .catalog-panel{
     padding: 0 1rem;
+     border: 1px solid lightgrey;
+    /*border-top: 3px solid #00A2E5;*/
 }
-.catalog-panel .catalog{
+.catalog-panel .caption{
     height: 4rem;
     border-bottom: 1px solid #D0CCC7;
     line-height: 4rem;
     position: relative;
 }
-.catalog span{
+.caption span{
     font-size: 1.6rem;
     font-weight: 700;
 }
-.catalog .btn{
+.caption .btn{
     position: absolute;
     right: 1rem;
     /*line-height: 3rem;*/
     top: 2px;
     font-size: 1.4rem;
 }
-/*核电动态start*/
-.cnnp-trends .material img{
-    width: 95%;
-    height: 10rem;
-    margin:1rem 2% 0;
-}
-.catalog-panel.cnnp-trends .list-item{
-    height: auto;
-    line-height: normal;
-}
-.catalog-panel.cnnp-trends .simple-item{
-    height: 6rem;
-    position: relative;
-    border-top: 1px solid #D0CCC7;
-    padding-top:  1rem;
-    margin-top: 1rem;
-}
-.simple-item .subject-font{
-    width: 80%;
-    height: 4rem;
-    overflow: hidden;
-    word-wrap: normal;
-    padding-right: 3rem;
-    margin-left: 2%;
-}
-.cnnp-trends .material .subject{
-    width: 80%;
-    padding-right: 3rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin:2% 2% -2%;
-}
-.cnnp-trends .desc{
-    line-height: normal;
-    padding: 5px;
-    padding-right: 3rem;
-}
-.cnnp-trends  .date{
-    position: absolute;
-    right: 0;
-    top: auto!important;
-    bottom: 1rem;
-    margin-right: 3%;
-}
-/*核电动态end*/
 .message{
     width: 100%;
     height: 100px;
@@ -227,8 +145,55 @@ div.scroll-panel{
     height: 3.9rem;
     line-height: 3.9rem;
 }
+
+/*核电动态start*/
+.material img{
+    width: 95%;
+    height: 10rem;
+    margin:1rem 2% 0;
+}
+ .material .list-item{
+    height: auto;
+    line-height: normal;
+}
+.material .simple-item{
+    height: 6rem;
+    position: relative;
+    border-top: 1px solid #D0CCC7;
+    padding-top:  1rem;
+    margin-top: 1rem;
+}
+.simple-item .subject-font{
+    width: 80%;
+    height: 4rem;
+    overflow: hidden;
+    word-wrap: normal;
+    padding-right: 3rem;
+    margin-left: 2%;
+}
+.material .subject{
+    width: 80%;
+    padding-right: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:2% 2% -2%;
+}
+.material .desc{
+    line-height: normal;
+    padding: 5px;
+    padding-right: 3rem;
+}
+.material  .date{
+    position: absolute;
+    right: 0;
+    top: auto!important;
+    bottom: 1rem;
+    margin-right: 3%;
+}
+/*核电动态end*/
+
 /*纯文本卡片*/
-.txt .list-item .title::before{
+.pure-txt  .title::before{
     content: "• ";
     position: relative;
     top: 3px;
@@ -236,7 +201,9 @@ div.scroll-panel{
     line-height: 3.9rem;
 
 }
-
+.pure-txt{
+    clear: both;
+}
 .catalog-panel .list-item .title{
     overflow: hidden;
     white-space: nowrap;
@@ -276,17 +243,17 @@ div.scroll-panel{
 .movie-panel .title{
     margin-top: 1rem;
 }
-.movie-panel .catalog{
+.movie-panel .caption{
     margin-bottom: 1rem;
 }
 /*视频end*/
 /*panel-5*/
-.panel5 .scroll-item{
+.style7 .scroll-item{
     height: 10.5rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid #D0CCC7;
 }
-.panel5 .scroll-item:last-child{
+.style7 .scroll-item:last-child{
     border-bottom: none;
 }
 /*panel-5*/
@@ -327,19 +294,13 @@ div.scroll-panel{
     top: 2px;
     font-size: 1.4rem;
 }
-.carousel.slide{
-    border-top: none;
-}
 div.scroll-panel-online{
     border: none;
-    /*padding: 5px;*/
 }
 .scroll-panel-online .list{
     position: absolute;
     left:0;
     top: 0;
-    /*width: calc(100% - 1rem);*/
-    /*width: 100%;*/
 }
 .scroll-icon-online{
     background-color: #e5e5e5;
@@ -412,15 +373,7 @@ div.scroll-panel-online{
     margin-top: 1rem;
     border: 1px solid #E5E5E5;
 }
-/*.online-power:hover{*/
-    /*width: 100%;*/
-    /*vertical-align: middle;*/
-    /*height: 14rem;*/
-    /*float: left;*/
-    /*margin-top: 1rem;*/
-    /*border: 1px solid #E5E5E5;*/
-    /*background-color: lightgray;*/
-/*}*/
+
 .online-power-amount span{
     text-align: center;
     /*margin-top: 1rem;*/
@@ -434,3 +387,4 @@ div.scroll-panel-online{
     color: white;
 }
 /*核电在线end*/
+
