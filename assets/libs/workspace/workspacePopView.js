@@ -157,7 +157,6 @@ function opentask(parmar){
                 for(var m=0; m<arr.length;m++){
                     tt = tt + arr[m];
                 }
-                alert(tt);
                 for(var j=0; j<data.length;j++){
                     restPort = restPort + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
                 }
