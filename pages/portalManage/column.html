@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"></title>
+        <title>栏目配置管理-栏目管理</title>
+
+        <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/portalManage/style.css">
+    </head>
+    <body ng-app="portalApp">
+    <header><com-header></com-header></header>
+
+    <div ng-controller="columnAdminCtrl" class="content-border">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <div ng-include="'tmp_navigation.html'"></div>
+                </div>
+
+                <div class="col-md-11">
+                    <br>
+
+                    <h3>栏目管理</h3>
+
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#list" data-toggle="tab">栏目列表</a></li>
+                        <li><a href="#addOrEdit" data-toggle="tab" ng-click="addClick(true)">新建/编辑</a></li>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content" style="margin-top: 30px;">
+                        <div class="tab-pane fade in active" id="list">
+                            <div>
+                                <div style="padding-bottom: 10px;margin-bottom: 15px; border-bottom: 1px solid #0088cc;">
+                                    <span style="margin-left: 10px;">门户选择:</span>
+                                    <select ng-model="addParams.hpid" style="margin-left: 10px;" ng-options="portal.name for portal in portalList" ng-change="portalSelect(addParams.hpid)">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                    <thead>
+                                    <tr style="background: #ffc000">
+                                        <th class="th-text">栏目ID</th>
+                                        <th class="th-text">栏目名称</th>
+                                        <th class="th-text">栏目类型</th>
+                                        <th class="th-text">管理员</th>
+                                        <th class="th-text">状态</th>
+                                        <th class="th-text">更新时间</th>
+                                        <th class="th-text">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <div>
+                                        <tr class="odd gradeX" ng-repeat="column in columnList">
+                                            <td class="td-text">{{column.hpid}} </td>
+                                            <td class="td-text">{{column.name}} </td>
+                                            <td class="td-text">{{column.type}} </td>
+                                            <td>
+                                                <span ng-repeat="admin in column.admin">{{admin.username}}</span>
+                                            </td>
+                                            <td class="td-text" ng-show="column.status == 0">启用</td>
+                                            <td class="td-text" ng-show="column.status == 1">停用</td>
+                                            <td class="td-text">{{column.updatetime}} </td>
+                                            <td class="td-text">
+                                                <div>
+                                                    <a ng-click="addClick(false, column)">编辑</a>
+                                                    <a ng-click="columnOperate($index, 'del')">删除</a>
+                                                    <a ng-click="columnOperate($index, 'start')"  ng-if="column.status == 1">启用</a>
+                                                    <a ng-click="columnOperate($index, 'stop')"  ng-if="column.status == 0">停用</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </tbody>
+                                </table>
+
+                                <h4 style="width: 100%; text-align: center; margin: 20px" ng-if="columnList.length == 0">该门户下面没有栏目，快试试去添加吧！</h4>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="addOrEdit">
+                            <div style="padding-bottom: 10px;margin-bottom: 15px; border-bottom: 1px solid #0088cc;">
+                                <span style="margin-left: 10px;">门户选择:</span>
+                                <select ng-model="addParams.addHpid" style="margin-left: 10px;" ng-options="portal.name for portal in portalList" ng-change="columnPortalSelect(curColumn.hpid)">
+                                    <option value="">--请选择--</option>
+                                </select>
+                            </div>
+
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">栏目ID</td>
+                                    <td colspan="8"><input size="60" type="text" readonly placeholder="自动生成" ng-model="curColumn.id"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">栏目名称</td>
+                                    <td colspan="4">
+                                        <input size="26" type="text" ng-model="curColumn.name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">栏目说明</td>
+                                    <td colspan="8"><input size="60" type="text" ng-model="curColumn.description" placeholder="请输入栏目说明"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">更多设置</td>
+                                    <td colspan="8"><button class="btn btn-primary" ng-click="addPeopleClick()">打开栏目内容管理系统</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="container">
+                                <button class="btn btn-primary" data-toggle="tab" ng-click="addColumn()" style="margin-left: 380px">保存</button>
+                                <button class="btn" style="margin-left: 80px" ng-click="listClick()">取消</button>
+                            </div>
+
+                            <div ng-include="'peopleSelectModal.html'"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer><com-footer></com-footer></footer>
+
+        <script src="/assets/libs/angular/angular.min.js"></script>
+        <script src="/assets/libs/jquery/jquery.min.js"></script>
+        <script src='/assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
+        <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="/src/portalManage/portalservice.js"></script>
+        <script src="/src/portalManage/columnAdmin.js"></script>
+        <script src='/assets/libs/jquery.blockUI.js'></script>
+        <script src='/src/components/header-footer.js'></script>
+    </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"></title>
+        <title>门户配置管理-门户管理</title>
+
+        <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/portalManage/style.css">
+    </head>
+    <body ng-app="portalApp">
+    <header><com-header></com-header></header>
+
+    <div ng-controller="PortalAdminCtrl" class="content-border">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <div ng-include="'tmp_navigation.html'"></div>
+                </div>
+
+                <div  class="col-md-11">
+                    <br>
+
+                    <h3>门户管理</h3>
+
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#list" data-toggle="tab">门户列表</a></li>
+                        <li><a href="#addOrEdit" data-toggle="tab" ng-click="addClick(true)">新建/编辑</a></li>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content" style="margin-top: 30px;">
+                        <div class="tab-pane fade in active" id="list">
+                            <div>
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                    <thead>
+                                    <tr style="background: #00b0f0">
+                                        <th class="th-text">门户ID</th>
+                                        <th class="th-text">门户名称</th>
+                                        <th class="th-text">门户类型</th>
+                                        <th class="th-text">门户样式ID</th>
+                                        <th class="th-text">管理员</th>
+                                        <th class="th-text">状态</th>
+                                        <th class="th-text">更新时间</th>
+                                        <th class="th-text">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <div>
+                                        <tr class="odd gradeX" ng-repeat="portal in portalList">
+                                            <td class="td-text">{{portal.id}} </td>
+                                            <td class="td-text">{{portal.name}} </td>
+                                            <td class="td-text">{{portal.hptype}} </td>
+                                            <td class="td-text">{{portal.styleid}} </td>
+                                            <td class="td-text">
+                                                <span ng-repeat="admin in portal.admin">{{admin.username}}</span>
+                                            </td>
+                                            <td class="td-text" ng-show="portal.status == 0">启用</td>
+                                            <td class="td-text" ng-show="portal.status == 1">停用</td>
+                                            <td class="td-text">{{portal.updatetime}} </td>
+                                            <td class="td-text">
+                                                <div>
+                                                    <a ng-click="addClick(false, portal)">编辑</a>
+                                                    <a ng-click="portalOperate($index, 'del')">删除</a>
+                                                    <a ng-click="portalBuild()">生成页面</a>
+                                                    <a ng-click="portalOperate($index, 'start')" ng-if="portal.status == 1">启用</a>
+                                                    <a ng-click="portalOperate($index, 'stop')" ng-if="portal.status == 0">停用</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </tbody>
+                                </table>
+
+                                <h4 style="width: 100%; text-align: center; margin: 20px" ng-if="portalList.length == 0">您还没有新建任何门户，快试试去新建门户吧！</h4>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="addOrEdit">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">门户ID</td>
+                                    <td colspan="8"><input class="input-padding" size="60" type="text" readonly placeholder="自动生成" ng-model="curPortal.id"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">门户名称</td>
+                                    <td colspan="4">
+                                        <input class="input-padding" size="26" type="text" ng-model="curPortal.name" placeholder="请输入门户名称">
+                                    </td>
+                                    <td class="td-text-left" colspan="1">门户类型</td>
+                                    <td colspan="3">
+                                        <select class="select-time" style="width: 120px" id="portalType">
+                                            <option value="0">公司门户</option>
+                                            <option value="1">部门门户</option>
+                                            <option value="2">专题门户</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">门户说明</td>
+                                    <td colspan="8"><input class="input-padding" size="60" type="text" ng-model="curPortal.description" placeholder="请输入门户说明"></td>
+                                </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">门户管理员</td>
+                                    <td colspan="8"><input class="input-padding" size="60" type="text" ng-model="curPortal.admin[0].username" readonly>
+                                        <div id="userselect" style="display: inline">
+                                            <button class="btn btn-primary" readonly ng-click="addPeopleClick()">选择管理员</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="10">
+                                        <label class="radio" style="margin-left: 20px">
+                                            <input class="input-padding" type="radio" name="webtypeRadios" id="optionsRadios1" value="0" checked>
+                                            门户类型1： 使用门户配置流程搭建门户。
+                                        </label>
+                                        <label class="radio" style="margin-left: 20px">
+                                            <input class="input-padding" type="radio" name="webtypeRadios" id="optionsRadios2" value="1">
+                                            门户类型2：引用外部网站链接。
+                                            <input class="input-padding" size="60" type="text" ng-model="curPortal.url" placeholder="请输入网址" style="display: block; margin-top: 5px">
+                                        </label>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="container">
+                                <button class="btn btn-primary" data-toggle="tab" ng-click="addPortal()" style="margin-left: 380px">保存</button>
+                                <button class="btn" style="margin-left: 60px" ng-click="listClick()">取消</button>
+                            </div>
+
+                            <div ng-include="'peopleSelectModal.html'"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include="'peopleSelectModal.html'"></div>
+
+    <footer><com-footer></com-footer></footer>
+        <script src="/assets/libs/angular/angular.min.js"></script>
+        <script src="/assets/libs/jquery/jquery.min.js"></script>
+        <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="/src/portalManage/portalservice.js"></script>
+        <script src="/src/portalManage/portalAdmin.js"></script>
+        <script src='/assets/libs/jquery.blockUI.js'></script>
+        <script src='/src/components/header-footer.js'></script>
+    </body>
+</html>

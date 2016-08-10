@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"></title>
+        <title>组件配置管理-组件管理</title>
+
+        <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/portalManage/style.css">
+        <link rel="stylesheet" href="/assets/css/simplelightbox.min.css">
+    </head>
+    <body ng-app="portalApp">
+    <header><com-header></com-header></header>
+
+    <div ng-controller="componentAdminCtrl" class="content-border">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <div ng-include="'tmp_navigation.html'"></div>
+                </div>
+
+                <div class="col-md-11">
+                    <br>
+
+                    <h3>组件管理</h3>
+
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#list" data-toggle="tab">组件列表</a></li>
+                        <li><a href="#addOrEdit" data-toggle="tab" ng-click="addClick(true)">新建/编辑</a></li>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content" style="margin-top: 30px;">
+                        <div class="tab-pane fade in active" id="list">
+                            <div>
+                                <div style="padding-bottom: 10px;margin-bottom: 15px; border-bottom: 1px solid #0088cc;">
+                                    <span style="margin-left: 10px;">门户选择:</span>
+                                    <select ng-model="addParams.hpid" style="margin-left: 10px;" ng-options="portal.name for portal in portalList" ng-change="portalSelect(addParams.hpid)">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                    <thead>
+                                    <tr style="background: #92d050">
+                                        <th class="th-text">组件ID</th>
+                                        <th class="th-text">组件名称</th>
+                                        <th class="th-text">组件插页ID</th>
+                                        <th class="th-text">组件插页名称</th>
+                                        <th class="th-text">组件样式ID</th>
+                                        <th class="th-text">组件宽度</th>
+                                        <th class="th-text">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="component in componentList">
+                                        <tr class="odd gradeX" ng-repeat="curFormin in component.formin">
+                                            <td class="td-text">{{component.id}}</td>
+                                            <td class="td-text">{{component.name}}</td>
+                                            <td class="td-text">{{curFormin.id}}</td>
+                                            <td class="td-text">{{curFormin.name}}</td>
+                                            <td class="td-text">{{component.styleid}}</td>
+                                            <td class="td-text">{{component.width}}</td>
+                                            <td class="td-text">
+                                                <div>
+                                                    <a ng-click="addClick(false, component)">编辑</a>
+                                                    <a ng-click="componentOperate($index, 'del')">删除</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h4 style="width: 100%; text-align: center; margin: 20px" ng-if="componentList.length == 0">该门户下面没有任何组件，快试试去添加吧！</h4>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="addOrEdit">
+                            <div style="padding-bottom: 10px;margin-bottom: 15px; border-bottom: 1px solid #0088cc;">
+                                <span style="margin-left: 10px;">门户选择:</span>
+                                <select ng-model="addParams.addHpid" style="margin-left: 10px;" ng-options="portal.name for portal in portalList" ng-change="addPortalSelect(addParams.addHpid)">
+                                    <option value="">--请选择--</option>
+                                </select>
+                            </div>
+
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td class="td-text-left" colspan="2">组件ID</td>
+                                        <td colspan="8"><input size="60" type="text" ng-model="curComponent.id" readonly placeholder="自动生成"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="td-text-left" colspan="2">组件名称</td>
+                                        <td colspan="2">
+                                            <input size="26" type="text" ng-model="curComponent.name" placeholder="请输入组件名称">
+                                        </td>
+                                        <td class="td-text-left" colspan="2">组件插页数量</td>
+                                        <td colspan="4">
+                                            <select style="width: 80px;" id="pageNo" ng-click="pageNoSelect()">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered" style="background: #f3f2f0" id="page1">
+                                <tbody>
+                                <tr>
+                                    <td class="td-text-title" colspan="10">组件插页1</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件插页ID</td>
+                                    <td colspan="8">
+                                        <input class="input-padding" size="60" type="text" readonly placeholder="自动生成" ng-model="curComponent.formin[0].id">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件插页名称</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="26" type="text" placeholder="请输入组件插页名称" ng-model="curComponent.formin[0].name">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">关联栏目名称</td>
+                                    <td colspan="4">
+                                        <select ng-model="addParams.columns[0]" style="margin-left: 10px;width: 120px" ng-options="column.name for column in columnList">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件样式</td>
+                                    <td colspan="2">
+                                        <select class="select-time" ng-model="curComponent.formin[0].styleid" style="width: 100px">
+                                            <option value="">--请选择--</option>
+                                            <option value="1">样式1</option>
+                                            <option value="2">样式2</option>
+                                            <option value="3">样式3</option>
+                                            <option value="4">样式4</option>
+                                            <option value="5">样式5</option>
+                                            <option value="6">样式6</option>
+                                            <option value="7">样式7</option>
+                                            <option value="8">样式8</option>
+                                            <option value="9">样式9</option>
+                                            <option value="10">样式10</option>
+                                        </select>
+
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[0].styleid > 0">组件样式参考图片</a>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="curComponent.formin[0].styleid == 8">
+                                    <td class="td-text-left" colspan="2"></td>
+                                    <td colspan="8">
+                                        <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[0].code" placeholder="请输入所嵌入的代码片段"></textarea>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered" style="background: #f3f2f0;margin-top: 20px" id="page2" ng-show="(addParams.pageNo == 2) || (addParams.pageNo == 3)">
+                                <tbody>
+                                <tr>
+                                    <td class="td-text-title" colspan="10">组件插页2</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件插页ID</td>
+                                    <td colspan="8">
+                                        <input class="input-padding" size="60" type="text" readonly placeholder="自动生成" ng-model="curComponent.formin[1].id">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件插页名称</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="26" type="text" placeholder="请输入组件插页名称" ng-model="curComponent.formin[1].name">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">关联栏目名称</td>
+                                    <td colspan="4">
+                                        <select ng-model="addParams.columns[1]" style="margin-left: 10px;width: 120px" ng-options="column.name for column in columnList">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件样式</td>
+                                    <td colspan="2">
+                                        <select class="select-time" ng-model="curComponent.formin[1].styleid" style="width: 100px">
+                                            <option value="1" ng-selected="true">样式1</option>
+                                            <option value="2">样式2</option>
+                                            <option value="3">样式3</option>
+                                            <option value="4">样式4</option>
+                                            <option value="5">样式5</option>
+                                            <option value="6">样式6</option>
+                                            <option value="7">样式7</option>
+                                            <option value="8">样式8</option>
+                                            <option value="9">样式9</option>
+                                            <option value="10">样式10</option>
+                                        </select>
+
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[1].styleid > 0">组件样式参考图片</a>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="curComponent.formin[1].styleid == 8">
+                                    <td class="td-text-left" colspan="2"></td>
+                                    <td colspan="8">
+                                        <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[1].code" placeholder="请输入所嵌入的代码片段"></textarea>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered" style="background: #f3f2f0;margin-top: 20px" id="page3" ng-show="addParams.pageNo == 3">
+                                <tbody>
+                                <tr>
+                                    <td class="td-text-title" colspan="10">组件插页3</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件插页ID</td>
+                                    <td colspan="8">
+                                        <input class="input-padding" size="60" type="text" readonly placeholder="自动生成" ng-model="curComponent.formin[2].id">
+                                    </td><td colspan="8">
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件插页名称</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="26" type="text" placeholder="请输入组件插页名称" ng-model="curComponent.formin[2].name">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">关联栏目名称</td>
+                                    <td colspan="4">
+                                        <select ng-model="addParams.columns[2]" style="margin-left: 10px;width: 120px" ng-options="column.name for column in columnList">
+                                            <option value="">--请选择--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件样式</td>
+                                    <td colspan="2">
+                                        <select class="select-time" ng-model="curComponent.formin[2].styleid" style="width: 100px">
+                                            <option value="1" ng-selected="true">样式1</option>
+                                            <option value="2">样式2</option>
+                                            <option value="3">样式3</option>
+                                            <option value="4">样式4</option>
+                                            <option value="5">样式5</option>
+                                            <option value="6">样式6</option>
+                                            <option value="7">样式7</option>
+                                            <option value="8">样式8</option>
+                                            <option value="9">样式9</option>
+                                            <option value="10">样式10</option>
+                                        </select>
+
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[2].styleid > 0">组件样式参考图片</a>
+                                    </td>
+                                </tr>
+
+                                <tr ng-if="curComponent.formin[2].styleid > 7">
+                                    <td class="td-text-left" colspan="2"></td>
+                                    <td colspan="8">
+                                        <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[2].code" placeholder="请输入所嵌入的代码片段"></textarea>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="container" style="margin-bottom: 60px">
+                                <button class="btn btn-primary" data-toggle="tab" ng-click="addComponent()" style="margin-left: 380px">保存</button>
+                                <button class="btn" style="margin-left: 80px" ng-click="listClick()">取消</button>
+                            </div>
+
+                            <div ng-include="'peopleSelectModal.html'"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer><com-footer></com-footer></footer>
+
+        <script src="/assets/libs/angular/angular.min.js"></script>
+        <script src="/assets/libs/jquery/jquery.min.js"></script>
+        <script src='/assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
+        <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="/src/portalManage/portalservice.js"></script>
+        <script src="/src/portalManage/componentAdmin.js"></script>
+        <script src='/assets/libs/jquery.blockUI.js'></script>
+        <script src='/src/components/header-footer.js'></script>
+        <script src='/assets/libs/simple-lightbox.min.js'></script>
+    </body>
+</html>
