@@ -4,8 +4,8 @@
 var portalApp = angular.module("portalApp", []);
 
 portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', function( $rootScope, $http, $timeout) {
-    //var configHostName = 'http://192.168.252.1:8000';
-    var configHostName = 'http://172.16.51.144:8000/';
+//    var configHostName = 'http://192.168.252.1:8000';
+    var configHostName = 'http://172.16.51.144:8000';
     var userHostName = 'http://172.16.51.137:8010/';
     var userId = '1234567';
 

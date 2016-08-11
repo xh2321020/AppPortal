@@ -125,5 +125,4 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
             });
       };
       getPortalListData();
-      $(".a_portal").href = "";
 });
