@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="http://172.16.51.144/"/>
-    <!-- <base href="../../"/>
     <title>公司门户</title>
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -18,92 +17,63 @@
 </header>
 
 <article class="container-fluid article" id="article">
-    <div class="panel col-md-8 left">
-        <div id="carousel-div" class="carousel slide" data-interval="5000" data-ride="carousel">
+   
+    <com-catalog v-for="item in catalogs" :catalog="item"></com-catalog>
+    <!-- <com-catalog  :catalog="catalogs[0]"></com-catalog> -->
 
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li v-for="n in carousel.length" :class={'active':n==0} data-target="#carousel-div"
-                    data-slide-to="{{n}}"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <template v-for="car in carousel">
-                    <div :class="['item',{'active':$index==0}]">
-                        <a :href="car.linkAddr" target="_blank"><img :src="car.imagePath" @error="imgErrorLoad"
-                                                                     style="width: 100%;height: 36rem;" alt="...">
-                        </a>
-
-                        <div class="carousel-caption" v-text="car.title">
-                        </div>
-                    </div>
-                </template>
-            </div>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-div" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-div" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
     <!-- /.carousel -->
-    <div class="panel col-md-4 right">
+    <!-- <div class="panel col-md-4">
         <div class="scroll-panel">
             <div class="scroll-icon up" v-on:click="scrollPanel">
                 <em class="glyphicon glyphicon-menu-up"></em>
-                <!-- /.glyphicon glyphicon-menu-up -->
+                /.glyphicon glyphicon-menu-up
             </div>
             <div class="list" id="scrollList" data-index="0">
-                <!-- /.list -->
+                /.list
                 <div v-for="item in scrollList" class="row scroll-item">
                     <img v-bind:src="item.imagePath" alt="" class="col-md-4" @error="imgErrorLoad"/>
-
+    
                     <div class="col-md-8">
                         <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr"
                                                    target="_blank">{{item.title}}</a></p>
-
+    
                         <div class="desc-font">
                             <span class="site">{{item.site}}</span>
                             <span class="date">{{item.publishDate}}</span>
                         </div>
-                        <!-- /.mark -->
+                        /.mark
                     </div>
                 </div>
             </div>
             <div class="scroll-icon down" @click="scrollPanel">
                 <em class="glyphicon glyphicon-menu-down"></em>
-                <!-- /.glyphicon glyphicon-menu-up -->
+                /.glyphicon glyphicon-menu-up
             </div>
-            <!-- /.scroll-up -->
-            <!-- /.scroll-up -->
+            /.scroll-up
+            /.scroll-up
         </div>
     </div>
-    <!-- /.scroll-panel -->
-    <div class="panel left col-md-4">
+    /.scroll-panel
+    <div class="panel col-md-4">
         <div class="catalog-panel cnnp-trends">
             <div class="catalog">
                 <span>中国核电动态</span>
                 <a class="btn btn-sm find-more" data-index="2">更多>>
                 </a>
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <div class="material list-item">
                 <a :href="cnnpTrends[0].linkAddr" target="_blank">
                     <img v-bind:src="cnnpTrends[0].imagePath" alt="" @error="imgErrorLoad"/>
-
+    
                     <p :class="['subject-font','subject',{'latest':cnnpTrends[0].latest}]">{{cnnpTrends[0].title}}</p>
-
+    
                     <div class="desc-font desc">{{cnnpTrends[0].subTitle}}
                         <span class="date">{{cnnpTrends[0].publishDate}}</span>
                     </div>
                 </a>
             </div>
-            <!-- /.material -->
+            /.material
             <template v-for="item in cnnpTrends|limitBy  2 1">
                 <div class="list-item simple-item">
                     <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
@@ -112,7 +82,7 @@
             </template>
         </div>
     </div>
-    <!-- /.panel left -->
+    /.panel left
     <div class="panel mid col-md-4">
         <div class="catalog-panel txt">
             <div class="catalog">
@@ -120,19 +90,19 @@
                 <a class="btn btn-sm find-more" data-index="3">更多>>
                 </a>
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <ul class="list subject-font">
                 <li v-for="item in bulletin" class="list-item">
                     <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
                     </p>
-                    <!-- /.title --><span class="date">{{item.publishDate}}</span>
+                    /.title<span class="date">{{item.publishDate}}</span>
                 </li>
-
+    
             </ul>
-            <!-- /.list -->
+            /.list
         </div>
     </div>
-    <!-- /.panel mid -->
+    /.panel mid
     <div class="panel right col-md-4">
         <div class="catalog-panel panel5">
             <div class="catalog">
@@ -140,26 +110,26 @@
                 <a class="btn btn-sm find-more" data-index="4">更多>>
                 </a>
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <template v-for="item in specialSuggest">
                 <div class="row scroll-item">
                     <img v-bind:src="item.imagePath" alt="" class="col-md-4" @error="imgErrorLoad"/>
-                    <!-- /.col-md-4 -->
+                    /.col-md-4
                     <div class="col-md-8">
                         <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr"
                                                    target="_blank">{{item.title}}</a></p>
-
+    
                         <div class="desc-font">
                             <span class="site">{{item.site}}</span>
                             <span class="date">{{item.publishDate}}</span>
                         </div>
-                        <!-- /.mark -->
+                        /.mark
                     </div>
                 </div>
             </template>
         </div>
     </div>
-    <!-- /.panel right -->
+    /.panel right
     <div class="panel right col-md-4">
         <div class="catalog-panel panel5">
             <div class="catalog">
@@ -167,33 +137,33 @@
                 <a class="btn btn-sm find-more" data-index="5">更多>>
                 </a>
             </div>
-            <!-- /.catalog -->
-            <!-- /.catalog -->
+            /.catalog
+            /.catalog
             <template v-for="item in memberStates">
                 <div class="row scroll-item">
                     <img v-bind:src="item.imagePath" alt="" class="col-md-4" @error="imgErrorLoad"/>
-                    <!-- /.col-md-4 -->
+                    /.col-md-4
                     <div class="col-md-8">
                         <p class="subject-font"><a :class="{'latest':item.latest}" :href="item.linkAddr"
                                                    target="_blank">{{item.title}}</a></p>
-
+    
                         <div class="desc-font">
                             <span class="site">{{item.site}}</span>
                             <span class="date">{{item.publishDate}}</span>
                         </div>
-                        <!-- /.mark -->
+                        /.mark
                     </div>
                 </div>
             </template>
-
+    
         </div>
     </div>
-    <!-- /.panel -->
+    /.panel
     <div class="panel right col-md-8">
         <div class="catalog-panel">
             <div class="catalog">
                 <span>核电在线</span>
-
+    
                 <div class="panel-online" style="margin-top: 0.5rem;">
                     <div class="catalog-online" style="margin-top: 1rem;">
                         <div class="scroll-panel-online">
@@ -218,14 +188,14 @@
                                     <li id="tag14" name="36">海南核电1#</li>
                                 </ul>
                             </div>
-
+    
                             <div class="scroll-icon-online down" id="goingDown">
                                 <em class="glyphicon-online glyphicon-menu-down"></em>
-                                <!-- /.glyphicon glyphicon-menu-up -->
+                                /.glyphicon glyphicon-menu-up
                             </div>
                         </div>
                     </div>
-                    <!-- iframe part-->
+                    iframe part
                     <div id="iframess" style="width: 50rem; height: 30rem; border: 0; margin-left: 2.5rem;">
                         <div style="width: 50rem; height: 30rem;">
                             <iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=2016-06-07&rid=1"
@@ -255,10 +225,10 @@
                     </div>
                 </div>
             </div>
-            <!-- /.catalog -->
+            /.catalog
         </div>
     </div>
-
+    
     <div class="panel left col-md-4">
         <div class="catalog-panel txt">
             <div class="catalog">
@@ -266,25 +236,25 @@
                 <a class="btn btn-sm find-more" data-index="8">更多>>
                 </a>
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <ul class="list subject-font">
                 <li v-for="item in cultureStates" class="list-item">
                     <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
                     </p>
-                    <!-- /.title --><span class="date">{{item.publishDate}}</span>
+                    /.title<span class="date">{{item.publishDate}}</span>
                 </li>
-
+    
             </ul>
         </div>
     </div>
-    <!-- /.panel left -->
+    /.panel left
     <div class="panel mid col-md-4">
         <div class="catalog-panel poster">
             <div class="catalog">
                 <span>文化专栏</span>
-
+    
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <a href="http://bjecm.cnnp.com.cn/publish2/newsShow/list?catId=17037" target="_blank">
                 <img src="assets/images/portal/culture.jpg" alt=""/>
             </a>
@@ -293,13 +263,13 @@
                     <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
                     </p>
                     <span class="date">{{item.publishDate}}</span>
-                    <!-- /.date -->
+                    /.date
                 </li>
             </ul>
-            <!-- /.list -->
+            /.list
         </div>
     </div>
-    <!-- /.panel mid -->
+    /.panel mid
     <div class="panel right col-md-4">
         <div class="catalog-panel txt">
             <div class="catalog">
@@ -307,25 +277,25 @@
                 <a class="btn btn-sm find-more" data-index="9">更多>>
                 </a>
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <ul class="list subject-font">
                 <li v-for="part in partyZone" class="list-item">
                     <p class="title"><a :class="{'latest':part.latest}" :href="part.linkAddr" target="_blank">{{part.title}}</a>
                     </p>
-                    <!-- /.title --><span class="date">{{part.publishDate}}</span>
+                    /.title<span class="date">{{part.publishDate}}</span>
                 </li>
-
+    
             </ul>
         </div>
     </div>
-    <!-- /.panel right -->
+    /.panel right
     <div class="panel left col-md-4">
         <div class="catalog-panel poster">
             <div class="catalog">
                 <span>企业内刊</span>
-
+    
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <a href="http://bjecm.cnnp.com.cn/publish2/newsShow/list?catId=17037" target="_blank">
                 <img src="assets/images/portal/u402.png" alt=""/>
             </a>
@@ -334,159 +304,61 @@
                     <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
                     </p>
                     <span class="date">{{item.publishDate}}</span>
-                    <!-- /.date -->
+                    /.date
                 </li>
             </ul>
-            <!-- /.list -->
+            /.list
         </div>
     </div>
-    <!-- /.panel left -->
+    /.panel left
     <div class="panel mid col-md-4">
         <div class="catalog-panel movie-panel">
             <div class="catalog">
                 <span>视频宣传</span>
-
+    
             </div>
-            <!-- /.catalog -->
+            /.catalog
             <video width="370" height="240" controls="controls"
                    :poster="'assets/images/default-pics/'+Math.round(Math.random()*50)+'.png'">
-                <!--  <source v-bind:src="movie[0].imagePath" type="video/ogg"> -->
+                <source v-bind:src="movie[0].imagePath" type="video/ogg">
                 <source v-bind:src="movie[0].imagePath+'.mp4'" type="video/mp4">
-                <!-- <source v-bind:src={{movie[0].imagePath}} type="video/mp4"> -->
-
+                <source v-bind:src={{movie[0].imagePath}} type="video/mp4">
+    
                 Your browser does not support the video tag.
             </video>
             <p class="subject-font title"><a :class="{'latest':movie[0].latest}" :href="movie[0].linkAddr"
                                              target="_blank">{{movie[0].title}}</a></p>
         </div>
-    </div>
+    </div> -->
     <!-- /.panel mid -->
-    <div class="panel right col-md-4">
-        <div class="catalog-panel txt">
-            <div class="catalog">
-                <span>媒体报道</span>
-                <a class="btn btn-sm find-more" data-index="12">更多>>
-                </a>
-            </div>
-            <!-- /.catalog -->
-            <ul class="list subject-font">
-                <li v-for="item in mediaNews" class="list-item">
-                    <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
-                    </p>
-                    <!-- /.title --><span class="date">{{item.publishDate}}</span>
-                </li>
-
-            </ul>
-        </div>
-    </div>
+   <!--  <div class="panel right col-md-4">
+       <div class="catalog-panel txt">
+           <div class="catalog">
+               <span>媒体报道</span>
+               <a class="btn btn-sm find-more" data-index="12">更多>>
+               </a>
+           </div>
+           /.catalog
+           <ul class="list subject-font">
+               <li v-for="item in mediaNews" class="list-item">
+                   <p class="title"><a :class="{'latest':item.latest}" :href="item.linkAddr" target="_blank">{{item.title}}</a>
+                   </p>
+                   /.title<span class="date">{{item.publishDate}}</span>
+               </li>
+   
+           </ul>
+       </div>
+   </div> -->
     <!-- /.panel right -->
 </article>
 <footer>
-  <com-footer></com-footer>
+    <com-footer></com-footer>
 </footer>
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
-<script src="dist/header-footer.js"></script>
-
 <script>
-    $(function () {
-        $("#comPortalNav").hover(function (ev) {
-            $(this.querySelector(".nav-panel")).show();
-        }, function () {
-            $(this.querySelector(".nav-panel")).hide();
-        });
-
-        /* $("#depPortalNav").hover(function (ev) {
-         $(this.querySelector(".nav-panel")).show();
-         }, function () {
-         $(this.querySelector(".nav-panel")).hide();
-         });*/
-//        $("#depPortalNav").find(".nav-panel").show();
-
-
-        var currenIndex = 0;
-        var dat = new Date();
-        var formateDat = "";
-        formateDat = dat.getFullYear() + "-" + (dat.getMonth() + 1) + "-" + dat.getDate();
-        document.getElementById("iframess").innerHTML = '<div style="width: 50rem; height: 30rem;">' +
-                '<iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=' + formateDat + '&rid=1"  width="100%" height="495px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>' +
-                '</div>';
-
-        $("#location").on("click", "li", function (ev) {
-            var id = $("#location").find(this).attr("name");
-            $("#location").find("li").each(function () {
-                this.style.backgroundColor = "#B4D6EF";
-                this.style.color = "black";
-                if ($(this).attr("name") == id) {
-                    this.style.backgroundColor = "#00a2e5";
-                    this.style.color = "#FFFFFF";
-                }
-            });
-            var d = new Date();
-            var formateDate = "";
-            formateDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-            document.getElementById("iframess").innerHTML = '<div style="width: 50rem; height: 30rem;">' +
-                    '<iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate=' + formateDate + '&rid=' +
-                    id + '"  width="100%" height="495px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>' +
-                    '</div>';
-        });
-        $("#goingUp").click(function (ev) {
-            if (currenIndex == 0) {
-                $("#location").find("li").each(function () {
-                    if ($(this).attr("name") < 6) {
-                        this.style.display = "none";
-                    } else if (($(this).attr("name") >= 6) && ($(this).attr("name") <= 10)) {
-                        this.style.display = "block";
-                    }
-                })
-                currenIndex++;
-            } else if (currenIndex == 1) {
-                $("#location").find("li").each(function () {
-                    if ($(this).attr("name") <= 9) {
-                        this.style.display = "none";
-                    } else {
-                        this.style.display = "block";
-                    }
-                })
-                currenIndex++;
-            }
-
-
-//                else if(currenIndex == 2){
-//                    $("#location").find("li").each(function(){
-//                        if($(this).attr("name")<=4){
-//                            this.style.display="block";
-//                        }
-//                    })
-//                    currenIndex = 0;
-//                }
-        });
-        $("#goingDown").click(function (ev) {
-            if (currenIndex == 2) {
-                $("#location").find("li").each(function () {
-                    if ($(this).attr("name") < 6) {
-                        this.style.display = "none";
-                    } else if (($(this).attr("name") >= 6) && ($(this).attr("name") <= 10)) {
-                        this.style.display = "block";
-                    }
-                })
-                currenIndex--;
-            } else if (currenIndex == 1) {
-                $("#location").find("li").each(function () {
-                    if ($(this).attr("name") <= 9) {
-                        this.style.display = "none";
-                    } else {
-                        this.style.display = "block";
-                    }
-                })
-                currenIndex--;
-            }
-        });
-
-    });
-
-
+    var scriptList=['./dist/header-footer.js','./dist/portal.js'];
 </script>
-<script src="dist/build.js"></script>
+<script src="./dist/main.js"></script>
 </body>
 </html>
