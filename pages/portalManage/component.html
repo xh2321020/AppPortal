@@ -7,7 +7,7 @@
 
         <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/portalManage/style.css">
-        <link rel="stylesheet" href="/assets/css/simplelightbox.min.css">
+        <link rel="stylesheet" href="/assets/css/portalManage/simplelightbox.min.css">
     </head>
     <body ng-app="portalApp">
     <header><com-header></com-header></header>
@@ -52,20 +52,20 @@
                                     </tr>
                                     </thead>
                                     <tbody ng-repeat="component in componentList">
-                                        <tr class="odd gradeX" ng-repeat="curFormin in component.formin">
-                                            <td class="td-text">{{component.id}}</td>
-                                            <td class="td-text">{{component.name}}</td>
-                                            <td class="td-text">{{curFormin.id}}</td>
-                                            <td class="td-text">{{curFormin.name}}</td>
-                                            <td class="td-text">{{component.styleid}}</td>
-                                            <td class="td-text">{{component.width}}</td>
-                                            <td class="td-text">
-                                                <div>
-                                                    <a ng-click="addClick(false, component)">编辑</a>
-                                                    <a ng-click="componentOperate($index, 'del')">删除</a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tr class="odd gradeX" ng-repeat="curFormin in component.formin">
+                                        <td class="td-text">{{component.id}}</td>
+                                        <td class="td-text">{{component.name}}</td>
+                                        <td class="td-text">{{curFormin.id}}</td>
+                                        <td class="td-text">{{curFormin.name}}</td>
+                                        <td class="td-text">{{component.styleid}}</td>
+                                        <td class="td-text">{{component.width}}</td>
+                                        <td class="td-text">
+                                            <div>
+                                                <a ng-click="addClick(false, component)">编辑</a>
+                                                <a ng-click="componentOperate($index, 'del')">删除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
 
@@ -83,25 +83,37 @@
 
                             <table class="table table-bordered">
                                 <tbody>
-                                    <tr>
-                                        <td class="td-text-left" colspan="2">组件ID</td>
-                                        <td colspan="8"><input size="60" type="text" ng-model="curComponent.id" readonly placeholder="自动生成"></td>
-                                    </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件ID</td>
+                                    <td colspan="8"><input size="60" type="text" ng-model="curComponent.id" readonly placeholder="自动生成"></td>
+                                </tr>
 
-                                    <tr>
-                                        <td class="td-text-left" colspan="2">组件名称</td>
-                                        <td colspan="2">
-                                            <input size="26" type="text" ng-model="curComponent.name" placeholder="请输入组件名称">
-                                        </td>
-                                        <td class="td-text-left" colspan="2">组件插页数量</td>
-                                        <td colspan="4">
-                                            <select style="width: 80px;" id="pageNo" ng-click="pageNoSelect()">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件名称</td>
+                                    <td colspan="2">
+                                        <input size="26" type="text" ng-model="curComponent.name" placeholder="请输入组件名称">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">组件插页数量</td>
+                                    <td colspan="4">
+                                        <select style="width: 80px;" id="pageNo" ng-click="pageNoSelect()">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">组件宽度</td>
+                                    <td colspan="8">
+                                        <select ng-model="curComponent.width" style="width: 120px;">
+                                            <option value="">-请选择-</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
 
@@ -133,7 +145,7 @@
 
                                 <tr>
                                     <td class="td-text-left" colspan="2">组件样式</td>
-                                    <td colspan="2">
+                                    <td colspan="6">
                                         <select class="select-time" ng-model="curComponent.formin[0].styleid" style="width: 100px">
                                             <option value="">--请选择--</option>
                                             <option value="1">样式1</option>
@@ -148,7 +160,7 @@
                                             <option value="10">样式10</option>
                                         </select>
 
-                                        <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[0].styleid > 0">组件样式参考图片</a>
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[0].styleid > 0">组件样式参考图片</a>
                                     </td>
                                 </tr>
 
@@ -156,6 +168,43 @@
                                     <td class="td-text-left" colspan="2"></td>
                                     <td colspan="8">
                                         <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[0].code" placeholder="请输入所嵌入的代码片段"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">内容获取URL</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入内容URL" ng-model="curComponent.formin[0].url">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">是否需要更多</td>
+                                    <td colspan="2">
+                                        <select class="select-time" ng-model="curComponent.formin[0].ismore" style="width: 60px">
+                                            <option value="1">否</option>
+                                            <option value="0">是</option>
+                                        </select>
+                                        <input class="input-padding" size="36" type="text" ng-if="curComponent.formin[0].ismore == 0" placeholder="请输入更多URL" ng-model="curComponent.formin[0].more_url" style="margin-left: 5px">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">content_type</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入content_type" ng-model="curComponent.formin[0].content_type">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">method</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入method" ng-model="curComponent.formin[0].method">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">payload</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入payload" ng-model="curComponent.formin[0].payload">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">querystring</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入querystring" ng-model="curComponent.formin[0].querystring">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -189,7 +238,7 @@
 
                                 <tr>
                                     <td class="td-text-left" colspan="2">组件样式</td>
-                                    <td colspan="2">
+                                    <td colspan="8">
                                         <select class="select-time" ng-model="curComponent.formin[1].styleid" style="width: 100px">
                                             <option value="1" ng-selected="true">样式1</option>
                                             <option value="2">样式2</option>
@@ -203,7 +252,7 @@
                                             <option value="10">样式10</option>
                                         </select>
 
-                                        <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[1].styleid > 0">组件样式参考图片</a>
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[1].styleid > 0">组件样式参考图片</a>
                                     </td>
                                 </tr>
 
@@ -211,6 +260,43 @@
                                     <td class="td-text-left" colspan="2"></td>
                                     <td colspan="8">
                                         <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[1].code" placeholder="请输入所嵌入的代码片段"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">内容获取URL</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入内容URL" ng-model="curComponent.formin[1].url">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">是否需要更多</td>
+                                    <td colspan="2">
+                                        <select class="select-time" ng-model="curComponent.formin[1].ismore" style="width: 60px">
+                                            <option value="1">否</option>
+                                            <option value="0">是</option>
+                                        </select>
+                                        <input class="input-padding" size="36" type="text" ng-if="curComponent.formin[1].ismore == 0" placeholder="请输入更多URL" ng-model="curComponent.formin[1].more_url" style="margin-left: 5px">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">content_type</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入content_type" ng-model="curComponent.formin[1].content_type">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">method</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入method" ng-model="curComponent.formin[1].method">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">payload</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入payload" ng-model="curComponent.formin[1].payload">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">querystring</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入querystring" ng-model="curComponent.formin[1].querystring">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -244,7 +330,7 @@
 
                                 <tr>
                                     <td class="td-text-left" colspan="2">组件样式</td>
-                                    <td colspan="2">
+                                    <td colspan="8">
                                         <select class="select-time" ng-model="curComponent.formin[2].styleid" style="width: 100px">
                                             <option value="1" ng-selected="true">样式1</option>
                                             <option value="2">样式2</option>
@@ -258,7 +344,7 @@
                                             <option value="10">样式10</option>
                                         </select>
 
-                                        <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[2].styleid > 0">组件样式参考图片</a>
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[2].styleid > 0">组件样式参考图片</a>
                                     </td>
                                 </tr>
 
@@ -266,6 +352,43 @@
                                     <td class="td-text-left" colspan="2"></td>
                                     <td colspan="8">
                                         <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[2].code" placeholder="请输入所嵌入的代码片段"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">内容获取URL</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入内容URL" ng-model="curComponent.formin[2].url">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">是否需要更多</td>
+                                    <td colspan="2">
+                                        <select class="select-time" ng-model="curComponent.formin[2].ismore" style="width: 60px">
+                                            <option value="1">否</option>
+                                            <option value="0">是</option>
+                                        </select>
+                                        <input class="input-padding" size="36" type="text" ng-if="curComponent.formin[2].ismore == 0" placeholder="请输入更多URL" ng-model="curComponent.formin[2].more_url" style="margin-left: 5px">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">content_type</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入content_type" ng-model="curComponent.formin[2].content_type">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">method</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入method" ng-model="curComponent.formin[2].method">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="td-text-left" colspan="2">payload</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入payload" ng-model="curComponent.formin[2].payload">
+                                    </td>
+                                    <td class="td-text-left" colspan="2">querystring</td>
+                                    <td colspan="2">
+                                        <input class="input-padding" size="46" type="text" placeholder="请输入querystring" ng-model="curComponent.formin[2].querystring">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -277,7 +400,7 @@
                             </div>
 
                             <div ng-include="'peopleSelectModal.html'"></div>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

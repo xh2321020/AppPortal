@@ -39,9 +39,9 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
             }
       };
 
-      var getColumnListData = function(hpid, type){
+      var getColumnListData = function(hpid){
             //门户0  栏目1
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/?hpid=" + hpid + "&type=" + type, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/?hpid=" + hpid, function(response){
                   $scope.columnList = response;
             });
       };
@@ -60,7 +60,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       getPortalListData();
 
       $scope.portalSelect = function(portal){
-            getColumnListData(portal.id, 1);
+            getColumnListData(portal.id);
       };
 
       $scope.columnOperate = function(index, operate){
@@ -83,12 +83,19 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       $scope.addColumn = function(){
             $scope.curColumn.type = $scope.addParams.addHpid.hptype;
             $scope.curColumn.hpid = $scope.addParams.addHpid.id;
-            PortalService.sendPostRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/add", $scope.curColumn, function(response){
+
+            var requestUrl = PortalService.getHostName();
+            if($scope.curColumn.id && $scope.curColumn.id != ""){
+                  requestUrl += "/api/V1.0/homepage/homepagecolumn/edit";
+            } else{
+                  requestUrl += "/api/V1.0/homepage/homepagecolumn/add";
+            }
+            PortalService.sendPostRequest(requestUrl, $scope.curColumn, function(response){
                   console.log("curColumn:" + response);
                   if(true){
                         PortalService.showAlert("新增成功");
                         $scope.listClick();
-                        getColumnListData($scope.addParams.hpid.id, 1);
+                        getColumnListData($scope.addParams.hpid.id);
                   }
             });
       };

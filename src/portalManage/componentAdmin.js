@@ -12,63 +12,73 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
 
       $scope.addClick = function(isAdd, component){
             if(isAdd){
+                  $scope.addParams.columns[0] = "";
+                  $scope.addParams.columns[1] = "";
+                  $scope.addParams.columns[2] = "";
                   $scope.curComponent =
                   {
-                      "hpid": '',
-                      "name": "",
-                      "styleid": "",
-                      "status": "",
-                      "description": "",
-                      "width": "",
-                      "createuserid": '',
-                      "createusername": '',
-                      "updatetime": "",
-                      "formin": [{
-                            "hpid": '',
-                            "name": "",
-                            "form_inid": "1",
-                            "columnid": '',
-                            "styleid": "",
-                            "updatetime": "",
-                            "imgname": "",
-                            "imgpath": "",
-                            "code": ""
-                      },
-                            {
-                                  "hpid": '',
-                                  "name": "",
-                                  "form_inid": "2",
-                                  "columnid": '',
-                                  "styleid": "",
-                                  "updatetime": "",
-                                  "imgname": "",
-                                  "imgpath": "",
-                                  "code": ""
-                            },
-                            {
-                                  "hpid": '',
-                                  "name": "",
-                                  "form_inid": "3",
-                                  "columnid": '',
-                                  "styleid": "",
-                                  "updatetime": "",
-                                  "imgname": "",
-                                  "imgpath": "",
-                                  "code": ""
-                            }]
+                        "hpid": '',
+                        "name": "",
+                        "styleid": "",
+                        "status": "",
+                        "description": "",
+                        "width": "",
+                        "createuserid": '',
+                        "createusername": '',
+                        "top_color": "#00A2E5",
+                        "formin": [{
+                              "name": "",
+                              "form_inid": "1",
+                              "columnid": '',
+                              "styleid": "",
+                              "code": "",
+                              "more_url": "",
+                              "ismore": "1",
+                              "url": "",
+                              "content_type": "",
+                              "method": "",
+                              "payload": "",
+                              "querystring": ""
+                        },{
+                              "name": "",
+                              "form_inid": "2",
+                              "columnid": '',
+                              "styleid": "",
+                              "code": "",
+                              "more_url": "",
+                              "ismore": "1",
+                              "url": "",
+                              "content_type": "",
+                              "method": "",
+                              "payload": "",
+                              "querystring": ""
+                        }, {
+                              "name": "",
+                              "form_inid": "3",
+                              "columnid": '',
+                              "styleid": "",
+                              "code": "",
+                              "more_url": "",
+                              "ismore": "1",
+                              "url": "",
+                              "content_type": "",
+                              "method": "",
+                              "payload": "",
+                              "querystring": ""
+                        }]
                   };
             } else{
                   $scope.addParams.addHpid = $scope.addParams.hpid;
                   $scope.addPortalSelect($scope.addParams.hpid
                       , function(){
-                        for(var i = 0, j = component.formin.length; i < j; i++){
-                              for(var m = 0, n = $scope.columnList.length; m < n; m++){
-                                    if($scope.columnList[m].id = component.formin[i].columnid){
-                                          $scope.addParams.columns[i] = $scope.columnList[m];
-                                    }
-                              }
-                        }
-                  });
+                            for(var i = 0, j = component.formin.length; i < j; i++){
+                                  for(var m = 0, n = $scope.columnList.length; m < n; m++){
+                                        if($scope.columnList[m].id = component.formin[i].columnid){
+                                              $scope.addParams.columns[i] = $scope.columnList[m];
+                                        }
+                                  }
+                            }
+                      });
                   if(component.formin.length > 1){
                         $scope.addParams.pageNo = component.formin.length;
                   }
@@ -93,13 +103,18 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
             });
       };
 
-      $scope.componentOperate = function(index, action){
-
+      $scope.componentDel = function(index){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepageform/del?formid=" + $scope.componentList[index].id, function(response){
+                  console.log(response);
+                  if(true){
+                        PortalService.showAlert("操作成功");
+                  }
+                  $scope.componentList.splice(index, 1);
+            });
       };
 
       var getColumnListData = function(hpid, callback){
-            //门户0  栏目1
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/?hpid=" + hpid + "&type=" + 1, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/?hpid=" + hpid, function(response){
                   $scope.columnList = response;
                   if(callback){
                         callback();
@@ -136,15 +151,21 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
       $scope.addComponent = function(){
             if($scope.addParams.pageNo == 1){
                   $scope.curComponent.formin.splice(1, 2);
-            }
-            if($scope.addParams.pageNo == 2){
+            }else if($scope.addParams.pageNo == 2){
                   $scope.curComponent.formin.splice(2, 1);
             }
             for(var i = 0, j = $scope.curComponent.formin.length; i < j; i++){
                   $scope.curComponent.formin[i].columnid = $scope.addParams.columns[i].id;
             }
             $scope.curComponent.hpid = $scope.addParams.addHpid.id;
-            PortalService.sendPostRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepageform/add", $scope.curComponent, function(response){
+
+            var requestUrl = PortalService.getHostName();
+            if($scope.curComponent.id && $scope.curComponent.id != ""){
+                  requestUrl += "/api/V1.0/homepage/homepageform/edit";
+            } else{
+                  requestUrl += "/api/V1.0/homepage/homepageform/add";
+            }
+            PortalService.sendPostRequest(requestUrl, $scope.curComponent, function(response){
                   console.log("curComponent:" + response);
                   if(true){
                         PortalService.showAlert("新增成功");
