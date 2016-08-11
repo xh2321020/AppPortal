@@ -234,22 +234,22 @@
 <!--<script data-main="assetsjs/main" src="assetsjs/require.js"></script>-->
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
-<script src="dist/header-footer.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
 <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 <script src="assets/libs/jquery.blockUI.js"></script>
 <script src="assets/libs/extendPagination.js"></script>
-<script src="dist/supervision-all.js"></script>
 <script>
-        var hidNode = null;
-        function hoverFunction(x) {
-            hidNode = x.getElementsByClassName("hoverInfo")[0];
-            hidNode.style.display = "block";
+    var scriptList=['./dist/header-footer.js','./dist/supervision-all.js'];
+    var hidNode = null;
+    function hoverFunction(x) {
+        hidNode = x.getElementsByClassName("hoverInfo")[0];
+        hidNode.style.display = "block";
 
-        }
-        function outFunction(x) {
-            hidNode.style.display = "none";
-        }
-    </script>
+    }
+    function outFunction(x) {
+        hidNode.style.display = "none";
+    }
+</script>
+<script src="dist/main.js"></script>
 </body>
 </html>
