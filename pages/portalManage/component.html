@@ -62,7 +62,7 @@
                                         <td class="td-text">
                                             <div>
                                                 <a ng-click="addClick(false, component)">编辑</a>
-                                                <a ng-click="componentDel($index)">删除</a>
+                                                <a ng-click="componentOperate($index, 'del')">删除</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -147,24 +147,23 @@
                                     <td class="td-text-left" colspan="2">组件样式</td>
                                     <td colspan="6">
                                         <select class="select-time" ng-model="curComponent.formin[0].styleid" style="width: 100px">
-                                            <option value="">--请选择--</option>
-                                            <option value="1">样式1</option>
-                                            <option value="2">样式2</option>
-                                            <option value="3">样式3</option>
-                                            <option value="4">样式4</option>
-                                            <option value="5">样式5</option>
-                                            <option value="6">样式6</option>
-                                            <option value="7">样式7</option>
-                                            <option value="8">样式8</option>
-                                            <option value="9">样式9</option>
-                                            <option value="10">样式10</option>
+                                            <option value="style1" ng-selected="true">样式1</option>
+                                            <option value="style2">样式2</option>
+                                            <option value="style3">样式3</option>
+                                            <option value="style4">样式4</option>
+                                            <option value="style5">样式5</option>
+                                            <option value="style6">样式6</option>
+                                            <option value="style7">样式7</option>
+                                            <option value="style8">样式8</option>
+                                            <option value="style9">样式9</option>
+                                            <option value="style110">样式10</option>
                                         </select>
 
-                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[0].styleid > 0">组件样式参考图片</a>
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour">组件样式参考图片</a>
                                     </td>
                                 </tr>
 
-                                <tr ng-if="curComponent.formin[0].styleid == 8">
+                                <tr ng-if="curComponent.formin[0].styleid == 'style8' || curComponent.formin[0].styleid == 'style9'">
                                     <td class="td-text-left" colspan="2"></td>
                                     <td colspan="8">
                                         <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[0].code" placeholder="请输入所嵌入的代码片段"></textarea>
@@ -240,23 +239,23 @@
                                     <td class="td-text-left" colspan="2">组件样式</td>
                                     <td colspan="8">
                                         <select class="select-time" ng-model="curComponent.formin[1].styleid" style="width: 100px">
-                                            <option value="1" ng-selected="true">样式1</option>
-                                            <option value="2">样式2</option>
-                                            <option value="3">样式3</option>
-                                            <option value="4">样式4</option>
-                                            <option value="5">样式5</option>
-                                            <option value="6">样式6</option>
-                                            <option value="7">样式7</option>
-                                            <option value="8">样式8</option>
-                                            <option value="9">样式9</option>
-                                            <option value="10">样式10</option>
+                                            <option value="style1" ng-selected="true">样式1</option>
+                                            <option value="style2">样式2</option>
+                                            <option value="style3">样式3</option>
+                                            <option value="style4">样式4</option>
+                                            <option value="style5">样式5</option>
+                                            <option value="style6">样式6</option>
+                                            <option value="style7">样式7</option>
+                                            <option value="style8">样式8</option>
+                                            <option value="style9">样式9</option>
+                                            <option value="style110">样式10</option>
                                         </select>
 
-                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[1].styleid > 0">组件样式参考图片</a>
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour">组件样式参考图片</a>
                                     </td>
                                 </tr>
 
-                                <tr ng-if="curComponent.formin[1].styleid == 8">
+                                <tr ng-if="curComponent.formin[1].styleid == 'style8' || curComponent.formin[1].styleid == 'style9'">
                                     <td class="td-text-left" colspan="2"></td>
                                     <td colspan="8">
                                         <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[1].code" placeholder="请输入所嵌入的代码片段"></textarea>
@@ -332,23 +331,23 @@
                                     <td class="td-text-left" colspan="2">组件样式</td>
                                     <td colspan="8">
                                         <select class="select-time" ng-model="curComponent.formin[2].styleid" style="width: 100px">
-                                            <option value="1" ng-selected="true">样式1</option>
-                                            <option value="2">样式2</option>
-                                            <option value="3">样式3</option>
-                                            <option value="4">样式4</option>
-                                            <option value="5">样式5</option>
-                                            <option value="6">样式6</option>
-                                            <option value="7">样式7</option>
-                                            <option value="8">样式8</option>
-                                            <option value="9">样式9</option>
-                                            <option value="10">样式10</option>
+                                            <option value="style1" ng-selected="true">样式1</option>
+                                            <option value="style2">样式2</option>
+                                            <option value="style3">样式3</option>
+                                            <option value="style4">样式4</option>
+                                            <option value="style5">样式5</option>
+                                            <option value="style6">样式6</option>
+                                            <option value="style7">样式7</option>
+                                            <option value="style8">样式8</option>
+                                            <option value="style9">样式9</option>
+                                            <option value="style110">样式10</option>
                                         </select>
 
-                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour" ng-if="curComponent.formin[2].styleid > 0">组件样式参考图片</a>
+                                        <a class="btn btn-primary big" style="margin-left: 20px" href="img/style_sample.png" rel="lightbox-tour">组件样式参考图片</a>
                                     </td>
                                 </tr>
 
-                                <tr ng-if="curComponent.formin[2].styleid > 7">
+                                <tr ng-if="curComponent.formin[2].styleid == 'style8' || curComponent.formin[2].styleid == 'style9'">
                                     <td class="td-text-left" colspan="2"></td>
                                     <td colspan="8">
                                         <textarea style="width:80%;margin: 8px" rows="4" ng-model="curComponent.formin[2].code" placeholder="请输入所嵌入的代码片段"></textarea>
