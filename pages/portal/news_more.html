@@ -30,7 +30,7 @@
             </thead>
             <tbody>
             <div>
-                <tr class="odd gradeX" ng-repeat="news in curNewList">
+                <tr class="odd gradeX" ng-repeat="news in curNewList" style="cursor:pointer;">
                     <td class="td-text" width="800" style="padding-left: 20px"><span ng-click="newsClick(news.id)" target='_blank'>{{news.title}}</span></td>
                     <td class="td-text" width="150">{{news.newsfield}}</td>
                     <td class="td-text" width="150">{{news.orgName}}</td>

@@ -11,16 +11,28 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       $scope.addClick = function(isAdd, column){
             if(isAdd){
                   $scope.curColumn = {
-                        "admin": [],
-                        "createuserid": "1234567",
-                        "createusername": "asdfasdf",
-                        "description": "",
-                        "hpid": "",
-                        "name": "",
-                        "status": "0",
-                        "type": "",
-                        "updatetime": ""
-                  };
+                        "auditor_ids": "",
+                      "auditor_names": "",
+                      "description": "",
+                      "is_build": "",
+                      "name": "",
+                      "parent_id": 0,
+                      "pre_view_name": "",
+                      "seq": "",
+                      "status": "",
+                      "version": ""
+                  }
+                  //$scope.curColumn = {
+                  //      "admin": [],
+                  //      "createuserid": "1234567",
+                  //      "createusername": "asdfasdf",
+                  //      "description": "",
+                  //      "hpid": "",
+                  //      "name": "",
+                  //      "status": "0",
+                  //      "type": "",
+                  //      "updatetime": ""
+                  //};
                   $scope.addParams.addHpid = $scope.portalList[0];
                   $('#myTab a:last').tab('show');
             } else{
@@ -81,8 +93,8 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       };
 
       $scope.addColumn = function(){
-            $scope.curColumn.type = $scope.addParams.addHpid.hptype;
-            $scope.curColumn.hpid = $scope.addParams.addHpid.id;
+            //$scope.curColumn.type = $scope.addParams.addHpid.hptype;
+            $scope.curColumn.parent_id = $scope.addParams.addHpid.id;
 
             var requestUrl = PortalService.getHostName();
             if($scope.curColumn.id && $scope.curColumn.id != ""){

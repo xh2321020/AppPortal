@@ -43,31 +43,27 @@
                                     <tr style="background: #ffc000">
                                         <th class="th-text">栏目ID</th>
                                         <th class="th-text">栏目名称</th>
-                                        <th class="th-text">栏目类型</th>
                                         <th class="th-text">管理员</th>
                                         <th class="th-text">状态</th>
-                                        <th class="th-text">更新时间</th>
                                         <th class="th-text">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <div>
                                         <tr class="odd gradeX" ng-repeat="column in columnList">
-                                            <td class="td-text">{{column.hpid}} </td>
+                                            <td class="td-text">{{column.id}} </td>
                                             <td class="td-text">{{column.name}} </td>
-                                            <td class="td-text">{{column.type}} </td>
-                                            <td>
-                                                <span ng-repeat="admin in column.admin">{{admin.username}}</span>
-                                            </td>
-                                            <td class="td-text" ng-show="column.status == 0">启用</td>
+                                            <td class="td-text">{{column.auditor_names}} </td>
+                                            <td class="td-text" ng-show="column.status == 0">停用</td>
                                             <td class="td-text" ng-show="column.status == 1">停用</td>
-                                            <td class="td-text">{{column.updatetime}} </td>
+                                            <td class="td-text" ng-show="column.status == 2">启用</td>
                                             <td class="td-text">
                                                 <div>
                                                     <a ng-click="addClick(false, column)">编辑</a>
                                                     <a ng-click="columnOperate($index, 'del')">删除</a>
+                                                    <a ng-click="columnOperate($index, 'start')"  ng-if="column.status == 0">启用</a>
                                                     <a ng-click="columnOperate($index, 'start')"  ng-if="column.status == 1">启用</a>
-                                                    <a ng-click="columnOperate($index, 'stop')"  ng-if="column.status == 0">停用</a>
+                                                    <a ng-click="columnOperate($index, 'stop')"  ng-if="column.status == 2">停用</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -103,20 +99,21 @@
                                     <td class="td-text-left" colspan="2">栏目说明</td>
                                     <td colspan="8"><input size="60" type="text" ng-model="curColumn.description" placeholder="请输入栏目说明"></td>
                                 </tr>
-                                <tr>
-                                    <td class="td-text-left" colspan="2">更多设置</td>
-                                    <td colspan="8"><button class="btn btn-primary" ng-click="addPeopleClick()">打开栏目内容管理系统</button></td>
-                                </tr>
+                                <!--<tr>-->
+                                <!--<td class="td-text-left" colspan="2">更多设置</td>-->
+                                <!--<td colspan="8"><button class="btn btn-primary" ng-click="addPeopleClick()">打开栏目内容管理系统</button></td>-->
+                                <!--</tr>-->
                                 </tbody>
                             </table>
 
-                            <div class="container">
+                            <div class="container" style="margin-top: 50px">
                                 <button class="btn btn-primary" data-toggle="tab" ng-click="addColumn()" style="margin-left: 380px">保存</button>
-                                <button class="btn" style="margin-left: 80px" ng-click="listClick()">取消</button>
+                                <button class="btn" style="margin-left: 50px" ng-click="listClick()">取消</button>
+                                <button class="btn btn-primary" style="margin-left: 50px" ng-click="addPeopleClick()">打开栏目内容管理系统</button>
                             </div>
 
                             <div ng-include="'peopleSelectModal.html'"></div>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

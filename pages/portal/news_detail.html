@@ -32,8 +32,9 @@
         <div style="margin:0px auto; text-align:center" ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '主附件'">
             <!--http://bjecm.cnnp.com.cn/publish2/attachment/show?fileId=7489-->
             <img style="margin: 10px" ng-if="attachment.file_type == 'jpg'" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.file_type == 'png'" ng-src="{{attachment.path}}" width="600" height="400">
 
-            <embed id={{attachment.id}} style="margin: 10px" ng-if="attachment.file_type == 'pdf'" width="100%" height="500px" type="application/pdf">
+            <embed id={{attachment.id}} style="margin: 10px" ng-if="attachment.file_type == 'pdf'" width="100%" ng-src="{{attachment.path}}" height="500px" type="application/pdf">
         </div>
         <div ng-bind-html="newsDetail.content"></div>
 
