@@ -1,26 +1,31 @@
 {
-	"serverAddress":"http://192.168.252.1:8000",
-	"additionalParams":{
-		"apikey":"e71982d5401b488da4acef8827c41845"
-		},
-	
-		"supervisionRequest":{
-		"supSourceUrl":"/api/cache/find/type/source-code",
-		"orgUrl":"/api/contact/getOrglist",
-		"supAreaUrl":"/api/cache/find/type/area-code",
-		"deptUrl":"/api/contact/getorgbyou",
-		"searchUrl":"/api/supervision/search",
-		"supDetailUrl":"/api/supervision/findchildren/%id%",
-		"supAddUrl":"/api/supervision/add",
-		"searchuserUrl":"/api/contact/searchuser",
-		"deptListUrl":"/api/contact/getchlistbyou",
-		"postphoneUrl":"/api/supervision/postpone/%id%",
-		"traceUrl":"/api/supervision/trace/%id%",
-		"closeUrl":"/api/supervision/close/%id%",
-		"revokeUrl":"/api/supervision/delete/%id%"
-	},
-	"portalRequest":{
-		"portalSectorUrl":"/api/V1.0/homepage/sector"
-	}
-
+  "api_mattia": {
+    "server": "http://192.168.252.1:8000",
+    "additionalParams": {
+      "apikey": "e71982d5401b488da4acef8827c41845"
+    },
+    "ulrs": {
+      "supervisionRequest": {
+        "supSourceUrl": "/api/cache/find/type/source-code",
+        "orgUrl": "/api/contact/getOrglist",
+        "supAreaUrl": "/api/cache/find/type/area-code",
+        "deptUrl": "/api/contact/getorgbyou",
+        "searchUrl": "/api/supervision/search",
+        "supDetailUrl": "/api/supervision/findchildren/%id%",
+        "supAddUrl": "/api/supervision/add",
+        "searchuserUrl": "/api/contact/searchuser",
+        "deptListUrl": "/api/contact/getchlistbyou",
+        "postphoneUrl": "/api/supervision/postpone/%id%",
+        "traceUrl": "/api/supervision/trace/%id%",
+        "closeUrl": "/api/supervision/close/%id%",
+        "revokeUrl": "/api/supervision/delete/%id%"
+      },
+      "portalRequest": {
+        "portalSectorUrl": "/api/V1.0/homepage/sector",
+        "catalogUrl": "/api/V1.0/homepage/%id%"
+      }
+    }
+  },
+  "api_sking": {
+  }
 }
