@@ -56,7 +56,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   color: '#fff'
             }
       });
-      $http.get( 'http://192.168.252.1:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
+      $http.get( 'http://172.16.51.137:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
       .success(function(response){
           if(true){
                 $scope.colls = response;
