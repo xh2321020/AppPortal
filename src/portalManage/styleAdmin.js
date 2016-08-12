@@ -16,12 +16,10 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                         "createusername": PortalService.getCookie("name"),
                         "description": "",
                         "hpid": "",
-                        "id": "",
                         "img": [
                               {
-                                    "id": "",
-                                    "imgname": "",
-                                    "imgpath": "",
+                                    "imgname": "http://www.baidu.com",
+                                    "imgpath": "http://www.baidu.com",
                                     "styleid": "",
                                     "updatetime": ""
                               }
@@ -66,15 +64,14 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
             });
       };
 
-      $scope.savStyle = function(){
+      $scope.savStyle = function(callback){
             $scope.curStyle.hpid = $scope.selectDate.addPortal.id;
             var count = 1;
             $("#multiselect_to option").each(function(){
                   for(var i = 0, j = $scope.addStyleList.length; i < j; i++){
                         if($scope.addStyleList[i].id == $(this).val()){
                               var order = {
-                                    "formid": "",
-                                    "id": $scope.addStyleList[i].id,
+                                    "formid": $scope.addStyleList[i].id,
                                     "orderid": count++,
                                     "styleid":  $scope.addStyleList[i].styleid,
                               };
@@ -87,7 +84,12 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                   console.log("curPortal:" + response);
                   if(true){
                         PortalService.showAlert("提交成功");
-                        $scope.listClick();
+                        if(callback){
+                              callback();
+                        } else{
+                              $scope.listClick();
+                        }
+
                   }
             });
       };
@@ -129,4 +131,10 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                 .parent().addClass($.support.fileInput ? undefined : 'disabled');
       };
       initFileUpload();
+
+      $scope.preview = function(){
+            $scope.savStyle(function(){
+                  window.open("pages/portal/index.html?type=" + $scope.selectDate.addPortal.hptype + "&node=" + $scope.selectDate.addPortal.id)
+            });
+      };
 });
