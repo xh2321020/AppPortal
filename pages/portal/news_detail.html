@@ -44,7 +44,7 @@
                     <td ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '附件区'">
                         <div id="atch_p">
                             <p class="atchWrapper" id="atchWrapper_7492">
-                                {{attachment.name}} (共{{attachment.size}}KB)<a class="link1" href="/publish2/attachment/down?eid=7492" target="_blank">具体内容</a>
+                                {{attachment.name}} (共{{attachment.size}}KB)<a class="link1" href={{attachment.path}} target="_blank">具体内容</a>
                             </p>
                         </div>
                     </td>
