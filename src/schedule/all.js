@@ -4,6 +4,10 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
             'startdate': "",
             'enddate': "",
       };
+      var userid = EventService.getCookie('userid');
+      if(userid && userid.length > 0) {
+            urlParams.userid = userid;
+      }
 
       EventService.showLoading('数据请求中，请稍后... ...');
       $http.get( 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845', '')
@@ -152,7 +156,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }

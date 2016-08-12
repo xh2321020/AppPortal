@@ -5,7 +5,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             'enddate': '',
       };
       var userid = EventService.getCookie('userid');
-      if(userid && userid.length > 0){
+      if(userid && userid.length > 0) {
             urlParams.userid = userid;
       }
 
@@ -61,7 +61,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": "",
+                  "userid": "10086",
                   "username": "",
                   "startdate": "2016-06-28",
                   "description": "",
@@ -74,8 +74,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": urlParams.userid,
-                  "createusername": "sadfa",
+                  "createuserid": EventService.getCookie('userid'),
+                  "createusername": "asdfa",
                   "createtime": "2016-06-28",
                   "other": "",
                   "people": {
@@ -94,7 +94,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }

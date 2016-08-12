@@ -1,13 +1,4 @@
 eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService) {
-      //var urlParams = {
-      //      'userid': '10086',
-      //      'companyid': '10',
-      //      'collid': '',
-      //      'type': '0',
-      //      'startdate': "",
-      //      'enddate': "",
-      //};
-
       var urlParams = {
             'userid': '',
             'startdate': "",
@@ -164,7 +155,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }

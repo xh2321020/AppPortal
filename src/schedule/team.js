@@ -56,7 +56,6 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   color: '#fff'
             }
       });
-//      $http.get( 'http://192.168.252.1:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
       $http.get( 'http://172.16.51.137:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
       .success(function(response){
           if(true){
@@ -124,7 +123,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": urlParams.userid,
+                  "createuserid": EventService.getCookie('userid'),
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
@@ -144,7 +143,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }
