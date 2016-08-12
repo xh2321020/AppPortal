@@ -3,6 +3,10 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             'userid': '10086',
             'startdate': '',
             'enddate': '',
+      };
+      var userid = EventService.getCookie('userid');
+      if(userid && userid.length > 0) {
+            urlParams.userid = userid;
       }
 
       $scope.scheduletype = [true, true, true, true, true];
@@ -54,7 +58,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             $scope.scheduletypes = EventService.getScheduletypes();
             $scope.scope = EventService.getScope();
             $scope.addParams = {
-                  "id": "",
+                  "id": "10086",
                   "title": "",
                   "scheduletype": "",
                   "userid": "10086",
@@ -70,8 +74,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": "10086",
-                  "createusername": "sadfa",
+                  "createuserid": EventService.getCookie('userid'),
+                  "createusername": "",
                   "createtime": "2016-06-28",
                   "other": "",
                   "people": {
@@ -123,6 +127,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
                             var count = 0;
+                            var orgtree = people.orgtree;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
@@ -137,7 +142,6 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                                         }
                                   }
                             }
-                            people.orgtree = title;
                             people.isChecked = false;
                       }
                 });

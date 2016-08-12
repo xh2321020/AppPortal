@@ -7,6 +7,10 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
             'startdate': '',
             'enddate': '',
       };
+      var userid = EventService.getCookie('userid');
+      if(userid && userid.length > 0){
+            urlParams.userid = userid;
+      }
 
       var callback = function() {
             $('#calendar').fullCalendar({
@@ -119,7 +123,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": "10086",
+                  "createuserid": EventService.getCookie('userid'),
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
@@ -172,6 +176,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
                             var count = 0;
+                            var orgtree = people.orgtree;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
@@ -186,7 +191,6 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                                         }
                                   }
                             }
-                            people.orgtree = title;
                             people.isChecked = false;
                       }
                 });
