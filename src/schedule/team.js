@@ -7,10 +7,6 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
             'startdate': '',
             'enddate': '',
       };
-      var userid = EventService.getCookie('userid');
-      if(userid && userid.length > 0){
-            urlParams.userid = userid;
-      }
 
       var callback = function() {
             $('#calendar').fullCalendar({
@@ -56,8 +52,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   color: '#fff'
             }
       });
-//      $http.get( 'http://192.168.252.1:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
-      $http.get( 'http://172.16.51.137:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
+      $http.get( 'http://192.168.252.1:8000/api/V1.0/collspace/Coll/' + urlParams.userid, '')
       .success(function(response){
           if(true){
                 $scope.colls = response;
@@ -124,7 +119,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": urlParams.userid,
+                  "createuserid": "10086",
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
@@ -144,7 +139,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }
@@ -177,7 +172,6 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
                             var count = 0;
-                            var orgtree = people.orgtree;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
@@ -192,6 +186,7 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                                         }
                                   }
                             }
+                            people.orgtree = title;
                             people.isChecked = false;
                       }
                 });

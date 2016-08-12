@@ -3,10 +3,6 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             'userid': '10086',
             'startdate': '',
             'enddate': '',
-      };
-      var userid = EventService.getCookie('userid');
-      if(userid && userid.length > 0){
-            urlParams.userid = userid;
       }
 
       $scope.scheduletype = [true, true, true, true, true];
@@ -58,10 +54,10 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             $scope.scheduletypes = EventService.getScheduletypes();
             $scope.scope = EventService.getScope();
             $scope.addParams = {
-                  "id": "10086",
+                  "id": "",
                   "title": "",
                   "scheduletype": "",
-                  "userid": "",
+                  "userid": "10086",
                   "username": "",
                   "startdate": "2016-06-28",
                   "description": "",
@@ -74,7 +70,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": urlParams.userid,
+                  "createuserid": "10086",
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
@@ -82,7 +78,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                         "id": '10086',
                         "companyid": "",
                         "scheduletype": "",
-                        "scheduleId": "10086",
+                        "scheduleId": "",
                         "userid": "",
                         "username": "",
                         "companyname": "",
@@ -94,7 +90,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }
@@ -127,7 +123,6 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
                             var count = 0;
-                            var orgtree = people.orgtree;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
@@ -142,6 +137,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                                         }
                                   }
                             }
+                            people.orgtree = title;
                             people.isChecked = false;
                       }
                 });

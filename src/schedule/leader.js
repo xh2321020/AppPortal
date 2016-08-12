@@ -20,7 +20,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
           $.unblockUI();
             if(true){
                   $scope.orgs = response;
-                  $scope.orgClick2($scope.orgs[0]);
+                  $scope.orgClick2($scope.orgs[3]);
             }
       });
 
@@ -144,7 +144,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": EventService.getCookie('userid'),
+                  "createuserid": "10086",
                   "createusername": "sadfa",
                   "createtime": "2016-06-28",
                   "other": "",
@@ -164,7 +164,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
       };
 
       $scope.addEvent = function(){
-            if(!$scope.addParams.userid || $scope.addParams.userid.length <= 0){
+            if(!$scope.addParams.people.userid || $scope.addParams.people.userid.length <= 0){
                   EventService.showAlert('请选择员工');
                   return;
             }
@@ -197,7 +197,6 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
                             var people = $scope.searchParams.result[i];
                             var count = 0;
-                            var orgtree = people.orgtree;
                             if (orgtree) {
                                   for (var orgi in orgtree) {
                                         for (var key in orgtree[orgi]){
@@ -212,6 +211,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                                         }
                                   }
                             }
+                            people.orgtree = title;
                             people.isChecked = false;
                       }
                 });
