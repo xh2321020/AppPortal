@@ -19,7 +19,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
                       "parent_id": 0,
                       "pre_view_name": "",
                       "seq": "",
-                      "status": "",
+                      "status": "2",
                       "version": ""
                   }
                   //$scope.curColumn = {

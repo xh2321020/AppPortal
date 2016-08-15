@@ -35,8 +35,8 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "more_url": "",
                               "ismore": "1",
                               "url": "",
-                              "content_type": "",
-                              "method": "",
+                              "content_type": "application/json",
+                              "method": "get",
                               "payload": "",
                               "querystring": ""
                         },{
@@ -48,8 +48,8 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "more_url": "",
                               "ismore": "1",
                               "url": "",
-                              "content_type": "",
-                              "method": "",
+                              "content_type": "application/json",
+                              "method": "get",
                               "payload": "",
                               "querystring": ""
                         }, {
@@ -61,8 +61,8 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "more_url": "",
                               "ismore": "1",
                               "url": "",
-                              "content_type": "",
-                              "method": "",
+                              "content_type": "application/json",
+                              "method": "get",
                               "payload": "",
                               "querystring": ""
                         }]

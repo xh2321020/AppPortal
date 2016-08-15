@@ -60,7 +60,14 @@ portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', functio
 
         sendGetRequest: function(url, callback){
             showLoading('数据获取中，请稍候...');
-            $http.get(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", '')
+            if(url.indexOf("apikey") < 0){
+            	if(url.indexOf("?") < 0){
+            		url = url + "?apikey=a16cb0c916404be78cb0805fefc7d26a"
+            	} else{
+            		url = url + "&apikey=a16cb0c916404be78cb0805fefc7d26a"
+            	}
+            }
+            $http.get(url, '')
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);
