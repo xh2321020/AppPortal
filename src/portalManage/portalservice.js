@@ -42,9 +42,9 @@ portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', functio
     };
 
     var service = {
-        sendPostRequest: function(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params, callback){
+        sendPostRequest: function(url, params, callback){
             showLoading('数据提交中，请稍候...');
-            $http.post(url, params)
+            $http.post(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params)
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);
@@ -58,9 +58,9 @@ portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', functio
             });
         },
 
-        sendGetRequest: function(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", callback){
+        sendGetRequest: function(url, callback){
             showLoading('数据获取中，请稍候...');
-            $http.get(url, '')
+            $http.get(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", '')
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);

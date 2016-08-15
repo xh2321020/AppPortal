@@ -53,13 +53,13 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
 
       var getColumnListData = function(hpid){
             //门户0  栏目1
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/?hpid=" + hpid, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagecolumn/?hpid=" + hpid, function(response){
                   $scope.columnList = response;
             });
       };
 
       var getPortalListData = function(){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepage/" + PortalService.getUserId(), function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   $scope.portalList = response;
                   if($scope.portalList.length > 0){
                         $scope.portalSelect($scope.portalList[0]);
@@ -76,7 +76,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       };
 
       $scope.columnOperate = function(index, operate){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/edittype?hpid="
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagecolumn/edittype?hpid="
                 + $scope.addParams.hpid.id +"&columnid=" + $scope.columnList[index].id + "&type=" + operate, function(response){
                   console.log(response);
                   if(true){
@@ -98,9 +98,9 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
 
             var requestUrl = PortalService.getHostName();
             if($scope.curColumn.id && $scope.curColumn.id != ""){
-                  requestUrl += "/api/V1.0/homepage/homepagecolumn/edit";
+                  requestUrl += "/api/homepage/homepagecolumn/edit";
             } else{
-                  requestUrl += "/api/V1.0/homepage/homepagecolumn/add";
+                  requestUrl += "/api/homepage/homepagecolumn/add";
             }
             PortalService.sendPostRequest(requestUrl, $scope.curColumn, function(response){
                   console.log("curColumn:" + response);

@@ -121,7 +121,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
       };
 
       $scope.searchPeople = function(){
-            $http.get( 'http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845&id=&q=' + $scope.searchParams.content, '')
+            $http.get( 'http://10.15.251.110:8010/api/contact/searchuser?apikey=a16cb0c916404be78cb0805fefc7d26a&id=&q=' + $scope.searchParams.content, '')
                 .success(function(response){
                       $scope.searchParams.result = response;
                       for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {

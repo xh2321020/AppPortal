@@ -30,7 +30,7 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
       };
 
       $scope.portalOperate = function(index, operate){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepage/edittype?hpid=" + $scope.portalList[index].id + "&type=" + operate, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/edittype?hpid=" + $scope.portalList[index].id + "&type=" + operate, function(response){
                   console.log(response);
                   if(true){
                         PortalService.showAlert("操作成功");
@@ -50,9 +50,9 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
             $scope.curPortal.hptype = $("#portalType option:selected").val();
             var requestUrl = PortalService.getHostName();
             if($scope.curPortal.id && $scope.curPortal.id != ""){
-                  requestUrl += "/api/V1.0/homepage/homepage/edit";
+                  requestUrl += "/api/homepage/homepage/edit";
             } else{
-                  requestUrl += "/api/V1.0/homepage/homepage/add";
+                  requestUrl += "/api/homepage/homepage/add";
             }
             PortalService.sendPostRequest(requestUrl, $scope.curPortal, function(response){
                   console.log("curPortal:" + response);
@@ -119,7 +119,7 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
       };
 
       var getPortalListData = function(){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepage/" + PortalService.getUserId(), function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   console.log(response);
                   $scope.portalList = response;
             });
