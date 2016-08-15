@@ -653,6 +653,7 @@
 	            this.selected = item;
 	        },
 	        searchInput: function searchInput() {
+	            var personalpageRequestVue = window.interfaceSettings.personalpageRequest.api;
 	            var _this = this;
 	            var input = this.input.trim();
 	            if (input == "") {
@@ -671,9 +672,10 @@
 	                    }
 	                    $(".cover").show();
 	                    $("#userInfo").html("");
+	                    var searchuserURL = personalpageRequestVue.searchuserUrl + "&q=" + inputVal;
 	                    _this.request = $.ajax({
 	                        type: "get",
-	                        url: "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845" + "&q=" + inputVal,
+	                        url: searchuserURL,
 	                        success: function success(result, state, jqxhr) {
 	                            var members = [];
 	                            var count = 0;
@@ -681,7 +683,7 @@
 	                                if (typeof result[i].imageurl == "undefined" || typeof result[i].imageurl == "") {
 	                                    result[i].imageurl = "assets/images/personalpage/defaultUserPhoto.png";
 	                                } else {
-	                                    result[i].imageurl = "assets/images/personalpage/defaultUserPhoto.png";
+	                                    result[i].imageurl = window.interfaceSettings.personalpageRequest.server + result[i].imageurl;
 	                                }
 	                                var orgtree = result[i].orgtree;
 	                                if (orgtree) {

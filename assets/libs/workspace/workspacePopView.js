@@ -1,5 +1,9 @@
 var currentSel = null;
 var usersid = getCookie("username")
+var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+var setPersonalpageHeader=function(url,paramObj,iid){
+    return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+}
 function opentask(parmar){
     var url = "pages/supervision/supervision-detail.html?id="+parmar;
     window.open(url,"_blank");
@@ -53,7 +57,7 @@ function opentask(parmar){
 
     function moveRight(src,des){
         if(src.selectedIndex==-1){
-            alert("Please select first!");
+            alert("请先选择相关工作入口！");
             return;
         }
         for(var i=0;i<src.length;i++){
@@ -91,46 +95,51 @@ function opentask(parmar){
             type: "post",
             dataType: "json",
             contentType: "application/json",
-            url: "http://172.16.51.137:8000/api/V1.0/work/work/add?type=edit&userid=" + usersid,
+            url:setPersonalpageHeader(personalpageRequest.popViewEdit,{type:"edit", userid:usersid},null),
             data: JSON.stringify(objJson),
             success: function success(data, state, jqxhr) {
                 alert("数据更新成功");
                 updatePopView();
             },
             error: function error(err) {
+                alert("提交失败，请刷新后重试");
                 console.log(err);
             }
         });
     }
+    updatePopView();
     function updatePopView(){
         $.ajax({
             type: "get",
             dataType: "json",
-            contentType: "application/json",
-            url: "http://172.16.51.137:8000/api/V1.0/work/work/"+usersid,
-            data:"",
+            url:personalpageRequest.getYonghuKuaiJieRuKou + usersid,
             success: function success(data, state, jqxhr) {
-                var kuaijierukouLeft="";
-                var kuaijierukoupop="";
-                var kuaijierukouselector="";                       
-                for(var j=0; j<data.length;j++){
-                    if(j<8){
-                        kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
-                        '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
+                if(data.length == 0){
+                    specialInit();
+                }else{
+                    var kuaijierukouLeft="";
+                    var kuaijierukoupop="";
+                    var kuaijierukouselector="";                       
+                    for(var j=0; j<data.length;j++){
+                        if(j<8){
+                            kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
+                            '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
+                        }
+                        kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
+                        '<a href="'+data[j].link+'" target="_blank">'+
+                        '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
+                        kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].linkid+'">'+data[j].description+'</option>';
                     }
-                    kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
-                    '<a href="'+data[j].link+'" target="_blank">'+
-                    '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
-                    kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].linkid+'">'+data[j].description+'</option>';
+                    //主页面工作快捷入口
+                    $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
+                    //弹框页面工作快捷入口（编辑页面）
+                    $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
+                    //编辑选择框已添加的工作快捷入口
+                    // alert(kuaijierukouselector);
+                    $("#leftSel").html(kuaijierukouselector);
+                    updateEdidPopView();
                 }
-                //主页面工作快捷入口
-                $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
-                //弹框页面工作快捷入口（编辑页面）
-                $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
-                //编辑选择框已添加的工作快捷入口
-                // alert(kuaijierukouselector);
-                $("#leftSel").html(kuaijierukouselector);
-                updateEdidPopView();
+                
             },
             error: function error(err) {
                 console.log(err);
@@ -142,7 +151,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: "http://172.16.51.137:8000/api/V1.0/work/work/link",
+            url: personalpageRequest.initUserKuaiJieRuKou,
             data: "",
             success: function success(data, state, jqxhr) {
                 var n=0;
@@ -161,26 +170,50 @@ function opentask(parmar){
                     restPort = restPort + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
                 }
                 $("#rightSel").html(restPort);
-                $("#hideEditPopView").css("display","none");
+                $("#hideEditPopView").css("display","display");
                 $("#hidePopView").css("display","block");
-                var currentSelL = null;
-                var currentSelR = null;
-                currentSelL = document.getElementById('leftSel');
-                currentSelR = document.getElementById('rightSel');
-                for(var k=0;k<currentSelL.length;k++){
-                    for(var j=0; j<currentSelR.length; j++){
-                        if (currentSelL.options[k].value == currentSelR.options[j].value){
-                            var removeIndex = currentSelR.options[j].index;
-                            currentSelR.options.remove(removeIndex);
-                        }
-                    }
-                }
+                
             },
             error: function error(err) {
                 console.log(err);
             }
         });
     }
+
+    function specialInit(){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            contentType: "application/json",
+            url: personalpageRequest.initUserKuaiJieRuKou,
+            success: function success(data, state, jqxhr) {
+                var kuaijierukouLeft="";
+                    var kuaijierukoupop="";
+                    var kuaijierukouselector="";                       
+                    for(var j=0; j<data.length;j++){
+                        if(j<8){
+                            kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
+                            '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
+                        }
+                        kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
+                        '<a href="'+data[j].link+'" target="_blank">'+
+                        '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
+                        kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
+                    }
+                    //主页面工作快捷入口
+                    $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
+                    //弹框页面工作快捷入口（编辑页面）
+                    $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
+                    //编辑选择框已添加的工作快捷入口
+                    // alert(kuaijierukouselector);
+                    $("#leftSel").html(kuaijierukouselector);
+            },
+            error: function error(err) {
+                console.log(err);
+            }
+        });
+    }
+
     function getCookie(name){
         var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
         if(arr=document.cookie.match(reg))

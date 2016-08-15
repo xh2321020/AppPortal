@@ -6,6 +6,11 @@ function myFunction(parmar){
     window.open(url,"_blank");
 }
 $(document).ready(function () {
+    var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+    var setPersonalpageHeader=function(url,paramObj,iid){
+        return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+    }
+
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -13,10 +18,14 @@ $(document).ready(function () {
         return null;
     }
     var sameOu=getQueryString("ou");
+    // alert(window.interfaceSettings.supervisionRequest.supSourceUrl);
+    // var sameOrgDetailsURL = window.interfaceSettings.personalpageRequest.api.getSameOrgDetails + "&ou=" +sameOu;
+    // personalpageRequest   setPersonalpageHeader
+    // alert(sameOrgDetailsURL);
     $.ajax({
         type: "get",
         dataType:"json",
-        url: getSameOrgDetails+sameOu,
+        url: setPersonalpageHeader(personalpageRequest.sameOrgDetailsURL,{ou:sameOu},null),        ,
         success: function (data, state, jqxhr) {
             var html='';
             for(var i=0; i<data.length; i++){
@@ -25,7 +34,7 @@ $(document).ready(function () {
                 if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
                     iconImages = "assets/images/personalpage/defaultUserPhoto.png";
                 } else {
-                    iconImages = data[i].imageurl;
+                    iconImages = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
                 }
                 for (var j = 1; j < data[i].orgtree.length; j++) {
                     for (var key in data[i].orgtree[j]) {

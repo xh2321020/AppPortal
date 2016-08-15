@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>工作空间</title>
-    <base href="http://10.15.251.110/"/>
+    <base href="http://172.16.51.144/"/>
     <!-- Bootstrap -->
-    <!-- <base href="../../"> -->
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
     <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
@@ -46,8 +45,101 @@
 
                     </ul>
                     <a style="cursor: pointer;">
-                        <div class="bodySectionLeftPortalMoreSys" id="showPopViw" style="color:#337ab7; margin-bottom:1rem;">更多 ></div>
+                        <div class="bodySectionLeftPortalMoreSys" style="color:#337ab7; margin-bottom:1rem;"data-toggle="modal"
+                             data-target="#myModal">更多 ></div>
                     </a>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                               aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="min-width:90rem;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close"
+                                            data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        工作快捷入口
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="ul-wedigt" id="gongzuokuaijirukouhidePopUl" style="border: 0;height: 50rem;">
+
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#editModal" id="showOpenEditPage">
+                                        编辑
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="min-width:90rem;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close"
+                                            data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="editModalLabel">
+                                        编辑工作快捷入口
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ws-edit-pop-div"  id="noactionpopview" style="z-index:1; height:50rem;padding-top: 2rem;">
+                                        <div style="width:15rem; height: 35rem; float: left; margin-left:19rem;">
+                                            <div>已选择快捷入口</div>
+                                            <select multiple="" id="leftSel" onclick="setButton(this)" ondblclick="document.getElementById('btnRight').click()" style="height:40rem;width:15rem;">
+
+                                            </select>
+                                        </div>
+                                        <div style="width: 10rem; height: 50rem; float: left; margin-left: 3.5rem; padding-top: 8rem;">
+                                            <input type="button" value=" > " id="btnRight" onClick="move(document.getElementById('leftSel'),document.getElementById('rightSel'));" class="ws-edit-pop-div-table-btn-td-input" />
+                                            <br />
+                                            <br />
+                                            <input type="button" value=" < " id="btnLeft" onClick="move(document.getElementById('rightSel'),document.getElementById('leftSel'));" class="ws-edit-pop-div-table-btn-td-input" />
+                                            <br />
+                                            <br />
+                                            <input type="button" value=" >> " id="btnRight" onClick="moveAllLtoR()" class="ws-edit-pop-div-table-btn-td-input" />
+                                            <br />
+                                            <br />
+                                            <input type="button" value=" << " id="btnLeft" onClick="moveAllRtoL()" class="ws-edit-pop-div-table-btn-td-input" />
+                                            <br />
+                                            <br />
+                                            <input type="button" value=" ↑ " id="btnUp" onClick="move(true);" class="ws-edit-pop-div-table-btn-td-input"/>
+                                            <br />
+                                            <br />
+                                            <input type="button" value=" ↓ " id="btnDowm" onClick="move(false);" class="ws-edit-pop-div-table-btn-td-input" />
+                                        </div>
+                                        <div style="width:15rem; height: 50rem; float: left;">
+                                            <div>未选择快捷入口</div>
+                                            <select multiple="" id="rightSel" onclick="setButton(this)" ondblclick="document.getElementById('btnLeft').click()" style="height:40rem;width:15rem;">
+
+                                            </select>
+                                        </div>
+                                        <!--<div style="padding-top: 40rem;">-->
+                                            <!--<input type="button" value=" 确定 " id="editConfirmedssss" onClick="submitResultStatus(document.getElementById('leftSel'))" class="ws-edit-pop-div-table-btn-td-input" />-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="editConfirmedssss" onClick="submitResultStatus(document.getElementById('leftSel'))">
+                                        保存
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
                 </div>
             </div>
             <div class="bodySectionLeftTool" style="margin-top: 52rem;">
@@ -66,33 +158,33 @@
                         <!-- /.list-item -->
                         <li class="article-list-item">
                             <a href="pages/schedule/personal.html" target="_blank">
-                                <img src="assets/images/portal/workspace/work_bg02.png" class="article-list-item-icon">
+                                <img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">
                                 <span class="article-list-item-span">日程管理</span>
                             </a>
                         </li>
                         <!-- /.list-item -->
                         <li class="article-list-item">
                             <a href="pages/personalpage/personalpage-detail.html" target="_blank">
-                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
+                                <img src="assets/images/portal/workspace/work_bg011.png" class="article-list-item-icon">
                                 <span class="article-list-item-span">个人页面</span>
                             </a>
                         </li>
                         <li class="article-list-item">
-                            <a href="pages/teamworkspace/team-workspace.html" target="_blank">
-                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
-                                <span class="article-list-item-span">协作空间</span>
-                            </a>
+                            <!--<a href="pages/teamworkspace/team-workspace.html" target="_blank">-->
+                                <img src="assets/images/portal/workspace/work_bg09" class="article-list-item-icon">
+                                <span class="article-list-item-span" style="color:lightgray">协作空间</span>
+                            <!--</a>-->
                         </li>
                         <li class="article-list-item">
                             <!-- <a href="http://erp.cnnp.com.cn/irj" target="_blank"> -->
-                                <img src="assets/images/portal/workspace/erp_bg2.png" class="article-list-item-icon">
-                                <span class="article-list-item-span" style="color:lightgray">计划管理</span>
+                            <img src="assets/images/portal/workspace/work_bg06.png" class="article-list-item-icon">
+                            <span class="article-list-item-span" style="color:lightgray">计划管理</span>
                             <!-- </a> -->
                         </li>
                     </ul>
                 </div>
             </div>
-            
+
         </div>
         <div class="bodySectionRight"  style="width:82%">
             <div style="width:100%; height:60%;float: left;">
@@ -272,9 +364,9 @@
                     <div style="width: 100%; padding-left: 2rem;">
                         <div style="width: 100%; height: 2rem; min-width: 48rem;">
                             <div class="workHalfLine-div">
-                                    <span class="workHalfLine-span">今日工作</span>
-                                </div>                        
+                                <span class="workHalfLine-span">今日工作</span>
                             </div>
+                        </div>
                         <div class="important-task-title">
                             <span class="bodySectionRightCurrentTabSubTitleImp">重点事宜提醒</span>
                             <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日会议和超期事项提醒）</span>
@@ -311,7 +403,7 @@
                     </div>
                     <!-- 后天计划-->
                     <div style="height: 50%; margin-top: 0.5rem;">
-                        
+
                         <div style="width: 100%; height: 2rem;">
                             <div class="workHalfLine-div">
                                 <span class="workHalfLine-span" id="qiribeirichengTitle"></span>
@@ -319,87 +411,27 @@
                         </div>
 
                         <div class="task-item" style="width:100%; min-width:18rem;" id="qiribeirichengItems">
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </article>
-<div style="position: absolute; top: 0px; background-color:rgba(0,0,0,0.5); z-index: 2; left: 0px; width: 100%; height: 200rem; display: none;" id="hidePopView">
-    <div class="popDiv" style="padding-top: 2%;">
-        <div class="popViewTitle">
-            <div class="popViewTitleLabel" style="padding-top: 0.5rem;">
-                工作快捷入口
-            </div>
-            
-            <div style="width: 4rem; height: 4rem;float: right" id="closePopView">
-                <a style="cursor: pointer"> <img src="assets/images/portal/workspace/close.png" style="width: 4rem; height: 4rem;"/></a>
-            </div>
-            <div id="showOpenEditPage" style="width: 5rem; background-color: white; height: 4rem; vertical-align: middle; float: right;">
-                <span style="vertical-align: middle; padding-top: 2rem; font-size: 16px;">编辑</span>
-            </div>
-        </div>
-        <ul class="ul-wedigt" id="gongzuokuaijirukouhidePopUl">
-
-        </ul>
-    </div>
-</div>
-<div style="position: absolute; top: 0px; background-color:rgba(0,0,0,0.5); z-index: 2; left: 0px; width: 100%; height: 200rem; display: none;" id="hideEditPopView">
-    <div class="popDiv" style="padding-top: 2%;">
-        <div class="popViewTitle">
-            <div class="popViewTitleLabel" style="padding-top: 0.5rem;">
-                编辑工作快捷入口
-            </div>
-            <div style="width: 4rem; height: 4rem;float: right" id="closeEditPopView">
-                <a style="cursor: pointer"> <img src="assets/images/portal/workspace/close.png" style="width: 4rem; height: 4rem;"/></a>
-            </div>
-            <div class="ws-edit-pop-div"  id="noactionpopview" style="z-index:1; position:">
- 
-                <div style="width:15rem; height: 35rem; float: left; margin-left:19rem;">
-                    <div>已选择快捷入口</div>
-                    <select multiple="" id="leftSel" onclick="setButton(this)" ondblclick="document.getElementById('btnRight').click()" style="height:30rem;width:15rem;">
-                        
-                    </select>
-                </div>
-                <div style="width: 10rem; height: 50rem; float: left; margin-left: 3.5rem; padding-top: 5rem;">
-                    <input type="button" value=" >> " id="btnRight" onClick="move(document.getElementById('leftSel'),document.getElementById('rightSel'));" class="ws-edit-pop-div-table-btn-td-input" />
-                    <br />
-                    <input type="button" value=" << " id="btnLeft" onClick="move(document.getElementById('rightSel'),document.getElementById('leftSel'));" class="ws-edit-pop-div-table-btn-td-input" />
-                    <br />
-                    <input type="button" value=" >>>> " id="btnRight" onClick="moveAllLtoR()" class="ws-edit-pop-div-table-btn-td-input" />
-                    <br />
-                    <input type="button" value=" <<<< " id="btnLeft" onClick="moveAllRtoL()" class="ws-edit-pop-div-table-btn-td-input" />
-                    <br />
-                    <input type="button" value=" Up " id="btnUp" onClick="move(true);" class="ws-edit-pop-div-table-btn-td-input"/>
-                    <br />
-                    <input type="button" value=" Down " id="btnDowm" onClick="move(false);" class="ws-edit-pop-div-table-btn-td-input" /> 
-                </div>
-                <div style="width:15rem; height: 50rem; float: left;">
-                    <div>未选择快捷入口</div>
-                    <select multiple="" id="rightSel" onclick="setButton(this)" ondblclick="document.getElementById('btnLeft').click()" style="height:30rem;width:15rem;">
-
-                    </select>
-                </div>
-                <div style="padding-top: 40rem;">
-                    <input type="button" value=" 确定 " id="editConfirmedssss" onClick="submitResultStatus(document.getElementById('leftSel'))" class="ws-edit-pop-div-table-btn-td-input" />
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
 <footer style="margin-top: 2rem;">
     <com-footer></com-footer>
 </footer>
+
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
-<script src="dist/header-footer.js"></script>
-<script src="assets/libs/workspace/workspacePopView.js"></script>
-<script src="dist/builds.js"></script>
+<script src="dist/main.js"></script>
+<script>
+    var scriptList=['assets/libs/personalpage/portUrl.js','dist/header-footer.js','assets/libs/workspace/personalCon.js','assets/libs/workspace/workspacePopView.js'];
+</script>
+<!-- <script src="dist/urlJsonport.js"></script> -->
 <script>
     $(function () {
         $("#comPortalNav").hover(function (ev) {
@@ -418,6 +450,19 @@
         });
         $("#showOpenEditPage").click(function(ev){
             $("#hideEditPopView").css("display","block");
+            var currentSelL = null;
+            var currentSelR = null;
+            currentSelL = document.getElementById('leftSel');
+            currentSelR = document.getElementById('rightSel');
+            for(var k=0;k<currentSelL.length;k++){
+                for(var j=0; j<currentSelR.length; j++){
+                    // alert(currentSelL.options[k].value + "   " + currentSelR.options[j].value)
+                    if (currentSelL.options[k].value == currentSelR.options[j].value){
+                        var removeIndex = currentSelR.options[j].index;
+                        currentSelR.options.remove(removeIndex);
+                    }
+                }
+            }
         });
 
         $("#closeEditPopView").click(function(ev){
