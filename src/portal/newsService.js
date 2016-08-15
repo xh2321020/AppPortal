@@ -39,9 +39,9 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
     };
 
     var service = {
-        sendPostRequest: function(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params, callback){
+        sendPostRequest: function(url, params, callback){
             showLoading('数据提交中，请稍候...');
-            $http.post(hostName + url, params)
+            $http.post(hostName + url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params)
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);
@@ -55,9 +55,9 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
             });
         },
 
-        sendGetRequest: function(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", callback){
+        sendGetRequest: function(url, callback){
             showLoading('数据获取中，请稍候...');
-            $http.get(hostName + url, '')
+            $http.get(hostName + url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", '')
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);

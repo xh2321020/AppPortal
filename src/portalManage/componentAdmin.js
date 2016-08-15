@@ -98,13 +98,13 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
       };
 
       var getComponentListData = function(hpid){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepageform/?hpid=" + hpid, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepageform/?hpid=" + hpid, function(response){
                   $scope.componentList = response;
             });
       };
 
       $scope.componentDel = function(index){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepageform/del?formid=" + $scope.componentList[index].id, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepageform/del?formid=" + $scope.componentList[index].id, function(response){
                   console.log(response);
                   if(true){
                         PortalService.showAlert("操作成功");
@@ -114,7 +114,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
       };
 
       var getColumnListData = function(hpid, callback){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagecolumn/?hpid=" + hpid, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagecolumn/?hpid=" + hpid, function(response){
                   $scope.columnList = response;
                   if(callback){
                         callback();
@@ -123,7 +123,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
       };
 
       var getPortalListData = function(){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepage/" + PortalService.getUserId(), function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   $scope.portalList = response;
                   if($scope.portalList.length > 0){
                         $scope.portalSelect($scope.portalList[0]);
@@ -161,9 +161,9 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
 
             var requestUrl = PortalService.getHostName();
             if($scope.curComponent.id && $scope.curComponent.id != ""){
-                  requestUrl += "/api/V1.0/homepage/homepageform/edit";
+                  requestUrl += "/api/homepage/homepageform/edit";
             } else{
-                  requestUrl += "/api/V1.0/homepage/homepageform/add";
+                  requestUrl += "/api/homepage/homepageform/add";
             }
             PortalService.sendPostRequest(requestUrl, $scope.curComponent, function(response){
                   console.log("curComponent:" + response);

@@ -36,13 +36,13 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       };
 
       var getStyleListData = function(hpid){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagestyle/" + hpid, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagestyle/" + hpid, function(response){
                   $scope.styleList = response;
             });
       };
 
       var getPortalListData = function(){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepage/" + PortalService.getUserId(), function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   $scope.portalList = response;
                   if($scope.portalList.length > 0){
                         $scope.portalSelect($scope.portalList[0]);
@@ -59,7 +59,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       };
 
       $scope.addPortalselect = function(){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepageform/?hpid=" + $scope.selectDate.addPortal.id, function(response) {
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepageform/?hpid=" + $scope.selectDate.addPortal.id, function(response) {
                   $scope.addStyleList = response;
             });
       };
@@ -80,7 +80,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                   }
             });
             console.log($scope.curStyle);
-            PortalService.sendPostRequest(PortalService.getHostName() + "/api/V1.0/homepage/homepagestyle/add", $scope.curStyle, function(response){
+            PortalService.sendPostRequest(PortalService.getHostName() + "/api/homepage/homepagestyle/add", $scope.curStyle, function(response){
                   console.log("curPortal:" + response);
                   if(true){
                         PortalService.showAlert("提交成功");
