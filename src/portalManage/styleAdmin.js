@@ -12,8 +12,10 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       $scope.addClick = function(isAdd, style){
             if(isAdd){
                   $scope.curStyle = {
-                        "createuserid": PortalService.getCookie("userid"),
-                        "createusername": PortalService.getCookie("name"),
+//                        "createuserid": PortalService.getCookie("userid"),
+//                        "createusername": PortalService.getCookie("name"),
+                        "createuserid": "1234567",
+                        "createusername": "sdfas",
                         "description": "",
                         "hpid": "",
                         "img": [
@@ -26,7 +28,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                         ],
                         "name": "",
                         "order": [],
-                        "status": "",
+                        "status": "1",
                         "updatetime": ""
                   };
             } else{
@@ -137,4 +139,22 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                   window.open("pages/portal/index.html?type=" + $scope.selectDate.addPortal.hptype + "&node=" + $scope.selectDate.addPortal.id)
             });
       };
+
+      $scope.moveUp = function(){
+            var index = document.getElementById('multiselect_to').options[document.getElementById('multiselect_to').selectedIndex].index;
+            if(index > 0){
+                  var option = document.getElementById('multiselect_to').options[index - 1];
+                  document.getElementById('multiselect_to').options[index - 1] = document.getElementById('multiselect_to').options[index];
+                  document.getElementById("multiselect_to").insertBefore(option, document.getElementById('multiselect_to').options[index]);
+            }
+      }
+
+      $scope.moveDown = function(){
+            var index = document.getElementById('multiselect').options[document.getElementById('multiselect').selectedIndex].index;
+            if(index < ($scope.addStyleList.length  - 1)){
+                  var option = document.getElementById('multiselect_to').options[index];
+                  document.getElementById('multiselect_to').options[index] = document.getElementById('multiselect_to').options[index + 1];
+                  document.getElementById("multiselect_to").insertAfter(option, document.getElementById('multiselect_to').options[index]);
+            }
+      }
 });

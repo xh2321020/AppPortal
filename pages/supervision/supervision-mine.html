@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-我的督办</title>
-<base href="http://10.15.251.110/">
+    <base href="http://172.16.51.144/">
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
@@ -41,8 +41,7 @@
 <article>
     <section>
 
-        <div role="tabpanel" class="tab-pane fade in active">
-          
+        <div role="tabpanel" class="tab-pane fade in active">           
             <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
                 督办管理
                   ><a type="button">我的督办</a>
@@ -191,8 +190,32 @@
 
                                     </tbody>
                                 </table>
-                                <div class="pagination-outer" id="key-pagination">
+                                <form class="form-horizontal" style="width: 15rem;float: right;">
+                                  <div class="form-group">
+                                    <label  class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control" id="keyPageSize" > 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                               <!--  <div class="page-number" style="width: 15rem;float: right;">
+                                     <span style="display: inline-block;">每页显示条数</span> 
+                                 <select class="form-control" id="keyPageSize" style="display: inline-block;"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
                                 </div>
+ -->
+                                <div class="pagination-outer" id="key-pagination">
+                                 
+                               
+                                </div>
+
                                 <!-- </div> -->
                                 <div class="key">
                                     <p>其他未完成督办事项 (未完成的，不在以上表格中的事项）</p>
@@ -292,7 +315,13 @@
 
                                     </tbody>
                                 </table>
+                                
+                                </div>
                                 <div class="pagination-outer" id="done-pagination">
+                                <div class="page-number" style="display: inline-block;width: 150px;">
+                                    <select class="form-control" v-model="pageSize">
+                                    <option v-for="option in sizeOptions" :value="option.value">{{option.text}}</option>
+                                </select>
                                 </div>
                             </div>
                         </section>

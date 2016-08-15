@@ -54,16 +54,16 @@
                                             <td class="td-text">
                                                 <span ng-repeat="admin in portal.admin">{{admin.username}}</span>
                                             </td>
-                                            <td class="td-text" ng-show="portal.status == 0">启用</td>
-                                            <td class="td-text" ng-show="portal.status == 1">停用</td>
+                                            <td class="td-text" ng-show="portal.status == 1">启用</td>
+                                            <td class="td-text" ng-show="portal.status == 0">停用</td>
                                             <td class="td-text">{{portal.updatetime}} </td>
                                             <td class="td-text">
                                                 <div>
                                                     <a ng-click="addClick(false, portal)">编辑</a>
                                                     <a ng-click="portalOperate($index, 'del')">删除</a>
                                                     <a ng-click="portalBuild()">生成页面</a>
-                                                    <a ng-click="portalOperate($index, 'start')" ng-if="portal.status == 1">启用</a>
-                                                    <a ng-click="portalOperate($index, 'stop')" ng-if="portal.status == 0">停用</a>
+                                                    <a ng-click="portalOperate($index, 'start')" ng-if="portal.status == 0">启用</a>
+                                                    <a ng-click="portalOperate($index, 'stop')" ng-if="portal.status == 1">停用</a>
                                                 </div>
                                             </td>
                                         </tr>
