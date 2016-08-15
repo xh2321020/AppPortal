@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-<base href="http://10.15.251.110/">
+    <base href="http://172.16.51.144/">
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 		<table class="table table-bordered">
 		    <tr class="title1">
 			<td colspan="6">督办明细
-				<a type="button" style="float: right;margin-right: 1rem;">返回</a>
+				
 			</td>
 		    </tr>
 		    <tr class="title2">
@@ -96,7 +96,7 @@
 			<td class="middle"><p>{{responsiblename}}</p></td>
 			<td class="middle"><p>{{estimatedcompletetiontime}}</p></td>
 			<td class="middle">
-			    <a :href="'pages/supervision/supervision-edit.html?pid='+id" class="menu">新增子项</a>
+			    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
 			    <a data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
 			</td>
 		    </tr>
@@ -108,7 +108,7 @@
 			<td class="middle"><p>{{item.estimatedcompletetiontime}}</p></td>
 			<td class="middle">
 			    <a :href="'pages/supervision/supervision-edit.html?id='+item.id+'&previous=detail'" class="menu">编辑</a>
-			    <!-- /.menu --><a @click="postphone(item)" class="menu">延期</a>
+			    <!-- /.menu --><a v-if="status=='0'" @click="postphone(item)" class="menu">延期</a>
 			    <!-- /.menu --><a @click="revoke(item)"class="menu">撤销</a>
 			    <!-- /.menu --><a @click="close(item)" class="menu">关闭</a>
 			    <!-- /.menu -->
@@ -246,6 +246,7 @@
 				  	<div v-show="currentModal=='close'">确定要关闭此督办吗？(确定点保存)</div>
 				  	<p v-show="currentModal=='success'">保存成功</p>
 				  	<p v-show="currentModal=='fail'">保存失败</p>
+				  	<p v-show="currentModal=='missrole'">非责任领导角色无此操作权限</p>
 				</template>
 				  <button type="button" class="btn btn-primary" @click="saveChanges" slot="save">保存</button>
 		</modal-pop>
@@ -259,6 +260,7 @@
 <footer>
     <com-footer></com-footer>
 </footer>
+
 <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
 <script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
