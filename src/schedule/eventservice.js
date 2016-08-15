@@ -11,8 +11,10 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
     var scope = new Array();
     var eventClasss = [];
 //    var hostName = "http://192.168.252.1:8000";
-    var hostName = "http://172.16.51.137:8000";
-    var configHostName = "http://172.16.51.137:8000";
+//    var hostName = "http://172.16.51.137:8000";
+    var hostName = "http://10.15.251.110:8010";
+//    var configHostName = "http://172.16.51.137:8000";
+    var configHostName = hostName;
 
     $http.get(configHostName + "/api/v1.0/cache/find/type/OPEN_TYPE", "")
     .success(function(response){
@@ -322,7 +324,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         getOrg: function(){
-            $http.get( 'http://172.16.51.137:8010/api/contact/getOrglist?apikey=e71982d5401b488da4acef8827c41845', '')
+            $http.get( 'http://10.15.251.110:8010/api/contact/getOrglist?apikey=a16cb0c916404be78cb0805fefc7d26a', '')
                 .success(function(response){
                     if(true){
                         console.log(response);

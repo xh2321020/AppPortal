@@ -5,7 +5,12 @@ function myFunction(parmar){
     var url = "pages/personalpage/personalpage-detail.html?uid="+parmar;
     window.open(url,"_blank");
 }
+
 $(document).ready(function () {
+    var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+var setPersonalpageHeader=function(url,paramObj,iid){
+    return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+}
     var ou = "02";
     var loadingImg='<div style="width:10rem; height:10rem; margin-left: 3rem;"><img src="assets/images/loading3.gif"></img> </div>';
     $("#loadingImgs").html(loadingImg);
@@ -15,10 +20,9 @@ $(document).ready(function () {
     function getDepartments() {
         $.ajax({ 
                 type: "get",
-                // dataType:"json",//pid--项目id
-                url: 'src/org.json',//需换成正式环境的url//接口名 /contacts/getFileinfo
+                dataType:"json",//pid--项目id
+                url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou:""},null), //需换成正式环境的url//接口名 /contacts/getFileinfo
                 success(data, state, jqxhr){  
-                    // var docuitems =[];
                     var source =
                 {
                     datatype: "json",
@@ -56,54 +60,14 @@ $(document).ready(function () {
                 }
                 
             });
-        /*$.ajax({
-            type: "get",
-            dataType: "json",
-            url: getDepartment,
-            success: function (data, state, jqxhr) {
-                var source =
-                {
-                    datatype: "json",
-                    datafields: [
-                        {name: 'ou'},
-                        {name: 'pid'},
-                        {name: 'name'},
-                        {name: 'id'}
-                    ],
-                    id: 'ou',
-                    localdata: data
-                };
-
-                // create data adapter.
-                var dataAdapter = new $.jqx.dataAdapter(source);
-                // perform Data Binding.
-                dataAdapter.dataBind();
-                // get the tree items. The first parameter is the item's id. The second parameter is the parent item's id. The 'items' parameter represents
-                // the sub items collection name. Each jqxTree item has a 'label' property, but in the JSON data, we have a 'text' field. The last parameter
-                // specifies the mapping between the 'text' and 'label' fields.
-                var records = dataAdapter.getRecordsHierarchy('ou', 'pid', 'items', [{
-                    name: 'name',
-                    map: 'label'
-                }]);
-                $('#jqxWidget').jqxTree({source: records, width: '300px'});
-                $('#jqxWidget').on('select', function (event) {
-                    var args = event.args;
-                    var item = $('#jqxWidget').jqxTree('getItem', args.element);
-                    getMembers(item.id);
-                });
-                $("#loadingImgs").remove();
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });*/
     };
     function getMembers(parmar) {
+        // var memberURL = window.userJsonPortalSettings.singleRequest.getMember + "&ou=" + parmar
         $.ajax({
             type: "post",
             contentType: "application/json",
             data: "",
-            url: getMember + parmar,
+            url: setPersonalpageHeader(personalpageRequest.getMember,{ou:parmar},null),
             success: function (data, state, jqxhr) {
                 var leaderHtml = '<div style="margin-bottom:1rem;" id="defaultLeader">'+
                     '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">领导/负责人</span></div></div></div>'+
@@ -131,7 +95,7 @@ $(document).ready(function () {
                     if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
                         images = "assets/images/personalpage/defaultUserPhoto.png";
                     } else {
-                        images = data[i].imageurl;
+                        images = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
                     }
                     if ((typeof(data[i].mail) == "undefined") || (typeof(data[i].mail) == "")) {
                         mailAdd = "";

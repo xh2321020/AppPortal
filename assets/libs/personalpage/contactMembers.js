@@ -10,6 +10,9 @@ function getUserCookies(name){
     else
         return null;
 }
+
+
+
 var currentUserId=getUserCookies("username");
 var pageUserUid="";
 var cancelText = "";
@@ -46,6 +49,7 @@ function editCancel(parmar){
 }
 function editSave(parmar,parmarKey){
     var input = "#input"+parmar;
+    // var updateUserProfileURL = window.userJsonPortalSettings.singleRequest.updateUserProfile  + "&uid=" + pageUserUid +'&'+parmarKey+'=' + $(input).val();
     $.ajax({
         type: "post",
         contentType: "application/json",
@@ -82,6 +86,10 @@ function editSave(parmar,parmarKey){
     });
 }
 $(document).ready(function () {
+    var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+    var setPersonalpageHeader=function(url,paramObj,iid){
+        return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+    }
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -110,7 +118,8 @@ $(document).ready(function () {
         type: "post",
         contentType: "application/json",
         data: "",
-        url: getMemberDetails + pageUser,
+        url: setPersonalpageHeader(personalpageRequest.getMemberDetails, {uid:pageUser},null),
+        // url: getMemberDetails + pageUser,
         success: function (data, state, jqxhr) {
             var countLeaders=0;
             var countMembers=0;
@@ -123,7 +132,7 @@ $(document).ready(function () {
                 if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
                     iconImages = "assets/images/personalpage/defaultUserPhoto.png";
                 } else {
-                    iconImages = data[i].imageurl;
+                    iconImages = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
                 }
                 for (var j = 1; j < data[i].orgtree.length; j++) {
                     for (var key in data[i].orgtree[j]) {
@@ -187,7 +196,8 @@ $(document).ready(function () {
         $.ajax({
             type: "get",
             dataType:"json",
-            url: getChainsDetails + parmar,
+            url: setPersonalpageHeader(personalpageRequest.getChainsDetails,{uid:parmar},null),
+            // url: getChainsDetails + parmar,
             success: function (data, state, jqxhr) {
                 var leveArray = new Array();
                 var titleArray = new Array();
@@ -259,11 +269,12 @@ $(document).ready(function () {
         return weeksArr;
     }
     function getXinCheng(parmar){
-        parmar = "10086"
+        parmar = pageUser;
         $.ajax({
             type: "get",
             dataType:"json",
-            url: getXingChengDetails + parmar,
+            // url: setPersonalpageHeader(personalpageRequest.getChainsDetails,{uid:parmar},null),
+            url: personalpageRequest.getXingChengDetails + parmar,
             success: function (data, state, jqxhr) {
                 var xinChengIcon = "";
                 for(var i = 0; i< data.length; i++){
@@ -284,7 +295,8 @@ $(document).ready(function () {
         $.ajax({
             type: "get",
             dataType:"json",
-            url: getSameOrgDetails+pramar,
+            url: setPersonalpageHeader(personalpageRequest.getSameOrgDetails,{ou:parmar},null),
+            // url: getSameOrgDetails + pramar,
             success: function (data, state, jqxhr) {
 
                 var sameOrgHtml = "";
@@ -302,7 +314,7 @@ $(document).ready(function () {
                     if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
                         iconImages = "assets/images/personalpage/defaultUserPhoto.png";
                     } else {
-                        iconImages = data[i].imageurl;
+                        iconImages = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
                     }
                     sameOrgHtml = sameOrgHtml +'<div class="tyzz-div" onclick="myFunction(\'' +data[i].uid +
                     '\')"><div style="float: left;"><div style="margin-right: 5px;">'+

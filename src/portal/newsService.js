@@ -4,8 +4,9 @@
 var newsApp = angular.module("newsApp", []);
 
 newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $http) {
-    var hostName = 'http://172.16.51.144:8000/';
+//    var hostName = 'http://172.16.51.144:8000/';
 //    var hostName = 'http://192.168.252.1:8000/';
+    var hostName = "http://10.15.251.110:8010";
 
     var showAlert = function(content){
         $.blockUI({
@@ -40,7 +41,7 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
     var service = {
         sendPostRequest: function(url, params, callback){
             showLoading('数据提交中，请稍候...');
-            $http.post(hostName + url, params)
+            $http.post(hostName + url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params)
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);
@@ -56,7 +57,7 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
 
         sendGetRequest: function(url, callback){
             showLoading('数据获取中，请稍候...');
-            $http.get(hostName + url, '')
+            $http.get(hostName + url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", '')
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);

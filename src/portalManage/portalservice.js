@@ -5,8 +5,10 @@ var portalApp = angular.module("portalApp", []);
 
 portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', function( $rootScope, $http, $timeout) {
 //    var configHostName = 'http://192.168.252.1:8000';
-    var configHostName = 'http://172.16.51.144:8000';
-    var userHostName = 'http://172.16.51.137:8010/';
+//    var configHostName = 'http://172.16.51.144:8000';
+	var configHostName = "http://10.15.251.110:8010";
+//    var userHostName = 'http://172.16.51.137:8010/';
+    var userHostName = configHostName;
     var userId = '1234567';
 
     var showAlert = function(content){
@@ -42,7 +44,7 @@ portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', functio
     var service = {
         sendPostRequest: function(url, params, callback){
             showLoading('数据提交中，请稍候...');
-            $http.post(url, params)
+            $http.post(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params)
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);
@@ -58,7 +60,7 @@ portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', functio
 
         sendGetRequest: function(url, callback){
             showLoading('数据获取中，请稍候...');
-            $http.get(url, '')
+            $http.get(url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", '')
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);

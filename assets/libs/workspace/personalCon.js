@@ -1,62 +1,4 @@
-/**
- * Created by kingsinsd on 2016/6/7.
- */
-var personalVm = new Vue({
-    el: "#article",
-    data: {
-        findcount: 25,
-        //数据未读条数
-        taskCount: [{
-            //领导批示
-            "ST":0,
-            //个人待阅
-            "DY":4292,
-            //领导批示
-            "GB":0,
-            //领导批示
-            "GC":0,
-            //领导批示
-            "WT":0,
-            //个人代办
-            "DB":50
-        }],
-        //领导批示
-        find: [
-            {}
-        ],
-        //公办待阅
-        publicread: [
-            {}
-        ],
-        //个人待办
-        personal:[
-            {}
-        ],
-        //公办待办
-        publicWork: [
-            {}
-        ],
-        //受托待办
-        specialSuggest:[
-            {}
-        ],
-        //个人待阅
-        personalread: [
-            {}
-        ],       
-        //委托待办
-        memberStates:[
-            {}
-        ],
-        //消息提醒
-        cultureColumn:[
-            {}
-        ],
-        dubanshixiang:[
-            {}
-        ]
-    },
-    ready: function () {
+$(document).ready(function () {
         //1.领导批示
         //2.办公待阅
         //3.个人待办
@@ -65,100 +7,293 @@ var personalVm = new Vue({
         //6.个人待阅
         //7.委托待办
         //8.消息提醒
-        var _this=this;
-        var currentPort = new Array();
-        var fetchArray = ["USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
-        var nameArray = ["findcount","dubanshixiang", "find1","find2", "find3", "find4", "find5","find6","find7","find8"];
-        var userid=_this.etCookie("username");
-        for (var i = 0, len = fetchArray.length + 1; i < len-1; i++) {
-            var url = "";
-            var datas = "";
-            var contentTypes = "application/json";
-            var datatypes = "json";
-            var types = "post";
-            var arrayId=fetchArray[i];
-            if (fetchArray[i] == "DUBANSHIXIANG") {
-                url = "http://172.16.51.137:8000/api/v1.0/supervision/search?page=0&size=50";
-                datas = JSON.stringify({ "accountablesn": userid });
-            } else if(fetchArray[i] == "USERKUAIJIERUKOU"){
-                types = "get";
-                datatypes = "json",
-                url = "http://192.168.252.1:8000/api/V1.0/work/work/"+userid;
-            } else if(fetchArray[i] == "QIRINEIRICHENG"){
-                var startDate = _this.dateFormatFun(new Date());
-                var stDate = new Date(); 
-                stDate.setDate(stDate.getDate()+7);
-                var y = stDate.getYear(); 
-                var m = (stDate.getMonth()+1)<10?"0"+(stDate.getMonth()+1):(stDate.getMonth()+1);
-                var d = stDate.getDate()<10?"0"+stDate.getDate():stDate.getDate();
-                var endDate = y+"-"+m+"-"+d;
-                types = "get";
-                datatypes = "json",
-                url = "http://172.16.51.137:8000/api/V1.0/schedule/scheduleuserdate?userid="+userid+"&startdate="+startDate+"&enddate="+endDate+"";
-            } else if(fetchArray[i] == "USERKUAIJIERUKOUAll"){
-                types = "get";
-                datatypes = "json",
-                url = "http://172.16.51.137:8000/api/V1.0/work/work/link";
-            } else {
-                url = "http://172.16.51.137:8010/api/task/web/interfaceTaskListService.action";
-                datas = JSON.stringify({F_BOUNDUSER: userid, Type:fetchArray[i]});
-            }
-            $.ajax({
-                type: types,
-                dataType: datatypes,
-                contentType: contentTypes,
-                url: url,
-                data: datas,
-                success: function success(data, state, jqxhr) {
-                    var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-                    "<tr><th style='text-align: center;'> 事项名称 </th>"+
-                    "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
-                    var tableFooter = "</tbody></table></section>";
-                    if(fetchArray[jqxhr.index] == "DUBANSHIXIANG"){
-                        var dubanshixiang="";
-                        var qiridubantixing="";
-                        var qiridubantixingMore='<div style="width:100%;margin-top:0.5rem;">'+
-                        '<a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;">更多 ></a></div>';
-                        for(var j=0; j<data.length; j++){
-                            var description = "";
-                            if ((typeof(data[j].description) == "undefined") || (typeof(data[j].description) == "")) {
-                                description = "";
-                            } else {
-                                description = data[j].description;
-                            }
-                            dubanshixiang=dubanshixiang+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">督办</div></div>'+
-                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\''+data[j].id+'\')"><div style="overflow: hidden; position: relative;">'+
-                            '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
-                            'white-space: nowrap; width: 100%; display: block; padding-top:0;" title="'+data[j].name+'">'+
-                            data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font">'+description+
-                            '</span></div></div> <div class="task-list-spack"></div></li>';
-                            if((data.length>0)&&(j<=1)){
-                                qiridubantixing = qiridubantixing + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
-                                '<a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" class="qiRiTiXing-a">'+
-                                '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
-                            }
-                        }
-                        $("#worksoftodayUl").append(dubanshixiang);
-                        $("#qirineidubanItems").html(qiridubantixing+qiridubantixingMore);
-                        $("#qirineidubanTitle").html("七日内督办提醒("+data.length+")");
-                    }else if(fetchArray[jqxhr.index] == "QIRINEIRICHENG"){
-                        var qirineirichengMore= '<div style="width:100%;margin-top:0.5rem;"><a class="default-font" href="pages/schedule/personal.html" style="float:right;">更多 ></a></div>';
-                        var qirineiricheng = "";
-                        for(var j=0; j<data.length; j++){
-                            if((data.length>0)&&(j<=1)){
-                                qirineiricheng = qirineiricheng + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
-                                '<a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" class="qiRiTiXing-a">'+
-                                '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
-                            }else{
+    var url = window.location.href;
+    url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
+    var mm = url.substring(url.indexOf('?')+1, url.length);
+    var Base64 = {  
+    // 转码表  
+    table : [  
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',  
+            'I', 'J', 'K', 'L', 'M', 'N', 'O' ,'P',  
+            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',  
+            'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',  
+            'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',  
+            'o', 'p', 'q', 'r', 's', 't', 'u', 'v',  
+            'w', 'x', 'y', 'z', '0', '1', '2', '3',  
+            '4', '5', '6', '7', '8', '9', '+', '/' 
+    ],  
+    UTF16ToUTF8 : function(str) {  
+        var res = [], len = str.length;  
+        for (var i = 0; i < len; i++) {  
+            var code = str.charCodeAt(i);  
+            if (code > 0x0000 && code <= 0x007F) {  
+                // 单字节，这里并不考虑0x0000，因为它是空字节  
+                // U+00000000 – U+0000007F  0xxxxxxx  
+                res.push(str.charAt(i));  
+            } else if (code >= 0x0080 && code <= 0x07FF) {  
+                // 双字节  
+                // U+00000080 – U+000007FF  110xxxxx 10xxxxxx  
+                // 110xxxxx  
+                var byte1 = 0xC0 | ((code >> 6) & 0x1F);  
+                // 10xxxxxx  
+                var byte2 = 0x80 | (code & 0x3F);  
+                res.push(  
+                    String.fromCharCode(byte1),   
+                    String.fromCharCode(byte2)  
+                );  
+            } else if (code >= 0x0800 && code <= 0xFFFF) {  
+                // 三字节  
+                // U+00000800 – U+0000FFFF  1110xxxx 10xxxxxx 10xxxxxx  
+                // 1110xxxx  
+                var byte1 = 0xE0 | ((code >> 12) & 0x0F);  
+                // 10xxxxxx  
+                var byte2 = 0x80 | ((code >> 6) & 0x3F);  
+                // 10xxxxxx  
+                var byte3 = 0x80 | (code & 0x3F);  
+                res.push(  
+                    String.fromCharCode(byte1),   
+                    String.fromCharCode(byte2),   
+                    String.fromCharCode(byte3)  
+                );  
+            } else if (code >= 0x00010000 && code <= 0x001FFFFF) {  
+                // 四字节  
+                // U+00010000 – U+001FFFFF  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  
+            } else if (code >= 0x00200000 && code <= 0x03FFFFFF) {  
+                // 五字节  
+                // U+00200000 – U+03FFFFFF  111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  
+            } else /** if (code >= 0x04000000 && code <= 0x7FFFFFFF)*/ {  
+                // 六字节  
+                // U+04000000 – U+7FFFFFFF  1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  
+            }  
+        }  
+ 
+        return res.join('');  
+    },  
+    UTF8ToUTF16 : function(str) {  
+        var res = [], len = str.length;  
+        var i = 0;  
+        for (var i = 0; i < len; i++) {  
+            var code = str.charCodeAt(i);  
+            // 对第一个字节进行判断  
+            if (((code >> 7) & 0xFF) == 0x0) {  
+                // 单字节  
+                // 0xxxxxxx  
+                res.push(str.charAt(i));  
+            } else if (((code >> 5) & 0xFF) == 0x6) {  
+                // 双字节  
+                // 110xxxxx 10xxxxxx  
+                var code2 = str.charCodeAt(++i);  
+                var byte1 = (code & 0x1F) << 6;  
+                var byte2 = code2 & 0x3F;  
+                var utf16 = byte1 | byte2;  
+                res.push(Sting.fromCharCode(utf16));  
+            } else if (((code >> 4) & 0xFF) == 0xE) {  
+                // 三字节  
+                // 1110xxxx 10xxxxxx 10xxxxxx  
+                var code2 = str.charCodeAt(++i);  
+                var code3 = str.charCodeAt(++i);  
+                var byte1 = (code << 4) | ((code2 >> 2) & 0x0F);  
+                var byte2 = ((code2 & 0x03) << 6) | (code3 & 0x3F);  
+                utf16 = ((byte1 & 0x00FF) << 8) | byte2  
+                res.push(String.fromCharCode(utf16));  
+            } else if (((code >> 3) & 0xFF) == 0x1E) {  
+                // 四字节  
+                // 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  
+            } else if (((code >> 2) & 0xFF) == 0x3E) {  
+                // 五字节  
+                // 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  
+            } else /** if (((code >> 1) & 0xFF) == 0x7E)*/ {  
+                // 六字节  
+                // 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  
+            }  
+        }  
+ 
+        return res.join('');  
+    },  
+    encode : function(str) {  
+        if (!str) {  
+            return '';  
+        }  
+        var utf8    = this.UTF16ToUTF8(str); // 转成UTF8  
+        var i = 0; // 遍历索引  
+        var len = utf8.length;  
+        var res = [];  
+        while (i < len) {  
+            var c1 = utf8.charCodeAt(i++) & 0xFF;  
+            res.push(this.table[c1 >> 2]);  
+            // 需要补2个=  
+            if (i == len) {  
+                res.push(this.table[(c1 & 0x3) << 4]);  
+                res.push('==');  
+                break;  
+            }  
+            var c2 = utf8.charCodeAt(i++);  
+            // 需要补1个=  
+            if (i == len) {  
+                res.push(this.table[((c1 & 0x3) << 4) | ((c2 >> 4) & 0x0F)]);  
+                res.push(this.table[(c2 & 0x0F) << 2]);  
+                res.push('=');  
+                break;  
+            }  
+            var c3 = utf8.charCodeAt(i++);  
+            res.push(this.table[((c1 & 0x3) << 4) | ((c2 >> 4) & 0x0F)]);  
+            res.push(this.table[((c2 & 0x0F) << 2) | ((c3 & 0xC0) >> 6)]);  
+            res.push(this.table[c3 & 0x3F]);  
+        }  
+ 
+        return res.join('');  
+    },  
+    decode : function(str) {  
+        if (!str) {  
+            return '';  
+        }  
+ 
+        var len = str.length;  
+        var i   = 0;  
+        var res = [];  
+ 
+        while (i < len) {  
+            code1 = this.table.indexOf(str.charAt(i++));  
+            code2 = this.table.indexOf(str.charAt(i++));  
+            code3 = this.table.indexOf(str.charAt(i++));  
+            code4 = this.table.indexOf(str.charAt(i++));  
+ 
+            c1 = (code1 << 2) | (code2 >> 4);  
+            c2 = ((code2 & 0xF) << 4) | (code3 >> 2);  
+            c3 = ((code3 & 0x3) << 6) | code4;  
+ 
+            res.push(String.fromCharCode(c1));  
+ 
+            if (code3 != 64) {  
+                res.push(String.fromCharCode(c2));  
+            }  
+            if (code4 != 64) {  
+                res.push(String.fromCharCode(c3));  
+            }  
+ 
+        }  
+ 
+        return this.UTF8ToUTF16(res.join(''));  
+    }  
+};  
+var cookiesId =  Base64.decode(mm).substring(4,12);
+// $.cookie("username", cookiesId);
+// document.cookie="username="+cookiesId;
+// document.cookie="path=/";
+var Days = 30;
+var exp = new Date();
+exp.setTime(exp.getTime() + Days*24*60*60*1000);
+document.cookie = "username=" + cookiesId + ";expires=" + exp.toGMTString()+";path=/"; 
 
-                            }
+
+var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+// alert(window.interfaceSettings.personalpageRequest.api.getDuBanShiXiang);
+var setPersonalpageHeader=function(url,paramObj,iid){
+    return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+}
+
+    var _this=this;
+    var currentPort = new Array();
+    var fetchArray = ["USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
+    var nameArray = ["findcount","dubanshixiang", "find1","find2", "find3", "find4", "find5","find6","find7","find8"];
+    var userid=etCookie("username");
+    for (var i = 0, len = fetchArray.length + 1; i < len-1; i++) {
+        var ajaxURL = "";
+        var datas = "";
+        var contentTypes = "application/json";
+        var datatypes = "json";
+        var types = "post";
+        var arrayId=fetchArray[i];
+        if (fetchArray[i] == "DUBANSHIXIANG") {
+            ajaxURL = personalpageRequest.getDuBanShiXiang;
+            datas = JSON.stringify({ "accountablesn": userid });
+
+        } else if(fetchArray[i] == "USERKUAIJIERUKOU"){
+            types = "get";
+            datatypes = "json";
+            ajaxURL = personalpageRequest.getYonghuKuaiJieRuKou + userid;
+        } else if(fetchArray[i] == "QIRINEIRICHENG"){
+            var startDate = dateFormatFun(new Date());
+            var stDate = new Date(); 
+            stDate.setDate(stDate.getDate()+7);
+            var y = stDate.getFullYear(); 
+            var m = (stDate.getMonth()+1)<10?"0"+(stDate.getMonth()+1):(stDate.getMonth()+1);
+            var d = stDate.getDate()<10?"0"+stDate.getDate():stDate.getDate();
+            var endDate = y+"-"+m+"-"+d;
+            types = "get";
+            datatypes = "json";
+            // ajaxURL =  getRiChengTiXing +userid+"&startdate="+startDate+"&enddate="+endDate+"";
+            ajaxURL = setPersonalpageHeader(personalpageRequest.getRiChengTiXing,{userid:userid, startdate:startDate, enddate:endDate},null);
+        } else if(fetchArray[i] == "USERKUAIJIERUKOUAll"){
+            types = "get";
+            datatypes = "json";
+            // ajaxURL = window.userJsonPortalSettings.singleRequest.initUserKuaiJieRuKou;
+            ajaxURL = personalpageRequest.initUserKuaiJieRuKou;
+        } else {
+            // ajaxURL = window.userJsonPortalSettings.singleRequest.getJinQiGongZuo;
+            ajaxURL = personalpageRequest.getJinQiGongZuo;
+            datas = JSON.stringify({F_BOUNDUSER: userid, Type:fetchArray[i]});
+        }
+        $.ajax({
+            type: types,
+            dataType: datatypes,
+            contentType: contentTypes,
+            url: ajaxURL,
+            data: datas,
+            success: function success(data, state, jqxhr) {
+                var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
+                "<tr><th style='text-align: center;'> 事项名称 </th>"+
+                "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
+                var tableFooter = "</tbody></table></section>";
+                if(fetchArray[jqxhr.index] == "DUBANSHIXIANG"){
+                    var dubanshixiang="";
+                    var qiridubantixing="";
+                    var qiridubantixingMore='<div style="width:100%;margin-top:0.5rem;">'+
+                    '<a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;"  target="_blank">更多 ></a></div>';
+                    for(var j=0; j<data.length; j++){
+                        var description = "";
+                        if ((typeof(data[j].description) == "undefined") || (typeof(data[j].description) == "")) {
+                            description = "";
+                        } else {
+                            description = data[j].description;
                         }
-                        $("#qiribeirichengTitle").html("七日内日程提醒("+data.length+")");
-                        $("#qiribeirichengItems").html(qirineiricheng+qirineirichengMore);
-                    }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOU"){
+                        dubanshixiang=dubanshixiang+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">督办</div></div>'+
+                        '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\''+data[j].id+'\')"><div style="overflow: hidden; position: relative;">'+
+                        '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
+                        'white-space: nowrap; width: 100%; display: block; padding-top:0;" title="'+data[j].name+'">'+
+                        data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font">'+description+
+                        '</span></div></div> <div class="task-list-spack"></div></li>';
+                        if((data.length>0)&&(j<=1)){
+                            qiridubantixing = qiridubantixing + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
+                            '<a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" class="qiRiTiXing-a" target="_blank">'+
+                            '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
+                        }
+                    }
+                    $("#worksoftodayUl").append(dubanshixiang);
+                    $("#qirineidubanItems").html(qiridubantixing+qiridubantixingMore);
+                    $("#qirineidubanTitle").html("七日内督办提醒("+data.length+")");
+                }else if(fetchArray[jqxhr.index] == "QIRINEIRICHENG"){
+                    var qirineirichengMore= '<div style="width:100%;margin-top:0.5rem;"><a class="default-font" href="pages/schedule/personal.html" style="float:right;" target="_blank">更多 ></a></div>';
+                    var qirineiricheng = "";
+                    for(var j=0; j<data.length; j++){
+                        if((data.length>0)&&(j<=1)){
+                            qirineiricheng = qirineiricheng + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
+                            '<a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" class="qiRiTiXing-a"  target="_blank">'+
+                            '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
+                        }else{
+
+                        }
+                    }
+                    $("#qiribeirichengTitle").html("七日内日程提醒("+data.length+")");
+                    $("#qiribeirichengItems").html(qirineiricheng+qirineirichengMore);
+                }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOU"){
+                    if(data.length == 0){
+                        initSpecialKuaiJieRuKou();
+                    }else{
                         var kuaijierukouLeft="";
                         var kuaijierukoupop="";
-                        var kuaijierukouselector="";                       
+                        var kuaijierukouselector="";
+                                           
                         for(var j=0; j<data.length;j++){
                             if(j<8){
                                 kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+
@@ -176,104 +311,143 @@ var personalVm = new Vue({
                         $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                         //编辑选择框已添加的工作快捷入口
                         $("#leftSel").html(kuaijierukouselector);
-                    }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOUAll"){
-                        var restPort = "";
-                        for(var j=0; j<data.length;j++){
-                            restPort = restPort + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
-                        }
-                        $("#rightSel").html(restPort);
-                        var currentSelL = null;
-                        var currentSelR = null;
-                        currentSelL = document.getElementById('leftSel');
-                        currentSelR = document.getElementById('rightSel');
-                        if(currentSelL.length>0){
-                            for(var k=0;k<currentSelL.length;k++){
-                                for(var j=0; j<currentSelR.length; j++){
-                                    if (currentSelL.options[k].value == currentSelR.options[j].value){
-                                        var removeIndex = currentSelR.options[j].index;
-                                        currentSelR.options.remove(removeIndex);
-                                    }
+                    }
+                }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOUAll"){
+                    var restPort = "";
+                    for(var j=0; j<data.length;j++){
+                        restPort = restPort + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
+                    }
+                    $("#rightSel").html(restPort);
+                    var currentSelL = null;
+                    var currentSelR = null;
+                    currentSelL = document.getElementById('leftSel');
+                    currentSelR = document.getElementById('rightSel');
+                    if(currentSelL.length>0){
+                        for(var k=0;k<currentSelL.length;k++){
+                            for(var j=0; j<currentSelR.length; j++){
+                                if (currentSelL.options[k].value == currentSelR.options[j].value){
+                                    var removeIndex = currentSelR.options[j].index;
+                                    currentSelR.options.remove(removeIndex);
                                 }
                             }
                         }
-                    } else if(fetchArray[jqxhr.index] == "1"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#lingdaopishiSpan").html(data.length);
-                        $("#lingdaopishitable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "2"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#gongbandaiyueSpan").html(data.length);
-                        $("#gongbandaiyuetable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "3"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#gerendaibanSpan").html(data.length);
-                        $("#gerendaibantable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "4"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#gongbandaibanSpan").html(data.length);
-                        $("#gongbandaibantable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "5"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#shoutuodaibanSpan").html(data.length);
-                        $("#shoutuodaibantable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "6"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#gerendaiyueSpan").html(data.length);
-                        $("#gerendaiyuetable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "7"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#weituodaibanSpan").html(data.length);
-                        $("#weituodaibantable").html(currentHtml);
-                    }else if(fetchArray[jqxhr.index] == "8"){
-                        var currentHtml=_this.htmlcode(data);
-                        $("#xiaoxitixingSpan").html(data.length);
-                        $("#xiaoxitixingtable").html(currentHtml);
                     }
-                    var index = jqxhr.index;
-                    // _this[nameArray[index]] = data;
-                    if (jqxhr.index == 0) console.log(data);
-                },
-                error: function error(err) {
-                    console.log(err);
+                } else if(fetchArray[jqxhr.index] == "1"){
+                    var currentHtml=htmlcode(data);
+                    $("#lingdaopishiSpan").html(data.length);
+                    $("#lingdaopishitable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "2"){
+                    var currentHtml=htmlcode(data);
+                    $("#gongbandaiyueSpan").html(data.length);
+                    $("#gongbandaiyuetable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "3"){
+                    var currentHtml=htmlcode(data);
+                    $("#gerendaibanSpan").html(data.length);
+                    $("#gerendaibantable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "4"){
+                    var currentHtml=htmlcode(data);
+                    $("#gongbandaibanSpan").html(data.length);
+                    $("#gongbandaibantable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "5"){
+                    var currentHtml=htmlcode(data);
+                    $("#shoutuodaibanSpan").html(data.length);
+                    $("#shoutuodaibantable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "6"){
+                    var currentHtml=htmlcode(data);
+                    $("#gerendaiyueSpan").html(data.length);
+                    $("#gerendaiyuetable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "7"){
+                    var currentHtml=htmlcode(data);
+                    $("#weituodaibanSpan").html(data.length);
+                    $("#weituodaibantable").html(currentHtml);
+                }else if(fetchArray[jqxhr.index] == "8"){
+                    var currentHtml=htmlcode(data);
+                    $("#xiaoxitixingSpan").html(data.length);
+                    $("#xiaoxitixingtable").html(currentHtml);
                 }
-            }).index = i;
-        }
-    },
-    methods:{
-        dateFormatFun: function(parmar){
-            var myDate = new Date(parmar);
-            return myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate();
-        },
-        htmlcode: function(data){
-            var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-                    "<tr><th style='text-align: center; width:60%;'> 事项名称 </th>"+
-                    "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
-            var tableFooter = "</tbody></table></section>";
-            var initHtml = "";
-            var moreUrlHtml = "";
-            var count = 0;
-            if (data.length == 0) {
-                initHtml = '<div class="todoIsNull">' + '<img src="assets/images/portal/workspace/todoIsNull.png" class="todoIsNull-img"/></div>';
-            } else {
-                if (data.length > 10) {
-                    count = 10;
-                    moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL">' + '<div class="moreURL-div" style="float: right; padding-right:2rem;">更多 ></div></a>';
-                } else {
-                    count = data.length;
-                }
-                for (var j = 0; j < count; j++) {
-                    initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font"><a href="' + data[j].f_URL + '" style="color: black;">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + this.dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
-                }
-                initHtml = tableHeader + initHtml + tableFooter;
+                var index = jqxhr.index;
+                // _this[nameArray[index]] = data;
+                if (jqxhr.index == 0) console.log(data);
+            },
+            error: function error(err) {
+                // if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOU"){
+                //     initSpecialKuaiJieRuKou();
+                // }
+                // initSpecialKuaiJieRuKou();
+                console.log(err);
             }
-            return initHtml + moreUrlHtml;
-        },
-        etCookie: function(name){
-            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-            if(arr=document.cookie.match(reg))
-                return unescape(arr[2]);
-            else
-                return null;
-        }
+        }).index = i;
     }
+    
+    function dateFormatFun(parmar){
+        var myDate = new Date(parmar);
+        return myDate.getFullYear()+"-"+myDate.getMonth()+"-"+myDate.getDate();
+    }
+    function htmlcode(data){
+        var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
+        "<tr><th style='text-align: center; width:60%;'> 事项名称 </th>"+
+        "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
+        var tableFooter = "</tbody></table></section>";
+        var initHtml = "";
+        var moreUrlHtml = "";
+        var count = 0;
+        if (data.length == 0) {
+            initHtml = '<div class="todoIsNull">' + '<img src="assets/images/portal/workspace/todoIsNull.png" class="todoIsNull-img"/></div>';
+        } else {
+            if (data.length > 10) {
+                count = 10;
+                moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank">' + '<div class="moreURL-div" style="float: right; padding-right:2rem;">更多 ></div></a>';
+            } else {
+                count = data.length;
+            }
+            for (var j = 0; j < count; j++) {
+                initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font"><a href="' + data[j].f_URL + '" style="color: black;"  target="_blank">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+            }
+            initHtml = tableHeader + initHtml + tableFooter;
+        }
+        return initHtml + moreUrlHtml;
+    }
+    function etCookie(name){
+        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if(arr=document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+    function initSpecialKuaiJieRuKou(){
+        // alert(123)
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            contentType: "application/json",
+            url: initUserKuaiJieRuKou,
+            // data: "",
+            success: function success(data, state, jqxhr) {
+                var kuaijierukouLeft="";
+                    var kuaijierukoupop="";
+                    var kuaijierukouselector="";                       
+                    for(var j=0; j<data.length;j++){
+                        if(j<8){
+                            kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
+                            '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
+                        }
+                        kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
+                        '<a href="'+data[j].link+'" target="_blank">'+
+                        '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
+                        kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
+                    }
+                    //主页面工作快捷入口
+                    $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
+                    //弹框页面工作快捷入口（编辑页面）
+                    $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
+                    //编辑选择框已添加的工作快捷入口
+                    // alert(kuaijierukouselector);
+                    $("#leftSel").html(kuaijierukouselector);
+            },
+            error: function error(err) {
+                console.log(err);
+            }
+        });
+    }
+
 });
