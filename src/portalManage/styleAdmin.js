@@ -28,7 +28,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                         ],
                         "name": "",
                         "order": [],
-                        "status": "2",
+                        "status": "1",
                         "updatetime": ""
                   };
             } else{

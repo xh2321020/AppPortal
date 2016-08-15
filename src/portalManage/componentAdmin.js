@@ -33,7 +33,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "styleid": "",
                               "code": "",
                               "more_url": "",
-                              "ismore": "1",
+                              "ismore": "0",
                               "url": "",
                               "content_type": "application/json",
                               "method": "get",
@@ -46,7 +46,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "styleid": "",
                               "code": "",
                               "more_url": "",
-                              "ismore": "1",
+                              "ismore": "0",
                               "url": "",
                               "content_type": "application/json",
                               "method": "get",
@@ -59,7 +59,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "styleid": "",
                               "code": "",
                               "more_url": "",
-                              "ismore": "1",
+                              "ismore": "0",
                               "url": "",
                               "content_type": "application/json",
                               "method": "get",
@@ -89,6 +89,52 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               if(component.hpid == $scope.portalList[i].id){
                                     $scope.addParams.addHpid = $scope.portalList[i];
                               }
+                        }
+                        if($scope.curComponent.formin.length == 1){
+                              var formin1 = {
+                                    "name": "",
+                                    "form_inid": "2",
+                                    "columnid": '',
+                                    "styleid": "",
+                                    "code": "",
+                                    "more_url": "",
+                                    "ismore": "0",
+                                    "url": "",
+                                    "content_type": "",
+                                    "method": "",
+                                    "payload": "",
+                                    "querystring": ""
+                              };
+                              $scope.curComponent.formin.push(formin1);
+                        } else if($scope.curComponent.formin.length == 2){
+                              var formin2 = [{
+                                    "name": "",
+                                    "form_inid": "2",
+                                    "columnid": '',
+                                    "styleid": "",
+                                    "code": "",
+                                    "more_url": "",
+                                    "ismore": "0",
+                                    "url": "",
+                                    "content_type": "",
+                                    "method": "",
+                                    "payload": "",
+                                    "querystring": ""
+                              }, {
+                                    "name": "",
+                                    "form_inid": "3",
+                                    "columnid": '',
+                                    "styleid": "",
+                                    "code": "",
+                                    "more_url": "",
+                                    "ismore": "0",
+                                    "url": "",
+                                    "content_type": "",
+                                    "method": "",
+                                    "payload": "",
+                                    "querystring": ""
+                              }];
+                              $scope.curComponent.formin.push(formin2);
                         }
                   } else{
                         PortalService.showAlert("您还没有添加任何组件，快去试试添加门户吧!");

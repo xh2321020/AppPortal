@@ -1,7 +1,7 @@
 newsApp.controller("newsDetailAppCtrl", function($scope, $http, $sce, NewsService, $timeout) {
 
     var getNewsDetail = function(id){
-        NewsService.sendGetRequest('api/v1.0/news/one?newid=' + id, function(response){
+        NewsService.sendGetRequest('/api/news/one?newid=' + id, function(response){
             $scope.newsDetail = response;
             $scope.newsDetail.content = $sce.trustAsHtml($scope.newsDetail.content);
             $timeout(
