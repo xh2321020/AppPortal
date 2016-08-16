@@ -1,5 +1,6 @@
 {
 
+
   "supervision": {
     "server": "http://10.15.251.110:8010",
     "header": {
@@ -19,9 +20,9 @@
         "traceUrl": "/api/supervision/trace/%id%",
         "closeUrl": "/api/supervision/close/%id%",
         "revokeUrl": "/api/supervision/delete/%id%"
-      
     }
   },
+
   "portal": {
 	  	"server": "http://10.15.251.110:8010",
 	    "header": {
@@ -33,26 +34,24 @@
 	    }
 	},
 	"personalpage":{
-     "server": "http://10.15.251.110:8010",
-    "header": {
-      "apikey": "a16cb0c916404be78cb0805fefc7d26a"
-    },
-    "api": {
-      "getSameOrgDetails":"/api/contact/getorgmember",
-      "searchuserUrl":"/api/contact/searchuser",
-      "getChainsDetails":"/api/contact/Reportchain",
-      "getDuBanShiXiang":"/api/supervision/search?page=0&size=50",
-      "getYonghuKuaiJieRuKou":"/api/work/work/",
-      "getRiChengTiXing":"/api/schedule/scheduleuserdate",
-      "initUserKuaiJieRuKou":"/api/work/work/link",
-      "getJinQiGongZuo":"/api/task/web/interfaceTaskListService.action",
-      "popViewEdit":"/api/work/work/add",
-      "getYonghuKuaiJieRuKou":"/api/work/work/",
-      "getDepartment":"/api/contact/getorgbyou",
-      "getMember":"/api/contact/getorgmember",
-      "getMemberDetails":"/api/contact/getuserlist",
-      "getXingChengDetails":"/api/schedule/schedule/",
-      "getSameOrgDetails":"/api/contact/getorgmember"
-    }
+      "server": "http://10.15.251.110:8010",
+      "header": {
+        "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+      },
+      "api": {
+        "searchuserUrl":"/api/contact/searchuser",
+        "getChainsDetails":"/api/contact/Reportchain",
+        "getDuBanShiXiang":"/api/supervision/search",
+        "getYonghuKuaiJieRuKou":"/api/work/work/",
+        "getRiChengTiXing":"/api/schedule/scheduleuserdate",
+        "initUserKuaiJieRuKou":"/api/work/work/link",
+        "getJinQiGongZuo":"/api/task/web/interfaceTaskListService.action",
+        "popViewEdit":"/api/work/work/add",
+        "getDepartment":"/api/contact/getorgbyou",
+        "getMember":"/api/contact/getorgmember",
+        "getMemberDetails":"/api/contact/getuserlist",
+        "getXingChengDetails":"/api/schedule/schedule/",
+        "getSameOrgDetails":"/api/contact/getorgmember"
+      }
 	}
 }
