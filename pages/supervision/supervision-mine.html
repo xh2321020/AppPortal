@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-我的督办</title>
-<base href="http://10.15.251.110/">
+    <base href="http://10.15.251.110/">
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
@@ -41,8 +41,7 @@
 <article>
     <section>
 
-        <div role="tabpanel" class="tab-pane fade in active">
-          
+        <div role="tabpanel" class="tab-pane fade in active">           
             <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
                 督办管理
                   ><a type="button">我的督办</a>
@@ -191,8 +190,22 @@
 
                                     </tbody>
                                 </table>
-                                <div class="pagination-outer" id="key-pagination">
+                                <form class="form-horizontal" style="width: 15rem;float: right;" id="keyPagesizeSelect">
+                                  <div class="form-group">
+                                    <label  class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control pagesize" data-key="key"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                              
+                                <div class="pagination-outer" id="key-pagination">      
                                 </div>
+
                                 <!-- </div> -->
                                 <div class="key">
                                     <p>其他未完成督办事项 (未完成的，不在以上表格中的事项）</p>
@@ -242,6 +255,18 @@
 
                                     </tbody>
                                 </table>
+                                <form class="form-horizontal" style="width: 15rem;float: right;" id="otherPagesizeSelect" >
+                                  <div class="form-group">
+                                    <label  class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control pagesize"data-key="other"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
                                 <div class="pagination-outer" id="other-pagination">
                                 </div>
                                 <div class="key">
@@ -292,8 +317,21 @@
 
                                     </tbody>
                                 </table>
-                                <div class="pagination-outer" id="done-pagination">
+                                
                                 </div>
+                                <div class="pagination-outer" id="done-pagination">
+                                <form class="form-horizontal" style="width: 15rem;float: right;" id="donePagesizeSelect">
+                                  <div class="form-group">
+                                    <label  class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control pagesize"   data-key="done"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
                             </div>
                         </section>
                     </div>
