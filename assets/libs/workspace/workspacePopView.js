@@ -1,6 +1,7 @@
 var currentSel = null;
 var usersid = getCookie("username")
 var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
 var setPersonalpageHeader=function(url,paramObj,iid){
     return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
 }
@@ -14,7 +15,7 @@ function opentask(parmar){
         if(obj.id=="leftSel"){
             $("#btnLeft").disabled = true;
             $("#btnRight").disabled = false;                
-            reSelect($("#rightSel"));            
+            reSelect($("#rightSel"));
         }else{
             $("#btnLeft").disabled = false;
             $("#btnRight").disabled = true;               
@@ -112,7 +113,7 @@ function opentask(parmar){
         $.ajax({
             type: "get",
             dataType: "json",
-            url:personalpageRequest.getYonghuKuaiJieRuKou + usersid,
+            url:personalpageRequest.getYonghuKuaiJieRuKou + usersid + personalpageRequestKey,
             success: function success(data, state, jqxhr) {
                 if(data.length == 0){
                     specialInit();
@@ -151,7 +152,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou,
+            url: personalpageRequest.initUserKuaiJieRuKou+personalpageRequestKey,
             data: "",
             success: function success(data, state, jqxhr) {
                 var n=0;
@@ -185,7 +186,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou,
+            url: personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey,
             success: function success(data, state, jqxhr) {
                 var kuaijierukouLeft="";
                     var kuaijierukoupop="";
