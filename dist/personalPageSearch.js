@@ -654,6 +654,7 @@
 	        },
 	        searchInput: function searchInput() {
 	            var personalpageRequestVue = window.interfaceSettings.personalpageRequest.api;
+	            var personalpageRequestKeys = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
 	            var _this = this;
 	            var input = this.input.trim();
 	            if (input == "") {
@@ -672,7 +673,7 @@
 	                    }
 	                    $(".cover").show();
 	                    $("#userInfo").html("");
-	                    var searchuserURL = personalpageRequestVue.searchuserUrl + "&q=" + inputVal;
+	                    var searchuserURL = personalpageRequestVue.searchuserUrl + personalpageRequestKeys + "&q=" + inputVal;
 	                    _this.request = $.ajax({
 	                        type: "get",
 	                        url: searchuserURL,

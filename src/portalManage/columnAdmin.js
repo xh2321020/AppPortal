@@ -11,7 +11,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       $scope.addClick = function(isAdd, column){
             if(isAdd){
                   $scope.curColumn = {
-                        "auditor_ids": "",
+                      "auditor_ids": "",
                       "auditor_names": "",
                       "description": "",
                       "is_build": "",
@@ -19,7 +19,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
                       "parent_id": 0,
                       "pre_view_name": "",
                       "seq": "",
-                      "status": "",
+                      "status": "2",
                       "version": ""
                   }
                   //$scope.curColumn = {
@@ -85,9 +85,9 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
                   if(operate == "del"){
                         $scope.columnList.splice(index, 1);
                   } else if(operate == "start"){
-                        $scope.columnList[index].status = 0;
+                        $scope.columnList[index].status = 2;
                   } else if(operate == "stop"){
-                        $scope.columnList[index].status = 1;
+                        $scope.columnList[index].status = 0;
                   }
             });
       };

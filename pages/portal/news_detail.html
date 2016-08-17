@@ -29,14 +29,16 @@
 
     <div class="articleCon" style="width: 85%">
         <!--{{newsDetail.content}}-->
-        <div style="margin:0px auto; text-align:center" ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '主附件'">
+        <div style="margin:0px auto; text-align:center" ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '主附件' || attachment.file_from == '附件正文'">
             <!--http://bjecm.cnnp.com.cn/publish2/attachment/show?fileId=7489-->
             <img style="margin: 10px" ng-if="attachment.file_type == 'jpg'" ng-src="{{attachment.path}}" width="600" height="400">
             <img style="margin: 10px" ng-if="attachment.file_type == 'png'" ng-src="{{attachment.path}}" width="600" height="400">
 
-            <embed id={{attachment.id}} style="margin: 10px" ng-if="attachment.file_type == 'pdf'" width="100%" ng-src="{{attachment.path}}" height="500px" type="application/pdf">
+            <embed id={{attachment.id}} style="margin: 10px" ng-if="attachment.file_type == 'pdf'" width="100%" src={{attachment.path}} height="500px" type="application/pdf">
         </div>
         <div ng-bind-html="newsDetail.content"></div>
+
+		<!-- <embed style="margin: 10px" width="100%" src="http://10.15.251.110/cnnp/publish2/attachment/19/19659" height="500px" type="application/pdf"> -->
 
         <table cellpadding="0" cellspacing="0" width="100%" border="0" class="articleRels" style="margin-top: 20px">
             <tbody>
@@ -56,13 +58,16 @@
 </div>
 
 <footer><com-footer></com-footer></footer>
-
+<script src="/assets/libs/vue.min.js"></script>
 <script src="/assets/libs/jquery/jquery.min.js"></script>
 <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
-<script src='/src/components/header-footer.js'></script>
 <script src="/assets/libs/angular/angular.min.js"></script>
 <script src='/src/portal/newsService.js'></script>
 <script src='/src/portal/news_detail.js'></script>
 <script src='/assets/libs/jquery.blockUI.js'></script>
+<script>
+    var scriptList=['./dist/header-footer.js'];
+</script>
+<script src="./dist/main.js"></script>
 </body>
 </html>

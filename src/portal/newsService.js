@@ -57,7 +57,14 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
 
         sendGetRequest: function(url, callback){
             showLoading('数据获取中，请稍候...');
-            $http.get(hostName + url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", '')
+            if(url.indexOf("apikey") < 0){
+            	if(url.indexOf("?") < 0){
+            		url = url + "?apikey=a16cb0c916404be78cb0805fefc7d26a"
+            	} else{
+            		url = url + "&apikey=a16cb0c916404be78cb0805fefc7d26a"
+            	}
+            }
+            $http.get(hostName + url, '')
                 .success(function(response){
                     $.unblockUI();
                     console.log(url + ':' + response);
@@ -75,12 +82,9 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
         },
 
         getUrlParamsString: function(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
             var r = window.location.search.substr(1).match(reg);
-            if (r != null) {
-                return unescape(r[2]);
-            }
-            return '';
+            if (r!=null) return (r[2]); return null;
         },
     };
 

@@ -25,7 +25,7 @@ $(document).ready(function () {
     $.ajax({
         type: "get",
         dataType:"json",
-        url: setPersonalpageHeader(personalpageRequest.sameOrgDetailsURL,{ou:sameOu},null),        ,
+        url: setPersonalpageHeader(personalpageRequest.getSameOrgDetails,{ou:sameOu},null),
         success: function (data, state, jqxhr) {
             var html='';
             for(var i=0; i<data.length; i++){

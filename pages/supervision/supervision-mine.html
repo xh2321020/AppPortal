@@ -190,11 +190,11 @@
 
                                     </tbody>
                                 </table>
-                                <form class="form-horizontal" style="width: 15rem;float: right;" id="keyPagesizeSelect">
+                                <form class="form-horizontal" style="width: 15rem;float: right;">
                                   <div class="form-group">
                                     <label  class="col-sm-5 control-label">条数</label>
                                     <div class="col-sm-7">
-                                     <select class="form-control pagesize" data-key="key"> 
+                                     <select class="form-control" id="keyPageSize" > 
                                     <option value="3">3</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
@@ -202,8 +202,18 @@
                                     </div>
                                   </div>
                                 </form>
-                              
-                                <div class="pagination-outer" id="key-pagination">      
+                               <!--  <div class="page-number" style="width: 15rem;float: right;">
+                                     <span style="display: inline-block;">每页显示条数</span> 
+                                 <select class="form-control" id="keyPageSize" style="display: inline-block;"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                </div>
+ -->
+                                <div class="pagination-outer" id="key-pagination">
+                                 
+                               
                                 </div>
 
                                 <!-- </div> -->
@@ -255,18 +265,6 @@
 
                                     </tbody>
                                 </table>
-                                <form class="form-horizontal" style="width: 15rem;float: right;" id="otherPagesizeSelect" >
-                                  <div class="form-group">
-                                    <label  class="col-sm-5 control-label">条数</label>
-                                    <div class="col-sm-7">
-                                     <select class="form-control pagesize"data-key="other"> 
-                                    <option value="3">3</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    </select> 
-                                    </div>
-                                  </div>
-                                </form>
                                 <div class="pagination-outer" id="other-pagination">
                                 </div>
                                 <div class="key">
@@ -320,18 +318,11 @@
                                 
                                 </div>
                                 <div class="pagination-outer" id="done-pagination">
-                                <form class="form-horizontal" style="width: 15rem;float: right;" id="donePagesizeSelect">
-                                  <div class="form-group">
-                                    <label  class="col-sm-5 control-label">条数</label>
-                                    <div class="col-sm-7">
-                                     <select class="form-control pagesize"   data-key="done"> 
-                                    <option value="3">3</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    </select> 
-                                    </div>
-                                  </div>
-                                </form>
+                                <div class="page-number" style="display: inline-block;width: 150px;">
+                                    <select class="form-control" v-model="pageSize">
+                                    <option v-for="option in sizeOptions" :value="option.value">{{option.text}}</option>
+                                </select>
+                                </div>
                             </div>
                         </section>
                     </div>
