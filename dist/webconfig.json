@@ -19,7 +19,8 @@
         "postphoneUrl": "/api/supervision/postpone/%id%",
         "traceUrl": "/api/supervision/trace/%id%",
         "closeUrl": "/api/supervision/close/%id%",
-        "revokeUrl": "/api/supervision/delete/%id%"
+        "revokeUrl": "/api/supervision/delete/%id%",
+        "traceHistory":"/api/supervision/findtrace/%id%"
     }
   },
 

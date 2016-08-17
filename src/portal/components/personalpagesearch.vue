@@ -226,7 +226,6 @@
         searchInput()
         {
             var personalpageRequestVue = window.interfaceSettings.personalpageRequest.api;
-            var personalpageRequestKeys = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
             let _this = this;
             let input = this.input.trim();
             if (input == ""){
@@ -244,7 +243,7 @@
                     }
                     $(".cover").show();
                     $("#userInfo").html("");
-                    var searchuserURL= personalpageRequestVue.searchuserUrl + personalpageRequestKeys + "&q=" + inputVal
+                    var searchuserURL= personalpageRequestVue.searchuserUrl + "&q=" + inputVal
                     _this.request = $.ajax({
                         type: "get",
                         url: searchuserURL,
