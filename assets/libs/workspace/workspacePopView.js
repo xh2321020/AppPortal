@@ -1,5 +1,5 @@
 var currentSel = null;
-var usersid = getCookie("username")
+var usersid = getCookie("userid")
 var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
 var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
 var setPersonalpageHeader=function(url,paramObj,iid){

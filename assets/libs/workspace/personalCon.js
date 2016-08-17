@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-    //url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
+  //  url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  
@@ -175,13 +175,15 @@ $(document).ready(function () {
         return this.UTF8ToUTF16(res.join(''));  
     }  
 };
-    //alert(etCookie("username"))
-    if(!etCookie("username")||(etCookie("username")==null)){
-        var cookiesId =  Base64.decode(mm).substring(4,12);
+    var cookiesId =  Base64.decode(mm).substring(4,12);
+    if(document.cookie && document.cookie != ''){
+        updateCookie("userid",cookiesId,30);
+        //updateCookie(username,cookiesId,30);
+    }else{
         var Days = 30;
         var exp = new Date();
         exp.setTime(exp.getTime() + Days*24*60*60*1000);
-        document.cookie = "username=" + cookiesId + ";expires=" + exp.toGMTString()+";path=/";
+        document.cookie = "userid=" + cookiesId + ";expires=" + exp.toGMTString()+";path=/";
     }
 //     <a href="http://172.16.51.131/portal/LoginServlet?url='
 // +Base64.encode(currentHost + '/pages/teamworkspace/team-workspace.html') + '" target="_blank">
@@ -206,22 +208,21 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     +'<img src="assets/images/portal/workspace/work_bg011.png" class="article-list-item-icon">'
     +'<span class="article-list-item-span">个人页面</span></a></li>'
     +'<li class="article-list-item"><img src="assets/images/portal/workspace/work_bg09.png" class="article-list-item-icon">'
-    +'<span class="article-list-item-span" style="color:lightgray">协作空间</span></a></li>'
+    +'<span class="article-list-item-span" style="color:lightgray">协作空间</span></li>'
     +'<li class="article-list-item"><img src="assets/images/portal/workspace/work_bg06.png" class="article-list-item-icon">'
     +'<span class="article-list-item-span" style="color:lightgray">计划管理</span></li>';
-$("#secondLogin").html(duBanGuanLiURL);
-var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
-var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
-// alert(window.interfaceSettings.personalpageRequest.api.getDuBanShiXiang);
-var setPersonalpageHeader=function(url,paramObj,iid){
-    return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
-}
+    $("#secondLogin").html(duBanGuanLiURL);
+    var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
+    var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
+    var setPersonalpageHeader=function(url,paramObj,iid){
+        return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+    }
 
     var _this=this;
     var currentPort = new Array();
     var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
     var nameArray = ["findcount","dubanshixiang", "find1","find2", "find3", "find4", "find5","find6","find7","find8"];
-    var userid=etCookie("username");
+    var usersid =etCookie("userid");
     for (var i = 0, len = fetchArray.length + 1; i < len-1; i++) {
         var ajaxURL = "";
         var datas = "";
@@ -230,15 +231,15 @@ var setPersonalpageHeader=function(url,paramObj,iid){
         var types = "post";
         var arrayId=fetchArray[i];
         if(fetchArray[i] == "GETUSERNAME"){
-            ajaxURL = setPersonalpageHeader(personalpageRequest.getMemberDetails, {uid:userid},null);
+            ajaxURL = setPersonalpageHeader(personalpageRequest.getMemberDetails, {uid:usersid},null);
         }else if (fetchArray[i] == "DUBANSHIXIANG") {
             ajaxURL = setPersonalpageHeader(personalpageRequest.getDuBanShiXiang,{page:0, size:50},null);
             // ajaxURL = personalpageRequest.getDuBanShiXiang+"&page=0&size=50";
-            datas = JSON.stringify({ "accountablesn": userid });
+            datas = JSON.stringify({ "accountablesn": usersid });
         } else if(fetchArray[i] == "USERKUAIJIERUKOU"){
             types = "get";
             datatypes = "json";
-            ajaxURL = personalpageRequest.getYonghuKuaiJieRuKou + userid + personalpageRequestKey;
+            ajaxURL = personalpageRequest.getYonghuKuaiJieRuKou + usersid + personalpageRequestKey;
         } else if(fetchArray[i] == "QIRINEIRICHENG"){
             var startDate = dateFormatFun(new Date());
             var stDate = new Date(); 
@@ -249,17 +250,14 @@ var setPersonalpageHeader=function(url,paramObj,iid){
             var endDate = y+"-"+m+"-"+d;
             types = "get";
             datatypes = "json";
-            // ajaxURL =  getRiChengTiXing +userid+"&startdate="+startDate+"&enddate="+endDate+"";
-            ajaxURL = setPersonalpageHeader(personalpageRequest.getRiChengTiXing,{userid:userid, startdate:startDate, enddate:endDate},null);
+            ajaxURL = setPersonalpageHeader(personalpageRequest.getRiChengTiXing,{userid:usersid, startdate:startDate, enddate:endDate},null);
         } else if(fetchArray[i] == "USERKUAIJIERUKOUAll"){
             types = "get";
             datatypes = "json";
-            // ajaxURL = window.userJsonPortalSettings.singleRequest.initUserKuaiJieRuKou;
             ajaxURL = personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey;
         } else {
-            // ajaxURL = window.userJsonPortalSettings.singleRequest.getJinQiGongZuo;
             ajaxURL = personalpageRequest.getJinQiGongZuo + personalpageRequestKey;
-            datas = JSON.stringify({F_BOUNDUSER: userid, Type:fetchArray[i]});
+            datas = JSON.stringify({F_BOUNDUSER: usersid, Type:fetchArray[i]});
         }
         $.ajax({
             type: types,
@@ -269,19 +267,19 @@ var setPersonalpageHeader=function(url,paramObj,iid){
             data: datas,
             success: function success(data, state, jqxhr) {
                 var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-                "<tr><th style='text-align: center;'> 事项名称 </th>"+
-                "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
+                "<tr><th style='text-align: center; color:black;'> 事项名称 </th>"+
+                "<th style='text-align: center;color:black;'> 创建人员 </th><th style='text-align: center;color:black;'> 创建时间 </th></tr></thead><tbody>";
                 var tableFooter = "</tbody></table></section>";
                 if(fetchArray[jqxhr.index] == "GETUSERNAME"){
                     var chinesename="";
                     var orgTree = "";
-                    for (var i = 0; i < data.length; i++) {
-                        chinesename = data[i].displayname;
-                        orgTree = JSON.stringify(data[i].orgtree);
-                    }
-                    if(!etCookie("chinesename")||(etCookie("chinesename")==null)){
-                        setCookie("chinesename",chinesename,30,"/");
-                        setCookie("userorg",orgTree,30,"/");
+                    chinesename = data[0].displayname;
+                    orgTree = JSON.stringify(data[0].orgtree);
+                    if(document.cookie && document.cookie != ''){
+                        updateCookie("username",chinesename,30,"/");
+                        updateCookie("userorg",orgTree,30,"/");
+                        //setCookie("username",chinesename,30,"/");
+                        //setCookie("userorg",orgTree,30,"/");
                     }
                 }else if(fetchArray[jqxhr.index] == "DUBANSHIXIANG"){
                     var dubanshixiang="";
@@ -334,11 +332,14 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                         }
                     }
                     $("#qiribeirichengTitle").html("七日内日程提醒("+data.length+")");
-                    $("#qiribeirichengItems").html(qirineiricheng+qirineirichengMore);
+
                     if(data.length == 0 ){
                         var nodataUI = '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
                             '<div class="qiRiTiXing-a-div default-font" title="暂无日程事宜提醒!">暂无日程事宜提醒!</div></div>';
+
                         $("#qiribeirichengItems").html(nodataUI + qirineirichengMore);
+                    }else{
+                        $("#qiribeirichengItems").html(qirineiricheng+qirineirichengMore);
                     }
                 }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOU"){
                     if(data.length == 0){
@@ -477,6 +478,15 @@ var setPersonalpageHeader=function(url,paramObj,iid){
         if(domain) cookieString+=";domain="+escape(domain);
         if(secure) cookieString+=";secure="+secure;
         document.cookie=cookieString;
+    }
+    function updateCookie(name,value,days)
+    {
+        if(days){
+            var date=new Date();
+            date.setTime(date.getTime()+(days*24*60*60*1000));
+            var expires=date.toGMTString();
+        }
+        setCookie(name, value,expires,"/");
     }
     function initSpecialKuaiJieRuKou(){
         $.ajax({
