@@ -16,11 +16,11 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
 //    var configHostName = "http://172.16.51.137:8000";
     var configHostName = hostName;
 
-    $http.get(configHostName + "/api/v1.0/cache/find/type/OPEN_TYPE", "")
+    $http.get(configHostName + "/api/cache/find/type/OPEN_TYPE?apikey=a16cb0c916404be78cb0805fefc7d26a", "")
     .success(function(response){
         scope = response;
     });
-    $http.get(configHostName + "/api/v1.0/cache/find/type/CAL_TYPE", "")
+    $http.get(configHostName + "/api/cache/find/type/CAL_TYPE?apikey=a16cb0c916404be78cb0805fefc7d26a", "")
     .success(function(response){
         scheduletypes = response;
         var tmpClass = ["event-meeting", "event-travel", "event-duty", "event-agent", "event-holiday"];
@@ -110,9 +110,9 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
 
         getEvents: function(urlParam, isMultiType, callback){
             if(isMultiType){
-                urlParam = hostName + "/api/V1.0/schedule/scheduleCompanyPeoples?" + urlParam;
+                urlParam = hostName + "/api/schedule/scheduleCompanyPeoples?apikey=a16cb0c916404be78cb0805fefc7d26a&" + urlParam;
             } else{
-                urlParam = hostName + '/api/V1.0/schedule/scheduleuserdate?' + urlParam;
+                urlParam = hostName + '/api/schedule/scheduleuserdate?apikey=a16cb0c916404be78cb0805fefc7d26a&' + urlParam;
             }
             $http.get(urlParam, "")
             .success(function(response){
@@ -134,7 +134,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         getEventsByPeople: function(urlParam, callback){
-            $http.post(hostName + '/api/V1.0/schedule/scheduledepartmentdate?startdate=' + urlParam.startdate + '&enddate=' + urlParam.enddate, urlParam.userid)
+            $http.post(hostName + '/api/schedule/scheduledepartmentdate?startdate=' + urlParam.startdate + '&enddate=' + urlParam.enddate + "&apikey=a16cb0c916404be78cb0805fefc7d26a", urlParam.userid)
                 .success(function(response){
                     if(true){
                         events = response;
@@ -153,9 +153,9 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
 
         updateEvents: function(urlParam, isMultiType){
             if(isMultiType){
-                urlParam = hostName + "/api/V1.0/schedule/scheduleCompanyPeoples?" + urlParam;
+                urlParam = hostName + "/api/schedule/scheduleCompanyPeoples?apikey=a16cb0c916404be78cb0805fefc7d26a&" + urlParam;
             } else{
-                urlParam = hostName + '/api/V1.0/schedule/scheduleuserdate?' + urlParam;
+                urlParam = hostName + '/api/schedule/scheduleuserdate?apikey=a16cb0c916404be78cb0805fefc7d26a&' + urlParam;
             }
             $http.get(urlParam, "")
                 .success(function(response){
@@ -190,7 +190,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         addEvent: function (event, isMultiType) {
-            var url = hostName + '/api/V1.0/schedule/schedule/add?startdate=' + event.startdate + '&enddate=' + event.enddate;
+            var url = hostName + '/api/schedule/schedule/add?apikey=a16cb0c916404be78cb0805fefc7d26a&startdate=' + event.startdate + '&enddate=' + event.enddate;
             var tmpS = event.startdate;
             var tmpE = event.enddate;
             event.startdate = event.startdate + ' '  +  event.starttime;
@@ -225,7 +225,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         editEvent: function (event, isMultiType) {
-            $http.post(hostName + '/api/V1.0/schedule/schedule/edit', event)
+            $http.post(hostName + '/api/schedule/schedule/edit?apikey=a16cb0c916404be78cb0805fefc7d26a', event)
             .success(function(response){
                 if(true){
                     console.log("edit success");
@@ -254,7 +254,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         deleteEventById: function(id){
-            $http.delete(hostName + '/api/V1.0/schedule/scheduledelone/' + id, '')
+            $http.delete(hostName + '/api/schedule/scheduledelone/' + id + "&apikey=a16cb0c916404be78cb0805fefc7d26a", '')
             .success(function(response){
                 if(response == true){
                     console.log("delete success");
@@ -275,7 +275,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         getPeoples: function(urlParam, callback){
-            $http.get(hostName + '/api/V1.0/schedule/scheduleCompanyPeoples?' + urlParam, '')
+            $http.get(hostName + '/api/schedule/scheduleCompanyPeoples?&apikey=a16cb0c916404be78cb0805fefc7d26a' + urlParam, '')
             .success(function(response){
                 console.log(JSON.stringify(response));
                 if(true){
