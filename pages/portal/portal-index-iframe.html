@@ -138,20 +138,32 @@
                         {
                             name:'电功率',
                             type:'line',
-                            stack: '总量',
+//                            stack: '总量',
                             data:mps,
                             itemStyle: {
                                 normal: { color:'#00a2e5' }
-                            }
+                            },
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
                         },
                         {
                             name:'热功率',
                             type:'line',
-                            stack: '总量',
+//                            stack: '总量',
                             data:hps,
                             itemStyle: {
                                 normal: { color:'#abcb27' }
-                            }
+                            },
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
                         }
                     ]
                 };
