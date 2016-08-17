@@ -48,6 +48,8 @@ function editCancel(parmar){
 function editSave(parmar,parmarKey){
     var input = "#input"+parmar;
     // var updateUserProfileURL = window.userJsonPortalSettings.singleRequest.updateUserProfile  + "&uid=" + pageUserUid +'&'+parmarKey+'=' + $(input).val();
+    alert($(input).val());
+    // return;
     $.ajax({
         type: "post",
         contentType: "application/json",
@@ -320,7 +322,7 @@ $(document).ready(function () {
                 }else{
                     sameOrgCount=4;
                     moreHtml = '<div style="margin-right: 5px;min-height: 4.7rem;">'+
-                    '<a href="pages/personalpage/personalpage-list-search.html?ou=' +pramar+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
+                    '<a href="pages/personalpage/personalpage-list-search.html?ou=' +parpp+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
                 }
                 for(var i = 0; i< sameOrgCount; i++){
                     var iconImages=""
@@ -335,7 +337,6 @@ $(document).ready(function () {
                     '<span class="right-name">'+data[i].displayname+'</span><br>' +
                     '<span class="right-bottom-org">'+ sameOrgName + '</span></div>';
                 }
-
                 if(data.length > 0){
                     $("#sameOrgId").remove();
                     $("#sameOrgMember").html(sameOrgMemberDiv+sameOrgLineHtml+sameOrgHtml + moreHtml+ '</div></div>');

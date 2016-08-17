@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-    url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
+    //url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  
@@ -174,12 +174,15 @@ $(document).ready(function () {
         }
         return this.UTF8ToUTF16(res.join(''));  
     }  
-};  
-var cookiesId =  Base64.decode(mm).substring(4,12);
-    var Days = 30;
-    var exp = new Date();
-    exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = "username=" + cookiesId + ";expires=" + exp.toGMTString()+";path=/"; 
+};
+    //alert(etCookie("username"))
+    if(!etCookie("username")||(etCookie("username")==null)){
+        var cookiesId =  Base64.decode(mm).substring(4,12);
+        var Days = 30;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days*24*60*60*1000);
+        document.cookie = "username=" + cookiesId + ";expires=" + exp.toGMTString()+";path=/";
+    }
 //     <a href="http://172.16.51.131/portal/LoginServlet?url='
 // +Base64.encode(currentHost + '/pages/teamworkspace/team-workspace.html') + '" target="_blank">
 //                                 <img src="assets/images/portal/workspace/work_bg09.png" class="article-list-item-icon">
@@ -190,15 +193,15 @@ var cookiesId =  Base64.decode(mm).substring(4,12);
 //                             <img src="assets/images/portal/workspace/work_bg06.png" class="article-list-item-icon">
 //                             <span class="article-list-item-span" style="color:lightgray">计划管理</span>
 //                             <!-- </a> -->
-var duBanGuanLiURL = '<li class="article-list-item"><a href="http://172.16.51.131/portal/LoginServlet?url='
+var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.com.cn/pt/LoginServlet?url='
     +Base64.encode(currentHost + '/pages/supervision/supervision-mine.html') + '"  target="_blank">'
     +'<img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">'
     +'<span class="article-list-item-span">督办管理</span></a></li>'
-    +'<li class="article-list-item"><a href="http://172.16.51.131/portal/LoginServlet?url='
+    +'<li class="article-list-item"><a href="http://bjecm.cnnp.com.cn/pt/LoginServlet?url='
     +Base64.encode(currentHost + '/pages/schedule/personal.html') + '" target="_blank">'
     +'<img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">'
     +'<span class="article-list-item-span">日程管理</span></a></li>'
-    +'<li class="article-list-item"><a href="http://172.16.51.131/portal/LoginServlet?url='
+    +'<li class="article-list-item"><a href="http://bjecm.cnnp.com.cn/pt/LoginServlet?url='
     +Base64.encode(currentHost + '/pages/personalpage/personalpage-detail.html') + '" target="_blank">'
     +'<img src="assets/images/portal/workspace/work_bg011.png" class="article-list-item-icon">'
     +'<span class="article-list-item-span">个人页面</span></a></li>'
@@ -216,7 +219,7 @@ var setPersonalpageHeader=function(url,paramObj,iid){
 
     var _this=this;
     var currentPort = new Array();
-    var fetchArray = ["USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
+    var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
     var nameArray = ["findcount","dubanshixiang", "find1","find2", "find3", "find4", "find5","find6","find7","find8"];
     var userid=etCookie("username");
     for (var i = 0, len = fetchArray.length + 1; i < len-1; i++) {
@@ -226,7 +229,9 @@ var setPersonalpageHeader=function(url,paramObj,iid){
         var datatypes = "json";
         var types = "post";
         var arrayId=fetchArray[i];
-        if (fetchArray[i] == "DUBANSHIXIANG") {
+        if(fetchArray[i] == "GETUSERNAME"){
+            ajaxURL = setPersonalpageHeader(personalpageRequest.getMemberDetails, {uid:userid},null);
+        }else if (fetchArray[i] == "DUBANSHIXIANG") {
             ajaxURL = setPersonalpageHeader(personalpageRequest.getDuBanShiXiang,{page:0, size:50},null);
             // ajaxURL = personalpageRequest.getDuBanShiXiang+"&page=0&size=50";
             datas = JSON.stringify({ "accountablesn": userid });
@@ -267,14 +272,22 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                 "<tr><th style='text-align: center;'> 事项名称 </th>"+
                 "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
                 var tableFooter = "</tbody></table></section>";
-                if(fetchArray[jqxhr.index] == "DUBANSHIXIANG"){
+                if(fetchArray[jqxhr.index] == "GETUSERNAME"){
+                    var chinesename="";
+                    var orgTree = "";
+                    for (var i = 0; i < data.length; i++) {
+                        chinesename = data[i].displayname;
+                        orgTree = JSON.stringify(data[i].orgtree);
+                    }
+                    if(!etCookie("chinesename")||(etCookie("chinesename")==null)){
+                        setCookie("chinesename",chinesename,30,"/");
+                        setCookie("userorg",orgTree,30,"/");
+                    }
+                }else if(fetchArray[jqxhr.index] == "DUBANSHIXIANG"){
                     var dubanshixiang="";
                     var qiridubantixing="";
                     var qiridubantixingMore='<div style="width:100%;margin-top:0.5rem;">'+
                     '<a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;"  target="_blank">更多 ></a></div>';
-                    //if(data.length == 0){
-                    //    alert(123);
-                    //}else{
                         for(var j=0; j<data.length; j++){
                             var description = "";
                             if ((typeof(data[j].description) == "undefined") || (typeof(data[j].description) == "")) {
@@ -290,34 +303,42 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                             '</span></div></div> <div class="task-list-spack"></div></li>';
                             if((data.length>0)&&(j<=1)){
                                 qiridubantixing = qiridubantixing + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
-                                '<a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" class="qiRiTiXing-a" target="_blank">'+
+                                '<a href="pages/supervision/supervision-detail.html" class="qiRiTiXing-a" target="_blank">'+
                                 '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
                             }
                         }
                         $("#nodataDiv").remove();
+                        $("#nodataDuBanUI").remove();
                         $("#worksoftodayUl").append(dubanshixiang);
                         $("#qirineidubanItems").html(qiridubantixing+qiridubantixingMore);
                         $("#qirineidubanTitle").html("七日内督办提醒("+data.length+")");
                     if(data.length == 0 ){
-                        $("#worksoftodayUl").html('<div style="width: 90%; height: 24rem; border: 1px solid lightgray;" id="nodataDiv">暂无数据！</div>');
-                        $("#qirineidubanItems").html("暂无数据！" +qiridubantixingMore);
+                        var nodateList = '<li class="li-task-list" id="nodataDiv" style="margin-top: 0.5rem;"><div class="task-list-meet"><div class="default-font">暂无</div></div>'+
+                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;"><div style="overflow: hidden; position: relative;">'+
+                            '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
+                            'white-space: nowrap; width: 100%; display: block; padding-top:0;" title="暂无重点事宜提醒">暂无重点事宜提醒</span></div>'+
+                            '<div><span class="task-list-detail-subtitle default-font"></span></div></div> <div class="task-list-spack"></div></li>';
+                        var nodataUI='<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;" id="nodataDuBanUI">'+
+                            '<div class="qiRiTiXing-a-div default-font" title="暂无督办事宜提醒！">暂无督办事宜提醒！</div></div>';
+                        $("#worksoftodayUl").html(nodateList);
+                        $("#qirineidubanItems").html(nodataUI +qiridubantixingMore);
                     }
-                    //}
-                    
                 }else if(fetchArray[jqxhr.index] == "QIRINEIRICHENG"){
                     var qirineirichengMore= '<div style="width:100%;margin-top:0.5rem;"><a class="default-font" href="pages/schedule/personal.html" style="float:right;" target="_blank">更多 ></a></div>';
                     var qirineiricheng = "";
                     for(var j=0; j<data.length; j++){
                         if((data.length>0)&&(j<=1)){
                             qirineiricheng = qirineiricheng + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
-                            '<a href="pages/supervision/supervision-detail.html?id=1002&amp;previous=all" class="qiRiTiXing-a"  target="_blank">'+
+                            '<a href="pages/schedule/personal.html" class="qiRiTiXing-a"  target="_blank">'+
                             '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
                         }
                     }
                     $("#qiribeirichengTitle").html("七日内日程提醒("+data.length+")");
                     $("#qiribeirichengItems").html(qirineiricheng+qirineirichengMore);
                     if(data.length == 0 ){
-                        $("#qiribeirichengItems").html("暂无数据！" + qirineirichengMore);
+                        var nodataUI = '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
+                            '<div class="qiRiTiXing-a-div default-font" title="暂无日程事宜提醒!">暂无日程事宜提醒!</div></div>';
+                        $("#qiribeirichengItems").html(nodataUI + qirineirichengMore);
                     }
                 }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOU"){
                     if(data.length == 0){
@@ -335,7 +356,7 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                             }
                             kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
                             '<a href="'+data[j].link+'" target="_blank">'+
-                            '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
+                            '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
                             kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].linkid+'">'+data[j].description+'</option>';
                         }
                         //主页面工作快捷入口
@@ -403,10 +424,6 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                 if (jqxhr.index == 0) console.log(data);
             },
             error: function error(err) {
-                // if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOU"){
-                //     initSpecialKuaiJieRuKou();
-                // }
-                // initSpecialKuaiJieRuKou();
                 console.log(err);
             }
         }).index = i;
@@ -447,8 +464,21 @@ var setPersonalpageHeader=function(url,paramObj,iid){
         else
             return null;
     }
+    function  setCookie(name,value,days,path,domain,secure){
+        if(days){
+            var date=new Date();
+            date.setTime(date.getTime()+(days*24*60*60*1000));
+            var expires=date.toGMTString();
+        }
+        else var expires="";
+        let cookieString=name+"="+escape(value);
+        if(expires) cookieString+=";expires="+expires;
+        if(path) cookieString+=";path="+escape(path);
+        if(domain) cookieString+=";domain="+escape(domain);
+        if(secure) cookieString+=";secure="+secure;
+        document.cookie=cookieString;
+    }
     function initSpecialKuaiJieRuKou(){
-        // alert(personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey)
         $.ajax({
             type: "get",
             dataType: "json",
@@ -456,27 +486,26 @@ var setPersonalpageHeader=function(url,paramObj,iid){
             url: personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey,
             // data: "",
             success: function success(data, state, jqxhr) {
-                // alert(data);
                 var kuaijierukouLeft="";
-                    var kuaijierukoupop="";
-                    var kuaijierukouselector="";                       
-                    for(var j=0; j<data.length;j++){
-                        if(j<8){
-                            kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
-                            '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
-                        }
-                        kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
-                        '<a href="'+data[j].link+'" target="_blank">'+
-                        '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
-                        kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
+                var kuaijierukoupop="";
+                var kuaijierukouselector="";
+                for(var j=0; j<data.length;j++){
+                    if(j<8){
+                        kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
+                        '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
                     }
-                    //主页面工作快捷入口
-                    $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
-                    //弹框页面工作快捷入口（编辑页面）
-                    $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
-                    //编辑选择框已添加的工作快捷入口
-                    // alert(kuaijierukouselector);
-                    $("#leftSel").html(kuaijierukouselector);
+                    kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
+                    '<a href="'+data[j].link+'" target="_blank">'+
+                    '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
+                    kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
+                }
+                //主页面工作快捷入口
+                $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
+                //弹框页面工作快捷入口（编辑页面）
+                $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
+                //编辑选择框已添加的工作快捷入口
+                // alert(kuaijierukouselector);
+                $("#leftSel").html(kuaijierukouselector);
             },
             error: function error(err) {
                 console.log(err);
