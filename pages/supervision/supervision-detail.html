@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base href="http://10.15.251.110/">
+    <base href="" id="baseTag">
+    <script>
+    	document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -199,11 +202,11 @@
 				    <td>进度</td>
 				    <td width="50%">执行情况</td>
 				</tr>
-				<tr class="middle">
-				    <td>{{latestTrace.updatetime}}</td>
-				    <td>{{latestTrace.operatorname}}</td>
-				    <td>{{latestTrace.rate}}%</td>
-				    <td>{{latestTrace.description}}</td>
+				<tr class="middle" v-for="trace in traceHistory">
+				    <td>{{trace.updatetime}}</td>
+				    <td>{{trace.operatorname}}</td>
+				    <td>{{trace.rate?trace.rate:0}}%</td>
+				    <td>{{trace.description}}</td>
 				</tr>
 				<!-- /.level-head -->
 			    </table>

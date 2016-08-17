@@ -9,10 +9,9 @@ newsApp.controller("newsDetailAppCtrl", function($scope, $http, $sce, NewsServic
                     if($scope.newsDetail.attachments){
                         for(var i = 0, j = $scope.newsDetail.attachments.length; i < j; i++){
                             var attachment = $scope.newsDetail.attachments[i];
-//                            if(attachment.file_type == 'pdf'){
-//                                var id = "#" + attachment.id;
-//                                $(id).attr("src", attachment.url);
-//                            }
+                            //if(attachment.file_type == 'other' && attachment.name.indexOf(".mp4") > -1){
+                            //    attachment.newUrl = attachment.path + ".mp4"
+                            //}
                         }
                     }
                 },
