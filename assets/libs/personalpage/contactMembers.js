@@ -11,7 +11,7 @@ function getUserCookies(name){
         return null;
 }
 
-var currentUserId=getUserCookies("username");
+var currentUserId=getUserCookies("userid");
 var pageUserUid="";
 var cancelText = "";
 function myFunction(parmar){
