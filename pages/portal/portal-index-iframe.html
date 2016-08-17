@@ -22,7 +22,7 @@
                     <div class="catalog-online" style="margin-top: 1rem;">
                         <div class="scroll-panel-online">
                             <div class="scroll-icon-online up" id="goingUp">
-                                <em class="glyphicon-online glyphicon-menu-up"></em>
+                                <em class="glyphicon-online glyphicon-menu-up" style="color: rgb(0,162,229);"></em>
                             </div>
                             <div class="online-list-div">
                                 <ul class="online-list-ul" style="height: 79.5rem;" id="location">
@@ -40,15 +40,16 @@
                                     <li id="tag12" name="12" onclick="getPowerAmount(24)">方家山1#</li>
                                     <li id="tag13" name="13" onclick="getPowerAmount(25)">方家山2#</li>
                                     <li id="tag14" name="14" onclick="getPowerAmount(36)">海南核电1#</li>
+                                    <li id="tag15" name="37" onclick="getPowerAmount(36)">海南核电2#</li>
                                 </ul>
                             </div>
 
                             <div class="scroll-icon-online down" id="goingDown">
-                                <em class="glyphicon-online glyphicon-menu-down"></em>
+                                <em class="glyphicon-online glyphicon-menu-down" style="color: rgb(0,162,229);"></em>
                             </div>
                         </div>
                     </div>
-                    <div class="scroll-icon-online down" id="echart" style="width: 50rem; height: 30rem; border: 0; margin-left: 2.5rem;">
+                    <div class="scroll-icon-online down" id="echart" style="width: 48rem; height: 30rem; border: 0; margin-left: 1rem;">
                         <em class="glyphicon-online glyphicon-menu-down"></em>
                     </div>
                     </div>
@@ -97,7 +98,7 @@
                 var hps = [];
                 for(var i = 0, j = data.length; i < j; i++){
                     var singleData = data[i];
-                    if(singleData.time.indexOf(":00") > 0){
+                    if(singleData.time.indexOf(":00") > 0 || singleData.time.indexOf(":20") > 0 || singleData.time.indexOf(":40") > 0){
                         resultDataList.push(singleData);
                         times.push(singleData.time);
                         mps.push(singleData.mp);
@@ -138,7 +139,6 @@
                         {
                             name:'电功率',
                             type:'line',
-//                            stack: '总量',
                             data:mps,
                             itemStyle: {
                                 normal: { color:'#00a2e5' }
@@ -153,7 +153,6 @@
                         {
                             name:'热功率',
                             type:'line',
-//                            stack: '总量',
                             data:hps,
                             itemStyle: {
                                 normal: { color:'#abcb27' }
@@ -207,18 +206,7 @@
             });
         }
 
-//        getPower();
         var currenIndex = 0;
-//        function getPower(){
-//            // var currenIndex = 0;
-//            var dat = new Date();
-//            var formateDat = "";
-//            formateDat = dat.getFullYear() + "-"+ (dat.getMonth()+1)+"-"+ dat.getDate();
-//            document.getElementById("iframess").innerHTML='<div style="width: 50rem; height: 30rem;">' +
-//            '<iframe src="http://10.15.252.238:8888/EchartsCaini/ProdDataAction?strdate='+formateDat+'&rid=1"  width="100%" height="495px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>' +
-//            '</div>';
-//        }
-        
         $("#comPortalNav").hover(function (ev) {
             $(this.querySelector(".nav-panel")).show();
         }, function () {
@@ -282,6 +270,67 @@
                 currenIndex--;
             }
         });
+
+        getSinglePowAction();
+        getPowDataAction();
+        function getPowDataAction(){
+             $.ajax({
+                 type: "get",
+                 contentType: "json",
+                 data: "",
+                 url:"http://10.15.251.110:8010/api/echart/SinglePowAction?apikey=a16cb0c916404be78cb0805fefc7d26a",
+                 success: function (data, state, jqxhr) {
+                     data = JSON.parse(data);
+                     var epw=0;
+                     var hpw=0;
+                     var bspow=0;
+                     var bstpow=0;
+                     for(var x in data){
+                         epw=epw+parseFloat(data[x].EPW);
+                         hpw=hpw+parseFloat(data[x].HPW);
+                         bspow=bspow+parseFloat(data[x].BSPOW);
+                         bstpow=bstpow+parseFloat(data[x].BSTPOW);
+                     }
+                     if(!isNaN(epw)){
+                         $("#p1").html(epw.toFixed(2)+"MW");
+                     }
+                     var epwper=epw/bspow*100;
+                     if(!isNaN(epwper)){
+                         $("#p11").html(epwper.toFixed(2)+"%");
+                     }
+                 },
+                 error: function (err) {
+                     console.log(err);
+                 }
+             });
+         }
+         function getSinglePowAction(){
+             $.ajax({
+                 type: "get",
+                 contentType: "json",
+                 data: "",
+                 url:"http://10.15.251.110:8010/api/echart/PowDataAction?apikey=a16cb0c916404be78cb0805fefc7d26a",
+                 success: function (data, state, jqxhr) {
+                     data = JSON.parse(data);
+                     var totalPow=0;
+                     var ypow=0;
+                     for(var x in data){
+                         totalPow=totalPow+data[x].total;
+                         ypow=ypow+parseFloat(data[x].ypow);
+                     }
+                     var powper=totalPow/ypow*100;
+                     if(!isNaN(totalPow)){
+                         $("#p2").html(totalPow.toFixed(2)+"亿度");
+                     }
+                     if(!isNaN(powper)){
+                         $("#p22").html(powper.toFixed(2)+"%");
+                     }
+                 },
+                 error: function (err) {
+                     console.log(err);
+                 }
+             });
+         }
     });
 </script>
 </body>
