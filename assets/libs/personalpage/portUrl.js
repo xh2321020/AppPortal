@@ -2,10 +2,10 @@
  * Created by kingsinsd on 2016/7/8.
  */
 //contact.js
-// var serveAddress = "http://10.15.251.110:8010";
-// var apikey = "a16cb0c916404be78cb0805fefc7d26a";
-var serveAddress = "http://172.16.51.137:8010";
-var apikey = "e71982d5401b488da4acef8827c41845"
+ var serveAddress = "http://10.15.251.110:8010";
+ var apikey = "a16cb0c916404be78cb0805fefc7d26a";
+//var serveAddress = "http://172.16.51.137:8010";
+//var apikey = "e71982d5401b488da4acef8827c41845"
 // http://10.25.251.110:8010/api/xxxx?api_key=a16cb0c916404be78cb0805fefc7d26a
 
 //获取更新个人信息
