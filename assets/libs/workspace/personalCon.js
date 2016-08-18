@@ -217,7 +217,6 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     var setPersonalpageHeader=function(url,paramObj,iid){
         return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
     }
-
     var _this=this;
     var currentPort = new Array();
     var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
@@ -470,7 +469,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
             var expires=date.toGMTString();
         }
         else var expires="";
-        let cookieString=name+"="+escape(value);
+        var cookieString=name+"="+escape(value);
         if(expires) cookieString+=";expires="+expires;
         if(path) cookieString+=";path="+escape(path);
         if(domain) cookieString+=";domain="+escape(domain);
