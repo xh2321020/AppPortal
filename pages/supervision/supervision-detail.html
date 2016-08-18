@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base href="http://10.15.251.110/">
+    <base  id="baseTag">
+    <script>
+    	document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -59,9 +62,9 @@
 			<td colspan="6">督办层级详情</td>
 		    </tr>
 		    <tr class="level-head">
-			<td width="12%"></td>
+			<td width="12%">形象进度</td>
 			<td width="43%">督办名称</td>
-			<td width="8%">责任领导</td>
+			<td width="8%">发起人</td>
 			<td width="7%">责任人</td>
 			<td width="10%">计划完成时间</td>
 			<td width="20%">操作</td>
@@ -96,6 +99,7 @@
 			<td class="middle"><p>{{responsiblename}}</p></td>
 			<td class="middle"><p>{{estimatedcompletetiontime}}</p></td>
 			<td class="middle">
+			 	<a @click="editOperation(id)"  class="menu">编辑</a>
 			    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
 			    <a data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
 			</td>
@@ -107,7 +111,7 @@
 			<td class="middle"><p>{{item.responsiblename}}</p></td>
 			<td class="middle"><p>{{item.estimatedcompletetiontime}}</p></td>
 			<td class="middle">
-			    <a :href="'pages/supervision/supervision-edit.html?id='+item.id+'&previous=detail'" class="menu">编辑</a>
+			    <a  @click="editOperation(item.id)" class="menu">编辑</a>
 			    <!-- /.menu --><a v-if="status=='0'" @click="postphone(item)" class="menu">延期</a>
 			    <!-- /.menu --><a @click="revoke(item)"class="menu">撤销</a>
 			    <!-- /.menu --><a @click="close(item)" class="menu">关闭</a>
@@ -130,25 +134,25 @@
 			<!-- /.al-left -->
 			<td class="al-right" colspan="2">督办来源</td>
 			<!-- /.al-right -->
-			<td class="al-left" colspan="2">{{source}}</td>
+			<td class="al-left" colspan="2">{{source_name}}</td>
 			<!-- /.al-left -->
 		    </tr>
 		    <tr>
 			<td class="al-right">领域</td>
 			<!-- /.al-right -->
-			<td class="al-left">{{area}}</td>
+			<td class="al-left">{{area_name}}</td>
 			<!-- /.al-left -->
-			<td class="al-right" colspan="2">{{estimatedcompletetiontime}}</td>
+			<td class="al-right" colspan="2">计划完成时间</td>
 			<!-- /.al-right -->
-			<td class="al-left" colspan="2">2016-07-17</td>
+			<td class="al-left" colspan="2">{{estimatedcompletetiontime}}</td>
 			<!-- /.al-left -->
 		    </tr>
 		    <tr>
-			<td class="al-right">责任领导</td>
+			<td class="al-right">发起人</td>
 			<!-- /.al-right -->
 			<td class="al-left">{{accountablename}}</td>
 			<!-- /.al-left -->
-			<td class="al-right" colspan="2">紧急程度</td>
+			<td style="min-width:17rem;"  colspan="2" class="al-right">紧急程度（5为最紧急）</td>
 			<!-- /.al-right -->
 			<td class="al-left" colspan="2">{{urgency}}</td>
 			<!-- /.al-left -->
@@ -158,7 +162,7 @@
 			<!-- /.al-right -->
 			<td class="al-left" v-text="scope"></td>
 			<!-- /.al-left -->
-			<td class="al-right" colspan="2">重要程度</td>
+			<td style="min-width:17rem;"  colspan="2" class="al-right">重要程度（5为最重要）</td>
 			<!-- /.al-right -->
 			<td class="al-left" colspan="2">{{importance}}</td>
 			<!-- /.al-left -->
@@ -187,7 +191,7 @@
 			<td colspan="5"></td>
 		    </tr>
 		    <tr class="title2">
-			<td colspan="6" class="al-right">执行进展</td>
+			<td colspan="6" class="al-left">执行进展</td>
 		    </tr>
 		    <!-- /.title2 -->
 		    <tr>
@@ -199,11 +203,11 @@
 				    <td>进度</td>
 				    <td width="50%">执行情况</td>
 				</tr>
-				<tr class="middle">
-				    <td>{{latestTrace.updatetime}}</td>
-				    <td>{{latestTrace.operatorname}}</td>
-				    <td>{{latestTrace.rate}}%</td>
-				    <td>{{latestTrace.description}}</td>
+				<tr class="middle" v-for="trace in traceHistory">
+				    <td>{{trace.updatetime}}</td>
+				    <td>{{trace.operatorname}}</td>
+				    <td>{{trace.rate?trace.rate:0}}%</td>
+				    <td>{{trace.description}}</td>
 				</tr>
 				<!-- /.level-head -->
 			    </table>
@@ -243,14 +247,14 @@
 						    </div>
 						  </div>
 				  	</form>
-				  	<div v-show="currentModal=='close'">确定要关闭此督办吗？(确定点保存)</div>
-				  	<p v-show="currentModal=='success'">保存成功</p>
-				  	<p v-show="currentModal=='fail'">保存失败</p>
-				  	<p v-show="currentModal=='missrole'">非责任领导角色无此操作权限</p>
+				  	<div v-show="currentModal=='close'">确定要关闭此督办吗？(确定点保存)</div>				  	
 				</template>
 				  <button type="button" class="btn btn-primary" @click="saveChanges" slot="save">保存</button>
 		</modal-pop>
 		<!-- detail tab end-->
+		<modal-pop :modal_id="'alertModal'">
+				<p slot="body" style="margin:0 auto;text-align: center;" v-text="alertMessage"></p>
+		</modal-pop>
 	    </div>
 	</div>
     </section>

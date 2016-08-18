@@ -46,7 +46,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
                 forceParse: 0,
             });
         },
-        100
+        3000
     );
 
     Date.prototype.format = function(format) {
@@ -102,6 +102,36 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         }
         return event;
     }
+
+    var clone = function(obj){
+        var o;
+        switch(typeof obj){
+            case 'undefined': break;
+            case 'string'   : o = obj + '';break;
+            case 'number'   : o = obj - 0;break;
+            case 'boolean'  : o = obj;break;
+            case 'object'   :
+                if(obj === null){
+                    o = null;
+                }else{
+                    if(obj instanceof Array){
+                        o = [];
+                        for(var i = 0, len = obj.length; i < len; i++){
+                            o.push(clone(obj[i]));
+                        }
+                    }else{
+                        o = {};
+                        for(var k in obj){
+                            o[k] = clone(obj[k]);
+                        }
+                    }
+                }
+                break;
+            default:
+                o = obj;break;
+        }
+        return o;
+    };
 
     var service = {
         getEventClasss: function(){
@@ -193,15 +223,16 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
             var url = hostName + '/api/schedule/schedule/add?apikey=a16cb0c916404be78cb0805fefc7d26a&startdate=' + event.startdate + '&enddate=' + event.enddate;
             var tmpS = event.startdate;
             var tmpE = event.enddate;
-            event.startdate = event.startdate + ' '  +  event.starttime;
-            event.enddate = event.enddate + ' '  +  event.endtime;
 
+            var tmpEvent = clone(event);
+            tmpEvent.startdate = event.startdate + ' '  +  event.starttime;
+            tmpEvent.enddate = event.enddate + ' '  +  event.endtime;
             var requestEvents = [];
-            requestEvents.push(event);
+            requestEvents.push(tmpEvent);
             console.log(JSON.stringify(requestEvents));
             $http.post(url, requestEvents)
              .success(function(response){
-                if(true){
+                if(response.length == ""){
                     console.log("add success");
                     $("#add").removeClass("active").removeClass("in");
                     $("#schedule").addClass("active").addClass("in");
@@ -215,6 +246,8 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
                         events.push(event);
                     }
                     $("#calendar").fullCalendar('addEventSource', [curEvent]);
+                }else if(response[0].id && response[0].id != ""){
+                        alert("该时间内已安排日程，请选择其他时间！");
                 }else{
                     alert("新增失败，请重试！");
                 }

@@ -58,7 +58,6 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                 {
                     console.log("error", jqxhr);
                 }
-                
             });
     };
     function getMembers(parmar) {

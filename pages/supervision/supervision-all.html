@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-全部督办</title>
-    <base href="http://10.15.251.110/">
+   <base  id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
@@ -41,7 +44,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-panel fade in active" >
-                        <p class="tip"><span>展示所有的督办信息，包括您作为责任领导和责任人的督办任务。</span></p>
+                        <p class="tip"><span>展示所有的督办信息，包括您作为发起人和责任人的督办任务。</span></p>
                         <section id="filterSection">
                             <div class="filter">
                                 <ul class="filter-item filter-field clearfix">
@@ -171,7 +174,7 @@
                         <section class="grid-table container-fluid " id="result-section" style="margin-top: 3rem;">                        
                             <div id="keySec">
                                 <table class="table table-hover table-condensed content-key datatable" id="keyList">
-                                    <thead >
+                                    <thead>
                                     <tr>
                                         <th v-for=" n in 8" :class="[keyItems.sorting[n]]" @click="sortColumn(n,'key')">
                                             {{ths[n].val}}
@@ -179,9 +182,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="grid-content " v-for="item in keyItems.show">
+                                    <tr class="grid-content" v-for="item in keyItems.show">
                                         <td>{{item.code}}</td>
-                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=all'">{{item.name}}</a></td>
+                                         <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=all'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -205,7 +225,7 @@
                                                 </div>
                                                 <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">{{item.latestDesc}}
                                                 </span>
-
+                                                
                                                 <div class="hoverInfo">{{item.latestDesc}}</div>
                                                 <!-- /.hoverInfo -->
                                             </div>
@@ -214,6 +234,18 @@
 
                                     </tbody>
                                 </table>
+                                  <form class="form-horizontal" style="width: 15rem;float: right;">
+                                  <div class="form-group">
+                                    <label  class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control" id="keyPagesizeSelect"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
                                 <div class="pagination-outer" id="key-pagination" style="text-align: right;">
                                 </div>
                               

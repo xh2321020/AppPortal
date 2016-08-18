@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>工作空间</title>
-    <base href="http://10.15.251.110/"/>
-    <!-- Bootstrap -->
+    <base href="" id="baseTag">
+    <script>
+            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
+    <!-- <base href="../../"> -->
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
     <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
@@ -45,7 +48,7 @@
 
                     </ul>
                     <a style="cursor: pointer;">
-                        <div class="bodySectionLeftPortalMoreSys" style="color:#337ab7; margin-bottom:1rem;"data-toggle="modal"
+                        <div class="bodySectionLeftPortalMoreSys" style="color:#337ab7; margin-bottom:1rem;" data-toggle="modal"
                              data-target="#myModal">更多 ></div>
                     </a>
 
@@ -68,12 +71,12 @@
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">关闭
-                                    </button>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#editModal" id="showOpenEditPage">
                                         编辑
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
                                     </button>
                                 </div>
                             </div><!-- /.modal-content -->
@@ -95,7 +98,7 @@
                                 <div class="modal-body">
                                     <div class="ws-edit-pop-div"  id="noactionpopview" style="z-index:1; height:50rem;padding-top: 2rem;">
                                         <div style="width:15rem; height: 35rem; float: left; margin-left:19rem;">
-                                            <div>已选择快捷入口</div>
+                                            <div style="padding-left:25%; margin-bottom:1rem;">已选择</div>
                                             <select multiple="" id="leftSel" onclick="setButton(this)" ondblclick="document.getElementById('btnRight').click()" style="height:40rem;width:15rem;">
 
                                             </select>
@@ -119,22 +122,20 @@
                                             <input type="button" value=" ↓ " id="btnDowm" onClick="move(false);" class="ws-edit-pop-div-table-btn-td-input" />
                                         </div>
                                         <div style="width:15rem; height: 50rem; float: left;">
-                                            <div>未选择快捷入口</div>
+                                            <div style="padding-left:25%; margin-bottom:1rem;">可添加</div>
                                             <select multiple="" id="rightSel" onclick="setButton(this)" ondblclick="document.getElementById('btnLeft').click()" style="height:40rem;width:15rem;">
 
                                             </select>
                                         </div>
-                                        <!--<div style="padding-top: 40rem;">-->
-                                            <!--<input type="button" value=" 确定 " id="editConfirmedssss" onClick="submitResultStatus(document.getElementById('leftSel'))" class="ws-edit-pop-div-table-btn-td-input" />-->
-                                        <!--</div>-->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">关闭
-                                    </button>
+                                    
                                     <button type="button" class="btn btn-primary" id="editConfirmedssss" onClick="submitResultStatus(document.getElementById('leftSel'))">
                                         保存
+                                    </button>
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
                                     </button>
                                 </div>
                             </div><!-- /.modal-content -->
@@ -148,39 +149,7 @@
                         <span>跨组织协作工具</span>
                     </div>
                     <!-- /.catalog -->
-                    <ul class="list subject-font">
-                        <li class="article-list-item">
-                            <a href="pages/supervision/supervision-mine.html"  target="_blank">
-                                <img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">
-                                <span class="article-list-item-span">督办管理</span>
-                            </a>
-                        </li>
-                        <!-- /.list-item -->
-                        <li class="article-list-item">
-                            <a href="pages/schedule/personal.html" target="_blank">
-                                <img src="assets/images/portal/workspace/work_bg01.png" class="article-list-item-icon">
-                                <span class="article-list-item-span">日程管理</span>
-                            </a>
-                        </li>
-                        <!-- /.list-item -->
-                        <li class="article-list-item">
-                            <a href="pages/personalpage/personalpage-detail.html" target="_blank">
-                                <img src="assets/images/portal/workspace/work_bg011.png" class="article-list-item-icon">
-                                <span class="article-list-item-span">个人页面</span>
-                            </a>
-                        </li>
-                        <li class="article-list-item">
-                            <!--<a href="pages/teamworkspace/team-workspace.html" target="_blank">-->
-                                <img src="assets/images/portal/workspace/work_bg09" class="article-list-item-icon">
-                                <span class="article-list-item-span" style="color:lightgray">协作空间</span>
-                            <!--</a>-->
-                        </li>
-                        <li class="article-list-item">
-                            <!-- <a href="http://erp.cnnp.com.cn/irj" target="_blank"> -->
-                            <img src="assets/images/portal/workspace/work_bg06.png" class="article-list-item-icon">
-                            <span class="article-list-item-span" style="color:lightgray">计划管理</span>
-                            <!-- </a> -->
-                        </li>
+                    <ul class="list subject-font" id="secondLogin">
                     </ul>
                 </div>
             </div>
@@ -367,23 +336,14 @@
                                 <span class="workHalfLine-span">今日工作</span>
                             </div>
                         </div>
-                        <div class="important-task-title">
+                        <div class="important-task-title" style="margin-bottom: 0.5rem;">
                             <span class="bodySectionRightCurrentTabSubTitleImp">重点事宜提醒</span>
                             <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日会议和超期事项提醒）</span>
                         </div>
                         <!-- data list-->
                         <div class="bodySectionRightMeeting">
                             <ul id="worksoftodayUl">
-                                <!-- <li class="li-task-list">
-                                    <div class="task-list-meet">
-                                        <div>公文</div>
-                                    </div>
-                                    <div class="task-list-detail" style="border: 1px dashed #a6cc38">
-                                        <div><span class="task-list-detail-title default-font">关于行动计划审批意见征求稿</span></div>
-                                        <div><span class="task-list-detail-subtitle default-font">2016/08/05</div>
-                                    </div>
-                                    <div class="task-list-spack"></div>
-                                </li> -->
+
                             </ul>
                         </div>
                     </div>
@@ -397,7 +357,7 @@
                             </div>
                         </div>
 
-                        <div class="task-item" style="width:100%; min-width:18rem;" id="qirineidubanItems">
+                        <div class="task-item" style="width:100%; min-width:18rem;min-height:10rem;" id="qirineidubanItems">
 
                         </div>
                     </div>
@@ -410,7 +370,7 @@
                             </div>
                         </div>
 
-                        <div class="task-item" style="width:100%; min-width:18rem;" id="qiribeirichengItems">
+                        <div class="task-item" style="width:100%; min-width:18rem;min-height:10rem;" id="qiribeirichengItems">
 
                         </div>
                     </div>

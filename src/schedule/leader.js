@@ -72,7 +72,6 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   }
             }
             EventService.showLoading('数据获取中，请稍后... ...');
-            //$http.get( 'http://10.15.251.110:8010/api/contact/getuserlist?apikey=a16cb0c916404be78cb0805fefc7d26a&ou=' + org.id, '')
             $http.get( 'http://10.15.251.110:8010/api/contact/getleader?apikey=a16cb0c916404be78cb0805fefc7d26a&ou=' + org.id, '')
                 .success(function(response){
                       if(true){
@@ -83,13 +82,9 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                                   var user =  response[i];
                                   user.id = user.uid;
                                   user.username = user.displayname;
-                            //      //if(('isleader' in user) && user.isleader == '1' && user.orgtree.length == 2){
-                            //      if(user.orgtree.length < 3){
-                                        userIds.push({"userid": user.id});
-                                        leaders.push(user);
-                            //      }
+                                  userIds.push({"userid": user.id});
+                                  leaders.push(user);
                             }
-                            //console.log("userIds:" + userIds.length);
                             $.unblockUI();
                             EventService.setPeoples(leaders);
                             $("#calendar").empty();
@@ -119,11 +114,8 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
             $scope.scheduletypes = EventService.getScheduletypes();
             $scope.scope = EventService.getScope();
             $scope.addParams = {
-                  "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": urlParams.userid,
-                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
@@ -140,13 +132,10 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {
-                        "id": '10086',
                         "companyid": "",
                         "scheduletype": "",
-                        "scheduleId": "10086",
                         "userid": "",
                         "username": "",
-                        "companyname": "",
                         "peopletype": "",
                         "updatetime": "",
                         "collsaceid": ""
@@ -167,6 +156,8 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   EventService.showAlert('请选择日程公开范围');
                   return;
             }
+            $scope.addParams.startdate = $("#startdate").val();
+            $scope.addParams.enddate = $("#enddate").val();
             $scope.addParams.scheduletype = $scope.addParams.scheduletype.id;
             $scope.addParams.scope = $scope.addParams.scope.id;
             EventService.showLoading('数据提交中，请稍后... ...');
@@ -213,10 +204,8 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   $scope.searchParams.result[i].isChecked = false;
             }
             user.isChecked = true;
-            $scope.addParams.username = user.displayname;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.companyname = user.orgtree;
             $scope.addParams.people.username = user.displayname;
       };
 

@@ -50,22 +50,22 @@
                     </div>
                     </div>
                     <div style="width: 10rem; height: 100%; float: left; border: 0px;margin-left:1rem;">
-                        <div class="online-power">
+                        <div class="online-power" style="margin-top:2rem">
                             <div class="online-power-amount">
                                 <span style="color:#00a2e5 ; font-size: 1.3rem;">总电功率</span>
-                                <span id="p1" style="color:#0B0D8C; font-size: 1rem;">0.00MW</span>
-                                <span id="p11" style="color:#0B0D8C; font-size: 1rem;">0.00%</span>
+                                <span id="p1" style="color: #000;font-size:12px;font-weight: 100;">0.00MW</span>
+                                <span id="p11" style="color: #000;font-size:12px;font-weight: 100;">0.00%</span>
                                 <span style="color:#00a2e5 ; font-size: 1.3rem;">总发电量</span>
-                                <span id="p2" style="color:#0B0D8C; font-size: 1rem;">0.00亿度</span>
-                                <span id="p22" style="color:#0B0D8C; font-size: 1rem;">0.00%</span>
+                                <span id="p2" style="color: #000;font-size:12px;font-weight: 100;">0.00亿度</span>
+                                <span id="p22" style="color: #000;font-size:12px;font-weight: 100;">0.00%</span>
                             </div>
                         </div>
-                        <div class="online-power">
-                            <div  class="online-power-amount" style="padding-top: 2rem;">
+                        <div class="online-power2">
+                            <div  class="online-power-amount">
                                 <span style="color:#00a2e5 ; font-size: 1.3rem; ">中国核电</span>
                                 <span style="color:#00a2e5 ; font-size: 1.3rem;">［601985］</span>
-                                <span id="stock" style="color:#0B0D8C; font-size: 1rem;">0.00</span>
-                                <span id="stock1" style="color:#0B0D8C; font-size: 1rem;">0.00（0.00%）</span>
+                                <span id="stock" style="color: #000;font-size:12px;font-weight: 100;">0.00</span>
+                                <span id="stock1" style="color: #000;font-size:12px;font-weight: 100;">0.00（0.00%）</span>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,10 @@
                 console.log("length:" + times.length);
                 var option = {
                     title: {
-                        text: '实时功率'
+                        text: '机组功率',
+                        textStyle: {
+                            fontSize: 16,
+                        },
                     },
                     tooltip: {
                         trigger: 'axis'

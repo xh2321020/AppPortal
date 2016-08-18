@@ -116,11 +116,8 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
             $scope.scheduletypes = EventService.getScheduletypes();
             $scope.scope = EventService.getScope();
             $scope.addParams = {
-                  "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": urlParams.userid,
-                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
@@ -137,13 +134,10 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {
-                        "id": '10086',
                         "companyid": "",
                         "scheduletype": "",
-                        "scheduleId": "10086",
                         "userid": "",
                         "username": "",
-                        "companyname": "",
                         "peopletype": "",
                         "updatetime": "",
                         "collsaceid": ""
@@ -164,6 +158,8 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   EventService.showAlert('请选择日程公开范围');
                   return;
             }
+            $scope.addParams.startdate = $("#startdate").val();
+            $scope.addParams.enddate = $("#enddate").val();
             $scope.addParams.scheduletype = $scope.addParams.scheduletype.id;
             $scope.addParams.scope = $scope.addParams.scope.id;
             EventService.showLoading('数据提交中，请稍后... ...');
@@ -210,10 +206,8 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   $scope.searchParams.result[i].isChecked = false;
             }
             user.isChecked = true;
-            $scope.addParams.username = user.displayname;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.companyname = user.orgtree;
             $scope.addParams.people.username = user.displayname;
       };
 

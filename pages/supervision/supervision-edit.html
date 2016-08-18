@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base href="http://10.15.251.110/">
+    <base  id="baseTag">
+    <script>
+    	document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">  
@@ -49,14 +52,13 @@
 
 		    <tr class="title2">
 			<td colspan="4">新增督办事项
-			<span style="margin-left: 10rem">{{saveState}}</span>
 			</td>
 		    </tr>
 		    <tr>
 			<td width="13%" class="al-right">督办事项</td>
 			<td colspan="3"><input type="text" style="width: 100%;" v-model="name"/></td>
 		    </tr>
-		     <tr v-if="pname">
+		     <tr v-if="pname&&pname!=''&&pname!='null'">
 				<td width="13%" class="al-right">父督办</td>
 				<td colspan="3"><span  style="width: 100%;" v-text="pname"></span></td>
 		    </tr>
@@ -84,12 +86,12 @@
 			</td>
 		    </tr>
 		      <tr>
-			<td width="13%" class="al-right">责任领导(A)</td>
+			<td width="13%" class="al-right">发起人(A)</td>
 			<td width="40%">    
                         <style scoped>.outer-container{float: left;}</style>                            
                                 <leader-select :given-params="leaderParams"  :selected-users.sync="leaders" ></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
                             </td>
-			<td width="15%" class="al-right">紧急程度（5为最紧急）</td>
+			<td width="15%" style="min-width:16.6rem;" class="al-right">紧急程度（5为最紧急）</td>
 			<td width="34%">
 			    <select class="form-control" v-model="urgency">
 				<option v-for="option in urgencyOptions" :value="option.value">{{option.text}}</option>
@@ -104,7 +106,7 @@
 		     btn_title="请选择"></com-accordion>
                                <span style="display: inline-block;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsibledeptname}}</span>
 			 </td>
-			<td width="15%" class="al-right">重要程度（5为最紧急）</td>
+			<td width="15%" class="al-right" style="min-width:15rem;">重要程度（5为最重要）</td>
 			<td width="34%">
 			    <select class="form-control" v-model="importance">
 				<option v-for="option in importanceOptions" :value="option.value">{{option.text}}</option>
@@ -166,7 +168,7 @@
 	        </div>
 		</div>
 		<modal-pop modal-title="操作提示" :modal_id="save_modal">
-			<p slot="body" style="margin:0 auto;text-align: center;">保存成功</p>
+			<p slot="body" style="margin:0 auto;text-align: center;" v-text="save_modal_txt"></p>
 		</modal-pop>
 </article>
 <footer>
