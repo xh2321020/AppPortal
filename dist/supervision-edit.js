@@ -1,1 +1,1993 @@
-!function(e){function t(s){if(o[s])return o[s].exports;var i=o[s]={exports:{},id:s,loaded:!1};return e[s].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}({0:function(e,t,o){"use strict";function s(e){return e&&e.__esModule?e:{"default":e}}var i=o(1),n=o(127),a=s(n),r=o(130),l=s(r),d=o(142),c=s(d),u=o(20),p=s(u),v=window.interfaceSettings.supervisionRequest.api,f=[{text:"1级",value:1},{text:"2级",value:2},{text:"3级",value:3},{text:"4级",value:4},{text:"5级",value:5}];new Vue({el:"#article",data:{save_modal:"savemodal"+(new Date).getTime(),accessory_modal:"accessory_modal"+(new Date).getTime(),previous:"all",pid:null,pname:null,id:null,name:"",sourceOptions:[{text:"请选择",value:""},{text:"hehe",value:"1"},{text:"uiui",value:"2"}],sourceSelected:"",areaSelected:"",areaOptions:[{text:"请选择",value:""},{text:"hehe",value:"1"},{text:"uiui",value:"2"}],estimatedcompletetiontime:"",urgency:1,urgencyOptions:f.concat(),importance:1,importanceOptions:f.concat(),responsibleOptions:[],comments:"",accessory:{},leaderParams:{searchuserUrl:v.searchuserUrl,multiple:!1,leaderOnly:!0,title:"责任领导选择(仅搜索领导)"},responsibleParams:{searchuserUrl:v.searchuserUrl,multiple:!1,leaderOnly:!1,title:"责任人选择"},saveState:"",selectedDepts:[],selectedDept:[],leaders:[],requests:v},computed:{scope:function(){var e=$.map(this.selectedDepts,function(e){return e.name});return e.join(",")},accountablesn:function(){var e=$.map(this.leaders,function(e){return e.uid});return e.join(",")},accountablename:function(){var e=$.map(this.leaders,function(e){return e.displayname});return e.join(",")},responsibledeptcode:function(){return this.selectedDept.length>0?this.selectedDept[0].ou:""},responsibledeptname:function(){return this.selectedDept.length>0?this.selectedDept[0].name:""},responsiblename:function(){return this.responsibleOptions.length>0?this.responsibleOptions[0].displayname:""}},created:function(){var e=this,t=(0,i.getQueryString)("pid");t&&(this.pid=t),this.pname=unescape((0,i.getQueryString)("pname"));var o=(0,i.getQueryString)("id");o&&(this.id=o,this.fetchOriginSupervision()),this.previous=(0,i.getQueryString)("previous"),(0,i.fetch_areaFromServer)(function(t,o,s){for(var i=[{text:"请选择",value:""}],n=0,a=t.length;a>n;n++)i.push({text:t[n].dicname,value:t[n].diccode});e.areaOptions=i}),(0,i.fetch_sourceFromServer)(function(t,o,s){for(var i=[{text:"请选择",value:""}],n=0,a=t.length;a>n;n++)i.push({text:t[n].dicname,value:t[n].diccode});e.sourceOptions=i}),window.addEventListener("message",function(e){var t=e.data;alert(t),console.log("message",t)})},ready:function(){var e=this;$("#completeDate").daterangepicker({singleDatePicker:!0,showDropdowns:!0},function(t,o,s){e.estimatedcompletetiontime=t})},methods:{fetchOriginSupervision:function(){var e=this;$.ajax({type:"get",dataType:"json",url:(0,i.setSupervisionHeader)(v.supDetailUrl,null,this.id),success:function(t){for(var o=0,s=t.length;s>o;o++){var i=t[o];if(i.id==e.id){for(var n in i)e[n]=i[n];e.leaders=[{uid:i.accountablesn,displayname:i.accountablename}],e.selectedDept=[{ou:i.responsibledeptcode,name:i.responsibledeptname}],e.responsibleOptions=[{uid:i.responsiblesn,displayname:i.responsiblename}];break}}},error:function(e){console.log(e)}})},submit_handler:function(){var e=this,t={accountablesn:this.accountablesn,accountablename:this.accountablename,area:this.areaSelected,comments:this.comments,estimatedcompletetiontime:moment(this.estimatedcompletetiontime).format("YYYY-MM-DD"),importance:this.importance,name:this.name,pid:this.pid,responsibledeptcode:this.responsibledeptcode,responsiblesn:this.responsibleOptions[0].uid,responsiblename:this.responsibleOptions[0].displayname,scope:this.scope,source:this.sourceSelected,status:0,urgency:this.urgency};(0,i.add_supervision)(t,function(t,o,s){e.saveState="保存成功",$("#"+e.save_modal).modal();var i=setTimeout(function(){clearTimeout(i)},700)},function(t,o,s){e.saveState="保存失败",console.log(t)})},navtoAll:function(){window.location.href="pages/supervision/supervision-all.html"},navtomine:function(){window.location.href="pages/supervision/supervision-mine.html"},cancel:function(){"all"==this.previous?window.location.href="pages/supervision/supervision-all.html":window.location.href="pages/supervision/supervision-mine.html"},showAccessoryModal:function(){window.open("http://192.168.0.163:8080/cnnpdm/service.jsp?action=uploadAndView","_blank")}},components:{comAccordion:a["default"],leaderSelect:l["default"],updateRate:c["default"],modalPop:p["default"]}})},1:function(e,t,o){"use strict";function s(e){return e&&e.__esModule?e:{"default":e}}function i(e,t,o,s,i,n){if(o){var a=new Date;a.setTime(a.getTime()+24*o*60*60*1e3);var r=a.toGMTString()}else var r="";var l=e+"="+escape(t);r&&(l+=";expires="+r),s&&(l+=";path="+escape(s)),i&&(l+=";domain="+escape(i)),n&&(l+=";secure="+n),document.cookie=l}function n(e){var t,o=new RegExp("(^| )"+e+"=([^;]*)(;|$)");return(t=document.cookie.match(o))?unescape(t[2]):null}function a(e){var t=new Date;t.setTime(t.getTime()-864e5),i(e,"",t)}function r(e){var t=new RegExp("(^|&)"+e+"=([^&]*)(&|$)","i"),o=window.location.search.substr(1).match(t);return null!=o?unescape(o[2]):null}function l(){$.blockUI({message:"数据获取中，请稍候... ...",css:{border:"none",padding:"15px",backgroundColor:"#000","-webkit-border-radius":"10px","-moz-border-radius":"10px",opacity:.5,color:"#fff"}})}function d(e,t){var o=function(e,o,s){t.list=e,t.successNext&&t.successNext()},s=function(e,t,o){console.log("error",e)},i={type:"get",url:e.URL+e.QueryString,success:o,error:s};"post"==e.METHOD&&(i={type:"post",url:e.URL+e.QueryString,data:e.PLAYLOAD,contentType:e.CONTENT_TYPE,success:o,error:s}),$.ajax(i)}Object.defineProperty(t,"__esModule",{value:!0}),t.fetchAjaxService=t.loadingCover=t.getQueryString=t.deleteCookie=t.getCookie=t.setCookie=t.add_supervision=t.fetch_sourceFromServer=t.fetch_areaFromServer=t.fetch_deptsFromServer=t.fetch_serviceByHttpProtocol=t.setSupervisionHeader=void 0;var c=o(4),u=s(c),p=window.interfaceSettings.supervisionRequest,v=function(e,t,o){return(o?e.replace("%id%",o):e)+"?"+(t?$.param($.extend({},p.header,t)):$.param(p.header))},f=function(e,t,o,s,i){"post"==t&&(o=(0,u["default"])(o)),$.ajax({url:e,type:t,data:o,contentType:"application/json",success:function(e,t,o){console.log("success"),s(e,t,o)},error:function(e,t,o){console.log("error"),i(e,t,o)}})},m=function(e,t){var o=v(p.api.deptUrl,null,e);f(o,"get",{},t,function(e,t,o){console.log(e)})},h=function(e){var t=v(p.api.supSourceUrl);f(t,"get",{},e,function(e,t,o){console.log(e)})},g=function(e){var t=v(p.api.supAreaUrl);f(t,"get",{},e,function(e,t,o){console.log(e)})},b=function(e,t){var o=v(p.api.supAddUrl);f(o,"post",e,t,function(e,t,o){console.log(e)})};t.setSupervisionHeader=v,t.fetch_serviceByHttpProtocol=f,t.fetch_deptsFromServer=m,t.fetch_areaFromServer=g,t.fetch_sourceFromServer=h,t.add_supervision=b,t.setCookie=i,t.getCookie=n,t.deleteCookie=a,t.getQueryString=r,t.loadingCover=l,t.fetchAjaxService=d},2:function(e,t){e.exports=function(){var e=[];return e.toString=function(){for(var e=[],t=0;t<this.length;t++){var o=this[t];o[2]?e.push("@media "+o[2]+"{"+o[1]+"}"):e.push(o[1])}return e.join("")},e.i=function(t,o){"string"==typeof t&&(t=[[null,t,""]]);for(var s={},i=0;i<this.length;i++){var n=this[i][0];"number"==typeof n&&(s[n]=!0)}for(i=0;i<t.length;i++){var a=t[i];"number"==typeof a[0]&&s[a[0]]||(o&&!a[2]?a[2]=o:o&&(a[2]="("+a[2]+") and ("+o+")"),e.push(a))}},e}},3:function(e,t,o){function s(e,t){for(var o=0;o<e.length;o++){var s=e[o],i=u[s.id];if(i){i.refs++;for(var n=0;n<i.parts.length;n++)i.parts[n](s.parts[n]);for(;n<s.parts.length;n++)i.parts.push(l(s.parts[n],t))}else{for(var a=[],n=0;n<s.parts.length;n++)a.push(l(s.parts[n],t));u[s.id]={id:s.id,refs:1,parts:a}}}}function i(e){for(var t=[],o={},s=0;s<e.length;s++){var i=e[s],n=i[0],a=i[1],r=i[2],l=i[3],d={css:a,media:r,sourceMap:l};o[n]?o[n].parts.push(d):t.push(o[n]={id:n,parts:[d]})}return t}function n(e,t){var o=f(),s=g[g.length-1];if("top"===e.insertAt)s?s.nextSibling?o.insertBefore(t,s.nextSibling):o.appendChild(t):o.insertBefore(t,o.firstChild),g.push(t);else{if("bottom"!==e.insertAt)throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");o.appendChild(t)}}function a(e){e.parentNode.removeChild(e);var t=g.indexOf(e);t>=0&&g.splice(t,1)}function r(e){var t=document.createElement("style");return t.type="text/css",n(e,t),t}function l(e,t){var o,s,i;if(t.singleton){var n=h++;o=m||(m=r(t)),s=d.bind(null,o,n,!1),i=d.bind(null,o,n,!0)}else o=r(t),s=c.bind(null,o),i=function(){a(o)};return s(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;s(e=t)}else i()}}function d(e,t,o,s){var i=o?"":s.css;if(e.styleSheet)e.styleSheet.cssText=b(t,i);else{var n=document.createTextNode(i),a=e.childNodes;a[t]&&e.removeChild(a[t]),a.length?e.insertBefore(n,a[t]):e.appendChild(n)}}function c(e,t){var o=t.css,s=t.media,i=t.sourceMap;if(s&&e.setAttribute("media",s),i&&(o+="\n/*# sourceURL="+i.sources[0]+" */",o+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(i))))+" */"),e.styleSheet)e.styleSheet.cssText=o;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(o))}}var u={},p=function(e){var t;return function(){return"undefined"==typeof t&&(t=e.apply(this,arguments)),t}},v=p(function(){return/msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase())}),f=p(function(){return document.head||document.getElementsByTagName("head")[0]}),m=null,h=0,g=[];e.exports=function(e,t){t=t||{},"undefined"==typeof t.singleton&&(t.singleton=v()),"undefined"==typeof t.insertAt&&(t.insertAt="bottom");var o=i(e);return s(o,t),function(e){for(var n=[],a=0;a<o.length;a++){var r=o[a],l=u[r.id];l.refs--,n.push(l)}if(e){var d=i(e);s(d,t)}for(var a=0;a<n.length;a++){var l=n[a];if(0===l.refs){for(var c=0;c<l.parts.length;c++)l.parts[c]();delete u[l.id]}}}};var b=function(){var e=[];return function(t,o){return e[t]=o,e.filter(Boolean).join("\n")}}()},4:function(e,t,o){e.exports={"default":o(6),__esModule:!0}},5:function(e,t){var o=e.exports={version:"2.4.0"};"number"==typeof __e&&(__e=o)},6:function(e,t,o){var s=o(5),i=s.JSON||(s.JSON={stringify:JSON.stringify});e.exports=function(e){return i.stringify.apply(i,arguments)}},20:function(e,t,o){var s,i;s=o(21),i=o(36),e.exports=s||{},e.exports.__esModule&&(e.exports=e.exports["default"]),i&&(("function"==typeof e.exports?e.exports.options||(e.exports.options={}):e.exports).template=i)},21:function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]={data:function(){return(new Date).getTime(),{}},props:["modalTitle","modal_id"]}},22:function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=function(e,t,o,s){this.btn=document.getElementById(e),this.bar=document.getElementById(t),this.title=document.getElementById(o),this.step=this.bar.getElementsByTagName("div")[0],this.init(s)};o.prototype={init:function(e){var t=this,o=document,s=window,i=Math;t.btn.onmousedown=function(n){var a=(n||s.event).clientX,r=this.offsetLeft,l=t.bar.offsetWidth-this.offsetWidth;o.onmousemove=function(n){var d=(n||s.event).clientX,c=i.min(l,i.max(-2,r+(d-a)));t.btn.style.left=c+"px",t.ondrag(i.round(100*i.max(0,c/l)),c),s.getSelection?s.getSelection().removeAllRanges():o.selection.empty(),e.rate=i.round(100*i.max(0,c/l))},o.onmouseup=new Function("this.onmousemove=null")}},ondrag:function(e,t){this.step.style.width=Math.max(0,t)+"px",this.title.innerHTML=e+"%"}},t["default"]={data:function(){var e=(new Date).getTime();return{btn_id:"btn"+e,bar_id:"bar"+e,title_id:"title"+e}},props:["rate"],created:function(){},ready:function(){new o(this.btn_id,this.bar_id,this.title_id,this)},methods:{}}},35:function(e,t,o){t=e.exports=o(2)(),t.push([e.id,".scale_panel[_v-1214d038]{font-size:12px;color:#999;width:70%;position:absolute;line-height:18px;left:60px;top:0}.scale_panel .r[_v-1214d038]{float:right}.scale span[_v-1214d038]{width:8px;height:16px;position:absolute;top:-5px;cursor:pointer}.scale[_v-1214d038]{background-repeat:repeat-x;background-position:0 100%;background-color:#e4e4e4;border-left:1px solid #83bbd9;width:100%;height:3px;position:relative;font-size:0;border-radius:3px}.scale .bar[_v-1214d038]{background-repeat:repeat-x;background-color:#3be3ff;position:absolute;height:3px;width:0;left:0;bottom:0}",""])},36:function(e,t){e.exports='<div class="modal fade" :id=modal_id tabindex=-1 role=dialog aria-labelledby=myModalLabel> <div class=modal-dialog role=document> <div class=modal-content> <div class=modal-header> <button type=button class=close data-dismiss=modal aria-label=Close><span aria-hidden=true>&times;</span></button> <h4 class=modal-title></h4> </div> <div class=modal-body> <slot name=body></slot> </div> <div class=modal-footer> <slot name=save></slot> <button type=button class="btn btn-default" data-dismiss=modal>关闭</button> </div> </div> </div> </div>'},37:function(e,t){e.exports='<div class=progress-container _v-1214d038=""> <span :id=title_id v-text="rate+\'%\'" _v-1214d038=""></span> <div class=scale_panel _v-1214d038=""> <span class=r _v-1214d038="">100</span>0 <div class=scale :id=bar_id _v-1214d038=""> <div class=bar :style="{width:rate+\'%\'}" _v-1214d038=""></div> <span :id=btn_id style="background: url(assets/images/progressdrag.gif) no-repeat" :style="{left:rate+\'%\'}" _v-1214d038=""></span> </div> </div> </div>'},38:function(e,t,o){var s,i;o(39),s=o(22),i=o(37),e.exports=s||{},e.exports.__esModule&&(e.exports=e.exports["default"]),i&&(("function"==typeof e.exports?e.exports.options||(e.exports.options={}):e.exports).template=i)},39:function(e,t,o){var s=o(35);"string"==typeof s&&(s=[[e.id,s,""]]),o(3)(s,{}),s.locals&&(e.exports=s.locals)},50:function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=window.interfaceSettings.supervisionRequest;t["default"]={data:function(){return{modal_id:"deptModal"+(new Date).getTime(),accordion_id:"accordion"+(new Date).getTime(),orgs:[],depts:{},sections:{},times:{}}},props:["supervisionRequest","selectedDepts","multiple","btn_title"],created:function(){var e=this;$.ajax({type:"get",dataType:"json",url:o.api.orgUrl+"?"+$.param(o.header),success:function(t,o,s){e.orgs=t,e.fetchDepts()},error:function(e,t,o){console.log(o.key),console.log(e)}})},ready:function(){var e=this,t=function(e,t){this.el=e||{},this.multiple=t||!1,this.el.on("click",".link",{el:this.el,multiple:this.multiple},this.dropdown)};t.prototype.dropdown=function(e){var t=(e.data.el,$(this)),o=t.next();o.toggle(),t.parent().toggleClass("open");for(var s=t.parent().siblings(),i=0;i<s.length;i++){var n=$(s[i]);if(n.hasClass("open")){n.find(">.submenu").toggle(),n.toggleClass("open");break}}},new t($("#"+e.accordion_id),!0)},methods:{selectDept:function(e,t){var o=this.selectedDepts;if(e.selected=!e.selected,"false"==this.multiple)return o.length>0&&(o[0].selected=!1,this.selected&&this.selected.toggleClass("selected")),this.selectedDepts=[],void(e.selected&&(this.selectedDepts.push(e),this.selected=$(t.currentTarget).toggleClass("selected")));if($(t.currentTarget).toggleClass("selected"),e.selected)o.push(e);else for(var s in o)if(o[s].id==e.id){o.splice(s,1);break}},fetchDepts:function(){var e=this;this.times.dept=0,$.ajax({type:"get",dataType:"json",url:o.api.deptUrl+"?"+$.param(o.header),success:function(t,o,s){if(t&&t.length>0){for(var i=0;i<t.length;i++)t[i].selected=!1;for(var n=t,a=e.orgs,r={},l={},d=0,c=a.length;c>d;d++){for(var u=a[d].id,p=[],v=0;v<n.length;v++)n[v].pid==u&&(p.push(n[v]),n.splice(v,1),v--);r[u]=p}for(var f in r)for(var m=r[f],h=0;h<m.length;h++){var g=m[h].id;l[g]=[];for(var b=0;b<n.length;b++)g==n[b].pid&&(l[g].push(n[b]),n.splice(b,1),b--);0==l[g].length&&delete l[g]}e.depts=r,e.sections=l}},error:function(e){console.log(e)}})},fetchSections:function(e){var t=this,s=this.depts[e];this.times[e]=0;for(var i=0,n=s.length;n>i;i++)$.ajax({type:"get",dataType:"json",url:o.deptUrl.replace("%id%",s[i].ou)+"?"+$.param(o.header),success:function(o,s,i){for(var n=0;n<o.length;n++)o[n].selected=!1;if(o&&o.length>0){var a=i.index.toString();t.sections[a]=o}if(++t.times[e]==t.depts[e].length){var r=t.sections;t.sections={},t.sections=r}},error:function(e){console.log(e)}}).index=s[i].ou}}}},52:function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]={data:function(){return{modal_id:"modal"+(new Date).getTime(),members:[],input:"",request:{},multiple:!0,leaderOnly:!0,searchuserUrl:"",title:"",currentView:"business"}},props:["givenParams","selectedUsers"],created:function(){this.multiple=this.givenParams.multiple,this.leaderOnly=this.givenParams.leaderOnly,this.searchuserUrl=this.givenParams.searchuserUrl},methods:{dialogClose:function(){this.currentView="business"},selectMember:function(e){this.selected=e},searchInput:function(){var e=this,t=this,o=this.input.replace(/(^\s*)|(\s*$)/g,"");if(""!=o)var s=setTimeout(function(){clearTimeout(s);var i=t.input.replace(/(^\s*)|(\s*$)/g,"");i==o&&""!=i&&(t.request.readyState&&4!=t.request.readyState&&(t.request.abort(),$(".cover").hide()),t.request=$.ajax({type:"get",url:e.searchuserUrl+"?"+$.param($.extend(window.interfaceSettings.supervisionRequest.header,{q:i})),success:function(e,o,s){for(var i=[],n=0,a=0,r=e.length;r>a;a++)if(!t.leaderOnly||"undefined"!=typeof e[a].isleader&&1==e[a].isleader){var l=e[a].orgtree;if(l)for(var d in l)for(var c in l[d])l[d].name=l[d][c];if(e.orgtree=l,i.push(e[a]),n++,4==n)break}console.log("members",i),t.members=[],t.members=i,$(".cover").hide()},error:function(e,t,o){$(".cover").hide(),console.log("error",o)}}),$(".cover").show())},1e3)},addUser:function(e){return e.selected?void(this.currentView="dialog1"):void(this.multiple||0==this.selectedUsers.length?(this.selectedUsers.push(e),e.selectedUsers=!0):this.currentView="dialog2")},removeUser:function(e){this.selectedUsers[e].selected=!1,this.selectedUsers.splice(e,1)}}}},64:function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t["default"]={data:function(){return{}},props:["rate","modal_id"],components:{modalPop:o(20),progressBar:o(38)},created:function(){console.log("rate",this.rate)},ready:function(){}}},101:function(e,t,o){t=e.exports=o(2)(),t.push([e.id,".inner[_v-04adc868]{position:static;float:none;border:0;padding:0;margin:0;border-radius:0;max-height:16rem;overflow-y:auto}.dropdown-menu.open[_v-04adc868]{width:100%}.dropdown-toggle .fa[_v-04adc868]{float:right;margin-right:-6px}.bs-searchbox .form-control[_v-04adc868]{border:1px solid skyblue;border-radius:5px}.input-group>.btn[_v-04adc868]{width:100%;text-align:left;background:#fff}.result[_v-04adc868]{border:1px solid #d3d3d3;width:100%;margin:2rem 0 0;padding:.5rem;height:4.5rem;border-radius:.5rem}.list[_v-04adc868]{list-style:none}.table th[_v-04adc868]{width:25%;text-align:center}.table td[_v-04adc868]{text-align:center;vertical-align:middle}.outer-container[_v-04adc868]{display:inline-block}.search-result[_v-04adc868]{position:relative;z-index:1}@-webkit-keyframes loadingRotate{to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes loadingRotate{to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}.cover[_v-04adc868]{display:none}.cover .loading[_v-04adc868]{position:absolute;width:16rem;height:16rem;left:calc(50% - 8rem);top:calc(50% - 8rem);display:table-cell;vertical-align:middle;margin:0 auto;border-radius:50%;opacity:.8}",""])},104:function(e,t,o){t=e.exports=o(2)(),t.push([e.id,".outer-container .progress-container[_v-4282b744]{margin:0 auto}.comment[_v-4282b744]{width:90%;margin:3rem auto}",""])},109:function(e,t,o){t=e.exports=o(2)(),t.push([e.id,"ul[_v-f85852e6]{list-style-type:none}a[_v-f85852e6]{color:#b63b4d;text-decoration:none}h1[_v-f85852e6]{color:#fff;font-size:24px;font-weight:400;text-align:center;margin-top:80px}h1 a[_v-f85852e6]{color:#c12c42;font-size:16px}.accordion[_v-f85852e6]{width:100%;max-width:360px;margin:30px auto 20px;background:#fff;border-radius:4px}.accordion .link[_v-f85852e6]{cursor:pointer;display:block;padding:15px 15px 15px 42px;color:#739217;font-size:14px;font-weight:400;border-bottom:1px solid #ccc;position:relative;-webkit-transition:all .4s ease;transition:all .4s ease}.accordion li:last-child .link[_v-f85852e6]{border-bottom:0}.accordion li i[_v-f85852e6]{position:absolute;top:16px;left:12px;font-size:18px;color:#739217;-webkit-transition:all .4s ease;transition:all .4s ease}.accordion li i.fa-chevron-down[_v-f85852e6],.accordion li i.fa-plus[_v-f85852e6]{right:12px;left:auto;font-size:16px}.accordion li.open .link[_v-f85852e6],.accordion li.open i[_v-f85852e6]{color:#739217}.accordion li.open i.fa-chevron-down[_v-f85852e6]{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.accordion .open>.link .fa-plus[_v-f85852e6]{-webkit-transform:rotate(45deg);transform:rotate(45deg)}.submenu[_v-f85852e6]{display:none;background:#444359;font-size:14px;max-height:30rem;overflow-y:auto}.submenu li[_v-f85852e6]{border-bottom:1px solid #4b4a5e}.submenu .link[_v-f85852e6],.submenu .link i[_v-f85852e6]{color:#fff!important}.submenu a[_v-f85852e6]{display:block;text-decoration:none;color:#d9d9d9;padding:12px;padding-left:42px;-webkit-transition:all .25s ease;transition:all .25s ease}.submenu a[_v-f85852e6]:hover{background:#739217;color:#fff}.submenu .selected[_v-f85852e6]{background:#a1c636;color:#000}",""])},118:function(e,t){e.exports='<div class=outer-container _v-04adc868=""> <div class=input-grout style="width: 50%;position: relative" _v-04adc868=""> <button type=button class="btn btn-sm" data-toggle=modal :data-target="\'#\'+modal_id" _v-04adc868="">请选择</button> </div> <div class="modal fade" :id=modal_id tabindex=-1 role=dialog aria-labelledby=myModalLabel _v-04adc868=""> <div class=modal-dialog role=document _v-04adc868=""> <div class=modal-content _v-04adc868=""> <div class=modal-header _v-04adc868=""> <button type=button class=close data-dismiss=modal aria-label=Close _v-04adc868=""><span aria-hidden=true _v-04adc868="">×</span></button> <h4 class=modal-title _v-04adc868="">{{givenParams.title}}</h4> </div> <div class=modal-body _v-04adc868=""> <div v-show="(currentView==\'business\')" _v-04adc868=""> <div class=input _v-04adc868=""><input type=text class="form-control inputSuccess1" v-model=input @keyup=searchInput _v-04adc868=""></div> <section class=search-result _v-04adc868=""> <table class="table table-hover table-condensed content-key" _v-04adc868=""> <thead _v-04adc868=""> <tr _v-04adc868=""><th _v-04adc868="">单位</th> <th _v-04adc868="">处室</th> <th _v-04adc868="">科室</th> <th _v-04adc868="">姓名</th> <th _v-04adc868=""></th> </tr></thead> <tbody _v-04adc868=""> <tr v-for="member in members" _v-04adc868=""> <td v-for="n in 3" _v-04adc868="">{{member.orgtree[n+1]?member.orgtree[n+1].name:""}}</td> <td _v-04adc868="">{{member.displayname}}</td> <td _v-04adc868=""> <button class="btn btn-default" @click=addUser(member) _v-04adc868="">添加</button> </td> </tr> </tbody> </table> <div class=result _v-04adc868=""> <ul class=list _v-04adc868=""> <li v-for="user in selectedUsers" class="btn btn-primary" @click=removeUser($index,event) _v-04adc868=""> <a v-text=user.displayname style="color: white" _v-04adc868=""> </a><i class="glyphicon glyphicon-remove" _v-04adc868=""></i></li> </ul> </div> <div class=cover _v-04adc868=""> <img class=loading :src="\'assets/images/loading3.gif\'" _v-04adc868=""> </div> </section> </div> <div v-show="currentView==\'dialog1\'" _v-04adc868=""> <p style="margin: 0 auto" _v-04adc868="">不可重复添加</p> </div> <div v-show="currentView==\'dialog2\'" _v-04adc868=""> <p _v-04adc868="">只能选择一个候选人，请移除后再添加..</p> </div> </div> <div class=modal-footer _v-04adc868=""> <button type=button v-show="currentView!=\'business\'" class="btn btn-default" @click=dialogClose _v-04adc868="">确定</button> </div> </div> </div> </div> </div>'},121:function(e,t){e.exports='<div class=outer-container _v-4282b744=""> <modal-pop :modal_id=modal_id _v-4282b744=""> <div slot=body _v-4282b744=""> <form class=form-horizontal _v-4282b744=""> <div class=form-group _v-4282b744=""> <label class="col-sm-2 control-label" _v-4282b744="">进度</label> <div class=col-sm-10 _v-4282b744=""> <progress-bar :rate.sync=rate.rate _v-4282b744=""></progress-bar> </div> </div> <div class=form-group _v-4282b744=""> <label class="col-sm-2 control-label" _v-4282b744=""></label> <textarea class=form-control v-model=rate.comment _v-4282b744=""></textarea> </div> </form> </div> </modal-pop> </div>'},126:function(e,t){e.exports='<div style=display:inline-block _v-f85852e6=""> <button type=button class="btn btn-sm" style="vertical-align: baseline" data-toggle=modal :data-target="\'#\'+modal_id" _v-f85852e6="">{{btn_title}}</button> <div class="modal fade" :id=modal_id tabindex=-1 role=dialog aria-labelledby=myModalLabel _v-f85852e6=""> <div class=modal-dialog role=document _v-f85852e6=""> <div class=modal-content _v-f85852e6=""> <div class=modal-header _v-f85852e6=""> <button type=button class=close data-dismiss=modal aria-label=Close _v-f85852e6=""><span aria-hidden=true _v-f85852e6="">×</span></button> <h4 class=modal-title _v-f85852e6="">部门列表</h4> </div> <div class=modal-body _v-f85852e6=""> <ul :id=accordion_id class=accordion _v-f85852e6=""> <li v-for="org in orgs" _v-f85852e6=""> <div class=link _v-f85852e6=""><i class="fa fa-th-list" _v-f85852e6=""></i>{{org.name}}<i class="fa fa-chevron-down" _v-f85852e6=""></i></div> <ul class=submenu _v-f85852e6=""> <li v-for="dept in depts[org.ou]" _v-f85852e6=""> <template v-if=sections[dept.ou]> <div class=link _v-f85852e6=""><i class="fa fa-th-list" _v-f85852e6=""></i>{{dept.name}}<i class="fa fa-plus" _v-f85852e6=""></i></div> <ul class=submenu _v-f85852e6=""> <li v-for="section in sections[dept.ou]" _v-f85852e6=""><a @click=selectDept(section,$event) _v-f85852e6="">{{section.name}}</a></li> </ul> </template> <template v-else=""> <a @click=selectDept(dept,$event) _v-f85852e6="">{{dept.name}}</a> </template> </li> </ul> </li> </ul> </div> <div class=modal-footer _v-f85852e6=""> <button type=button class="btn btn-default" data-dismiss=modal _v-f85852e6="">关闭</button> </div> </div> </div> </div> </div>'},127:function(e,t,o){var s,i;o(153),s=o(50),i=o(126),e.exports=s||{},e.exports.__esModule&&(e.exports=e.exports["default"]),i&&(("function"==typeof e.exports?e.exports.options||(e.exports.options={}):e.exports).template=i)},130:function(e,t,o){var s,i;o(145),s=o(52),i=o(118),e.exports=s||{},e.exports.__esModule&&(e.exports=e.exports["default"]),i&&(("function"==typeof e.exports?e.exports.options||(e.exports.options={}):e.exports).template=i)},142:function(e,t,o){var s,i;o(148),s=o(64),i=o(121),e.exports=s||{},e.exports.__esModule&&(e.exports=e.exports["default"]),i&&(("function"==typeof e.exports?e.exports.options||(e.exports.options={}):e.exports).template=i)},145:function(e,t,o){var s=o(101);"string"==typeof s&&(s=[[e.id,s,""]]),o(3)(s,{}),s.locals&&(e.exports=s.locals)},148:function(e,t,o){var s=o(104);"string"==typeof s&&(s=[[e.id,s,""]]),o(3)(s,{}),s.locals&&(e.exports=s.locals)},153:function(e,t,o){var s=o(109);"string"==typeof s&&(s=[[e.id,s,""]]),o(3)(s,{}),s.locals&&(e.exports=s.locals)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _commonFunction = __webpack_require__(4);
+
+	var _accordionMenu = __webpack_require__(5);
+
+	var _accordionMenu2 = _interopRequireDefault(_accordionMenu);
+
+	var _userSelector = __webpack_require__(12);
+
+	var _userSelector2 = _interopRequireDefault(_userSelector);
+
+	var _updateRate = __webpack_require__(17);
+
+	var _updateRate2 = _interopRequireDefault(_updateRate);
+
+	var _modalPop = __webpack_require__(21);
+
+	var _modalPop2 = _interopRequireDefault(_modalPop);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Created by Mattia on 2016/6/23.
+	 */
+	// import Vue from "vue"
+	/*common function start********************/
+
+	var supervisionRequest = window.interfaceSettings.supervisionRequest.api;
+	var levelArray = [{
+	    text: "1级", value: 1
+	}, {
+	    text: "2级", value: 2
+	}, {
+	    text: "3级", value: 3
+	}, {
+	    text: "4级", value: 4
+	}, {
+	    text: "5级", value: 5
+	}];
+
+	var createVm = new Vue({
+	    el: "#article",
+	    data: {
+	        save_modal: "savemodal" + new Date().getTime(),
+	        accessory_modal: "accessory_modal" + new Date().getTime(),
+	        previous: "all",
+	        pid: null,
+	        pname: null,
+	        id: null,
+	        name: "",
+	        sourceOptions: [{
+	            text: "请选择", value: ""
+	        }, {
+	            text: "hehe", value: "1"
+	        }, {
+	            text: "uiui", value: "2"
+	        }],
+	        sourceSelected: "",
+	        areaSelected: "",
+	        areaOptions: [{
+	            text: "请选择", value: ""
+	        }, {
+	            text: "hehe", value: "1"
+	        }, {
+	            text: "uiui", value: "2"
+	        }],
+	        estimatedcompletetiontime: "",
+	        urgency: 1,
+	        urgencyOptions: levelArray.concat(),
+	        importance: 1,
+	        importanceOptions: levelArray.concat(),
+	        responsibleOptions: [],
+	        comments: "",
+	        accessory: {},
+	        leaderParams: {
+	            searchuserUrl: supervisionRequest.searchuserUrl,
+	            multiple: false,
+	            leaderOnly: false,
+	            title: "责任领导选择(仅搜索领导)"
+	        },
+	        responsibleParams: {
+	            searchuserUrl: supervisionRequest.searchuserUrl,
+	            multiple: false,
+	            leaderOnly: false,
+	            title: "责任人选择"
+	        },
+	        saveState: "",
+	        selectedDepts: [],
+	        selectedDept: [],
+	        leaders: [],
+	        requests: supervisionRequest
+	    },
+	    computed: {
+	        scope: function scope() {
+	            var depts = $.map(this.selectedDepts, function (item) {
+	                return item.name;
+	            });
+	            return depts.join(",");
+	        },
+	        accountablesn: function accountablesn() {
+	            // body...
+	            var uids = $.map(this.leaders, function (item) {
+	                return item.uid;
+	            });
+	            return uids.join(",");
+	        },
+	        accountablename: function accountablename() {
+	            var names = $.map(this.leaders, function (item) {
+	                return item.displayname;
+	            });
+	            return names.join(",");
+	        },
+	        responsibledeptcode: function responsibledeptcode() {
+	            return this.selectedDept.length > 0 ? this.selectedDept[0].ou : "";
+	        },
+	        responsibledeptname: function responsibledeptname() {
+	            return this.selectedDept.length > 0 ? this.selectedDept[0].name : "";
+	        },
+	        responsiblename: function responsiblename() {
+	            return this.responsibleOptions.length > 0 ? this.responsibleOptions[0].displayname : "";
+	        }
+	    },
+	    created: function created() {
+	        var _this2 = this;
+
+	        var _this = this;
+	        var pid = (0, _commonFunction.getQueryString)("pid");
+	        if (pid) this.pid = pid;
+	        this.pname = unescape((0, _commonFunction.getQueryString)("pname"));
+	        var iid = (0, _commonFunction.getQueryString)("id");
+	        if (iid) {
+	            this.id = iid;
+	            this.fetchOriginSupervision();
+	        }
+	        this.previous = (0, _commonFunction.getQueryString)("previous");
+	        (0, _commonFunction.fetch_areaFromServer)(function (result, state, jqxhr) {
+	            var area = [{
+	                text: "请选择", value: ""
+	            }];
+	            // console.log(result)
+	            for (var i = 0, len = result.length; i < len; i++) {
+	                area.push({
+	                    text: result[i].dicname,
+	                    value: result[i].diccode
+	                });
+	            }
+	            _this2.areaOptions = area;
+	        });
+	        // fetch source
+	        (0, _commonFunction.fetch_sourceFromServer)(function (result, state, jqxhr) {
+	            var source = [{
+	                text: "请选择", value: ""
+	            }];
+	            // console.log(result)
+	            for (var i = 0, len = result.length; i < len; i++) {
+	                source.push({
+	                    text: result[i].dicname,
+	                    value: result[i].diccode
+	                });
+	            }
+	            _this2.sourceOptions = source;
+	        });
+	        window.addEventListener("message", function (ev) {
+	            var message = ev.data;
+	            alert(message);
+	            console.log("message", message);
+	            //callback
+	        });
+	        // body...
+	    }, ready: function ready() {
+	        var _this = this;
+	        $("#completeDate").daterangepicker({
+	            singleDatePicker: true,
+	            showDropdowns: true
+	        }, function (start, end, label) {
+	            _this.estimatedcompletetiontime = start;
+	        });
+	        // $("#iframe_accessory").attr("src","http://192.168.0.163:8080/cnnpdm/service.jsp?action=uploadAndView");
+	    },
+	    methods: {
+	        fetchOriginSupervision: function fetchOriginSupervision() {
+	            var _this = this;
+	            $.ajax({
+	                type: "get",
+	                dataType: "json",
+	                url: (0, _commonFunction.setSupervisionHeader)(supervisionRequest.supDetailUrl, null, this.id),
+	                success: function success(result) {
+	                    for (var i = 0, len = result.length; i < len; i++) {
+	                        var item = result[i];
+	                        if (item.id == _this.id) {
+	                            for (var key in item) {
+	                                _this[key] = item[key];
+	                            }
+	                            _this.leaders = [{
+	                                uid: item.accountablesn,
+	                                displayname: item.accountablename
+	                            }];
+	                            _this.selectedDept = [{
+	                                ou: item.responsibledeptcode,
+	                                name: item.responsibledeptname
+	                            }];
+	                            _this.responsibleOptions = [{
+	                                uid: item.responsiblesn,
+	                                displayname: item.responsiblename
+	                            }];
+	                            break;
+	                        }
+	                    }
+
+	                    // console.log(JSON.stringify(_this.children))
+	                },
+	                error: function error(data) {
+	                    console.log(data);
+	                }
+	            });
+	        },
+	        submit_handler: function submit_handler() {
+	            var _this3 = this;
+
+	            var options = {
+	                "accountablesn": this.accountablesn,
+	                accountablename: this.accountablename,
+	                "area": this.areaSelected,
+	                // "code": "string",
+	                "comments": this.comments,
+	                "estimatedcompletetiontime": moment(this.estimatedcompletetiontime).format('YYYY-MM-DD'),
+	                "importance": this.importance,
+	                "name": this.name,
+	                "pid": this.pid,
+	                "responsibledeptcode": this.responsibledeptcode,
+	                "responsiblesn": this.responsibleOptions[0].uid,
+	                responsiblename: this.responsibleOptions[0].displayname,
+	                "scope": this.scope,
+	                "source": this.sourceSelected,
+	                "status": 0,
+	                "urgency": this.urgency
+	            };
+	            (0, _commonFunction.add_supervision)(options, function (result, state, jqxhr) {
+	                _this3.saveState = "保存成功";
+	                $("#" + _this3.save_modal).modal();
+	                var timer = setTimeout(function () {
+	                    clearTimeout(timer);
+	                }, 700);
+	            }, function (result, state, jqxhr) {
+	                _this3.saveState = "保存失败";
+	                console.log(result);
+	            });
+	        },
+	        navtoAll: function navtoAll() {
+	            window.location.href = "pages/supervision/supervision-all.html";
+	        },
+
+	        navtomine: function navtomine() {
+	            window.location.href = "pages/supervision/supervision-mine.html";
+	        }, cancel: function cancel() {
+	            if (this.previous == "all") window.location.href = "pages/supervision/supervision-all.html";else window.location.href = "pages/supervision/supervision-mine.html";
+	        },
+	        showAccessoryModal: function showAccessoryModal() {
+	            // body...
+	            // $("#"+this.accessory_modal).modal();
+	            window.open("http://192.168.0.163:8080/cnnpdm/service.jsp?action=uploadAndView", "_blank");
+	        }
+	    },
+	    components: {
+	        comAccordion: _accordionMenu2.default,
+	        leaderSelect: _userSelector2.default,
+	        updateRate: _updateRate2.default,
+	        modalPop: _modalPop2.default
+	    }
+
+	});
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(2), __esModule: true };
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(3)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.fetchAjaxService = exports.loadingCover = exports.getQueryString = exports.deleteCookie = exports.getCookie = exports.setCookie = exports.add_supervision = exports.fetch_sourceFromServer = exports.fetch_areaFromServer = exports.fetch_deptsFromServer = exports.fetch_serviceByHttpProtocol = exports.setSupervisionHeader = undefined;
+
+	var _stringify = __webpack_require__(1);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var supervisionRequest = window.interfaceSettings.supervisionRequest;
+
+	var setSupervisionHeader = function setSupervisionHeader(url, paramObj, iid) {
+		return (iid ? url.replace("%id%", iid) : url) + "?" + (paramObj ? $.param($.extend({}, supervisionRequest.header, paramObj)) : $.param(supervisionRequest.header));
+	};
+
+	//ajax
+	var fetch_serviceByHttpProtocol = function fetch_serviceByHttpProtocol(url, type, requestData, successHandler, errorHandler) {
+		if (type == "post") requestData = (0, _stringify2.default)(requestData);
+		$.ajax({
+			url: url,
+			type: type,
+			data: requestData,
+			// dataType:"json",
+			contentType: "application/json",
+			success: function success(result, state, jqxhr) {
+				console.log("success");
+				successHandler(result, state, jqxhr);
+			},
+			error: function error(result, state, jqxhr) {
+				console.log("error");
+				errorHandler(result, state, jqxhr);
+			}
+		});
+	};
+	//fetch organization
+
+	//fetch depts   部门
+	var fetch_deptsFromServer = function fetch_deptsFromServer(pid, success) {
+		var url = setSupervisionHeader(supervisionRequest.api["deptUrl"], null, pid);
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision source
+	var fetch_sourceFromServer = function fetch_sourceFromServer(success) {
+		var url = setSupervisionHeader(supervisionRequest.api["supSourceUrl"]);
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//supervision area
+	var fetch_areaFromServer = function fetch_areaFromServer(success) {
+		var url = setSupervisionHeader(supervisionRequest.api["supAreaUrl"]);
+		fetch_serviceByHttpProtocol(url, "get", {}, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+
+	//accountable sn
+
+	//add new supervision
+	var add_supervision = function add_supervision(options, success) {
+		var url = setSupervisionHeader(supervisionRequest.api["supAddUrl"]);
+		fetch_serviceByHttpProtocol(url, "post", options, success, function (result, state, jqxhr) {
+			console.log(result);
+		});
+	};
+	//*cookies*/
+
+	function setCookie(name, value, days, path, domain, secure) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+			var expires = date.toGMTString();
+		} else var expires = "";
+		var cookieString = name + "=" + escape(value);
+		if (expires) cookieString += ";expires=" + expires;
+		if (path) cookieString += ";path=" + escape(path);
+		if (domain) cookieString += ";domain=" + escape(domain);
+		if (secure) cookieString += ";secure=" + secure;
+		document.cookie = cookieString;
+	}
+	function getCookie(name) {
+		var arr,
+		    reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+		if (arr = document.cookie.match(reg)) return unescape(arr[2]);else return null;
+	} //读取cookie
+
+	function deleteCookie(name) {
+		var expdate = new Date();
+		expdate.setTime(expdate.getTime() - 86400 * 1000 * 1);
+		setCookie(name, "", expdate);
+	}
+	//*cookies*/
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+		} else {
+			return null;
+		}
+	}
+
+	/*covering loading function*/
+	function loadingCover() {
+		$.blockUI({ message: '数据获取中，请稍候... ...',
+			css: {
+				border: 'none',
+				padding: '15px',
+				backgroundColor: '#000',
+				'-webkit-border-radius': '10px',
+				'-moz-border-radius': '10px',
+				opacity: .5,
+				color: '#fff'
+			}
+		});
+	}
+
+	function fetchAjaxService(dataSource, _this) {
+		var successHandler = function successHandler(result, status, xhr) {
+			_this.list = result;
+			if (_this.successNext) _this.successNext();
+		};
+		var error = function error(result, status, xhr) {
+			console.log("error", result);
+		};
+		var ajaxOptions = {
+			type: 'get',
+			url: dataSource.URL + dataSource.QueryString,
+			success: successHandler,
+			error: error
+		};
+		if (dataSource.METHOD == "post") {
+			ajaxOptions = {
+				type: 'post',
+				url: dataSource.URL + dataSource.QueryString,
+				data: dataSource.PLAYLOAD,
+				contentType: dataSource.CONTENT_TYPE,
+				success: successHandler,
+				error: error
+			};
+		}
+		$.ajax(ajaxOptions);
+	}
+
+	exports.setSupervisionHeader = setSupervisionHeader;
+	exports.fetch_serviceByHttpProtocol = fetch_serviceByHttpProtocol;
+	exports.fetch_deptsFromServer = fetch_deptsFromServer;
+	exports.fetch_areaFromServer = fetch_areaFromServer;
+	exports.fetch_sourceFromServer = fetch_sourceFromServer;
+	exports.add_supervision = add_supervision;
+	exports.setCookie = setCookie;
+	exports.getCookie = getCookie;
+	exports.deleteCookie = deleteCookie;
+	exports.getQueryString = getQueryString;
+	exports.loadingCover = loadingCover;
+	exports.fetchAjaxService = fetchAjaxService;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(6)
+	__vue_script__ = __webpack_require__(10)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\accordion-menu.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(11)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./accordion-menu.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(7);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-f85852e6&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./accordion-menu.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-f85852e6&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./accordion-menu.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(8)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\nul[_v-f85852e6] {\r\n\tlist-style-type: none;\r\n}\r\n\r\na[_v-f85852e6] {\r\n\tcolor: #b63b4d;\r\n\ttext-decoration: none;\r\n}\r\n\r\n/** =======================\r\n * Contenedor Principal\r\n ===========================*/\r\nh1[_v-f85852e6] {\r\n \tcolor: #FFF;\r\n \tfont-size: 24px;\r\n \tfont-weight: 400;\r\n \ttext-align: center;\r\n \tmargin-top: 80px;\r\n }\r\n\r\nh1 a[_v-f85852e6] {\r\n \tcolor: #c12c42;\r\n \tfont-size: 16px;\r\n }\r\n\r\n .accordion[_v-f85852e6] {\r\n \twidth: 100%;\r\n \tmax-width: 360px;\r\n \tmargin: 30px auto 20px;\r\n \tbackground: #FFF;\r\n \tborder-radius: 4px;\r\n }\r\n\r\n.accordion .link[_v-f85852e6] {\r\n\tcursor: pointer;\r\n\tdisplay: block;\r\n\tpadding: 15px 15px 15px 42px;\r\n\tcolor: #739217;\r\n\tfont-size: 14px;\r\n\tfont-weight: 400;\r\n\tborder-bottom: 1px solid #CCC;\r\n\tposition: relative;\r\n\t-webkit-transition: all 0.4s ease;\r\n\ttransition: all 0.4s ease;\r\n}\r\n\r\n.accordion li:last-child .link[_v-f85852e6] {\r\n\tborder-bottom: 0;\r\n}\r\n\r\n.accordion li i[_v-f85852e6] {\r\n\tposition: absolute;\r\n\ttop: 16px;\r\n\tleft: 12px;\r\n\tfont-size: 18px;\r\n\tcolor: #739217;\r\n\t-webkit-transition: all 0.4s ease;\r\n\ttransition: all 0.4s ease;\r\n}\r\n\r\n.accordion li i.fa-chevron-down[_v-f85852e6],.accordion li i.fa-plus[_v-f85852e6]{\r\n\tright: 12px;\r\n\tleft: auto;\r\n\tfont-size: 16px;\r\n}\r\n\r\n.accordion li.open .link[_v-f85852e6] {\r\n\tcolor: #739217;\r\n}\r\n\r\n.accordion li.open i[_v-f85852e6] {\r\n\tcolor: #739217;\r\n}\r\n.accordion li.open i.fa-chevron-down[_v-f85852e6]{\r\n\t-webkit-transform: rotate(180deg);\r\n\ttransform: rotate(180deg);\r\n}\r\n.accordion .open>.link .fa-plus[_v-f85852e6]{\r\n\t-webkit-transform: rotate(45deg);\r\n\ttransform: rotate(45deg);\r\n}\r\n\r\n/**\r\n * Submenu\r\n -----------------------------*/\r\n .submenu[_v-f85852e6] {\r\n \tdisplay: none;\r\n \tbackground: #444359;\r\n \tfont-size: 14px;\r\n \tmax-height: 30rem;\r\n \toverflow-y: auto;\r\n }\r\n\r\n .submenu li[_v-f85852e6] {\r\n \tborder-bottom: 1px solid #4b4a5e;\r\n }\r\n .submenu .link[_v-f85852e6]{\r\n\tcolor:white!important;\r\n}\r\n.submenu .link i[_v-f85852e6]{\r\n\tcolor:white!important;\r\n}\r\n \r\n .submenu a[_v-f85852e6] {\r\n \tdisplay: block;\r\n \ttext-decoration: none;\r\n \tcolor: #d9d9d9;\r\n \tpadding: 12px;\r\n \tpadding-left: 42px;\r\n \t-webkit-transition: all 0.25s ease;\r\n \ttransition: all 0.25s ease;\r\n }\r\n\r\n .submenu a[_v-f85852e6]:hover {\r\n \tbackground: #739217;\r\n \tcolor: #FFF;\r\n }\r\n .submenu .selected[_v-f85852e6]{\r\n \tbackground: #A1C636;\r\n \tcolor: #000;\r\n }\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+		var sourceMap = obj.sourceMap;
+
+		if (media) {
+			styleElement.setAttribute("media", media);
+		}
+
+		if (sourceMap) {
+			// https://developer.chrome.com/devtools/docs/javascript-debugging
+			// this makes source maps inside style tags work properly in Chrome
+			css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <style scoped>
+	// ul {
+	// 	list-style-type: none;
+	// }
+	//
+	// a {
+	// 	color: #b63b4d;
+	// 	text-decoration: none;
+	// }
+	//
+	// /** =======================
+	//  * Contenedor Principal
+	//  ===========================*/
+	// h1 {
+	//  	color: #FFF;
+	//  	font-size: 24px;
+	//  	font-weight: 400;
+	//  	text-align: center;
+	//  	margin-top: 80px;
+	//  }
+	//
+	// h1 a {
+	//  	color: #c12c42;
+	//  	font-size: 16px;
+	//  }
+	//
+	//  .accordion {
+	//  	width: 100%;
+	//  	max-width: 360px;
+	//  	margin: 30px auto 20px;
+	//  	background: #FFF;
+	//  	-webkit-border-radius: 4px;
+	//  	-moz-border-radius: 4px;
+	//  	border-radius: 4px;
+	//  }
+	//
+	// .accordion .link {
+	// 	cursor: pointer;
+	// 	display: block;
+	// 	padding: 15px 15px 15px 42px;
+	// 	color: #739217;
+	// 	font-size: 14px;
+	// 	font-weight: 400;
+	// 	border-bottom: 1px solid #CCC;
+	// 	position: relative;
+	// 	-webkit-transition: all 0.4s ease;
+	// 	-o-transition: all 0.4s ease;
+	// 	transition: all 0.4s ease;
+	// }
+	//
+	// .accordion li:last-child .link {
+	// 	border-bottom: 0;
+	// }
+	//
+	// .accordion li i {
+	// 	position: absolute;
+	// 	top: 16px;
+	// 	left: 12px;
+	// 	font-size: 18px;
+	// 	color: #739217;
+	// 	-webkit-transition: all 0.4s ease;
+	// 	-o-transition: all 0.4s ease;
+	// 	transition: all 0.4s ease;
+	// }
+	//
+	// .accordion li i.fa-chevron-down,.accordion li i.fa-plus{
+	// 	right: 12px;
+	// 	left: auto;
+	// 	font-size: 16px;
+	// }
+	//
+	// .accordion li.open .link {
+	// 	color: #739217;
+	// }
+	//
+	// .accordion li.open i {
+	// 	color: #739217;
+	// }
+	// .accordion li.open i.fa-chevron-down{
+	// 	-webkit-transform: rotate(180deg);
+	// 	-ms-transform: rotate(180deg);
+	// 	-o-transform: rotate(180deg);
+	// 	transform: rotate(180deg);
+	// }
+	// .accordion .open>.link .fa-plus{
+	// 	-webkit-transform: rotate(45deg);
+	// 	-ms-transform: rotate(45deg);
+	// 	-o-transform: rotate(45deg);
+	// 	transform: rotate(45deg);
+	// }
+	//
+	// /**
+	//  * Submenu
+	//  -----------------------------*/
+	//  .submenu {
+	//  	display: none;
+	//  	background: #444359;
+	//  	font-size: 14px;
+	//  	max-height: 30rem;
+	//  	overflow-y: auto;
+	//  }
+	//
+	//  .submenu li {
+	//  	border-bottom: 1px solid #4b4a5e;
+	//  }
+	//  .submenu .link{
+	// 	color:white!important;
+	// }
+	// .submenu .link i{
+	// 	color:white!important;
+	// }
+	//
+	//  .submenu a {
+	//  	display: block;
+	//  	text-decoration: none;
+	//  	color: #d9d9d9;
+	//  	padding: 12px;
+	//  	padding-left: 42px;
+	//  	-webkit-transition: all 0.25s ease;
+	//  	-o-transition: all 0.25s ease;
+	//  	transition: all 0.25s ease;
+	//  }
+	//
+	//  .submenu a:hover {
+	//  	background: #739217;
+	//  	color: #FFF;
+	//  }
+	//  .submenu .selected{
+	//  	background: #A1C636;
+	//  	color: #000;
+	//  }
+	// </style>
+	// <!-- Contenedor -->
+	// <template>
+	// <div style="display:inline-block;">
+	//  <button type="button" class="btn  btn-sm" style="vertical-align: baseline;" data-toggle="modal" :data-target="'#'+modal_id">{{btn_title}}</button>
+	// <!-- Modal -->
+	// <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	//   <div class="modal-dialog" role="document">
+	//     <div class="modal-content">
+	//       <div class="modal-header">
+	// 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	// 	<h4 class="modal-title">部门列表</h4>
+	//       </div>
+	//       <div class="modal-body">
+	//
+	// 		<!--accordion start -->
+	//
+	// 			<ul :id="accordion_id" class="accordion">
+	// 				<li v-for="org in orgs">
+	// 					<div class="link"><i class="fa fa-th-list"></i>{{org.name}}<i class="fa fa-chevron-down"></i></div>
+	// 					<ul class="submenu">
+	//
+	// 						<li  v-for="dept in depts[org.ou]">
+	// 						<template v-if="sections[dept.ou]">
+	// 							<div class="link" ><i class="fa fa-th-list"></i>{{dept.name}}<i class="fa fa-plus"></i></div>
+	// 							<ul class="submenu">
+	// 								<li v-for="section in sections[dept.ou]"><a @click="selectDept(section,$event)">{{section.name}}</a></li>
+	// 							</ul>
+	// 						</template>
+	// 							<template v-else>
+	// 								<a @click="selectDept(dept,$event)">{{dept.name}}</a>
+	// 							</template>
+	// 						</li>
+	// 					</ul>
+	// 				</li>			
+	// 			</ul>
+	// 		</div>
+	// 		<!-- accordion end -->
+	// 		  <div class="modal-footer">
+	//      	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	//      </div>
+	//       </div>
+	//
+	//     </div>
+	//   </div>
+	// </div>
+	// <!--modal end-->
+	//
+	//
+	//
+	// </template>
+	// <script >
+	var supervisionRequest = window.interfaceSettings.supervisionRequest;
+	exports.default = {
+		data: function data() {
+			return {
+				modal_id: "deptModal" + new Date().getTime(),
+				accordion_id: "accordion" + new Date().getTime(),
+				orgs: [],
+				depts: {},
+				sections: {},
+				times: {}
+			};
+		},
+
+		props: ["supervisionRequest", "selectedDepts", "multiple", "btn_title"],
+		created: function created() {
+			// console.log(this.supervisionRequest)	
+
+			var _this = this;
+			$.ajax({
+				type: "get",
+				dataType: "json",
+				url: supervisionRequest.api.orgUrl + "?" + $.param(supervisionRequest.header),
+				success: function success(result, state, jqxhr) {
+					_this.orgs = result;
+					_this.fetchDepts();
+				},
+				error: function error(data, state, jqxhr) {
+					console.log(jqxhr.key);
+					console.log(data);
+				}
+			});
+		},
+		ready: function ready() {
+			var _this = this;
+			var Accordion = function Accordion(el, multiple) {
+				this.el = el || {};
+				this.multiple = multiple || false;
+				this.el.on("click", ".link", { el: this.el, multiple: this.multiple }, this.dropdown);
+			};
+			Accordion.prototype.dropdown = function (e) {
+				var $el = e.data.el,
+				    $this = $(this),
+				    $next = $this.next();
+				$next.toggle();
+				$this.parent().toggleClass('open');
+				var parentBro = $this.parent().siblings();
+				for (var i = 0; i < parentBro.length; i++) {
+					var single = $(parentBro[i]);
+					if (single.hasClass("open")) {
+						single.find(">.submenu").toggle();
+						single.toggleClass("open");
+						break;
+					}
+				}
+			};
+
+			var accordion = new Accordion($('#' + _this.accordion_id), true);
+		},
+
+		methods: {
+			selectDept: function selectDept(dept, event) {
+				var selectedDepts = this.selectedDepts;
+				dept.selected = !dept.selected;
+				if (this.multiple == "false") {
+					if (selectedDepts.length > 0) {
+						selectedDepts[0].selected = false;
+						if (this.selected) {
+							this.selected.toggleClass("selected");
+						}
+					}
+					this.selectedDepts = [];
+					if (dept.selected) {
+						this.selectedDepts.push(dept);
+						this.selected = $(event.currentTarget).toggleClass("selected");
+					}
+					return;
+				}
+
+				$(event.currentTarget).toggleClass("selected");
+				if (dept.selected) {
+					selectedDepts.push(dept);
+				} else {
+					for (var i in selectedDepts) {
+						if (selectedDepts[i].id == dept.id) {
+							selectedDepts.splice(i, 1);
+							break;
+						}
+					}
+				}
+			},
+			fetchDepts: function fetchDepts() {
+				var _this = this;
+				this.times.dept = 0;
+				$.ajax({
+					type: "get",
+					dataType: "json",
+					url: supervisionRequest.api.deptUrl + "?" + $.param(supervisionRequest.header),
+					success: function success(result, state, jqxhr) {
+						if (result && result.length > 0) {
+							// _this.depts[jqxhr.index.toString()]=result;	
+							for (var i = 0; i < result.length; i++) {
+								result[i].selected = false;
+							}
+							var depts = result;
+							var orgs = _this.orgs,
+							    department = {},
+							    sections = {};
+							for (var _i = 0, len = orgs.length; _i < len; _i++) {
+								var pid = orgs[_i].id;
+								var new_depts = [];
+								for (var di = 0; di < depts.length; di++) {
+									if (depts[di].pid == pid) {
+										new_depts.push(depts[di]);
+										depts.splice(di, 1);
+										di--;
+									}
+								}
+								department[pid] = new_depts;
+							}
+							for (var key in department) {
+								var dept = department[key];
+								for (var _i2 = 0; _i2 < dept.length; _i2++) {
+									var _pid = dept[_i2].id;
+									sections[_pid] = [];
+									for (var si = 0; si < depts.length; si++) {
+										if (_pid == depts[si].pid) {
+											sections[_pid].push(depts[si]);
+											depts.splice(si, 1);
+											si--;
+										}
+									}
+									if (sections[_pid].length == 0) delete sections[_pid];
+								}
+							}
+							_this.depts = department;
+							_this.sections = sections;
+						}
+					},
+					error: function error(data) {
+						console.log(data);
+					}
+				});
+			},
+			fetchSections: function fetchSections(iid) {
+				var _this = this,
+				    depts = this.depts[iid];
+				this.times[iid] = 0;
+				for (var i = 0, len = depts.length; i < len; i++) {
+					$.ajax({
+						type: "get",
+						dataType: "json",
+						url: supervisionRequest.deptUrl.replace("%id%", depts[i].ou) + "?" + $.param(supervisionRequest.header),
+						success: function success(result, state, jqxhr) {
+							for (var j = 0; j < result.length; j++) {
+								result[j].selected = false;
+							}
+							if (result && result.length > 0) {
+
+								var ou = jqxhr.index.toString();
+								_this.sections[ou] = result;
+								// let sections=_this.sections;						
+								// _this.sections={};
+								// _this.sections=sections;		
+							}
+
+							if (++_this.times[iid] == _this.depts[iid].length) {
+								var sections = _this.sections;
+								_this.sections = {};
+								_this.sections = sections;
+							}
+						},
+						error: function error(data) {
+							console.log(data);
+						}
+					}).index = depts[i].ou;
+				}
+			}
+		}
+	};
+
+	// </script>
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div style=\"display:inline-block;\" _v-f85852e6=\"\">\n <button type=\"button\" class=\"btn  btn-sm\" style=\"vertical-align: baseline;\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\" _v-f85852e6=\"\">{{btn_title}}</button>\n<!-- Modal -->\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-f85852e6=\"\">\n  <div class=\"modal-dialog\" role=\"document\" _v-f85852e6=\"\">\n    <div class=\"modal-content\" _v-f85852e6=\"\">\n      <div class=\"modal-header\" _v-f85852e6=\"\">\n\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-f85852e6=\"\"><span aria-hidden=\"true\" _v-f85852e6=\"\">×</span></button>\n\t<h4 class=\"modal-title\" _v-f85852e6=\"\">部门列表</h4>\n      </div>\n      <div class=\"modal-body\" _v-f85852e6=\"\">\n\n\t\t<!--accordion start -->\n\t\t\n\t\t\t<ul :id=\"accordion_id\" class=\"accordion\" _v-f85852e6=\"\">\n\t\t\t\t<li v-for=\"org in orgs\" _v-f85852e6=\"\">\n\t\t\t\t\t<div class=\"link\" _v-f85852e6=\"\"><i class=\"fa fa-th-list\" _v-f85852e6=\"\"></i>{{org.name}}<i class=\"fa fa-chevron-down\" _v-f85852e6=\"\"></i></div>\n\t\t\t\t\t<ul class=\"submenu\" _v-f85852e6=\"\">\n\t\t\t\t\t\t\n\t\t\t\t\t\t<li v-for=\"dept in depts[org.ou]\" _v-f85852e6=\"\">\n\t\t\t\t\t\t<template v-if=\"sections[dept.ou]\">\n\t\t\t\t\t\t\t<div class=\"link\" _v-f85852e6=\"\"><i class=\"fa fa-th-list\" _v-f85852e6=\"\"></i>{{dept.name}}<i class=\"fa fa-plus\" _v-f85852e6=\"\"></i></div>\n\t\t\t\t\t\t\t<ul class=\"submenu\" _v-f85852e6=\"\">\n\t\t\t\t\t\t\t\t<li v-for=\"section in sections[dept.ou]\" _v-f85852e6=\"\"><a @click=\"selectDept(section,$event)\" _v-f85852e6=\"\">{{section.name}}</a></li>\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</template>\n\t\t\t\t\t\t\t<template v-else=\"\">\n\t\t\t\t\t\t\t\t<a @click=\"selectDept(dept,$event)\" _v-f85852e6=\"\">{{dept.name}}</a>\n\t\t\t\t\t\t\t</template>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n\t\t\t\t</li>\t\t\t\n\t\t\t</ul>\n\t\t</div>\n\t\t<!-- accordion end -->\n\t\t  <div class=\"modal-footer\" _v-f85852e6=\"\">\n     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" _v-f85852e6=\"\">关闭</button>\n     </div>\n      </div>\n    \n    </div>\n  </div>\n</div>\n<!--modal end-->\n\n\n\t\n";
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(13)
+	__vue_script__ = __webpack_require__(15)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\user-selector.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(16)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./user-selector.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(14);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-04adc868&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./user-selector.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-04adc868&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./user-selector.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(8)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.inner[_v-04adc868] {\n    position: static;\n    float: none;\n    border: 0;\n    padding: 0;\n    margin: 0;\n    border-radius: 0;\n    max-height: 16rem;\n    overflow-y: auto;\n    /*min-height: 80px;*/\n}\n\n.dropdown-menu.open[_v-04adc868] {\n    width: 100%;\n}\n\n.dropdown-toggle .fa[_v-04adc868] {\n    float: right;\n    margin-right: -6px;\n}\n\n.bs-searchbox .form-control[_v-04adc868] {\n    border: 1px solid skyblue;\n    border-radius: 5px;\n}\n\n.input-group > .btn[_v-04adc868] {\n    width: 100%;\n    text-align: left;\n    background: white;\n}\n\n.result[_v-04adc868] {\n    border: 1px solid lightgrey;\n    width: 100%;\n    margin: 2rem 0 0;\n    padding: 0.5rem 0.5rem;\n    height: 4.5rem;\n    border-radius: 0.5rem;\n}\n\n.list[_v-04adc868] {\n    list-style: none;\n}\n\n.table th[_v-04adc868] {\n    width: 25%;\n    text-align: center;\n}\n\n.table td[_v-04adc868] {\n    text-align: center;\n    vertical-align: middle;\n}\n.outer-container[_v-04adc868]{\n\tdisplay: inline-block;\n}\n.search-result[_v-04adc868]{\n    position: relative;\n    z-index: 1;\n}\n/*遮罩start*/\n    @-webkit-keyframes loadingRotate\n{\n 100%   {-webkit-transform: rotate(360deg);transform: rotate(360deg)};\n}\n    @keyframes loadingRotate\n{\n 100%   {-webkit-transform: rotate(360deg);transform: rotate(360deg)};\n}\n .cover[_v-04adc868]{\n  /*  position:absolute;\n    width: 100%;\n    height: 100%;\n    z-index: 100;\n    background: #fff;\n    opacity: 0;\n    text-align: center;\n    display: table;\n    left: 0;\n    top: 0;*/\n    display: none;\n }\n .cover .loading[_v-04adc868]{\n     position:absolute;\n\n    width: 16rem;\n    height: 16rem;\n      left: calc( 50% - 8rem);\n     top: calc( 50% - 8rem);\n    display: table-cell;\n    vertical-align: middle;\n    margin:0 auto ;\n    border-radius: 50%;\n    /*background: none;*/\n    opacity: 0.8;\n/*animation: loadingRotate 1s linear 0.05s  infinite;*/\n }\n /*cover end*/\n\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <style scoped>
+	//     .inner {
+	//         position: static;
+	//         float: none;
+	//         border: 0;
+	//         padding: 0;
+	//         margin: 0;
+	//         border-radius: 0;
+	//         max-height: 16rem;
+	//         overflow-y: auto;
+	//         /*min-height: 80px;*/
+	//     }
+	//
+	//     .dropdown-menu.open {
+	//         width: 100%;
+	//     }
+	//
+	//     .dropdown-toggle .fa {
+	//         float: right;
+	//         margin-right: -6px;
+	//     }
+	//
+	//     .bs-searchbox .form-control {
+	//         border: 1px solid skyblue;
+	//         border-radius: 5px;
+	//     }
+	//
+	//     .input-group > .btn {
+	//         width: 100%;
+	//         text-align: left;
+	//         background: white;
+	//     }
+	//
+	//     .result {
+	//         border: 1px solid lightgrey;
+	//         width: 100%;
+	//         margin: 2rem 0 0;
+	//         padding: 0.5rem 0.5rem;
+	//         height: 4.5rem;
+	//         border-radius: 0.5rem;
+	//     }
+	//
+	//     .list {
+	//         list-style: none;
+	//     }
+	//
+	//     .table th {
+	//         width: 25%;
+	//         text-align: center;
+	//     }
+	//
+	//     .table td {
+	//         text-align: center;
+	//         vertical-align: middle;
+	//     }
+	//     .outer-container{
+	//     	display: inline-block;
+	//     }
+	//     .search-result{
+	//         position: relative;
+	//         z-index: 1;
+	//     }
+	//     /*遮罩start*/
+	//         @keyframes loadingRotate
+	//     {
+	//      100%   {transform: rotate(360deg)};
+	//     }
+	//      .cover{
+	//       /*  position:absolute;
+	//         width: 100%;
+	//         height: 100%;
+	//         z-index: 100;
+	//         background: #fff;
+	//         opacity: 0;
+	//         text-align: center;
+	//         display: table;
+	//         left: 0;
+	//         top: 0;*/
+	//         display: none;
+	//      }
+	//      .cover .loading{
+	//          position:absolute;
+	//
+	//         width: 16rem;
+	//         height: 16rem;
+	//           left: calc( 50% - 8rem);
+	//          top: calc( 50% - 8rem);
+	//         display: table-cell;
+	//         vertical-align: middle;
+	//         margin:0 auto ;
+	//         border-radius: 50%;
+	//         /*background: none;*/
+	//         opacity: 0.8;
+	//     /*animation: loadingRotate 1s linear 0.05s  infinite;*/
+	//      }
+	//      /*cover end*/
+	//
+	// </style>
+	// <template> 
+	// <div class="outer-container">
+	//     <div class="input-grout" style="width: 50%;position: relative;">
+	//      <button type="button" class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">请选择</button>
+	//     </div>
+	//     <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	//         <div class="modal-dialog" role="document">
+	//             <div class="modal-content">
+	//                 <div class="modal-header">
+	//                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+	//                             aria-hidden="true">&times;</span></button>
+	//                     <h4 class="modal-title">{{givenParams.title}}</h4>
+	//                 </div>
+	//                 <div class="modal-body">
+	//                 <div v-show="(currentView=='business')">
+	//                     <div class="input"><input type="text" class="form-control inputSuccess1" v-model="input"
+	//                                               @keyup="searchInput"></div>
+	//                    <section class="search-result">
+	//
+	//                     <table class="table table-hover table-condensed content-key">
+	//                         <thead>
+	//                         <th>单位</th>
+	//                         <th>处室</th>
+	//                         <th>科室</th>
+	//                         <th>姓名</th>
+	//                         <th></th>
+	//                         </thead>
+	//                         <tbody>
+	//                         <tr v-for="member in members">
+	//                             <td v-for="n in 3">{{member.orgtree[n+1]?member.orgtree[n+1].name:""}}</td>
+	//                             <td>{{member.displayname}}</td>
+	//                             <td>
+	//                                 <button class="btn btn-default" @click="addUser(member)">添加</button>
+	//                             </td>
+	//                         </tr>
+	//
+	//                         </tbody>
+	//                     </table>
+	//                     <div class="result">
+	//                         <ul class="list">
+	//                             <li v-for="user in selectedUsers" class="btn btn-primary" @click="removeUser($index,event)">
+	//                                 <a v-text="user.displayname" style="color: white;">
+	//                                 </a><i class="glyphicon glyphicon-remove"></i></li>
+	//                         </ul>
+	//                     </div>
+	//                         <div class="cover">
+	//                             <img class="loading" :src="'assets/images/loading3.gif'">
+	//                         </div>
+	//                    </section>
+	//                 </div>
+	//                 <div v-show="currentView=='dialog1'">
+	//                       <p style="margin: 0 auto;">不可重复添加</p>
+	//                 </div>
+	//                  <div v-show="currentView=='dialog2'">
+	//                      <p >只能选择一个候选人，请移除后再添加..</p>
+	//                  </div>
+	//
+	//                 </div>
+	//                 <div class="modal-footer">
+	//
+	//                       <button type="button" v-show="currentView!='business'" class="btn btn-default" @click="dialogClose">确定</button>
+	//                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+	//                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	//     </div>
+	// </template>
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            modal_id: "modal" + new Date().getTime(),
+	            members: [],
+	            // options:[],
+	            input: "",
+	            request: {},
+	            multiple: true,
+	            leaderOnly: true,
+	            searchuserUrl: "",
+	            title: "",
+	            currentView: "business"
+	        };
+	    },
+
+	    props: ["givenParams", 'selectedUsers'],
+
+	    created: function created() {
+	        this.multiple = this.givenParams.multiple;
+	        this.leaderOnly = this.givenParams.leaderOnly;
+	        this.searchuserUrl = this.givenParams.searchuserUrl;
+	    },
+
+	    methods: {
+	        dialogClose: function dialogClose() {
+	            // body...
+	            this.currentView = "business";
+	        },
+	        selectMember: function selectMember(item) {
+	            this.selected = item;
+	        },
+	        searchInput: function searchInput() {
+	            var _this2 = this;
+
+	            var _this = this;
+	            var input = this.input.replace(/(^\s*)|(\s*$)/g, "");
+	            if (input == "") {
+	                return;
+	            }
+	            var timer = setTimeout(function () {
+	                clearTimeout(timer);
+	                var inputVal = _this.input.replace(/(^\s*)|(\s*$)/g, "");
+	                if (inputVal != input) {
+	                    return;
+	                } else {
+	                    if (inputVal == "") return;
+	                    if (_this.request.readyState && _this.request.readyState != 4) {
+	                        _this.request.abort();
+	                        $(".cover").hide();
+	                    }
+	                    _this.request = $.ajax({
+	                        type: "get",
+	                        url: _this2.searchuserUrl + "?" + $.param($.extend(window.interfaceSettings.supervisionRequest.header, { q: inputVal })),
+	                        success: function success(result, state, jqxhr) {
+	                            var members = [];
+	                            var count = 0;
+	                            for (var i = 0, len = result.length; i < len; i++) {
+	                                //leaders only
+	                                if (_this.leaderOnly && (typeof result[i].isleader == "undefined" || result[i].isleader != 1)) {
+	                                    continue;
+	                                }
+	                                var orgtree = result[i].orgtree;
+	                                if (orgtree) {
+	                                    for (var orgi in orgtree) {
+	                                        for (var key in orgtree[orgi]) {
+	                                            orgtree[orgi].name = orgtree[orgi][key];
+	                                        }
+	                                    }
+	                                }
+	                                result.orgtree = orgtree;
+	                                members.push(result[i]);
+	                                count++;
+	                                if (count == 4) break;
+	                            }
+	                            console.log("members", members);
+	                            _this.members = [];
+	                            _this.members = members;
+	                            $(".cover").hide();
+	                        },
+	                        error: function error(result, state, jqxhr) {
+	                            $(".cover").hide();
+	                            console.log("error", jqxhr);
+	                        }
+	                    });
+	                    $(".cover").show();
+	                }
+	            }, 1000);
+	        },
+	        addUser: function addUser(item) {
+	            if (item.selected) {
+	                this.currentView = "dialog1";
+	                return;
+	            }
+	            if (this.multiple || this.selectedUsers.length == 0) {
+	                this.selectedUsers.push(item);
+	                item.selectedUsers = true;
+	            } else {
+	                this.currentView = "dialog2";
+	            }
+	        },
+	        removeUser: function removeUser(index) {
+	            this.selectedUsers[index].selected = false;
+	            this.selectedUsers.splice(index, 1);
+	        }
+	    }
+	};
+
+	// </script>
+	// </body>
+	// </html>
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n<div class=\"outer-container\" _v-04adc868=\"\">\n    <div class=\"input-grout\" style=\"width: 50%;position: relative;\" _v-04adc868=\"\">\n     <button type=\"button\" class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\" _v-04adc868=\"\">请选择</button>\n    </div>\n    <div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" _v-04adc868=\"\">\n        <div class=\"modal-dialog\" role=\"document\" _v-04adc868=\"\">\n            <div class=\"modal-content\" _v-04adc868=\"\">\n                <div class=\"modal-header\" _v-04adc868=\"\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" _v-04adc868=\"\"><span aria-hidden=\"true\" _v-04adc868=\"\">×</span></button>\n                    <h4 class=\"modal-title\" _v-04adc868=\"\">{{givenParams.title}}</h4>\n                </div>\n                <div class=\"modal-body\" _v-04adc868=\"\">\n                <div v-show=\"(currentView=='business')\" _v-04adc868=\"\">\n                    <div class=\"input\" _v-04adc868=\"\"><input type=\"text\" class=\"form-control inputSuccess1\" v-model=\"input\" @keyup=\"searchInput\" _v-04adc868=\"\"></div>\n                   <section class=\"search-result\" _v-04adc868=\"\">\n                                                  \n                    <table class=\"table table-hover table-condensed content-key\" _v-04adc868=\"\">\n                        <thead _v-04adc868=\"\">\n                        <tr _v-04adc868=\"\"><th _v-04adc868=\"\">单位</th>\n                        <th _v-04adc868=\"\">处室</th>\n                        <th _v-04adc868=\"\">科室</th>\n                        <th _v-04adc868=\"\">姓名</th>\n                        <th _v-04adc868=\"\"></th>\n                        </tr></thead>\n                        <tbody _v-04adc868=\"\">\n                        <tr v-for=\"member in members\" _v-04adc868=\"\">\n                            <td v-for=\"n in 3\" _v-04adc868=\"\">{{member.orgtree[n+1]?member.orgtree[n+1].name:\"\"}}</td>\n                            <td _v-04adc868=\"\">{{member.displayname}}</td>\n                            <td _v-04adc868=\"\">\n                                <button class=\"btn btn-default\" @click=\"addUser(member)\" _v-04adc868=\"\">添加</button>\n                            </td>\n                        </tr>\n\n                        </tbody>\n                    </table>\n                    <div class=\"result\" _v-04adc868=\"\">\n                        <ul class=\"list\" _v-04adc868=\"\">\n                            <li v-for=\"user in selectedUsers\" class=\"btn btn-primary\" @click=\"removeUser($index,event)\" _v-04adc868=\"\">\n                                <a v-text=\"user.displayname\" style=\"color: white;\" _v-04adc868=\"\">\n                                </a><i class=\"glyphicon glyphicon-remove\" _v-04adc868=\"\"></i></li>\n                        </ul>\n                    </div>\n                        <div class=\"cover\" _v-04adc868=\"\">\n                            <img class=\"loading\" :src=\"'assets/images/loading3.gif'\" _v-04adc868=\"\">\n                        </div>\n                   </section>\n                </div>\n                <div v-show=\"currentView=='dialog1'\" _v-04adc868=\"\">\n                      <p style=\"margin: 0 auto;\" _v-04adc868=\"\">不可重复添加</p>\n                </div>\n                 <div v-show=\"currentView=='dialog2'\" _v-04adc868=\"\">\n                     <p _v-04adc868=\"\">只能选择一个候选人，请移除后再添加..</p>\n                 </div>\n                    \n                </div>\n                <div class=\"modal-footer\" _v-04adc868=\"\">\n\n                      <button type=\"button\" v-show=\"currentView!='business'\" class=\"btn btn-default\" @click=\"dialogClose\" _v-04adc868=\"\">确定</button>\n                    <!-- <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button> -->\n                    <!-- <button type=\"button\" class=\"btn btn-primary\">Save changes</button> -->\n                </div>\n            </div>\n        </div>\n    </div>\n    </div>\n";
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(18)
+	__vue_script__ = __webpack_require__(20)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\supervision\\components\\update-rate.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(29)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./update-rate.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(19);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4282b744&scoped=true!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./update-rate.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4282b744&scoped=true!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./update-rate.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(8)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.outer-container .progress-container[_v-4282b744]{\n\tmargin: 0 auto;\n}\n.comment[_v-4282b744]{\n\twidth: 90%;\n\tmargin: 3rem auto;\n}\n/*.comment textarea{\n\twidth: 100%;\n}*/\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <style scoped>
+	// 	.outer-container .progress-container{
+	// 		margin: 0 auto;
+	// 	}
+	// 	.comment{
+	// 		width: 90%;
+	// 		margin: 3rem auto;
+	// 	}
+	// 	/*.comment textarea{
+	// 		width: 100%;
+	// 	}*/
+	// </style>
+	// <template>
+	// 	<div class="outer-container">
+	// 		<modal-pop :modal_id="modal_id">
+	// 			<div slot="body">
+	// 				<form class="form-horizontal">
+	// 				  <div class="form-group">
+	// 				    <label  class="col-sm-2 control-label">进度</label>
+	// 				    <div class="col-sm-10">
+	// 				    <progress-bar :rate.sync="rate.rate"></progress-bar>
+	// 				    </div>
+	// 				  </div>
+	// 					<div class="form-group">
+	// 					<label class="col-sm-2 control-label"></label>
+	// 					<textarea class="form-control" v-model="rate.comment"></textarea>
+	// 					</div>					
+	// 					</form>
+	// 				</div>
+	// 		</modal-pop>
+	// 	</div>
+	// </template>
+	// <script>
+	exports.default = {
+		data: function data() {
+			return {};
+		},
+
+		props: ["rate", "modal_id"],
+		components: {
+			modalPop: __webpack_require__(21),
+			progressBar: __webpack_require__(24)
+		},
+		created: function created() {
+			// body...
+			console.log("rate", this.rate);
+		}, ready: function ready() {}
+	};
+	// </script>
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(22)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\modal-pop.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(23)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./modal-pop.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <template>
+	// <!-- <button class="btn btn-sm" data-toggle="modal" :data-target="'#'+modal_id">button</button> -->
+	// <div class="modal fade" :id="modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	//   <div class="modal-dialog" role="document">
+	//     <div class="modal-content">
+	//       <div class="modal-header">
+	// 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	// 		<h4 class="modal-title"></h4>
+	//       </div>
+	//       <div class="modal-body">
+	//       <slot name="body"></slot>
+	// 		</div>
+	// 		<!-- accordion end -->
+	// 		<div class="modal-footer">
+	// 		<slot name="save"></slot>
+	// 	     	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	//      	</div>
+	//       </div>   
+	//     </div>
+	//   </div>
+	// </template>
+	// <script >
+	exports.default = {
+		data: function data() {
+			var timeNow = new Date().getTime();
+			return {
+				// :"modal"+timeNow
+			};
+		},
+
+		props: ["modalTitle", "modal_id"]
+	};
+
+	// </script>
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n<!-- <button class=\"btn btn-sm\" data-toggle=\"modal\" :data-target=\"'#'+modal_id\">button</button> -->\r\n<div class=\"modal fade\" :id=\"modal_id\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n\t\t<h4 class=\"modal-title\"></h4>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n      <slot name=\"body\"></slot>\r\n\t\t</div>\r\n\t\t<!-- accordion end -->\r\n\t\t<div class=\"modal-footer\">\r\n\t\t<slot name=\"save\"></slot>\r\n\t     \t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\r\n     \t</div>\r\n      </div>    \r\n    </div>\r\n  </div>\r\n";
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(25)
+	__vue_script__ = __webpack_require__(27)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\progressbar-drag.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(28)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "./progressbar-drag.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(26);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-1214d038&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./progressbar-drag.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(8)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n.scale_panel[_v-1214d038]{\r\n\tfont-size:12px;\r\n\tcolor:#999;\r\n\twidth:70%;\r\n\tposition:absolute; \r\n\tline-height:18px; \r\n\tleft:60px;\r\n\ttop:-0px;\r\n}\r\n.scale_panel .r[_v-1214d038]{\r\n\tfloat:right;\r\n}\r\n.scale span[_v-1214d038]{\r\n\t\r\n\twidth:8px;\r\n\theight:16px; \r\n\tposition:absolute; \r\n\t/*left:-2px;*/\r\n\ttop:-5px;\r\n\tcursor:pointer;\r\n\t/*background-color: lightgrey;*/\r\n}\r\n.scale[_v-1214d038]{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }\r\n.scale .bar[_v-1214d038]{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }\r\n\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <style scoped>
+	// .scale_panel{
+	// 	font-size:12px;
+	// 	color:#999;
+	// 	width:70%;
+	// 	position:absolute;
+	// 	line-height:18px;
+	// 	left:60px;
+	// 	top:-0px;
+	// }
+	// .scale_panel .r{
+	// 	float:right;
+	// }
+	// .scale span{
+	//
+	// 	width:8px;
+	// 	height:16px;
+	// 	position:absolute;
+	// 	/*left:-2px;*/
+	// 	top:-5px;
+	// 	cursor:pointer;
+	// 	/*background-color: lightgrey;*/
+	// }
+	// .scale{ background-repeat: repeat-x; background-position: 0 100%; background-color: #E4E4E4; border-left: 1px #83BBD9 solid;  width: 100%; height: 3px; position: relative; font-size: 0px; border-radius: 3px; }
+	// .scale .bar{ background-repeat: repeat-x; background-color: #3BE3FF; width: 0px; position: absolute; height: 3px; width: 0; left: 0; bottom: 0; }
+	//
+	// </style>
+	// <template>
+	// 	<div class="progress-container">
+	// 		<span :id="title_id" v-text="rate+'%'"></span>
+	// <div class="scale_panel">
+	// 	<span class="r">100</span>0
+	// 	<div class="scale" :id="bar_id">
+	// 		<div class="bar" :style="{width:rate+'%'}"></div>
+	// 		<span :id="btn_id" style="background: url(assets/images/progressdrag.gif) no-repeat; " :style="{left:rate+'%'}"></span>
+	// 	</div>
+	// </div>
+	// 	</div>
+	// </template>
+	//
+	// <script>
+	var scale = function scale(btn, bar, title, _this) {
+		this.btn = document.getElementById(btn);
+		this.bar = document.getElementById(bar);
+		this.title = document.getElementById(title);
+		this.step = this.bar.getElementsByTagName("div")[0];
+		this.init(_this);
+	};
+	scale.prototype = {
+		init: function init(_this) {
+			var f = this,
+			    g = document,
+			    b = window,
+			    m = Math;
+			f.btn.onmousedown = function (e) {
+				var x = (e || b.event).clientX;
+				var l = this.offsetLeft;
+				var max = f.bar.offsetWidth - this.offsetWidth;
+				g.onmousemove = function (e) {
+					var thisX = (e || b.event).clientX;
+					var to = m.min(max, m.max(-2, l + (thisX - x)));
+					f.btn.style.left = to + 'px';
+					f.ondrag(m.round(m.max(0, to / max) * 100), to);
+					b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+					_this.rate = m.round(m.max(0, to / max) * 100);
+				};
+				g.onmouseup = new Function('this.onmousemove=null');
+			};
+		},
+		ondrag: function ondrag(pos, x) {
+			this.step.style.width = Math.max(0, x) + 'px';
+			this.title.innerHTML = pos + '%';
+		}
+	};
+
+	exports.default = {
+		data: function data() {
+			var timeStr = new Date().getTime();
+			return {
+				btn_id: "btn" + timeStr,
+				bar_id: "bar" + timeStr,
+				title_id: "title" + timeStr
+			};
+		},
+
+		props: ["rate"],
+		created: function created() {},
+		ready: function ready() {
+			new scale(this.btn_id, this.bar_id, this.title_id, this);
+		},
+		methods: {}
+	};
+
+	// </script>
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t<div class=\"progress-container\" _v-1214d038=\"\">\n\t\t<span :id=\"title_id\" v-text=\"rate+'%'\" _v-1214d038=\"\"></span>\n<div class=\"scale_panel\" _v-1214d038=\"\">\n\t<span class=\"r\" _v-1214d038=\"\">100</span>0\n\t<div class=\"scale\" :id=\"bar_id\" _v-1214d038=\"\">\n\t\t<div class=\"bar\" :style=\"{width:rate+'%'}\" _v-1214d038=\"\"></div>\n\t\t<span :id=\"btn_id\" style=\"background: url(assets/images/progressdrag.gif) no-repeat; \" :style=\"{left:rate+'%'}\" _v-1214d038=\"\"></span>\n\t</div> \n</div> \n\t</div>\n";
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"outer-container\" _v-4282b744=\"\">\n\t<modal-pop :modal_id=\"modal_id\" _v-4282b744=\"\">\n\t\t<div slot=\"body\" _v-4282b744=\"\">\n\t\t\t<form class=\"form-horizontal\" _v-4282b744=\"\">\n\t\t\t  <div class=\"form-group\" _v-4282b744=\"\">\n\t\t\t    <label class=\"col-sm-2 control-label\" _v-4282b744=\"\">进度</label>\n\t\t\t    <div class=\"col-sm-10\" _v-4282b744=\"\">\n\t\t\t    <progress-bar :rate.sync=\"rate.rate\" _v-4282b744=\"\"></progress-bar>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t\t\t<div class=\"form-group\" _v-4282b744=\"\">\n\t\t\t\t<label class=\"col-sm-2 control-label\" _v-4282b744=\"\"></label>\n\t\t\t\t<textarea class=\"form-control\" v-model=\"rate.comment\" _v-4282b744=\"\"></textarea>\n\t\t\t\t</div>\t\t\t\t\t\n\t\t\t\t</form>\n\t\t\t</div>\n\t</modal-pop>\n</div>\n";
+
+/***/ }
+/******/ ]);
