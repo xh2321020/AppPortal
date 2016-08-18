@@ -6,7 +6,7 @@ var setPersonalpageHeader=function(url,paramObj,iid){
     return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
 }
 function opentask(parmar){
-    var url = "pages/supervision/supervision-detail.html?id="+parmar;
+    var url = "pages/supervision/supervision-detail.html";
     window.open(url,"_blank");
 }
     function setButton(obj){  
@@ -100,10 +100,7 @@ function opentask(parmar){
             data: JSON.stringify(objJson),
             success: function success(data, state, jqxhr) {
                 alert("数据更新成功");
-                updatePopView();
-                //$("#myModal").css("display","block");
-                //$("#editModal").css("display","none");
-                //$("").css("display","none");
+                setTimeout("updatePopView('refresh');",500);
             },
             error: function error(err) {
                 alert("提交失败，请刷新后重试");
@@ -111,8 +108,8 @@ function opentask(parmar){
             }
         });
     }
-    updatePopView();
-    function updatePopView(){
+    updatePopView("init");
+    function updatePopView(parmar){
         $.ajax({
             type: "get",
             dataType: "json",
@@ -139,7 +136,9 @@ function opentask(parmar){
                     //弹框页面工作快捷入口（编辑页面）
                     $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                     //编辑选择框已添加的工作快捷入口
-                    $("#leftSel").html(kuaijierukouselector);
+                    if(parmar=="init"){
+                        $("#leftSel").html(kuaijierukouselector);
+                    }
                     updateEdidPopView();
                 }
                 
