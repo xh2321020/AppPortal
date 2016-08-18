@@ -20,7 +20,8 @@
         "traceUrl": "/api/supervision/trace/%id%",
         "closeUrl": "/api/supervision/close/%id%",
         "revokeUrl": "/api/supervision/delete/%id%",
-        "traceHistory":"/api/supervision/findtrace/%id%"
+        "traceHistory":"/api/supervision/findtrace/%id%",
+        "completedRateStatistics":"/api/supervision/completedRateStatistics/%id%"
     }
   },
 
@@ -43,11 +44,11 @@
         "searchuserUrl":"/api/contact/searchuser",
         "getChainsDetails":"/api/contact/Reportchain",
         "getDuBanShiXiang":"/api/supervision/search",
-        "getYonghuKuaiJieRuKou":"/api/work/work/",
+        "getYonghuKuaiJieRuKou":"/api/work/",
         "getRiChengTiXing":"/api/schedule/scheduleuserdate",
-        "initUserKuaiJieRuKou":"/api/work/work/link",
+        "initUserKuaiJieRuKou":"/api/work/link",
         "getJinQiGongZuo":"/api/task/web/interfaceTaskListService.action",
-        "popViewEdit":"/api/work/work/add",
+        "popViewEdit":"/api/work/add",
         "getDepartment":"/api/contact/getorgbyou",
         "getMember":"/api/contact/getorgmember",
         "getMemberDetails":"/api/contact/getuserlist",
