@@ -33,8 +33,22 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                   };
             } else{
                   $scope.curStyle = style;
+                  for(var i = 0, j = $scope.portalList.length; i < j; i++){
+                        if($scope.curStyle.hpid == $scope.portalList[i].id){
+                              $scope.selectDate.addPortal = $scope.portalList[i];
+                        }
+                  }
+                  addPortalselect();
             }
             $('#myTab a:last').tab('show');
+      };
+
+      $scope.del = function(index){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagestyle/edittype?type=del&styleid=" + $scope.styleList[index].id, function(response){
+                  console.log(response);
+                  PortalService.showAlert("操作成功");
+                  $scope.styleList.splice(index, 1);
+            });
       };
 
       var getStyleListData = function(hpid){
@@ -69,20 +83,27 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       $scope.savStyle = function(callback){
             $scope.curStyle.hpid = $scope.selectDate.addPortal.id;
             var count = 1;
+            $scope.curStyle.order = [];
             $("#multiselect_to option").each(function(){
                   for(var i = 0, j = $scope.addStyleList.length; i < j; i++){
                         if($scope.addStyleList[i].id == $(this).val()){
                               var order = {
                                     "formid": $scope.addStyleList[i].id,
                                     "orderid": count++,
-                                    "styleid":  $scope.addStyleList[i].styleid,
+                                    "styleid": $scope.addStyleList[i].styleid,
                               };
                               $scope.curStyle.order.push(order);
                         }
                   }
             });
             console.log($scope.curStyle);
-            PortalService.sendPostRequest(PortalService.getHostName() + "/api/homepage/homepagestyle/add", $scope.curStyle, function(response){
+            var requestUrl = PortalService.getHostName();
+            if($scope.curStyle.id && $scope.curStyle.id != ""){
+                  requestUrl += "/api/homepage/homepagestyle/edit";
+            } else{
+                  requestUrl += "/api/homepage/homepagestyle/add";
+            }
+            PortalService.sendPostRequest(requestUrl, $scope.curStyle, function(response){
                   console.log("curPortal:" + response);
                   if(true){
                         PortalService.showAlert("提交成功");
