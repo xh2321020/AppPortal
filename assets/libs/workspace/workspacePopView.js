@@ -1,7 +1,6 @@
 var currentSel = null;
-var usersid = getCookie("userid")
+var usersid = getCookie("username")
 var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
-var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
 var setPersonalpageHeader=function(url,paramObj,iid){
     return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
 }
@@ -15,7 +14,7 @@ function opentask(parmar){
         if(obj.id=="leftSel"){
             $("#btnLeft").disabled = true;
             $("#btnRight").disabled = false;                
-            reSelect($("#rightSel"));
+            reSelect($("#rightSel"));            
         }else{
             $("#btnLeft").disabled = false;
             $("#btnRight").disabled = true;               
@@ -101,9 +100,6 @@ function opentask(parmar){
             success: function success(data, state, jqxhr) {
                 alert("数据更新成功");
                 updatePopView();
-                //$("#myModal").css("display","block");
-                //$("#editModal").css("display","none");
-                //$("").css("display","none");
             },
             error: function error(err) {
                 alert("提交失败，请刷新后重试");
@@ -116,7 +112,7 @@ function opentask(parmar){
         $.ajax({
             type: "get",
             dataType: "json",
-            url:personalpageRequest.getYonghuKuaiJieRuKou + usersid + personalpageRequestKey,
+            url:personalpageRequest.getYonghuKuaiJieRuKou + usersid,
             success: function success(data, state, jqxhr) {
                 if(data.length == 0){
                     specialInit();
@@ -131,7 +127,7 @@ function opentask(parmar){
                         }
                         kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
                         '<a href="'+data[j].link+'" target="_blank">'+
-                        '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
+                        '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
                         kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].linkid+'">'+data[j].description+'</option>';
                     }
                     //主页面工作快捷入口
@@ -139,6 +135,7 @@ function opentask(parmar){
                     //弹框页面工作快捷入口（编辑页面）
                     $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                     //编辑选择框已添加的工作快捷入口
+                    // alert(kuaijierukouselector);
                     $("#leftSel").html(kuaijierukouselector);
                     updateEdidPopView();
                 }
@@ -154,7 +151,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou+personalpageRequestKey,
+            url: personalpageRequest.initUserKuaiJieRuKou,
             data: "",
             success: function success(data, state, jqxhr) {
                 var n=0;
@@ -173,19 +170,9 @@ function opentask(parmar){
                     restPort = restPort + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
                 }
                 $("#rightSel").html(restPort);
-                var currentSelLU = null;
-                var currentSelRU = null;
-                currentSelLU = document.getElementById('leftSel');
-                currentSelRU = document.getElementById('rightSel');
-                for(var k=0;k<currentSelLU.length;k++){
-                    for(var j=0; j<currentSelRU.length; j++){
-                        // alert(currentSelL.options[k].value + "   " + currentSelR.options[j].value)
-                        if (currentSelLU.options[k].value == currentSelRU.options[j].value){
-                            var removeIndex = currentSelRU.options[j].index;
-                            currentSelRU.options.remove(removeIndex);
-                        }
-                    }
-                }
+                $("#hideEditPopView").css("display","display");
+                $("#hidePopView").css("display","block");
+                
             },
             error: function error(err) {
                 console.log(err);
@@ -198,7 +185,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey,
+            url: personalpageRequest.initUserKuaiJieRuKou,
             success: function success(data, state, jqxhr) {
                 var kuaijierukouLeft="";
                     var kuaijierukoupop="";
@@ -210,7 +197,7 @@ function opentask(parmar){
                         }
                         kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
                         '<a href="'+data[j].link+'" target="_blank">'+
-                        '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
+                        '<img src="'+data[j].icoa+'"><span>'+data[j].description+'</span></a></li>';
                         kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
                     }
                     //主页面工作快捷入口
@@ -218,6 +205,7 @@ function opentask(parmar){
                     //弹框页面工作快捷入口（编辑页面）
                     $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                     //编辑选择框已添加的工作快捷入口
+                    // alert(kuaijierukouselector);
                     $("#leftSel").html(kuaijierukouselector);
             },
             error: function error(err) {

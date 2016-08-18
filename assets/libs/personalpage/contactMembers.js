@@ -11,7 +11,9 @@ function getUserCookies(name){
         return null;
 }
 
-var currentUserId=getUserCookies("userid");
+
+
+var currentUserId=getUserCookies("username");
 var pageUserUid="";
 var cancelText = "";
 function myFunction(parmar){
@@ -48,8 +50,6 @@ function editCancel(parmar){
 function editSave(parmar,parmarKey){
     var input = "#input"+parmar;
     // var updateUserProfileURL = window.userJsonPortalSettings.singleRequest.updateUserProfile  + "&uid=" + pageUserUid +'&'+parmarKey+'=' + $(input).val();
-    alert($(input).val());
-    // return;
     $.ajax({
         type: "post",
         contentType: "application/json",
@@ -87,20 +87,9 @@ function editSave(parmar,parmarKey){
 }
 $(document).ready(function () {
     var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
-    var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
     var setPersonalpageHeader=function(url,paramObj,iid){
         return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
     }
-
-    var dateObj = new Date();
-    var defaultArr=getWeeks(dateObj);
-    var defaultMeetting = '<div style="margin-top: 10px;"><div style="float: left;border-right: 1px dashed black;">'
-        +'<div><div class="round-data" style="margin-right: 5px;">'+defaultArr[0]+'</div><p class="right-p">'+defaultArr[1]
-        +'</p></div></div><div style="float: left;"><div><span class="right-name">暂无数据！</span><br>'
-        +'<span class="right-bottom-org"></span></div></div></div>';
-    $("#defaultMeeting").append(defaultMeetting);
-    $("#defaultAct").append(defaultMeetting);
-
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -270,13 +259,17 @@ $(document).ready(function () {
     function getWeeks(parmar){
         var oDate1 = new Date(parmar);
         var arrayChar=["日","一","二","三","四","五","六"];
-        //var dataChar = parmar.substring(parmar.length-2, parmar.length);
-        var weekDay = oDate1.getDate()+arrayChar[new Date(oDate1).getDay()];
-        var monthChar = (oDate1.getMonth()+1)+"月";
+        var dataChar = parmar.substring(parmar.length-2, parmar.length);
+        var weekDay = dataChar+arrayChar[new Date(oDate1).getDay()];
+        var monthChar = parmar.substring(5, parmar.length-3)+"月";
+        if(monthChar.indexOf("0") == 0){
+            monthChar = monthChar.substring(1, monthChar.length);
+        }
         var weeksArr = [weekDay,monthChar];
         return weeksArr;
     }
     function getXinCheng(parmar){
+        parmar = pageUser;
         $.ajax({
             type: "get",
             dataType:"json",
@@ -292,28 +285,20 @@ $(document).ready(function () {
                     '<span class="right-bottom-org">'+data[i].starttime+'~'+data[i].endtime+' 领导活动</span></div></div>';
                 }
                 $("#xinChengDate").html(xinChengIcon);
-                var newDate = new Date();
-                var arrayDate = getWeeks(newDate);
-                if(data.length == 0){
-                    var xingChengD = '<div class="xc-div" style="margin-top: 0;"><div class="xc-div-datediv">'+
-                        '<div class="round-data">'+arrayDate[0]+'</div><p class="right-p">'+arrayDate[1]+'</p></div><div>'+
-                        '<span class="xc-right-name" style="max-width: 18rem; margin-top:0.5rem;" title="">暂无行程！</span><br>'+
-                        '<span class="right-bottom-org"></span></div></div>';
-                    $("#xinChengDate").html(defaultMeetting);
-                }
             },
             error: function (err) {
                 console.log(err);
             }
         });
     }
-    function getSameOrg(parpp){
-        parpp = sameOrgOu;
+    function getSameOrg(pramar){
         $.ajax({
             type: "get",
             dataType:"json",
-            url: personalpageRequest.getSameOrgDetails + personalpageRequestKey + "&ou=" + parpp,
+            url: setPersonalpageHeader(personalpageRequest.getSameOrgDetails,{ou:parmar},null),
+            // url: getSameOrgDetails + pramar,
             success: function (data, state, jqxhr) {
+
                 var sameOrgHtml = "";
                 var sameOrgCount = "";
                 var moreHtml = "";
@@ -322,7 +307,7 @@ $(document).ready(function () {
                 }else{
                     sameOrgCount=4;
                     moreHtml = '<div style="margin-right: 5px;min-height: 4.7rem;">'+
-                    '<a href="pages/personalpage/personalpage-list-search.html?ou=' +parpp+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
+                    '<a href="pages/personalpage/personalpage-list-search.html?ou=' +pramar+ '" style="float:right; margin-top:3rem;">更多>></a></div>';
                 }
                 for(var i = 0; i< sameOrgCount; i++){
                     var iconImages=""
@@ -337,6 +322,7 @@ $(document).ready(function () {
                     '<span class="right-name">'+data[i].displayname+'</span><br>' +
                     '<span class="right-bottom-org">'+ sameOrgName + '</span></div>';
                 }
+
                 if(data.length > 0){
                     $("#sameOrgId").remove();
                     $("#sameOrgMember").html(sameOrgMemberDiv+sameOrgLineHtml+sameOrgHtml + moreHtml+ '</div></div>');

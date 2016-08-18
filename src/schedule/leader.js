@@ -1,6 +1,6 @@
 eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService) {
       var urlParams = {
-            'userid': EventService.getCookie('username'),
+            'userid': EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
             'startdate': "",
             'enddate': "",
       };
@@ -122,8 +122,8 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": EventService.getCookie('username'),
-                  "username": "",
+                  "userid": urlParams.userid,
+                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
@@ -135,8 +135,8 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": EventService.getCookie('username'),
-                  "createusername": EventService.getCookie('chinesename'),
+                  "createuserid": urlParams.userid,
+                  "createusername": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {
