@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-  //  url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
+    url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  
@@ -278,8 +278,6 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                     if(document.cookie && document.cookie != ''){
                         updateCookie("username",chinesename,30,"/");
                         updateCookie("userorg",orgTree,30,"/");
-                        //setCookie("username",chinesename,30,"/");
-                        //setCookie("userorg",orgTree,30,"/");
                     }
                 }else if(fetchArray[jqxhr.index] == "DUBANSHIXIANG"){
                     var dubanshixiang="";
@@ -436,8 +434,8 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     }
     function htmlcode(data){
         var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-        "<tr><th style='text-align: center; width:60%;'> 事项名称 </th>"+
-        "<th style='text-align: center;'> 创建人员 </th><th style='text-align: center;'> 创建时间 </th></tr></thead><tbody>";
+        "<tr><th style='text-align: center; width:60%; color:black;'> 事项名称 </th>"+
+        "<th style='text-align: center;color: black;'> 创建人员 </th><th style='text-align: center;color: black;'> 创建时间 </th></tr></thead><tbody>";
         var tableFooter = "</tbody></table></section>";
         var initHtml = "";
         var moreUrlHtml = "";
@@ -447,12 +445,12 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else {
             if (data.length > 10) {
                 count = 10;
-                moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank">' + '<div class="moreURL-div" style="float: right; padding-right:2rem;">更多 ></div></a>';
+                moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank">' + '<div class="moreURL-div" style="float: right; padding-right:6rem;">更多 ></div></a>';
             } else {
                 count = data.length;
             }
             for (var j = 0; j < count; j++) {
-                initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font"><a href="' + data[j].f_URL + '" style="color: black;"  target="_blank">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font" style="height:3rem;"><a href="' + data[j].f_URL + '" style="color: black;"  target="_blank">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
             }
             initHtml = tableHeader + initHtml + tableFooter;
         }

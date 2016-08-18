@@ -47,9 +47,6 @@ function editCancel(parmar){
 }
 function editSave(parmar,parmarKey){
     var input = "#input"+parmar;
-    // var updateUserProfileURL = window.userJsonPortalSettings.singleRequest.updateUserProfile  + "&uid=" + pageUserUid +'&'+parmarKey+'=' + $(input).val();
-    alert($(input).val());
-    // return;
     $.ajax({
         type: "post",
         contentType: "application/json",
