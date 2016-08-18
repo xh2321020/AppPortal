@@ -5,14 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>公司门户</title>
-
-    <!-- Bootstrap -->
     <base href="http://10.15.251.110/"/>
-    <!-- <base href="../../"> -->
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/portal-iframe.css"/>
 </head>
-<!--onload="initIframe()"-->
 <body >
 <article class="container-fluid article" id="article">
     <div>
@@ -21,30 +17,30 @@
                 <div class="panel-online" style="margin-top: 0.5rem;">
                     <div class="catalog-online" style="margin-top: 1rem;">
                         <div class="scroll-panel-online">
-                            <div class="scroll-icon-online up" id="goingUp">
+                            <div class="scroll-icon-online up" id="goingUp" style="border-bottom: 1px solid lightgrey;">
                                 <em class="glyphicon-online glyphicon-menu-up" style="color: rgb(0,162,229);"></em>
                             </div>
                             <div class="online-list-div">
                                 <ul class="online-list-ul" style="height: 79.5rem;" id="location">
-                                    <li id="tag01" name="1" class="selected-li" style="display: block;">秦山一期1#</li>
-                                    <li id="tag02" name="2" onclick="getPowerAmount(4)">秦山二期1#</li>
-                                    <li id="tag03" name="3" onclick="getPowerAmount(5)">秦山二期2#</li>
-                                    <li id="tag04" name="4" onclick="getPowerAmount(14)">秦山二期3#</li>
-                                    <li id="tag05" name="5" onclick="getPowerAmount(15)">秦山二期4#</li>
-                                    <li id="tag06" name="6" onclick="getPowerAmount(8)">秦山三期1#</li>
-                                    <li id="tag07" name="7" onclick="getPowerAmount(9)">秦山三期2#</li>
-                                    <li id="tag08" name="8" onclick="getPowerAmount(11)">田湾核电1#</li>
-                                    <li id="tag09" name="9" onclick="getPowerAmount(10)">田湾核电2#</li>
-                                    <li id="tag10" name="10" onclick="getPowerAmount(20)">福清核电1#</li>
-                                    <li id="tag11" name="11" onclick="getPowerAmount(21)">福清核电2#</li>
-                                    <li id="tag12" name="12" onclick="getPowerAmount(24)">方家山1#</li>
-                                    <li id="tag13" name="13" onclick="getPowerAmount(25)">方家山2#</li>
-                                    <li id="tag14" name="14" onclick="getPowerAmount(36)">海南核电1#</li>
-                                    <li id="tag15" name="37" onclick="getPowerAmount(36)">海南核电2#</li>
+                                    <li id="tag01" name="1" style="cursor:pointer;" onclick="getPowerAmount(1)"class="selected-li" style="display: block;">秦山一期1#</li>
+                                    <li id="tag02" name="2" style="cursor:pointer;" onclick="getPowerAmount(4)">秦山二期1#</li>
+                                    <li id="tag03" name="3" style="cursor:pointer;" onclick="getPowerAmount(5)">秦山二期2#</li>
+                                    <li id="tag04" name="4" style="cursor:pointer;" onclick="getPowerAmount(14)">秦山二期3#</li>
+                                    <li id="tag05" name="5" style="cursor:pointer;" onclick="getPowerAmount(15)">秦山二期4#</li>
+                                    <li id="tag06" name="6" style="cursor:pointer;" onclick="getPowerAmount(8)">秦山三期1#</li>
+                                    <li id="tag07" name="7" style="cursor:pointer;" onclick="getPowerAmount(9)">秦山三期2#</li>
+                                    <li id="tag08" name="8" style="cursor:pointer;" onclick="getPowerAmount(11)">田湾核电1#</li>
+                                    <li id="tag09" name="9" style="cursor:pointer;" onclick="getPowerAmount(10)">田湾核电2#</li>
+                                    <li id="tag10" name="10" style="cursor:pointer;" onclick="getPowerAmount(20)">福清核电1#</li>
+                                    <li id="tag11" name="11" style="cursor:pointer;" onclick="getPowerAmount(21)">福清核电2#</li>
+                                    <li id="tag12" name="12" style="cursor:pointer;" onclick="getPowerAmount(24)">方家山1#</li>
+                                    <li id="tag13" name="13" style="cursor:pointer;" onclick="getPowerAmount(25)">方家山2#</li>
+                                    <li id="tag14" name="14" style="cursor:pointer;" onclick="getPowerAmount(36)">海南核电1#</li>
+                                    <li id="tag15" name="37" style="cursor:pointer;" onclick="getPowerAmount(36)">海南核电2#</li>
                                 </ul>
                             </div>
 
-                            <div class="scroll-icon-online down" id="goingDown">
+                            <div class="scroll-icon-online down" id="goingDown" style="border-top: 1px solid lightgrey;">
                                 <em class="glyphicon-online glyphicon-menu-down" style="color: rgb(0,162,229);"></em>
                             </div>
                         </div>
@@ -53,7 +49,7 @@
                         <em class="glyphicon-online glyphicon-menu-down"></em>
                     </div>
                     </div>
-                    <div style="width: 12rem; height: 100%; float: left; border: 0px;margin-left:1rem;">
+                    <div style="width: 10rem; height: 100%; float: left; border: 0px;margin-left:1rem;">
                         <div class="online-power">
                             <div class="online-power-amount">
                                 <span style="color:#00a2e5 ; font-size: 1.3rem;">总电功率</span>
@@ -82,6 +78,7 @@
 <script src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/echarts.min.js"></script>
 <script>
+    var currenIndex = 0;
     function getPowerAmount(rid){
         var myDate = new Date();
         var dataStr = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) +  "-" + myDate.getDate()
@@ -206,7 +203,6 @@
             });
         }
 
-        var currenIndex = 0;
         $("#comPortalNav").hover(function (ev) {
             $(this.querySelector(".nav-panel")).show();
         }, function () {
@@ -220,8 +216,8 @@
         $("#location").on("click","li",function(ev){
             var id = $("#location").find(this).attr("name");
             $("#location").find("li").each(function(){
-                this.style.backgroundColor="#B4D6EF";
-                this.style.color="black";
+                this.style.backgroundColor="#fff";
+                this.style.color="#00a2e5";
                 if($(this).attr("name")==id){
                     this.style.backgroundColor="#00a2e5";
                     this.style.color="#FFFFFF";
@@ -229,46 +225,48 @@
             });
         });
         $("#goingUp").click(function(ev){
-                if(currenIndex==0){
-                    $("#location").find("li").each(function(){
-                        if($(this).attr("name")<6){
-                            this.style.display="none";
-                        }else if(($(this).attr("name")>=6) && ($(this).attr("name")<=10)){
-                            this.style.display="block";
-                        }
-                    })
-                    currenIndex++;
-                }else if(currenIndex==1){
-                    $("#location").find("li").each(function(){
-                        if($(this).attr("name")<=9){
-                            this.style.display="none";
-                        }else {
-                            this.style.display = "block";
-                        }
-                    })
-                    currenIndex++;
-                }
-        });
-        $("#goingDown").click(function(ev){
             if(currenIndex==2){
                 $("#location").find("li").each(function(){
-                    if($(this).attr("name")<6){
-                        this.style.display="none";
-                    }else if(($(this).attr("name")>=6) && ($(this).attr("name")<=10)){
+                    if(($(this).attr("name")>=6) && ($(this).attr("name")<=10)){
                         this.style.display="block";
+                    } else{
+                        this.style.display="none";
                     }
                 })
                 currenIndex--;
             }else if(currenIndex==1){
                 $("#location").find("li").each(function(){
-                    if($(this).attr("name")<=9){
+                    if($(this).attr("name")<=5){
+                        this.style.display = "block";
+                    }else {
+                        this.style.display="none";
+                    }
+                })
+                currenIndex--;
+            }
+            console.log("currenIndex:" + currenIndex);
+        });
+        $("#goingDown").click(function(ev){
+            if(currenIndex==0){
+                $("#location").find("li").each(function(){
+                    if(($(this).attr("name")>=6) && ($(this).attr("name")<=10)){
+                        this.style.display="block";
+                    } else{
+                        this.style.display="none";
+                    }
+                })
+                currenIndex++;
+            }else if(currenIndex==1){
+                $("#location").find("li").each(function(){
+                    if($(this).attr("name")<=10){
                         this.style.display="none";
                     }else {
                         this.style.display = "block";
                     }
                 })
-                currenIndex--;
+                currenIndex++;
             }
+            console.log("currenIndex:" + currenIndex);
         });
 
         getSinglePowAction();
