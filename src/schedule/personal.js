@@ -4,7 +4,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             'startdate': '',
             'enddate': '',
       };
-      
+
       $scope.scheduletype = [true, true, true, true, true];
       $scope.scheduleTypeClick = function(index){
             var scheduletypes = EventService.getScheduletypes();
@@ -31,7 +31,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   eventClick: function(calEvent, jsEvent, view) {
                         $scope.$apply(
                             function(){
-                                  $scope.currentEvent = EventService.getEventDetail(calEvent.id);
+                                    $scope.currentEvent = EventService.getEventDetail(calEvent.id);
                             }
                         );
                         $("#schedule").removeClass("active").removeClass("in");
@@ -54,11 +54,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             $scope.scheduletypes = EventService.getScheduletypes();
             $scope.scope = EventService.getScope();
             $scope.addParams = {
-                  "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": urlParams.userid,
-                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
@@ -75,13 +72,10 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {
-                        "id": '10086',
                         "companyid": "",
                         "scheduletype": "",
-                        "scheduleId": "10086",
                         "userid": "",
                         "username": "",
-                        "companyname": "",
                         "peopletype": "",
                         "updatetime": "",
                         "collsaceid": ""
@@ -102,6 +96,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   EventService.showAlert('请选择日程公开范围');
                   return;
             }
+            $scope.addParams.startdate = $("#startdate").val();
+            $scope.addParams.enddate = $("#enddate").val();
             $scope.addParams.scheduletype = $scope.addParams.scheduletype.id;
             $scope.addParams.scope = $scope.addParams.scope.id;
             EventService.showLoading('数据提交中，请稍后... ...');
@@ -148,11 +144,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   $scope.searchParams.result[i].isChecked = false;
             }
             user.isChecked = true;
-            $scope.addParams.username = user.displayname;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.companyname = user.orgtree;
             $scope.addParams.people.username = user.displayname;
       };
 

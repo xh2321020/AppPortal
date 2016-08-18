@@ -5,7 +5,7 @@
     </tr>
     <tr>
         <td class="td-text" colspan="2">姓名</td>
-        <td colspan="8"><input size="60" type="text" ng-model="addParams.username" readonly>
+        <td colspan="8"><input size="60" type="text" ng-model="addParams.people.username" readonly>
             <div id="userselect" style="display: inline">
                 <button ng-click="addPeopleClick()">添加人员</button>
             </div>
@@ -14,13 +14,13 @@
     <tr>
         <td class="td-text" colspan="2">开始日期</td>
         <td colspan="4">
-            <div id="startdate" class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input size="16" type="text" value="" readonly ng-model="addParams.startdate">
+            <div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input id="startdate" size="16" type="text" value="" readonly ng-model="addParams.startdate">
                 <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
             </div>
         </td>
         <td colspan="1" class="td-text">开始时间</td>
-        <td colspan="1">
+        <td colspan="3">
             <select class="select-time" ng-model="addParams.starttime">
                 <option>请选择</option>
                 <option value="8:00">8:00</option>
@@ -34,19 +34,17 @@
                 <option value="12:00">12:00</option>
             </select>
         </td>
-        <td colspan="1"><input type="checkbox">上午</input></td>
-        <td colspan="1"><input type="checkbox">全天</input></td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">结束日期</td>
         <td colspan="4">
             <div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input size="16" type="text" value="" readonly ng-model="addParams.enddate">
+                <input id="enddate" size="16" type="text" value="" readonly ng-model="addParams.enddate">
                 <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
             </div>
         </td>
         <td class="td-text" colspan="1">结束时间</td>
-        <td colspan="1">
+        <td colspan="3">
             <select class="select-time" ng-model="addParams.endtime">
                 <option>请选择</option>
                 <option value="8:00">8:00</option>
@@ -72,8 +70,6 @@
                 <option value="18:30">18:00</option>
             </select>
         </td>
-        <td colspan="1"><input type="checkbox">下午</input></td>
-        <td colspan="1"><input type="checkbox">重要</input></td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">标题</td>
@@ -114,9 +110,9 @@
     </tbody>
 </table>
 
-<div class="container" style="text-align: center">
-    <button data-toggle="tab" ng-click="addEvent()">保存</button>
-    <button style="margin-left: 80px" href="#schedule" data-toggle="tab">取消</button>
+<div class="container" style="text-align: center; margin-bottom: 10px">
+    <button class="btn btn-primary" data-toggle="tab" ng-click="addEvent()">保存</button>
+    <button class="btn btn-primary" style="margin-left: 80px" href="#schedule" data-toggle="tab">取消</button>
 </div>
 
 <!-- 模态框（Modal） -->
@@ -133,9 +129,9 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <input style="display: inline; padding: 5px" size="65" type="text" ng-model="searchParams.content" placeholder="请输入员工姓名或拼音">
+                <input style="display: inline; padding: 5px" size="66" type="text" ng-model="searchParams.content" placeholder="请输入员工姓名或拼音">
                 <div style="display: inline">
-                    <button class="btn btn-primary" ng-click="searchPeople()">查询</button>
+                    <button class="btn btn-primary" style="margin-left: 10px" ng-click="searchPeople()">查询</button>
                 </div>
 
                 <div style="margin-top: 20px">
@@ -162,7 +158,7 @@
                 </div>
             </div>
             <div class="modal-footer; text-center" style="margin: 10px;">
-                <button type="button" class="btn btn-default" ng-click="peopleConfig()">确定</button>
+                <button type="button" class="btn btn-primary" ng-click="peopleConfig()">确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div><!-- /.modal-content -->

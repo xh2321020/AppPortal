@@ -572,6 +572,15 @@ div.scroll-panel-online{
     margin-top: 1rem;
     border: 1px solid #E5E5E5;
 }
+
+.online-power2{
+    width: 100%;
+    vertical-align: middle;
+    height: 10rem;
+    float: left;
+    margin-top: 1rem;
+    border: 1px solid #E5E5E5;
+}
 /*.online-power:hover{*/
     /*width: 100%;*/
     /*vertical-align: middle;*/
