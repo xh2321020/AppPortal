@@ -1,7 +1,7 @@
 newsApp.controller("newsSearchAppCtrl", function($scope, $http, NewsService) {
 
     var getSearchNewsList = function(str){
-        NewsService.sendGetRequest('api/v1.0/news/search?title=' +  str, function(response){
+        NewsService.sendGetRequest('/api/news/search?title=' +  str, function(response){
             console.log('result:' + ':' + response);
             $scope.newsList = response;
             $scope.curNewList = $scope.newsList.slice(0, 20);

@@ -1,7 +1,7 @@
 
 /***************** common *******************/
 body{
-    font-family:"微软雅黑", "宋体", Tahoma, Arial !important;
+    font-family:"微软雅黑";
     color:#555;background:#fff;padding: 0px;margin: 0px auto;font-size: 12px;
 }
 form{margin:0px; padding:0px}
@@ -189,5 +189,14 @@ table.listTblOne tbody td a:hover{color:#000; text-decoration:underline}
     height: 38px;
     font-style: normal;
     font-size: 15px;
-    color: #333;
+    color: #fff;
+}
+.td-text {
+    text-align: center;
+    font-family: 微软雅黑;
+    font-weight: 400;
+    height: 35px;
+    font-style: normal;
+    font-size: 14px;
+    color: #333333;
 }

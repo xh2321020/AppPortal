@@ -1,6 +1,6 @@
 eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) {
       var urlParams = {
-            'userid': '10001',
+            'userid': EventService.getCookie('username'),
             'companyid': '',
             'collid': '',
             'type': '2',

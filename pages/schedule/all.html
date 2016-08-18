@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>中国核电内网门户-日程管理</title>
-
+        <base href="http://10.15.251.110/"/>
         <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/schedule/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="/assets/css/schedule/fullcalendar.css">
@@ -14,7 +14,7 @@
     <header><com-header></com-header></header>
     
     <div ng-controller="AllCtrl"  class="content-border">
-        <div class="container">
+        <div class="container" style="max-width: 100%;min-height: 500px;">
             <div class="row">
                 <div class="col-md-12">
                     <br>
@@ -23,10 +23,10 @@
                     <div id="myTabContent2" class="tab-content">
                         <div id="schedule" class="tab-pane fade in active">
                             <ul id="myTab" class="nav nav-tabs">
-                                <li><a href="personal.html">个人日程</a></li>
-                                <li><a href="leader.html">领导日程</a></li>
+                                <li><a href="/pages/schedule/personal.html">个人日程</a></li>
+                                <li><a href="/pages/schedule/leader.html">领导日程</a></li>
                                 <li class="active"><a>组织日程</a></li>
-                                <li><a href="team.html">协作空间日程</a></li>
+                                <!--<li><a href="team.html">协作空间日程</a></li>-->
                             </ul>
 
                             <div id="all">
@@ -89,15 +89,15 @@
                         </div>
 
                         <div class="tab-pane fade" id="add">
-                            <div ng-include="'event-add.html'"></div>
+                            <div ng-include="'/pages/schedule/event-add.html'"></div>
                         </div>
 
                         <div class="tab-pane fade" id="detail">
-                            <div ng-include="'event-detail.html'"></div>
+                            <div ng-include="'/pages/schedule/event-detail.html'"></div>
                         </div>
 
                         <div class="tab-pane fade" id="edit">
-                            <div ng-include="'event-edit.html'"></div>
+                            <div ng-include="'/pages/schedule/event-edit.html'"></div>
                         </div>
                     </div>
                 </div>
@@ -117,6 +117,10 @@
         <script src="/src/schedule/eventservice.js"></script>
         <script src="/src/schedule/all.js"></script>
         <script src='/assets/libs/jquery.blockUI.js'></script>
-        <script src='/src/components/header-footer.js'></script>
+        <script src="/assets/libs/vue.min.js"></script>
+        <script>
+            var scriptList=['./dist/header-footer.js'];
+        </script>
+        <script src="./dist/main.js"></script>
     </body>
 </html>

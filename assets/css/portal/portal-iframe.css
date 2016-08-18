@@ -459,7 +459,7 @@ div.scroll-panel{
     top: 0;
     /*height: 100%;*/
     height: 26.5rem;
-    width: 12rem;
+    width: 10rem;
     border: 1px solid lightgrey;
     /*border-top: 3px solid #00A2E5;*/
     overflow: hidden;
@@ -501,7 +501,7 @@ div.scroll-panel-online{
     /*width: 100%;*/
 }
 .scroll-icon-online{
-    background-color: #e5e5e5;
+    background-color: #fff;
     width:100% ;
     height: 31rem;
     text-align: center;
@@ -559,14 +559,15 @@ div.scroll-panel-online{
 }
 .online-list-ul>li{
     text-align: center;
-    background-color: #B4D6EF;
+    background-color: #fff;
     border-top: 1px solid lightgray;
     list-style: none;
+    color: #00a2e5;
 }
 .online-power{
     width: 100%;
     vertical-align: middle;
-    height: 14rem;
+    height: 13rem;
     float: left;
     margin-top: 1rem;
     border: 1px solid #E5E5E5;

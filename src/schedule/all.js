@@ -1,13 +1,9 @@
 eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
       var urlParams = {
-            'userid': '',
+            'userid': EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
             'startdate': "",
             'enddate': "",
       };
-      var userid = EventService.getCookie('userid');
-      if(userid && userid.length > 0) {
-            urlParams.userid = userid;
-      }
 
       EventService.showLoading('数据请求中，请稍后... ...');
       $http.get( 'http://10.15.251.110:8010/api/contact/getOrglist?apikey=a16cb0c916404be78cb0805fefc7d26a', '')
@@ -123,12 +119,12 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": "10086",
-                  "username": "",
-                  "startdate": "2016-06-28",
+                  "userid": urlParams.userid,
+                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
+                  "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
-                  "enddate": "2016-06-28",
+                  "enddate": new Date().format("yyyy-MM-dd"),
                   "starttime": "8:30",
                   "endtime": "18:30",
                   "address": "",
@@ -136,9 +132,9 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": EventService.getCookie('userid'),
-                  "createusername": "sadfa",
-                  "createtime": "2016-06-28",
+                  "createuserid": urlParams.userid,
+                  "createusername": EventService.getCookie('username') ? EventService.getCookie('username') : "",
+                  "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {
                         "id": '10086',
