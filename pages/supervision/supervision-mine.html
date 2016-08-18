@@ -10,7 +10,7 @@
     <title>督办管理-我的督办</title>
     <base  id="baseTag">
     <script>
-        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/supervision_ui/";
     </script>
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -160,7 +160,24 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in keyItems.show">
                                         <td>{{item.code}}</td>
-                                        <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
+                                         <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -224,7 +241,24 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in otherItems.show">
                                         <td>{{item.code}}</td>
-                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
+                                       <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -286,7 +320,24 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in doneItems.show">
                                         <td>{{item.code}}</td>
-                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
+                                       <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
