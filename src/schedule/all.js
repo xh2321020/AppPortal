@@ -1,13 +1,9 @@
 eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
       var urlParams = {
-            'userid': '',
+            'userid': EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
             'startdate': "",
             'enddate': "",
       };
-      var userid = EventService.getCookie('username');
-      if(userid && userid.length > 0) {
-            urlParams.userid = userid;
-      }
 
       EventService.showLoading('数据请求中，请稍后... ...');
       $http.get( 'http://10.15.251.110:8010/api/contact/getOrglist?apikey=a16cb0c916404be78cb0805fefc7d26a', '')
@@ -123,8 +119,8 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": EventService.getCookie('username'),
-                  "username": "",
+                  "userid": urlParams.userid,
+                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
@@ -136,8 +132,8 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": EventService.getCookie('username'),
-                  "createusername": EventService.getCookie('chinesename'),
+                  "createuserid": urlParams.userid,
+                  "createusername": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {

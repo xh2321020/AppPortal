@@ -1,10 +1,10 @@
 eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventService, $timeout) {
       var urlParams = {
-            'userid': EventService.getCookie('username'),
+            'userid': EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
             'startdate': '',
             'enddate': '',
       };
-
+      
       $scope.scheduletype = [true, true, true, true, true];
       $scope.scheduleTypeClick = function(index){
             var scheduletypes = EventService.getScheduletypes();
@@ -57,8 +57,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "id": "10086",
                   "title": "",
                   "scheduletype": "",
-                  "userid": EventService.getCookie('username'),
-                  "username": "",
+                  "userid": urlParams.userid,
+                  "username": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "startdate": new Date().format("yyyy-MM-dd"),
                   "description": "",
                   "scope": "",
@@ -70,8 +70,8 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": EventService.getCookie('username'),
-                  "createusername": EventService.getCookie('chinesename'),
+                  "createuserid": urlParams.userid,
+                  "createusername": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",
                   "people": {
