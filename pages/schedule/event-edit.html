@@ -18,7 +18,7 @@
             </div>
         </td>
         <td colspan="1" class="td-text">开始时间</td>
-        <td colspan="1">
+        <td colspan="3">
             <select class="select-time" ng-model="editParams.starttime">
                 <option>请选择</option>
                 <option value="8:00">8:00</option>
@@ -27,8 +27,6 @@
                 <option value="9:30">9:30</option>
             </select>
         </td>
-        <td colspan="1"><input type="checkbox">上午</input></td>
-        <td colspan="1"><input type="checkbox">全天</input></td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">结束日期</td>
@@ -39,7 +37,7 @@
             </div>
         </td>
         <td class="td-text" colspan="1">结束时间</td>
-        <td colspan="1">
+        <td colspan="3">
             <select class="select-time" ng-model="editParams.endtime">
                 <option>请选择</option>
                 <option value="8:00">8:00</option>
@@ -65,8 +63,6 @@
                 <option value="18:30">18:00</option>
             </select>
         </td>
-        <td colspan="1"><input type="checkbox">下午</input></td>
-        <td colspan="1"><input type="checkbox">重要</input></td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">标题</td>
@@ -114,7 +110,7 @@
     </tbody>
 </table>
 
-<div class="container" style="text-align: center">
-    <button data-toggle="tab" ng-click="editSubmit()">保存</button>
-    <button style="margin-left: 80px" href="#schedule" data-toggle="tab">取消</button>
+<div class="container" style="text-align: center; margin-bottom: 10px;">
+    <button data-toggle="tab" class="btn btn-primary" ng-click="editSubmit()">保存</button>
+    <button style="margin-left: 80px" class="btn btn-primary" href="#schedule" data-toggle="tab">取消</button>
 </div>
