@@ -58,7 +58,8 @@
                                             <td class="td-text">{{style.updatetime}} </td>
                                             <td class="td-text">
                                                 <div>
-                                                    <a>编辑</a><a>删除</a>
+                                                    <a ng-click="addClick(false, style)">编辑</a>
+                                                    <a ng-click="del($index)">删除</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -168,8 +169,8 @@
         <script src="/assets/libs/multiselect.min.js"></script>
         <script src="/assets/libs/jquery.ui.widget.js"></script>
         <script src="/assets/libs/jquery.iframe-transport.js"></script>
-        <script src="/assets/libs/jquery.fileupload.js"></script>
         <script src="/assets/libs/vue.min.js"></script>
+        <script src="/assets/libs/jquery.fileupload.js"></script>
         <script>
             var scriptList=['./dist/header-footer.js'];
         </script>
