@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-首页</title>
-    <base  id="baseTag">
-    <script>
-    	document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
-    </script>
+    <base href="../../">
     <!-- Bootstrap -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -62,7 +59,7 @@
 			<td colspan="6">督办层级详情</td>
 		    </tr>
 		    <tr class="level-head">
-			<td width="12%">形象进度</td>
+			<td width="12%">事项进展</td>
 			<td width="43%">督办名称</td>
 			<td width="8%">发起人</td>
 			<td width="7%">责任人</td>
@@ -102,6 +99,9 @@
 			 	<a @click="editOperation(id)"  class="menu">编辑</a>
 			    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
 			    <a data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
+			    <!-- /.menu --><a v-if="status=='0'" @click="postphone('parent')" class="menu">延期</a>
+			    <!-- /.menu --><a @click="revoke('parent')"class="menu">撤销</a>
+			    <!-- /.menu --><a @click="close('parent')" class="menu">关闭</a>
 			</td>
 		    </tr>
 
@@ -119,7 +119,7 @@
 			</td>
 		    </tr>
 		    <tr class="title2">
-			<td colspan="6">都办任务详情</td>
+			<td colspan="6">督办任务详情</td>
 		    </tr>
 		    <tr>
 			<td class="al-right">督办事项</td>

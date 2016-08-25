@@ -8,15 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-我的督办</title>
-    <base  id="baseTag">
-    <script>
-        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
-    </script>
+    <base href="../../">
+   
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
     <link href="assets/css/supervision.css" rel="stylesheet">   
-    <script src="assets/libs/vue.min.js"></script>
+   
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -107,7 +105,7 @@
                                             </button>
                                             <ul class="dropdown-menu panel panel-default">
                                                 <template v-for="n in (area.length-7)">
-                                                    <li @click="changeArea((n+7),'area')"><a>{{<area>[n+7]</area>.dicname}}</a></li>
+                                                    <li @click="changeArea((n+7),'area')"><a>{{area[n+7].dicname}}</a></li>
                                                 </template>
                                             </ul>
                                         </div>
@@ -401,6 +399,7 @@
 </footer>
 
 <!--<script data-main="assetsjs/main" src="assetsjs/require.js"></script>-->
+ <script src="assets/libs/vue.min.js"></script>
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/daterangepicker/moment.min.js"></script>
@@ -411,6 +410,5 @@
     var scriptList=['./dist/header-footer.js','./dist/supervision-mine.js'];
 </script>
 <script src="dist/main.js"></script>
-
 </body>
 </html>

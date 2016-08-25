@@ -8,16 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-全部督办</title>
-   <base  id="baseTag">
-    <script>
-        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
-    </script>
+   <base href="../../">
+  
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/daterangepicker.css" rel="stylesheet">
     <link href="assets/css/supervision.css" rel="stylesheet">   
     <script src="assets/libs/vue.min.js"></script>
-    
+     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <!--head-->
@@ -44,7 +47,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-panel fade in active" >
-                        <p class="tip"><span>展示所有的督办信息，包括您作为发起人和责任人的督办任务。</span></p>
+                        <p class="tip"><span>按照多维度条件筛查所有督办信息。</span></p>
                         <section id="filterSection">
                             <div class="filter">
                                 <ul class="filter-item filter-field clearfix">
