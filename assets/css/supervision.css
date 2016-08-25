@@ -65,8 +65,10 @@
     align-items:center;
 }
 .filter-item li{
-    float: left;
+    /*float: left;*/
     list-style: none;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .filter-field{
@@ -97,6 +99,9 @@
     max-height: 17.5rem;
     height: auto;
     overflow-y: scroll;
+}
+.more .dropdown-menu li{    
+    float: left;
 }
 .more .dropdown-menu .btn{
    text-overflow: ellipsis;
