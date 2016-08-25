@@ -153,7 +153,7 @@ $(document).ready(function () {
                     iconImages = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
                 }
                 for (var j = 1; j < data[i].orgtree.length; j++) {
-                    for (var key in data[i].orgtree[j]) 
+                    for (var key in data[i].orgtree[j]) {
                         sameOrgOu = key;
                         sameOrgName = data[i].orgtree[j][key];
                         if(j == "1"){
