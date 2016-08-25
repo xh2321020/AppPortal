@@ -18,10 +18,6 @@ $(document).ready(function () {
         return null;
     }
     var sameOu=getQueryString("ou");
-    // alert(window.interfaceSettings.supervisionRequest.supSourceUrl);
-    // var sameOrgDetailsURL = window.interfaceSettings.personalpageRequest.api.getSameOrgDetails + "&ou=" +sameOu;
-    // personalpageRequest   setPersonalpageHeader
-    // alert(sameOrgDetailsURL);
     $.ajax({
         type: "get",
         dataType:"json",
@@ -50,7 +46,7 @@ $(document).ready(function () {
                 }
                 html= html + '<div class="sameOrg-class-result"><div class="sameOrg-class" onclick="myFunction(\''+data[i].uid +'\')">'+
                     '<img class="img sameOrg-class-img" src="'+iconImages+'"/>'+
-                    '<div class="sameOrg-class-div"><span class="sameOrg-class-div-p-span">'+data[i].displayname+'</span><br><div>'+
+                    '<div class="sameOrg-class-div"><span class="sameOrg-class-div-p-span">'+data[i].displayName+'</span><br><div>'+
                     department+'</div><span>'+data[i].mail+'</span></div></div></div>';
             }
             $("#userInfo").html(html);

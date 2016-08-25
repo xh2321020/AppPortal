@@ -10,6 +10,7 @@
     <script>
         document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
     </script>
+    <base href="../../">
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="assets/css/jqx/jqx.base.css" type="text/css"/>
@@ -53,7 +54,16 @@
                     </div>
 
                     <div class="org-member-card-list">
-                        <div class="org-member-card-list-div">
+                        <div style="width: 100%; float:left;" class="org-member-card-list-div" id="depDesc">
+                            <div style="height: 2rem;">
+                                <div class="workHalfLine-div">
+                                    <span class="workHalfLine-span">部门介绍</span>
+                                </div>
+                            </div>
+                            <div id="depDesctiption">
+                            </div>
+                        </div>
+                        <div class="org-member-card-list-div" style="margin-top:1rem;">
                             <div style="width: 100%;" id="leaderArea">
                                 <div style="margin-bottom:1rem;" id="defaultLeader">
                                     <div style="height: 2rem;">
@@ -64,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="width: 100%;" id="member">
+                        <div style="width: 100%; float:left;margin-top:1rem;" id="member">
                         </div>
                     </div>
                 </div>

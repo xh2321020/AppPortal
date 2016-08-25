@@ -9,20 +9,22 @@
     <script>
             document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
     </script>
-    <!-- <base href="../../"> -->
+     <!-- <base href="../../"> -->
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
     <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
     <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css">
     <script src="assets/libs/vue.min.js"></script>
 </head>
-<body>
+<body> 
 <header>
     <com-header></com-header>
 </header>
 <article class="container-fluid article" id="article">
     <script>
         function changeView(parmar){
+            // alert($("#lingdaopishi").val());
+            document.getElementById("lingdaopishi").style.display = "none";
             document.getElementById("lingdaopishi").style.display = "none";
             document.getElementById("gongbandaiyue").style.display = "none";
             document.getElementById("gerendaiban").style.display = "none";
@@ -31,6 +33,19 @@
             document.getElementById("gerendaiyue").style.display = "none";
             document.getElementById("weituodaiban").style.display = "none";
             document.getElementById("xiaoxitixing").style.display = "none";
+
+            document.getElementById("lingdaopishiUI").style.backgroundColor = "white";
+            document.getElementById("lingdaopishiUI").style.backgroundColor = "white";
+            document.getElementById("gongbandaiyueUI").style.backgroundColor = "white";
+            document.getElementById("gerendaibanUI").style.backgroundColor = "white";
+            document.getElementById("gongbandaibanUI").style.backgroundColor = "white";
+            document.getElementById("shoutuodaibanUI").style.backgroundColor = "white";
+            document.getElementById("gerendaiyueUI").style.backgroundColor = "white";
+            document.getElementById("weituodaibanUI").style.backgroundColor = "white";
+            document.getElementById("xiaoxitixingUI").style.backgroundColor = "white";
+            // alert(parmar+"UI");
+            var uiId = parmar+"UI";
+            document.getElementById(uiId).style.backgroundColor = "#f3f2f0";
             document.getElementById(parmar).style.display = "block";
         }
     </script>
@@ -163,28 +178,12 @@
                             <span>统一待办</span>
                         </div>
                         <!-- /.taskCount-->
-                        <div class="task-btntype" style="padding-left: 0.5rem;padding-top:0.5rem;">
-                            <div  onclick="changeView('lingdaopishi')" class="title-hover">
-                                <div class="task-btntype-title">
-                                    <span id="lingdaopishiSpan">0</span>
-                                </div>
-                                <div class="task-btntype-subtitle">
-                                    <span>领导批示</span>
-                                </div>
-                            </div>
-                            <div  onclick="changeView('gongbandaiyue')" class="title-hover">
-                                <div class="task-btntype-title">
-                                    <span style="width: 7rem; height: 1rem;" id="gongbandaiyueSpan">0</span>
-                                </div>
-                                <div class="task-btntype-subtitle">
-                                    <span>公办待阅</span>
-                                </div>
-                            </div>
-                            <div  onclick="changeView('gerendaiban')" class="title-hover">
+                        <div class="task-btntype" style="padding-top:1rem;">
+                            <div  onclick="changeView('gerendaiban')"  style="margin-left: 0rem;" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="gerendaibanSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="gerendaibanUI" style="background-color:#f3f2f0;">
                                     <span>个人待办</span>
                                 </div>
                             </div>
@@ -192,39 +191,55 @@
                                 <div class="task-btntype-title">
                                     <span id="gongbandaibanSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="gongbandaibanUI">
                                     <span>公办待办</span>
-                                </div>
-                            </div>
-                            <div onclick="changeView('shoutuodaiban')" class="title-hover">
-                                <div class="task-btntype-title">
-                                    <span id="shoutuodaibanSpan">0</span>
-                                </div>
-                                <div class="task-btntype-subtitle" class="title-hover">
-                                    <span>受托待办</span>
                                 </div>
                             </div>
                             <div onclick="changeView('gerendaiyue')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="gerendaiyueSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="gerendaiyueUI">
                                     <span>个人待阅</span>
+                                </div>
+                            </div>
+                            <div  onclick="changeView('gongbandaiyue')" class="title-hover">
+                                <div class="task-btntype-title">
+                                    <span style="width: 7rem; height: 1rem;" id="gongbandaiyueSpan">0</span>
+                                </div>
+                                <div class="task-btntype-subtitle" id="gongbandaiyueUI">
+                                    <span>公办待阅</span>
+                                </div>
+                            </div>
+                            <div  onclick="changeView('lingdaopishi')" class="title-hover">
+                                <div class="task-btntype-title">
+                                    <span id="lingdaopishiSpan">0</span>
+                                </div>
+                                <div class="task-btntype-subtitle" id="lingdaopishiUI">
+                                    <span>领导批示</span>
                                 </div>
                             </div>
                             <div onclick="changeView('weituodaiban')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="weituodaibanSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="weituodaibanUI">
                                     <span>委托待办</span>
+                                </div>
+                            </div>
+                            <div onclick="changeView('shoutuodaiban')" class="title-hover">
+                                <div class="task-btntype-title">
+                                    <span id="shoutuodaibanSpan">0</span>
+                                </div>
+                                <div class="task-btntype-subtitle" id="shoutuodaibanUI">
+                                    <span>受托待办</span>
                                 </div>
                             </div>
                             <div onclick="changeView('xiaoxitixing')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="xiaoxitixingSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="xiaoxitixingUI">
                                     <span>消息提醒</span>
                                 </div>
                             </div>
@@ -232,9 +247,9 @@
                         <div style=" height: 80rem;" id="selectData">
                             <!-- 领导批示 find-->
                             <div class="line-tasktype-wedigt" id="lingdaopishi"  style="display: block;">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 4%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;领导批示&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="lingdaopishitable">
@@ -243,9 +258,9 @@
                             </div>
                             <!-- 办公待阅 publicread-->
                             <div class="line-tasktype-wedigt" id="gongbandaiyue">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 17%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;办公待阅&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gongbandaiyuetable">
@@ -254,9 +269,9 @@
                             </div>
                             <!-- 个人待办 personal-->
                             <div class="line-tasktype-wedigt" id="gerendaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 30%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;个人待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gerendaibantable">
@@ -265,9 +280,9 @@
                             </div>
                             <!-- 公办待办 public-->
                             <div class="line-tasktype-wedigt" id="gongbandaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 42%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;公办待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gongbandaibantable">
@@ -276,9 +291,9 @@
                             </div>
                             <!-- 受托待办-->
                             <div class="line-tasktype-wedigt" id="shoutuodaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 55%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;受托待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="shoutuodaibantable">
@@ -287,9 +302,9 @@
                             </div>
                             <!-- 个人待阅 personalread-->
                             <div class="line-tasktype-wedigt" id="gerendaiyue">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 64%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;个人待阅&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gerendaiyuetable">
@@ -298,9 +313,9 @@
                             </div>
                             <!-- 委托待办-->
                             <div class="line-tasktype-wedigt" id="weituodaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 76%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;委托待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="weituodaibantable">
@@ -309,9 +324,9 @@
                             </div>
                             <!-- 消息提醒-->
                             <div class="line-tasktype-wedigt" id="xiaoxitixing">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 88%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;消息提醒&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="xiaoxitixingtable">
@@ -338,7 +353,7 @@
                         </div>
                         <div class="important-task-title" style="margin-bottom: 0.5rem;">
                             <span class="bodySectionRightCurrentTabSubTitleImp">重点事宜提醒</span>
-                            <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日会议和超期事项提醒）</span>
+                            <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日日程、会议、督办等事宜提醒）</span>
                         </div>
                         <!-- data list-->
                         <div class="bodySectionRightMeeting">
@@ -383,10 +398,10 @@
 <footer style="margin-top: 2rem;">
     <com-footer></com-footer>
 </footer>
-
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
 <script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src='assets/libs/jquery.blockUI.js'></script>
 <script src="dist/main.js"></script>
 <script>
     var scriptList=['assets/libs/personalpage/portUrl.js','dist/header-footer.js','assets/libs/workspace/personalCon.js','assets/libs/workspace/workspacePopView.js'];

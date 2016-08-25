@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-    // url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
+     url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTIwMTIwMDE0MTQ3MTUxNDYyNTE2OQ==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  
@@ -219,7 +219,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     }
     var _this=this;
     var currentPort = new Array();
-    var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
+    var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG","XINGCHENG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
     var nameArray = ["findcount","dubanshixiang", "find1","find2", "find3", "find4", "find5","find6","find7","find8"];
     var usersid =etCookie("userid");
     for (var i = 0, len = fetchArray.length + 1; i < len-1; i++) {
@@ -231,6 +231,11 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         var arrayId=fetchArray[i];
         if(fetchArray[i] == "GETUSERNAME"){
             ajaxURL = setPersonalpageHeader(personalpageRequest.getMemberDetails, {uid:usersid},null);
+        }else if (fetchArray[i] == "XINGCHENG") {
+            types="get";
+            datatypes="json";
+            ajaxURL = personalpageRequest.getXingChengDetails + usersid + personalpageRequestKey;
+            // ajaxURL = personalpageRequest.getDuBanShiXiang+"&page=0&size=50";
         }else if (fetchArray[i] == "DUBANSHIXIANG") {
             ajaxURL = setPersonalpageHeader(personalpageRequest.getDuBanShiXiang,{page:0, size:50},null);
             // ajaxURL = personalpageRequest.getDuBanShiXiang+"&page=0&size=50";
@@ -266,13 +271,13 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
             data: datas,
             success: function success(data, state, jqxhr) {
                 var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-                "<tr><th style='text-align: center; color:black;'> 事项名称 </th>"+
-                "<th style='text-align: center;color:black;'> 创建人员 </th><th style='text-align: center;color:black;'> 创建时间 </th></tr></thead><tbody>";
+                "<tr><th style='text-align: center; color:black;background-color: white; '> 事项名称 </th>"+
+                "<th style='text-align: center;color:black;background-color: white; '> 创建人员 </th><th style='text-align: center;color:black;background-color: white; '> 创建时间 </th></tr></thead><tbody>";
                 var tableFooter = "</tbody></table></section>";
                 if(fetchArray[jqxhr.index] == "GETUSERNAME"){
                     var chinesename="";
                     var orgTree = "";
-                    chinesename = data[0].displayname;
+                    chinesename = data[0].displayName;
                     orgTree = JSON.stringify(data[0].orgtree);
                     if(document.cookie && document.cookie != ''){
                         updateCookie("username",chinesename,30,"/");
@@ -285,16 +290,16 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                     '<a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;"  target="_blank">更多 ></a></div>';
                         for(var j=0; j<data.length; j++){
                             var description = "";
-                            if ((typeof(data[j].description) == "undefined") || (typeof(data[j].description) == "")) {
+                            if ((typeof(data[j].estimatedcompletetiontime) == "undefined") || (typeof(data[j].estimatedcompletetiontime) == "")) {
                                 description = "";
                             } else {
-                                description = data[j].description;
+                                description = data[j].estimatedcompletetiontime;
                             }
                             dubanshixiang=dubanshixiang+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">督办</div></div>'+
-                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\''+data[j].id+'\')"><div style="overflow: hidden; position: relative;">'+
+                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\'duban\')"><div style="overflow: hidden; position: relative;">'+
                             '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
-                            'white-space: nowrap; width: 100%; display: block; padding-top:0;" title="'+data[j].name+'">'+
-                            data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font">'+description+
+                            'white-space: nowrap; width: 100%; display: block; padding-top:0; margin-left: 1rem;" title="'+data[j].name+'">'+
+                            data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font" style="margin-left:1rem;">'+description+
                             '</span></div></div> <div class="task-list-spack"></div></li>';
                             if((data.length>0)&&(j<=1)){
                                 qiridubantixing = qiridubantixing + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
@@ -325,7 +330,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                         if((data.length>0)&&(j<=1)){
                             qirineiricheng = qirineiricheng + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
                             '<a href="pages/schedule/personal.html" class="qiRiTiXing-a"  target="_blank">'+
-                            '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
+                            '<div class="qiRiTiXing-a-div default-font" title="'+data[j].title+'">'+data[j].title+'</div></a></div>';
                         }
                     }
                     $("#qiribeirichengTitle").html("七日内日程提醒("+data.length+")");
@@ -384,7 +389,25 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                             }
                         }
                     }
-                } else if(fetchArray[jqxhr.index] == "1"){
+                }else if(fetchArray[jqxhr.index] == "XINGCHENG"){
+                    var xingcheng="";
+                    for(var j=0; j<data.length; j++){
+                        var description = "";
+                        if ((typeof(data[j].enddate) == "undefined") || (typeof(data[j].enddate) == "")) {
+                            description = "";
+                        } else {
+                            description = data[j].enddate;
+                        }
+                        xingcheng=xingcheng+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">行程</div></div>'+
+                        '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\'xingcheng\')"><div style="overflow: hidden; position: relative;">'+
+                        '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
+                        'white-space: nowrap; width: 100%; display: block; padding-top:0; margin-left: 1rem;" title="'+data[j].title+'">'+
+                        data[j].title+'</span></div><div><span class="task-list-detail-subtitle default-font" style="margin-left:1rem;">'+description+
+                        '</span></div></div> <div class="task-list-spack"></div></li>';
+                    }
+                    $("#nodataDiv").remove();
+                    $("#worksoftodayUl").append(xingcheng);
+                }else if(fetchArray[jqxhr.index] == "1"){
                     var currentHtml=htmlcode(data);
                     $("#lingdaopishiSpan").html(data.length);
                     $("#lingdaopishitable").html(currentHtml);
@@ -419,7 +442,9 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                 }
                 var index = jqxhr.index;
                 // _this[nameArray[index]] = data;
-                if (jqxhr.index == 0) console.log(data);
+                if (jqxhr.index == 0){
+                    console.log(data);
+                }
             },
             error: function error(err) {
                 console.log(err);
@@ -433,8 +458,8 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     }
     function htmlcode(data){
         var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-        "<tr><th style='text-align: center; width:60%; color:black;'> 事项名称 </th>"+
-        "<th style='text-align: center;color: black;'> 创建人员 </th><th style='text-align: center;color: black;'> 创建时间 </th></tr></thead><tbody>";
+        "<tr><th style='text-align: center; width:60%; color:black;background-color: white; '> 事项名称 </th>"+
+        "<th style='text-align: center;color: black;background-color: white; '> 创建人员 </th><th style='text-align: center;color: black;background-color: white; '> 创建时间 </th></tr></thead><tbody>";
         var tableFooter = "</tbody></table></section>";
         var initHtml = "";
         var moreUrlHtml = "";
@@ -444,12 +469,24 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else {
             if (data.length > 10) {
                 count = 10;
-                moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank">' + '<div class="moreURL-div" style="float: right; padding-right:6rem;">更多 ></div></a>';
+                moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank" style="margin-bottom: 0.5rem;">' + '<div class="moreURL-div" style="float: right; line-height:0;">更多 ></div></a>';
             } else {
                 count = data.length;
             }
             for (var j = 0; j < count; j++) {
-                initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font" style="height:3rem;"><a href="' + data[j].f_URL + '" style="color: black;"  target="_blank">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                if((j%2) == 1){
+                    initHtml = initHtml + '<tr class="grid-content" style="border-bottom: 1px solid lightgrey; height:3rem;">' + '<td class=" default-font"><a href="'
+                     + data[j].f_URL + '" style="color: black;"  target="_blank"><div style="height:2rem; overflow: hidden; width: 100%;">' 
+                     + data[j].f_SUBJECT + '</div></a></td>' + '<td class=" default-font" style="text-align: center;">' 
+                     + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                }else{
+                    initHtml = initHtml + '<tr class="grid-content" style="border-bottom: 1px solid lightgrey; height:3rem; background-color:#f3f2f0;">' + '<td class=" default-font"><a href="'
+                     + data[j].f_URL + '" style="color: black;"  target="_blank"><div style="height:2rem; overflow: hidden; width: 100%;">' 
+                     + data[j].f_SUBJECT + '</div></a></td>' + '<td class=" default-font" style="text-align: center;">' 
+                     + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                }
+
+                
             }
             initHtml = tableHeader + initHtml + tableFooter;
         }
