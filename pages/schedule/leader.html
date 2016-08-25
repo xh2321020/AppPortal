@@ -34,15 +34,41 @@
                                     <span>公司领导以及部门领导的日程展示，默认展示您所在公司的领导日程信息。</span>
                                 </div>
 
-                                <div class="org">
-                                    <span style="float: left"><strong>组织：</strong></span>
-                                    <ul class="ul-org">
-                                        <li ng-repeat="org in orgs" ng-click="orgClick2(org)">
-                                            <span class="span-org-selected" ng-show="org.isSelected">{{org.name}}</span>
-                                            <span class="span-org" ng-show="!org.isSelected">{{org.name}}</span>
-                                        </li>
-                                    </ul>
+                                <div id="container" class="org">
+                                    <div id="left_side">
+                                        <span style="float: left"><strong>组织：</strong></span>
+                                    </div>
+                                    <div id="content">
+                                        <ul class="ul-org">
+                                            <li ng-repeat="org in orgs" ng-click="orgClick2(org)" class="li-org" ng-if="displayParams.isShowAllOrg || (!displayParams.isShowAllOrg && $index < 10)">
+                                                <span class="span-org-selected" ng-show="org.isSelected">{{org.name}}</span>
+                                                <span class="span-org" ng-show="!org.isSelected">{{org.name}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="right_side">
+                                        <span style="float: right; padding: 2px;border: 1px solid #000;border-radius: 4px;" class="dropdown-toggle" ng-click="showAllOrgClick()">
+                                            <span ng-if="displayParams.isShowAllOrg">收起</span>
+                                            <span ng-if="!displayParams.isShowAllOrg">更多</span>
+                                            <span class="caret"></span>
+                                        </span>
+                                    </div>
                                 </div>
+                                <!--<div class="org">-->
+                                    <!--<span style="float: left"><strong>组织：</strong></span>-->
+                                    <!--<div style="width: 90%">-->
+                                        <!--<ul class="ul-org">-->
+                                            <!--<li ng-repeat="org in orgs" ng-click="orgClick2(org)" class="li-org">-->
+                                                <!--<span class="span-org-selected" ng-show="org.isSelected">{{org.name}}</span>-->
+                                                <!--<span class="span-org" ng-show="!org.isSelected">{{org.name}}</span>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                    <!--<span style="float: right;"><strong>更多：</strong></span>-->
+                                    <!--&lt;!&ndash;<button style="float: right" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;更多 <span class="caret"></span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                                <!--</div>-->
                                 <br>
 
                                 <div>

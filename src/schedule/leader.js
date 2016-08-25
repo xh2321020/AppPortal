@@ -11,7 +11,13 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
           $.unblockUI();
             if(true){
                   $scope.orgs = response;
-                  $scope.orgClick2($scope.orgs[0]);
+                  //$scope.orgClick2($scope.orgs[0])
+                  $timeout(function(){
+                        $(".ul-org li:gt(5)").each(function() {
+                              $(this).css("visibility", "hidden");
+                        });
+                  }, 100);
+                  $scope.searchMyInfo();
             }
       });
 
@@ -81,7 +87,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                             for(var i = 0, j = response.length; i < j; i++){
                                   var user =  response[i];
                                   user.id = user.uid;
-                                  user.username = user.displayname;
+                                  user.username = user.displayName;
                                   userIds.push({"userid": user.id});
                                   leaders.push(user);
                             }
@@ -174,29 +180,29 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
 
       $scope.searchPeople = function(){
             $http.get( 'http://10.15.251.110:8010/api/contact/searchuser?apikey=a16cb0c916404be78cb0805fefc7d26a&id=&q=' + $scope.searchParams.content, '')
-                .success(function(response){
-                      $scope.searchParams.result = response;
-                      for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
-                            var people = $scope.searchParams.result[i];
-                            var count = 0;
-                            var orgtree = people.orgtree;
-                            if (orgtree) {
-                                  for (var orgi in orgtree) {
-                                        for (var key in orgtree[orgi]){
-                                              if(count == 1){
-                                                    people.company = orgtree[orgi][key];
-                                              } else if(count == 2){
-                                                    people.office = orgtree[orgi][key];
-                                              } else if(count == 3){
-                                                    people.department = orgtree[orgi][key];
-                                              }
-                                              count++;
+            .success(function(response){
+                  $scope.searchParams.result = response;
+                  for (var i = 0, j = $scope.searchParams.result.length; i < j; i++) {
+                        var people = $scope.searchParams.result[i];
+                        var count = 0;
+                        var orgtree = people.orgtree;
+                        if (orgtree) {
+                              for (var orgi in orgtree) {
+                                  for (var key in orgtree[orgi]){
+                                        if(count == 1){
+                                              people.company = orgtree[orgi][key];
+                                        } else if(count == 2){
+                                              people.office = orgtree[orgi][key];
+                                        } else if(count == 3){
+                                              people.department = orgtree[orgi][key];
                                         }
+                                        count++;
                                   }
-                            }
-                            people.isChecked = false;
-                      }
-                });
+                              }
+                        }
+                  people.isChecked = false;
+                }
+          });
       };
 
       $scope.userClick = function(user){
@@ -206,7 +212,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
             user.isChecked = true;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.username = user.displayname;
+            $scope.addParams.people.username = user.displayName;
       };
 
       $scope.peopleConfig = function(){
@@ -225,5 +231,58 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
 
       $scope.delete = function(id){
             EventService.deleteEventById($scope.currentEvent.id);
+      };
+
+      $scope.searchMyInfo = function(){
+            var uid = EventService.getCookie('userid') ? EventService.getCookie('userid') : "";
+            $http.get( 'http://10.15.251.110:8010/api/contact/searchuser?apikey=a16cb0c916404be78cb0805fefc7d26a&id=&q=' + uid, '')
+                  .success(function(response){
+                        if(response.length == 1){
+                              var orgtree = response[0].orgtree;
+                              var orgid = "-1";
+                              var count = 0;
+                              if (orgtree) {
+                                    for (var orgi in orgtree) {
+                                          for (var key in orgtree[orgi]){
+                                                if(count == 1){
+                                                      orgid = key;
+                                                }
+                                                count++;
+                                          }
+                                    }
+                              }
+                              var isFind = false;
+                              for(var i = 0, j = $scope.orgs.length; i < j; i++){
+                                    if(orgid == $scope.orgs[i].id){
+                                          $scope.orgClick2($scope.orgs[1]);
+                                          isFind = true;
+                                          if(i > 5){
+                                                $scope.displayParams.isShowAllOrg = true;
+                                          }
+                                    }
+                              }
+                              if(!isFind){
+                                    $scope.orgClick2($scope.orgs[0]);
+                              }
+                        }
+                  }
+            );
+      }
+
+      $scope.displayParams = {
+            isShowAllOrg :  false,
+      };
+
+      $scope.showAllOrgClick = function(){
+            if($scope.displayParams.isShowAllOrg){
+                  $(".ul-org li:gt(5)").each(function() {
+                        $(this).css("visibility", "hidden");
+                  });
+            } else{
+                  $(".ul-org li:gt(5)").each(function() {
+                        $(this).css("visibility", "visible");
+                  });
+            }
+            $scope.displayParams.isShowAllOrg = !$scope.displayParams.isShowAllOrg;
       };
 });

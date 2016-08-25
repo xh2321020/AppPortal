@@ -22,17 +22,6 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
                       "status": "2",
                       "version": ""
                   }
-                  //$scope.curColumn = {
-                  //      "admin": [],
-                  //      "createuserid": "1234567",
-                  //      "createusername": "asdfasdf",
-                  //      "description": "",
-                  //      "hpid": "",
-                  //      "name": "",
-                  //      "status": "0",
-                  //      "type": "",
-                  //      "updatetime": ""
-                  //};
                   $scope.addParams.addHpid = $scope.portalList[0];
                   $('#myTab a:last').tab('show');
             } else{
@@ -111,4 +100,31 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
                   }
             });
       };
+
+      //var dataList = PortalService.getData();
+      //for(var i = 0, j = dataList.length; i < j; i++){
+      //      var tmp = dataList[i];
+      //      var data = {
+      //            "auditor_ids": "1",
+      //            "auditor_names": "1",
+      //            "description": tmp.SUBCARDS[0].SUBCARD_ZH,
+      //            "is_build": "1",
+      //            "name": tmp.SUBCARDS[0].SUBCARD_ZH,
+      //            "parent_id": 100,
+      //            "seq": "1",
+      //            "status": "2",
+      //            "version": "1",
+      //            "pre_view_name": tmp.SUBCARDS[0].SUBCARD_ZH
+      //
+      //      };
+      //      var requestUrl = PortalService.getHostName();
+      //      requestUrl += "/api/homepage/homepagecolumn/add";
+      //      PortalService.sendPostRequest(requestUrl, data, function(response){
+      //            console.log("curColumn:" + response);
+      //            if(true){
+      //                  PortalService.showAlert("新增成功");
+      //                  $scope.listClick();
+      //            }
+      //      });
+      //}
 });

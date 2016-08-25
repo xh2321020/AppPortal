@@ -107,7 +107,7 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
 //                  "hpid": 3,
                   "type": "",
                   "userid": user.uid,
-                  "username": user.displayname,
+                  "username": user.displayName,
                   "updatetime": "",
                   "columnid": "",
             };

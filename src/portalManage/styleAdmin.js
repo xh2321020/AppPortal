@@ -38,7 +38,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                               $scope.selectDate.addPortal = $scope.portalList[i];
                         }
                   }
-                  addPortalselect();
+                  $scope.addPortalselect();
             }
             $('#myTab a:last').tab('show');
       };

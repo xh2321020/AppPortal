@@ -84,7 +84,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                       for(var i = 0, j = response.length; i < j; i++){
                             var user =  response[i];
                             user.id = user.uid;
-                            user.username = user.displayname;
+                            user.username = user.displayName;
                             userIds.push({"userid": user.id});
                       }
                       $.unblockUI();
@@ -208,7 +208,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
             user.isChecked = true;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.username = user.displayname;
+            $scope.addParams.people.username = user.displayName;
       };
 
       $scope.peopleConfig = function(){

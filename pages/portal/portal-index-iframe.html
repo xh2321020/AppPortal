@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <!--<meta charset="utf-8">-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="viewport" content="width=device-width,initial-scale=1.0">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <title>公司门户</title>
     <base href="http://10.15.251.110/"/>
     <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +39,7 @@
                                     <li id="tag12" name="12" style="cursor:pointer;" onclick="getPowerAmount(24)">方家山1#</li>
                                     <li id="tag13" name="13" style="cursor:pointer;" onclick="getPowerAmount(25)">方家山2#</li>
                                     <li id="tag14" name="14" style="cursor:pointer;" onclick="getPowerAmount(36)">海南核电1#</li>
-                                    <li id="tag15" name="37" style="cursor:pointer;" onclick="getPowerAmount(36)">海南核电2#</li>
+                                    <li id="tag15" name="37" style="cursor:pointer;" onclick="getPowerAmount(37)">海南核电2#</li>
                                 </ul>
                             </div>
 
@@ -76,6 +79,7 @@
 </article>
 <script src="assets/libs/jquery.min.js"></script>
 <script src="assets/libs/bootstrap.min.js"></script>
+<script>jQuery.support.cors=true;</script>
 <script src="assets/libs/echarts.min.js"></script>
 <script>
     var currenIndex = 0;
@@ -85,9 +89,10 @@
         $.ajax({
             type: "get",
             dataType: "json",
+            contentType:'application/json; charset=utf-8;',
             url: "http://10.15.251.110:8010/api/echart/ProdDataAction?strdate=" + dataStr + "&rid=" + rid + "&withjson=true&apikey=a16cb0c916404be78cb0805fefc7d26a",
             success: function (data, state, jqxhr) {
-                console.log(data);
+                document.cookie;
                 var myChart = echarts.init(document.getElementById('echart'));
                 var resultDataList = [];
                 var times = [];
@@ -102,7 +107,6 @@
                         hps.push(singleData.hp);
                     }
                 }
-                console.log("length:" + times.length);
                 var option = {
                     title: {
                         text: '机组功率',
@@ -247,7 +251,6 @@
                 })
                 currenIndex--;
             }
-            console.log("currenIndex:" + currenIndex);
         });
         $("#goingDown").click(function(ev){
             if(currenIndex==0){
@@ -269,7 +272,6 @@
                 })
                 currenIndex++;
             }
-            console.log("currenIndex:" + currenIndex);
         });
 
         getSinglePowAction();
@@ -282,22 +284,22 @@
                  url:"http://10.15.251.110:8010/api/echart/SinglePowAction?apikey=a16cb0c916404be78cb0805fefc7d26a",
                  success: function (data, state, jqxhr) {
                      data = JSON.parse(data);
-                     var epw=0;
-                     var hpw=0;
-                     var bspow=0;
-                     var bstpow=0;
+                     var epw = 0;
+                     var hpw = 0;
+                     var bspow = 0;
+                     var bstpow = 0;
                      for(var x in data){
-                         epw=epw+parseFloat(data[x].EPW);
-                         hpw=hpw+parseFloat(data[x].HPW);
-                         bspow=bspow+parseFloat(data[x].BSPOW);
-                         bstpow=bstpow+parseFloat(data[x].BSTPOW);
+                         epw = epw + parseFloat(data[x].EPW);
+                         hpw = hpw + parseFloat(data[x].HPW);
+                         bspow = bspow + parseFloat(data[x].BSPOW);
+                         bstpow = bstpow + parseFloat(data[x].BSTPOW);
                      }
                      if(!isNaN(epw)){
-                         $("#p1").html(epw.toFixed(2)+"MW");
+                         $("#p1").html(epw.toFixed(2) + "MW");
                      }
-                     var epwper=epw/bspow*100;
+                     var epwper = epw / bspow*100;
                      if(!isNaN(epwper)){
-                         $("#p11").html(epwper.toFixed(2)+"%");
+                         $("#p11").html(epwper.toFixed(2) + "%");
                      }
                  },
                  error: function (err) {

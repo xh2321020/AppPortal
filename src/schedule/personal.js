@@ -26,6 +26,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                         left: 'prev, next today',
                         center: 'title',
                         right: 'month, agendaWeek',
+                        allDayDefault: false,
                   },
                   firstDay:1,
                   eventClick: function(calEvent, jsEvent, view) {
@@ -146,7 +147,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             user.isChecked = true;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.username = user.displayname;
+            $scope.addParams.people.username = user.displayName;
       };
 
       $scope.peopleConfig = function(){

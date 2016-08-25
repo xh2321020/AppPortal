@@ -258,7 +258,17 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         },
 
         editEvent: function (event, isMultiType) {
-            $http.post(hostName + '/api/schedule/schedule/edit?apikey=a16cb0c916404be78cb0805fefc7d26a', event)
+            var url = hostName + '/api/schedule/schedule/add?apikey=a16cb0c916404be78cb0805fefc7d26a&startdate=' + event.startdate + '&enddate=' + event.enddate;
+            var tmpS = event.startdate;
+            var tmpE = event.enddate;
+
+            var tmpEvent = clone(event);
+            tmpEvent.startdate = event.startdate + ' '  +  event.starttime;
+            tmpEvent.enddate = event.enddate + ' '  +  event.endtime;
+            var requestEvents = [];
+            requestEvents.push(tmpEvent);
+
+            $http.post(url, requestEvents)
             .success(function(response){
                 if(true){
                     console.log("edit success");
