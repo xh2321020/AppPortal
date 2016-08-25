@@ -150,20 +150,20 @@
 
 .ul-org >li{
     list-style:none;
-    margin-right: 15px;
+    margin-right: 5px;
     margin-bottom: 5px;
     float: left;
     font-family: 'Arial Regular', 'Arial';
     font-weight: 400;
     height: 22px;
-    padding: 2px 6px 2px 6px;
+    padding: 2px 2px 2px 2px;
     font-style: normal;
     font-size: 13px;
     color: #333333;
 }
 
 .span-org   {
-    padding: 6px 10px 6px 10px;
+    /*padding: 6px 10px 6px 10px;*/
 }
 
 .span-org-selected   {
@@ -212,4 +212,31 @@
     min-height: 500px;
     border: 1px solid #CCCCCC;
     border-top: 0.5rem solid #A7C528;
+}
+
+.li-org{
+    width: 16%;
+}
+
+#container{
+    position:relative;
+    margin:20px;
+}
+#left_side{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:60px;
+    margin-top: 5px;
+}
+#content{
+    margin-left: 40px;
+    margin-right: 25px;
+}
+#right_side{
+    position:absolute;
+    top:0px;
+    right:0px;
+    width:50px;
+    margin-top: 5px;
 }

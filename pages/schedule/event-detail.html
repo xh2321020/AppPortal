@@ -5,23 +5,19 @@
     </tr>
     <tr>
         <td class="td-text" colspan="2">姓名</td>
-        <td colspan="8" >{{currentEvent.username}}</td>
+        <td colspan="8" >{{currentEvent.people.username}}</td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">开始日期</td>
         <td colspan="4">{{currentEvent.startdate}}</td>
         <td colspan="1" class="td-text">开始时间</td>
-        <td colspan="1">{{currentEvent.starttime}}</td>
-        <td colspan="1"><input type="checkbox">上午</input></td>
-        <td colspan="1"><input type="checkbox">全天</input></td>
+        <td colspan="3">{{currentEvent.starttime}}</td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">结束日期</td>
         <td colspan="4">{{currentEvent.enddate}}</td>
         <td class="td-text" colspan="1">结束时间</td>
-        <td colspan="1">{{currentEvent.endtime}}</td>
-        <td colspan="1"><input type="checkbox">下午</input></td>
-        <td colspan="1"><input type="checkbox">重要</input></td>
+        <td colspan="3">{{currentEvent.endtime}}</td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">标题</td>
@@ -37,13 +33,11 @@
         <td class="td-text" colspan="2">地点</td>
         <td colspan="4">{{currentEvent.address}}</td>
         <td class="td-text" colspan="1">公开范围</td>
-        <td colspan="3">所在部门</td>
         <td colspan="3" ng-if="currentEvent.scope == 10030">公开</td>
-        <td colspan="3" ng-if="currentEvent.scope == 10031">半公开</td>
         <td colspan="3" ng-if="currentEvent.scope == 10032">私密</td>
     </tr>
     <tr>
-        <td class="td-text" colspan="2">日程连接</td>
+        <td class="td-text" colspan="2">日程链接</td>
         <td colspan="8"><a href="currentEvent.sourcelink">{{currentEvent.sourcelink}}</a></td>
     </tr>
     <tr>
@@ -58,7 +52,7 @@
 </table>
 
 <div class="container" style="text-align: center">
-    <button href="#schedule" data-toggle="tab">返回</button>
-    <button href="#edit"  style="margin-left: 30px" ng-click="editClick()">编辑</button>
-    <button data-toggle="tab" style="margin-left: 30px" ng-click="delete()">删除</button>
+    <button href="#schedule" class="btn btn-primary" data-toggle="tab">返回</button>
+    <button href="#edit" class="btn btn-primary" style="margin-left: 30px" ng-click="editClick()">编辑</button>
+    <button data-toggle="tab" class="btn btn-primary" style="margin-left: 30px" ng-click="delete()">删除</button>
 </div>

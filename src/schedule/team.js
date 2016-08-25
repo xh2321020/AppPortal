@@ -201,11 +201,11 @@ eventApp.controller("TeamCtrl", function($scope, $http, $timeout, EventService) 
                   $scope.searchParams.result[i].isChecked = false;
             }
             user.isChecked = true;
-            $scope.addParams.username = user.displayname;
+            $scope.addParams.username = user.displayName;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
             $scope.addParams.people.companyname = user.orgtree;
-            $scope.addParams.people.username = user.displayname;
+            $scope.addParams.people.username = user.displayName;
       };
 
       $scope.peopleConfig = function(){

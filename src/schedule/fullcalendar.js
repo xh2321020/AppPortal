@@ -34,8 +34,8 @@ var defaults = {
 	editable: false,
 	//disableDragging: false,
 	//disableResizing: false,
-	
-	allDayDefault: true,
+	//canice
+	allDayDefault: false,
 	ignoreTimezone: true,
 	
 	// event ajax
