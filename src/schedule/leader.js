@@ -254,7 +254,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                               var isFind = false;
                               for(var i = 0, j = $scope.orgs.length; i < j; i++){
                                     if(orgid == $scope.orgs[i].id){
-                                          $scope.orgClick2($scope.orgs[1]);
+                                          $scope.orgClick2($scope.orgs[i]);
                                           isFind = true;
                                           if(i > 5){
                                                 $scope.displayParams.isShowAllOrg = true;
