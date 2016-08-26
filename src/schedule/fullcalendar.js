@@ -71,8 +71,8 @@ var defaults = {
 		prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
 		nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
 		today: '今天',
-		month: '月',
-		week: '星期',
+		month: '按月',
+		week: '按周',
 		day: '天'
 	},
 	
@@ -174,7 +174,6 @@ $.fn.fullCalendar = function(options) {
 		calendar = new Calendar(element, options, eventSources);
 		element.data('fullCalendar', calendar); // TODO: look into memory leak implications
 		calendar.render();
-		console.log();
 	});
 	
 	

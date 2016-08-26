@@ -155,7 +155,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
                     }
                     callback(resultEvents);
                 } else{
-                    console.log("request event data fail!")
+                    //console.log("request event data fail!")
                 }
                 $.unblockUI();
             }).error(function(){
@@ -175,7 +175,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
                         }
                         callback(resultEvents);
                     } else{
-                        console.log("request event data fail!")
+                        //console.log("request event data fail!")
                     }
                     $.unblockUI();
                 });
@@ -198,7 +198,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
                         }
                         $("#calendar").fullCalendar('addEventSource', [resultEvents]);
                     } else{
-                        console.log("request event data fail!")
+                        //console.log("request event data fail!")
                     }
                 });
         },
@@ -229,11 +229,11 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
             tmpEvent.enddate = event.enddate + ' '  +  event.endtime;
             var requestEvents = [];
             requestEvents.push(tmpEvent);
-            console.log(JSON.stringify(requestEvents));
+            //console.log(JSON.stringify(requestEvents));
             $http.post(url, requestEvents)
              .success(function(response){
                 if(response.length == ""){
-                    console.log("add success");
+                    //console.log("add success");
                     $("#add").removeClass("active").removeClass("in");
                     $("#schedule").addClass("active").addClass("in");
                     var curEvent = convertEvent(event, isMultiType);
@@ -271,7 +271,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
             $http.post(url, requestEvents)
             .success(function(response){
                 if(true){
-                    console.log("edit success");
+                    //console.log("edit success");
                     $("#edit").removeClass("active").removeClass("in");
                     $("#schedule").addClass("active").addClass("in");
                     var curEvent = convertEvent(event, isMultiType);
@@ -300,11 +300,11 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
             $http.delete(hostName + '/api/schedule/scheduledelone/' + id + "&apikey=a16cb0c916404be78cb0805fefc7d26a", '')
             .success(function(response){
                 if(response == true){
-                    console.log("delete success");
+                    //console.log("delete success");
                     $("#detail").removeClass("active").removeClass("in");
                     $("#schedule").addClass("active").addClass("in");
                     $("#calendar").fullCalendar('removeEvents', id);
-                    console.log(events.length);
+                    //console.log(events.length);
                     for(var i = 0, j = events.length; i < j; i++){
                         if(events[i].id == id){
                             events.splice(i, 1);
@@ -320,10 +320,10 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         getPeoples: function(urlParam, callback){
             $http.get(hostName + '/api/schedule/scheduleCompanyPeoples?&apikey=a16cb0c916404be78cb0805fefc7d26a' + urlParam, '')
             .success(function(response){
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 if(true){
                     peoples = response;
-                    console.log("getPeoples success");
+                    //console.log("getPeoples success");
                     callback();
                 }
             });
@@ -370,7 +370,7 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
             $http.get( 'http://10.15.251.110:8010/api/contact/getOrglist?apikey=a16cb0c916404be78cb0805fefc7d26a', '')
                 .success(function(response){
                     if(true){
-                        console.log(response);
+                        //console.log(response);
                     }
                 });
         },

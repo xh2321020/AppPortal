@@ -10,7 +10,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
           .success(function(response){
           if(true){
                 $scope.orgs = response;
-                $scope.orgClick($scope.orgs[7]);
+                $scope.searchMyInfo();
           }
       });
 
@@ -63,7 +63,16 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
             .success(function(response){
                 if(true){
                       $scope.childOrgs = response;
-                      $scope.childOrgClick($scope.childOrgs[0]);
+                      var isFind = false;
+                      for(var i = 0, j = $scope.childOrgs.length; i < j; i++){
+                            if($scope.peopleInfo.branchOrgid == $scope.childOrgs[i].id){
+                                  $scope.childOrgClick($scope.childOrgs[i]);
+                                  isFind = true;
+                            }
+                      }
+                      if(!isFind){
+                            $scope.childOrgClick($scope.childOrgs[0]);
+                      }
                 }
             });
       };
@@ -88,7 +97,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                             userIds.push({"userid": user.id});
                       }
                       $.unblockUI();
-                      console.log(JSON.stringify(userIds));
+                      //console.log(JSON.stringify(userIds));
                       EventService.setPeoples(response);
                       $("#calendar").empty();
                       urlParams.userid = userIds;
@@ -228,4 +237,45 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
       $scope.delete = function(){
             EventService.deleteEventById($scope.currentEvent.id);
       };
+
+      $scope.peopleInfo = {
+            "orgid": "-1",
+            "branchOrgid": "-1",
+      };
+      $scope.searchMyInfo = function(){
+            var uid = EventService.getCookie('userid') ? EventService.getCookie('userid') : "";
+            $http.get( 'http://10.15.251.110:8010/api/contact/searchuser?apikey=a16cb0c916404be78cb0805fefc7d26a&id=&q=' + uid, '')
+                .success(function(response){
+                      if(response.length == 1){
+                            var orgtree = response[0].orgtree;
+                            var count = 0;
+                            if (orgtree) {
+                                  for (var orgi in orgtree) {
+                                        for (var key in orgtree[orgi]){
+                                              if(count == 1){
+                                                    $scope.peopleInfo.orgid = key;
+                                              } else if(count == 2){
+                                                    $scope.peopleInfo.branchOrgid = key;
+                                              }
+                                              count++;
+                                        }
+                                  }
+                            }
+                            var isFind = false;
+                            for(var i = 0, j = $scope.orgs.length; i < j; i++){
+                                  if($scope.peopleInfo.orgid == $scope.orgs[i].id){
+                                        $scope.orgClick($scope.orgs[i]);
+                                        isFind = true;
+                                        if(i > 5){
+                                              $scope.displayParams.isShowAllOrg = true;
+                                        }
+                                  }
+                            }
+                            if(!isFind){
+                                  $scope.orgClick($scope.orgs[0]);
+                            }
+                      }
+                }
+            );
+      }
 });
