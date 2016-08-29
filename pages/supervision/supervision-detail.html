@@ -98,7 +98,7 @@
 			<td class="middle">
 			 	<a @click="editOperation(id)"  class="menu">编辑</a>
 			    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
-			    <a data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
+			    <a v-if="status=='0'" data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
 			    <!-- /.menu --><a v-if="status=='0'" @click="postphone('parent')" class="menu">延期</a>
 			    <!-- /.menu --><a @click="revoke('parent')"class="menu">撤销</a>
 			    <!-- /.menu --><a @click="close('parent')" class="menu">关闭</a>
