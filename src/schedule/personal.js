@@ -1,4 +1,4 @@
-eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventService, $timeout) {
+eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventService) {
       var urlParams = {
             'userid': EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
             'startdate': '',
