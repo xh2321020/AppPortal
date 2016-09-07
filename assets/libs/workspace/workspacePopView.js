@@ -231,4 +231,4 @@ function opentask(parmar){
             return unescape(arr[2]);
         else
             return null;
-    }
+    };

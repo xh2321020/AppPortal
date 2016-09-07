@@ -467,7 +467,6 @@ function Calendar(element, options, eventSources) {
 			if(JSON.stringify(options.header.right).indexOf("month") < 0){
 				suggestedViewHeight = 8000;
 			}
-			//console.log("content:" + content.width() + "  ratio:" + options.aspectRatio + "  height:" + suggestedViewHeight);
 		}
 	}
 
@@ -1802,8 +1801,11 @@ function lazySegBind(container, segs, bindHandlers) {
 
 function setOuterWidth(element, width, includeMargins) {
 	for (var i=0, e; i<element.length; i++) {
-		e = $(element[i]);
-		e.width(Math.max(0, width - hsides(e, includeMargins)));
+		if(element[i]){
+			e = $(element[i]);
+			e.width(Math.max(0, width - hsides(e, includeMargins)));
+		} else{
+		}
 	}
 }
 
@@ -3119,7 +3121,7 @@ function AgendaView(element, calendar, viewName) {
 	}
 	
 	
-	
+	//canice20160829
 	function buildSkeleton() {
 		var headerClass = tm + "-widget-header";
 		var contentClass = tm + "-widget-content";
@@ -3364,8 +3366,9 @@ function AgendaView(element, calendar, viewName) {
 			axisWidth
 		);
 		
-		var slotTableWidth = slotScroller[0].clientWidth; // needs to be done after axisWidth (for IE7)
-		//slotTable.width(slotTableWidth);
+		//var slotTableWidth = slotScroller[0].clientWidth; // needs to be done after axisWidth (for IE7)
+		slotTable.width(slotTableWidth);
+		var slotTableWidth = jQuery(slotScroller[0]).outerWidth()
 		
 		gutterWidth = slotScroller.width() - slotTableWidth;
 		if (gutterWidth) {
@@ -3380,7 +3383,9 @@ function AgendaView(element, calendar, viewName) {
 				.prev()
 				.addClass('fc-last');
 		}
-		
+		if(slotTableWidth <= 0){
+			slotTableWidth = 1128;
+		}
 		colWidth = Math.floor((slotTableWidth - axisWidth) / colCnt);
 		setOuterWidth(dayHeadCells.slice(0, -1), colWidth);
 	}

@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-     // url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTIwMTIwMDE0MTQ3MTUxNDYyNTE2OQ==";
+     url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTIwMTIwMDE0MTQ3MTUxNDYyNTE2OQ==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  
@@ -295,15 +295,19 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                             } else {
                                 description = data[j].estimatedcompletetiontime;
                             }
+                            var url = "pages/supervision/supervision-detail.html?id="+ data[j].id;
+                            var divLable =  '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onClick="window.location.href=\'' + url + '\'"><div style="overflow: hidden; position: relative;">';
                             dubanshixiang=dubanshixiang+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">督办</div></div>'+
-                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\'duban\')"><div style="overflow: hidden; position: relative;">'+
+                                divLable +
                             '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
                             'white-space: nowrap; width: 100%; display: block; padding-top:0; margin-left: 1rem;" title="'+data[j].name+'">'+
                             data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font" style="margin-left:1rem;">'+description+
                             '</span></div></div> <div class="task-list-spack"></div></li>';
                             if((data.length>0)&&(j<=1)){
+                                var url = "pages/supervision/supervision-detail.html?id="+ data[j].id;
+                                var aLable = '<a href="' + url +'" class="qiRiTiXing-a" target="_blank">';
                                 qiridubantixing = qiridubantixing + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
-                                '<a href="pages/supervision/supervision-detail.html" class="qiRiTiXing-a" target="_blank">'+
+                                    aLable +
                                 '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
                             }
                         }
