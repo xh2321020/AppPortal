@@ -37,7 +37,6 @@
                                         <th class="th-text">门户ID</th>
                                         <th class="th-text">门户名称</th>
                                         <th class="th-text">门户类型</th>
-                                        <th class="th-text">门户样式ID</th>
                                         <th class="th-text">管理员</th>
                                         <th class="th-text">状态</th>
                                         <th class="th-text">更新时间</th>
@@ -49,8 +48,9 @@
                                         <tr class="odd gradeX" ng-repeat="portal in portalList">
                                             <td class="td-text">{{portal.id}} </td>
                                             <td class="td-text">{{portal.name}} </td>
-                                            <td class="td-text">{{portal.hptype}} </td>
-                                            <td class="td-text">{{portal.styleid}} </td>
+                                            <td class="td-text" ng-if="portal.hptype == 0">企业门户</td>
+                                            <td class="td-text" ng-if="portal.hptype == 1">部门门户</td>
+                                            <td class="td-text" ng-if="portal.hptype == 2">专题门户</td>
                                             <td class="td-text">
                                                 <span ng-repeat="admin in portal.admin">{{admin.username}}</span>
                                             </td>

@@ -74,7 +74,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                       , function(){
                             for(var i = 0, j = component.formin.length; i < j; i++){
                                   for(var m = 0, n = $scope.columnList.length; m < n; m++){
-                                        if($scope.columnList[m].id = component.formin[i].columnid){
+                                        if($scope.columnList[m].id == component.formin[i].columnid){
                                               $scope.addParams.columns[i] = $scope.columnList[m];
                                         }
                                   }
