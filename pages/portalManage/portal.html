@@ -87,7 +87,7 @@
                                     <td colspan="4">
                                         <input class="input-padding" size="26" type="text" ng-model="curPortal.name" placeholder="请输入门户名称">
                                     </td>
-                                    <td class="td-text-left" colspan="1">门户类型</td>
+                                    <td class="td-text-left" colspan="2">门户类型</td>
                                     <td colspan="3">
                                         <select class="select-time" style="width: 120px" id="portalType">
                                             <option value="0">公司门户</option>
@@ -98,7 +98,11 @@
                                 </tr>
                                 <tr>
                                     <td class="td-text-left" colspan="2">门户说明</td>
-                                    <td colspan="8"><input class="input-padding" size="60" type="text" ng-model="curPortal.description" placeholder="请输入门户说明"></td>
+                                    <td colspan="4"><input class="input-padding" size="50" type="text" ng-model="curPortal.description" placeholder="请输入门户说明"></td>
+                                    <td class="td-text-left" colspan="2">门户优先级(优先级越大，显示越前)</td>
+                                    <td colspan="3">
+                                        <input class="input-padding" style="width: 120px" type="text" ng-model="curPortal.index" placeholder="请输入门户优先级">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="td-text-left" colspan="2">门户管理员</td>

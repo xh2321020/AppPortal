@@ -14,7 +14,7 @@
 
 <div style="width: 100%; min-height: 750px; max-height: 1000px;background: #dedede;">
     <div class="viewport">
-        <div class="wTitle"><img src="/assets/images/portal/titleIcon.gif">信详情&nbsp;&gt;&nbsp;远程投稿</div>
+        <div class="wTitle"><img src="/assets/images/portal/titleIcon.gif">信息详情&nbsp;&gt;&nbsp;远程投稿</div>
         <div>
             <table border="0" cellpadding="0" cellspacing="0" class="col2Frm">
                 <tbody>
@@ -50,13 +50,21 @@
                 <tbody>
                     <tr>
                         <td width="7%" class="label">目标栏目</td>
-                        <td width="93%" colspan="3">目标栏目</td>
+                        <td width="93%">
+                            <div id="content2">
+                                <ul class="ul-org">
+                                    <li v-for="cloumn in localColumnList" class="li-org" onclick="localCloumnClick(this)">
+                                        <span class="span-org-selected" v-if="cloumn.isSelected">{{cloumn.name}}</span>
+                                        <span class="span-org" v-if="!cloumn.isSelected">{{cloumn.name}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
             <div class="wToolbarBtm">
-                <a href="/publish2/article/edit/20499" class="imgLink btn1"><img src="/assets/images/portal/edit.gif" alt="修 改">投 稿</a>
-                <a href="#" onclick="ensure('/publish2/article/list/20499')" class="imgLink btn1"><img src="/assets/images/portal/cancel2.gif" alt="取 消">取 消</a>
+                <a class="imgLink btn1" onclick="publish2Local()"><img src="/assets/images/portal/edit.gif" alt="投 稿">投 稿</a>
             </div>
 
             <div class="wTitle" style="margin-top: 15px;"><img src="/assets/images/portal/titleIcon.gif">向中核投稿</div>
@@ -78,8 +86,7 @@
                 </tbody>
             </table>
             <div class="wToolbarBtm">
-                <a class="imgLink btn1" onclick="publish()"><img src="/assets/images/portal/edit.gif" alt="修 改">投 稿</a>
-                <a href="#" onclick="ensure('/publish2/article/list/20499')" class="imgLink btn1"><img src="/assets/images/portal/cancel2.gif" alt="取 消">取 消</a>
+                <a class="imgLink btn1" onclick="publish2Hq()"><img src="/assets/images/portal/edit.gif" alt="投 稿">投 稿</a>
             </div>
         </div>
     </div>
