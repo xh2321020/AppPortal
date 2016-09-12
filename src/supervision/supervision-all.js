@@ -3,29 +3,15 @@
  */
 // var requestInterfaces=require("../webconfig.js")
 
-import { supervisionRequest } from '../webconfig';
-var Vue = require("vue");
-import ComHeader from "../components/header.vue";
-import ComFooter from "../components/footer.vue";
-let headerVm = new Vue({
-    el: "header",
-    components: {
-        ComHeader
-    }
-});
-let footerVm = new Vue({
-    el: "footer",
-    components: {
-        ComFooter
-    }
-});
+import {getQueryString,getCookie,loadingCover,setSupervisionHeader} from '../common-function';
+let supervisionRequest=window.interfaceSettings.supervisionRequest.api;
 let filterVm = new Vue({
     el: "#filterSection",
     data: {
         filterOptions: {
             areaCode: [],
             sourceCode: [],
-            scopeCode: []
+            deptsCode: []
         },
         dateFilter: [
             {title: "全部", status: true},
@@ -42,7 +28,7 @@ let filterVm = new Vue({
             end: "2016-12-25",
             x: 0,
             y: 0,
-            range: true,//是否多选
+            range: true//是否多选
         },
         area: {
             show: [{status: "1", name: "全部"}], more: []
@@ -50,13 +36,14 @@ let filterVm = new Vue({
         }, source: {
             show: [], more: []
         },
+        derivedMeeting:[],
         org: {show: [], more: []},
-        scope: {show: [], more: []},
+        depts: {show: [], more: []},
         stateList: [
-            {label: "正常", value: true, feature: "label-success", margin: '50%'},
-            {label: "一周内过期", value: true, feature: "label-warning", margin: ''},
-            {label: "已过期", value: true, feature: "label-danger", margin: ''},
-            {label: "已完成", value: false, feature: "label-default", margin: ''}
+            // {label: "正常", value: true, feature: "label-success", margin: '50%'},
+            // {label: "一周内过期", value: true, feature: "label-warning", margin: ''},
+            // {label: "已过期", value: true, feature: "label-danger", margin: ''},
+            // {label: "已完成", value: false, feature: "label-default", margin: ''}
         ]
     },
     methods: {
@@ -100,6 +87,18 @@ let filterVm = new Vue({
             }
         },
         changeArea: function (index, type, filter) {
+            if(filter=="source"&&(this.source[type][index].diccode=="MEETING"||(index == 0&&type=="show"))){
+                let sourceArray=this.filterOptions["sourceCode"];
+                 let meetings=this.derivedMeeting;
+            for(let i=0;i<meetings.length;i++){
+                let metindex=$.inArray(meetings[i].diccode,sourceArray);
+                if(metindex>-1){
+                    sourceArray.splice(metindex,1);
+                    this.derivedMeeting[i].status="0";
+                }
+            }
+            }
+           
             // console.log(JSON.stringify(this.area.show));return;
             let all=this[filter].show[0];
             let area = this[filter].show;
@@ -126,7 +125,7 @@ let filterVm = new Vue({
                 //      area[0].status = "0";
                 // }
                let diccode="diccode"; 
-               if(filter="scope")diccode="ou";
+               if(filter=="depts")diccode="ou";
                 if (area[index].status == "1") {
                     area[index].status = "0";     
                     for (let i in areaCode) {
@@ -150,7 +149,30 @@ let filterVm = new Vue({
             }
             //
 
+
             resultVm.fetchTransactions(supervisionRequest.searchUrl);
+        },
+        changeMeeting:function(index){
+            let source =this.source.show;
+            let options=this.filterOptions["sourceCode"];
+            for(let i=0;i<source.length;i++){
+                if((i==0||source[i].dicname=="会议")&&source[i].status=="1"){
+                    source[i].status="0";                   
+                  let indMeeting=$.inArray(source[i].diccode,options);
+                  options.splice(indMeeting,1);//markable for responsive options
+                }
+            }
+            let targetOption=this.derivedMeeting[index];
+            let targetIndex=$.inArray(targetOption.diccode,options);
+            if(targetIndex>-1){
+                options.splice(targetIndex,1);
+                targetOption.status="0";
+            }else{
+                targetOption.status="1";
+                options.push(targetOption.diccode);
+            }
+
+             resultVm.fetchTransactions(supervisionRequest.searchUrl);
         },
         changeOrg: function (index, type) {
             // body...
@@ -173,6 +195,7 @@ let filterVm = new Vue({
             } else {
                 this.org = {show: area, more: other};
             }
+            loadingCover();
             // console.log(JSON.stringify(area))
             this.fetchDepts(area[index].ou);
         },
@@ -181,7 +204,7 @@ let filterVm = new Vue({
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: supervisionRequest.deptUrl + pid,
+                url:setSupervisionHeader(supervisionRequest.deptListUrl,{ou:pid}) ,
                 success: function (result, state, jqxhr) {
                     // console.log(JSON.stringify(result))
                     let depts=[];
@@ -192,12 +215,14 @@ let filterVm = new Vue({
                         }
                     }
                     let show = [{status: "1", name: "全部"}];
-                    _this.scope = {
+                    _this.depts = {
                         show: show.concat(depts.slice(0, 6)),
                         more: depts.slice(6)
                     }
+                    $.unblockUI();
                 },
                 error: function (data, state, jqxhr) {
+                    $.unblockUI();
                     console.log(jqxhr.key)
                     console.log(data)
                 }
@@ -218,7 +243,7 @@ let filterVm = new Vue({
                 type: "get",
                 dataType: "json",
                 // contentType:"application/json;charset=UTF-8",
-                url: urls[key],
+                url: setSupervisionHeader(urls[key]),
                 success: function (result, state, jqxhr) {
                     for (let i in result) {
                         result[i].status = "0";
@@ -236,9 +261,18 @@ let filterVm = new Vue({
                         // console.log(_this.area)
                     } else if (name == "supSourceUrl") {
                         //督办来源
+                        let derived=[],spliced=[];
+                        for(let sourcei=0;sourcei<result.length;sourcei++){
+                            if(result[sourcei].parentid=="10019"){
+                                derived.push(result[sourcei]);
+                            }else{
+                                spliced.push(result[sourcei]);
+                            }
+                        }  
+                        _this.derivedMeeting=derived;
                         _this.source = {
-                            show: show.concat(result.slice(0, 6)),
-                            more: result.slice(6)
+                            show: show.concat(spliced.slice(0, 6)),
+                            more: spliced.slice(6)
                         };
                     } else if (name == "orgUrl") {
                         _this.org = {
@@ -247,7 +281,7 @@ let filterVm = new Vue({
                         }
                         filterVm.changeOrg(0, "show");
                     } else {
-                        _this.scope = {
+                        _this.depts = {
                             show: show.concat(result.slice(0, 6)),
                             more: result.slice(6)
                         }
@@ -291,7 +325,7 @@ var resultVm = new Vue({
     data: {
         ths: [{key: "code", val: '督办编号'},
             {key: "name", val: '督办事项名称'},
-            {key: "accountablename", val: '责任领导(A)'},
+            {key: "accountablename", val: '发起人(A)'},
             {key: "responsiblename", val: '责任人(R)'},
             {key: "estimatedcompletetiontime", val: '计划完成时间'},
             {key: "urgency", val: '紧急程度'},
@@ -305,16 +339,31 @@ var resultVm = new Vue({
             current: 1
         },
         pageSize: 3,
+        levelBackground:["gray","#A1C636","#5CB85C","#F0AD4E","#D9534F"]
 
     },
     created: function () {
-        let _this = this;
-        supervisionRequest.searchUrl += "?page=0" + "&size=100";
+        let _this = this;       
         //search for the initialization
         this.fetchTransactions(supervisionRequest.searchUrl);
 
         //fetch list end
 
+    },ready(){
+        let that=this;
+          $("#keyPagesizeSelect").change((ev)=>{
+            let target=ev.currentTarget;
+             var totalCount = Number(that["keyItems"].total.length);
+            $('#key-pagination').extendPagination({
+                totalCount: totalCount,
+                limit: target.value,
+                name: "key",
+                callback: function (curr, limit, totalCount, key) {
+                    that.changePage(curr, limit, totalCount, key);
+                }
+            });
+            that.changePage(1, target.value, totalCount, "key");
+        });
     },
     methods: {
         changePage: function (curr, limit, totalCount, name) {
@@ -355,7 +404,7 @@ var resultVm = new Vue({
 
         },
         changeHandler: function (curr, name, items) {
-            let pageSize = this.pageSize;
+            let pageSize = $("#keyPagesizeSelect").val();
             items.show = items.total.slice((curr - 1) * pageSize, pageSize * (curr));
         },
         fetchTransactions: function (url) {
@@ -373,8 +422,8 @@ var resultVm = new Vue({
                 options.areaCode = options.areaCode.join(",");
             }
            
-            options.scope = options.scopeCode;
-            delete options.scopeCode;
+            options.scope = options.deptsCode;
+            delete options.deptsCode;
             if (options.scope.length == 0) {
                 delete options.scope;
             }
@@ -397,7 +446,7 @@ var resultVm = new Vue({
                 dataType: "json",
                 data: options,
                 contentType: "application/json",
-                url: url,
+                url: setSupervisionHeader(url,{page:0,size:1000}),
                 success: function (result, state, jqxhr) {
                     // console.log(JSON.stringify(result))
                     let keyList = [];
@@ -420,7 +469,7 @@ var resultVm = new Vue({
                         keyList.push(item)
                     }
 
-                    let sorting = sortings.concat(), pageSize = that.pageSize;
+                    let sorting = sortings.concat(), pageSize =$('#keyPagesizeSelect').val();
                     that.keyItems = {
                         total: keyList,
                         show: keyList.slice(0, pageSize),
@@ -429,7 +478,7 @@ var resultVm = new Vue({
                     };
 
 
-                    let limit = Number(that.pageSize) || 10;
+                    let limit = Number(pageSize) || 10;
                     var totalCount = Number(that.keyItems.total.length);
                     $('#key-pagination').extendPagination({
                         totalCount: totalCount,

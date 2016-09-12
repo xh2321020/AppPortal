@@ -79,7 +79,7 @@
 .filter-item .item-title{
     background-color: #F3F2F0;
     text-align: right;
-    width: 12rem;
+    min-width: 12rem;
     margin-left: 0;
     margin-right: 0;
     line-height: 4.4rem;
@@ -310,6 +310,14 @@ text-align: center;
     display: table-cell;
     vertical-align: middle!important;
 }
+
+.star::before{
+    content: "*";
+    color: red;
+    margin-left: 5px;
+    font-weight: 600;
+}
+
 /*pagination start*/
 table.table thead .sorting { background: url('../images/sort_both.png') no-repeat center right; }
 table.table thead .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }

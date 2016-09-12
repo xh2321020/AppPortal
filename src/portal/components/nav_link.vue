@@ -2,81 +2,81 @@
     <div class="nav-link" id="navLink">
         <ul class="nav-list">
             <li class="nav-list-item" id="comPortalNav" @hover="">
-                <a class="navbar-link com-portal">公司门户</a>
+                <a class="navbar-link com-portal">鹿芦脣戮脙脜禄搂</a>
 
                 <div class="nav-panel company">
                     <ul v-for="list in ">
                     <ul class="list">
-                        <li class="list-item"><a class="btn">计划发展部</a>
+                        <li class="list-item"><a class="btn">录脝禄庐路垄脮鹿虏驴</a>
                             <!-- /.btn btn-default --></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn btn-success">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn btn-success">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
                     </ul>
                     <ul>
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
-                        <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                        <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                         <!-- /.list-item -->
                     </ul>
                 </div>
             </li>
             <li class="nav-list-item dept-subj" id="depPortalNav">
-                <a class="navbar-link dep-portal">部门及专题门户</a>
+                <a class="navbar-link dep-portal">虏驴脙脜录掳脳篓脤芒脙脜禄搂</a>
 
                 <div class="nav-panel row">
                     <div class="list dept col-md-6">
-                        <p class="title">公司门户</p>
+                        <p class="title">鹿芦脣戮脙脜禄搂</p>
                         <!-- /.title -->
                         <ul v-for="list in items.company">
 
-                            <li v-for="item in list" class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li v-for="item in list" class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-                            <!-- /.list-item -->
-                        </ul>
-                        <ul>
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-                            <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-                            <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
-                            <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
                         </ul>
                         <ul>
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
+                            <!-- /.list-item -->
+                        </ul>
+                        <ul>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
                         </ul>
                         <img src="../../assets/images/portal/dash_line.png" alt="" class="split"/>
@@ -84,33 +84,33 @@
                     </div>
                     <!-- /.list -->
                     <div class="list col-md-6">
-                        <p class="title">专题门户</p>
+                        <p class="title">脳篓脤芒脙脜禄搂</p>
                         <!-- /.title -->
                         <ul>
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
                         </ul>
                         <ul>
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
-                            <li class="list-item"><a href="" class="btn">计划发展部</a></li>
+                            <li class="list-item"><a href="" class="btn">录脝禄庐路垄脮鹿虏驴</a></li>
                             <!-- /.list-item -->
                         </ul>
                     </div>
                     <!-- /.list -->
                 </div>
             </li>
-            <li class="nav-list-item"><a class="navbar-link workbench">个人工作台</a></li>
+            <li class="nav-list-item"><a class="navbar-link workbench">赂枚脠脣鹿陇脳梅脤篓</a></li>
         </ul>
     </div>
 </template>
@@ -120,9 +120,9 @@
     module.export= {
         data :function() {
         return {
-    company:[ ["计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部"], ["计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部"]]
-    department: ["计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部"],
-    subject: ["计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部","计划发展部"],
+    company:[ ["录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴"], ["录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴"]]
+    department: ["录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴"],
+    subject: ["录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴","录脝禄庐路垄脮鹿虏驴"],
 }
     }
     }

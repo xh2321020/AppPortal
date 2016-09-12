@@ -1,0 +1,42 @@
+ 
+
+{
+          PortalName_EN:"",
+        CARD_GROUP:"",
+        CARD_INDEX:0,
+        CARD_WIDTH:"",
+        CARD_TOP_COLOR:"",
+       SUBCARDS:[{
+                SUBCARD_EN:"",
+                SUBCARD_ZH:"中国核电动态"+(i+1),
+                SUBCARD_TYPE:"style"+(i+1),
+                SUBCARD_ISMORE:"",
+                SUBCARD_MORE_URL:"",
+                SUBCARD_INDEX:"",
+                DATASOURCE:{
+                // URL:"http://192.168.252.1:8000/api/v1.0/news/5?size=3",
+                  URL:urlPre,
+                METHOD:"get",
+                CONTENT_TYPE:"",
+                PAYLOAD:"",
+                QueryString:fetchArray[i]+"?size="+sizeArray[i]
+                }
+            },{
+                SUBCARD_EN:"",
+                SUBCARD_ZH:"中国核电动态"+(i+1),
+                SUBCARD_TYPE:"style"+(i+1),
+                SUBCARD_ISMORE:"",
+                SUBCARD_MORE_URL:"",
+                SUBCARD_INDEX:"",
+                DATASOURCE:{
+                // URL:"http://192.168.252.1:8000/api/v1.0/news/5?size=3",
+                  URL:urlPre,
+                METHOD:"get",
+                CONTENT_TYPE:"",
+                PAYLOAD:"",
+                QueryString:fetchArray[i]+"?size="+sizeArray[i]
+                }
+            }] 
+            
+    }
+

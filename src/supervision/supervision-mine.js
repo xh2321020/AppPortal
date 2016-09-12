@@ -3,25 +3,16 @@
  */
 // var requestInterfaces=require("../webconfig.js")
 
-import { supervisionRequest } from '../webconfig';
-var Vue = require("vue");
-import ComHeader from "../components/header.vue";
-import ComFooter from "../components/footer.vue";
-let headerVm = new Vue({
-    el: "header",
-    components: {
-        ComHeader
-    }
-});
-let footerVm = new Vue({
-    el: "footer",
-    components: {
-        ComFooter
-    }
-});
+import {getQueryString,getCookie,setSupervisionHeader} from '../common-function';
+let supervisionRequest=window.interfaceSettings.supervisionRequest.api;
+window.userLoginInfo={
+    userid:getCookie("userid"),
+    username:getCookie("username")
+};
 let filterVm = new Vue({
     el: "#filterSection",
     data: {
+        userLoginInfo:{},
         filterOptions: {
             areaCode: [],
             sourceCode: [],
@@ -46,6 +37,7 @@ let filterVm = new Vue({
             range: true,//是否多选
         },
         area: [], source: [],
+        derivedMeeting:[],
         stateList: [
             {label: "正常", value: true, feature: "label-success", margin: '50%'},
             {label: "一周内过期", value: true, feature: "label-warning", margin: ''},
@@ -94,6 +86,18 @@ let filterVm = new Vue({
         },
         changeArea: function (index,filter) {
             // console.log(JSON.stringify(this.area.show));return;
+            if(filter=="source"&&(index==0||this.source[index].diccode=="MEETING")){
+                let sourceArray=this.filterOptions["sourceCode"];
+                 let meetings=this.derivedMeeting;
+            for(let i=0;i<meetings.length;i++){
+                let metindex=$.inArray(meetings[i].diccode,sourceArray);
+                if(metindex>-1){
+                    sourceArray.splice(metindex,1);
+                    this.derivedMeeting[i].status="0";
+                }
+            }
+           }
+
              let area = this[filter];
             if (index == 0) {          
                 if(area[0].status=="1")return;      //all
@@ -124,34 +128,83 @@ let filterVm = new Vue({
              this[filter]=area;
             //
             resultVm.fetchTransactions(supervisionRequest.searchUrl);
+        },
+        changeMeeting:function (index) {
+            // body...
+            let source =this.source;
+            let options=this.filterOptions["sourceCode"];
+            if(source[0].status=="1"){
+                 source[0].status="0";
+                 let indMeeting0=$.inArray(source[0].diccode,options);
+                  options.splice(indMeeting0,1);//markable for responsive options
+              }
+            for(let i=1;i<source.length;i++){
+                if(source[i].diccode=="MEETING"&&source[i].status=="1"){
+                    source[i].status="0";                   
+                  let indMeeting=$.inArray(source[i].diccode,options);
+                  options.splice(indMeeting,1);//markable for responsive options
+                  break;
+                }
+            }
+            let targetOption=this.derivedMeeting[index];
+            let targetIndex=$.inArray(targetOption.diccode,options);
+            if(targetIndex>-1){
+                options.splice(targetIndex,1);
+                targetOption.status="0";
+            }else{
+                targetOption.status="1";
+                options.push(targetOption.diccode);
+            }
+
+             resultVm.fetchTransactions(supervisionRequest.searchUrl);
         }
 
     },
     created: function () {
-        let _this = this;
+        let _this = this;        
         var urls = {
             'supAreaUrl': supervisionRequest["supAreaUrl"],
-            "supSourceUrl": supervisionRequest["supSourceUrl"]
+            "supSourceUrl": supervisionRequest["supSourceUrl"],
+            "completedRateStatistics":supervisionRequest["completedRateStatistics"]
         };
         for (let key in urls) {
+             if(key=="completedRateStatistics") {
+                urls[key]=setSupervisionHeader(urls[key],null,window.userLoginInfo.userid);
+             }
+                else urls[key]=setSupervisionHeader(urls[key]);
+           
             $.ajax({
                 type: "get",
                 dataType: "json",
                 // contentType:"application/json;charset=UTF-8",
                 url: urls[key],
                 success: function (result, state, jqxhr) {
+                    let name = jqxhr.key;
+                     if(name=="completedRateStatistics"){
+                        let completedRateStatistics=result[1]+"/"+(result[0]+result[1]);
+                        $("#completedRateStatistics").text(completedRateStatistics);
+                        return;
+                     }
                     for (let i in result) {
                         result[i].status = "0";
                     }
-                    let name = jqxhr.key;
+                  
                     let show = [{status: "1", dicname: "全部"}];
                     if (name == "supAreaUrl") {
-
                         //领域
                         _this.area =show.concat(result);
                     } else {
                         //督办来源
-                        _this.source = show.concat(result);
+                         let derived=[],spliced=[];
+                        for(let sourcei=0;sourcei<result.length;sourcei++){
+                            if(result[sourcei].parentid=="10019"){
+                                derived.push(result[sourcei]);
+                            }else{
+                                spliced.push(result[sourcei]);
+                            }
+                        }  
+                        _this.derivedMeeting=derived;
+                        _this.source = show.concat(spliced);
                     }
                 },
                 error: function (data, state, jqxhr) {
@@ -166,6 +219,7 @@ let filterVm = new Vue({
     ready: function () {
         // body...
         $("#startDate").daterangepicker({
+            language:"zh-CN",
             singleDatePicker: true,
             showDropdowns: true
         }, function (start, end, label) {
@@ -189,7 +243,7 @@ var resultVm = new Vue({
     data: {
         ths: [{key: "code", val: '督办编号'},
             {key: "name", val: '督办事项名称'},
-            {key: "accountablename", val: '责任领导(A)'},
+            {key: "accountablename", val: '发起人(A)'},
             {key: "responsiblename", val: '责任人(R)'},
             {key: "estimatedcompletetiontime", val: '计划完成时间'},
             {key: "urgency", val: '紧急程度'},
@@ -214,17 +268,46 @@ var resultVm = new Vue({
             show: [],
             current: 1
         },
-        pageSize: 3,
+          levelBackground:["gray","#A1C636","#5CB85C","#F0AD4E","#D9534F"],
+        sizeOptions:[
+      { text: "3", value: "3"},
+      { text: "10", value: "10"},
+      { text: "20", value: "20"}
+        ]
 
     },
     created: function () {
         let _this = this;
-        supervisionRequest.searchUrl += "?page=0" + "&size=100";
+        let userid=getCookie("userid"),username=getCookie("username");
+        if(userid&&userid!=""){
+        this.userLoginInfo={
+            userid:userid,
+            username:username
+        };
         //search for the initialization
         this.fetchTransactions(supervisionRequest.searchUrl);
-
+    }else{
+        location.href = "http://bjecm.cnnp.com.cn/pt/LoginServlet?url="+Base64.encode(window.location.href);
+    }
         //fetch list end
 
+    },ready:function(){
+        let that=this;
+        $(".pagesize").change((ev)=>{
+
+            let target=ev.currentTarget;
+            let key=target.getAttribute("data-key");
+             var totalCount = Number(that[key + "Items"].total.length);
+            $('#' + key + '-pagination').extendPagination({
+                totalCount: totalCount,
+                limit: target.value,
+                name: key,
+                callback: function (curr, limit, totalCount, key) {
+                    that.changePage(curr, limit, totalCount, key);
+                }
+            });
+               that.changePage(1, target.value, totalCount, key);
+        });
     },
     methods: {
         changePage: function (curr, limit, totalCount, name) {
@@ -265,14 +348,15 @@ var resultVm = new Vue({
 
         },
         changeHandler: function (curr, name, items) {
-            let pageSize = this.pageSize;
+            let pageSize = $("#"+name+"PagesizeSelect").find("select").val();
             items.show = items.total.slice((curr - 1) * pageSize, pageSize * (curr));
         },
         fetchTransactions: function (url) {
+            url=setSupervisionHeader(url,{page:0,size:1000});
             // //search for the tablelist
             //  jQuery.support.cors = true;
             let options = {
-              
+
             };
             for (let key in filterVm.filterOptions) {
                 options[key] = filterVm.filterOptions[key];
@@ -291,8 +375,9 @@ var resultVm = new Vue({
             else {
                 options.source = options.source.join(",");
             }
-            options.responsiblesn="20116636";
             let that = this;
+            options.accountableSN=this.userLoginInfo.userid;
+            options.responsibleSN=this.userLoginInfo.userid;
             options = JSON.stringify(options);
             $.ajax({
                 type: "POST",
@@ -337,7 +422,7 @@ var resultVm = new Vue({
                         }
                     }
                     let res = {doneList: doneList, keyList: keyList, otherList: otherList};
-                    let sorting = sortings.concat(), pageSize = that.pageSize;
+                    let sorting = sortings.concat(), pageSize =$("#"+name+"PagesizeSelect").find("select").val()||3;
                     let names = ['key', 'other', 'done'];
                     for (let i in names) {
                         let name = names[i];
@@ -348,8 +433,10 @@ var resultVm = new Vue({
                             current: 1
                         };
 
-                        let limit = Number(that.pageSize) || 10;
+                        let limit = Number(pageSize) || 3;
                         var totalCount = Number(that[name + "Items"].total.length);
+                        if(totalCount==0)$("#"+name+"PagesizeSelect").hide();
+                        else $("#"+name+"PagesizeSelect").show();
                         $('#' + name + '-pagination').extendPagination({
                             totalCount: totalCount,
                             // showCount: showCount,
@@ -362,6 +449,7 @@ var resultVm = new Vue({
                     }
 
                 },
+
                 error: function (data, state, jqxhr) {
                     console.log(data)
                 }
@@ -370,7 +458,7 @@ var resultVm = new Vue({
             //fetch list end
         },
         newfunc: function () {
-
+            
         }
     }
 

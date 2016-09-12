@@ -1,0 +1,138 @@
+[
+  {
+    "card_TOP_COLOR": "#00A2E5",
+    "portalName": null,
+    "card_WIDTH": "2",
+    "card_INDEX": 1,
+    "subcards": [
+      {
+        "url": "http://172.16.51.137:8010/api/news/2?size=4",
+        "subcard_ZH": "安全质量文化",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "1",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 7
+      }
+    ]
+  },
+  {
+    "card_TOP_COLOR": "#00A2E5",
+    "portalName": null,
+    "card_WIDTH": "1",
+    "card_INDEX": 2,
+    "subcards": [
+      {
+        "url": "http://172.16.51.137:8010/api/news/2?size=4",
+        "subcard_ZH": "安全质量文化",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "1",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 8
+      }
+    ]
+  },
+  {
+    "card_TOP_COLOR": "#00A2E5",
+    "portalName": null,
+    "card_WIDTH": "3",
+    "card_INDEX": 3,
+    "subcards": [
+      {
+        "url": "http://172.16.51.137:8010/api/news/2?size=4",
+        "subcard_ZH": "安全质量文化",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "1",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 9
+      },
+      {
+        "url": "http://172.16.51.137:8010/api/news/9999?size=10",
+        "subcard_ZH": "计划与总结",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "2",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 10
+      }
+    ]
+  },
+  {
+    "card_TOP_COLOR": "#00A2E5",
+    "portalName": null,
+    "card_WIDTH": "1",
+    "card_INDEX": 4,
+    "subcards": [
+      {
+        "url": "http://172.16.51.137:8010/api/news/2?size=4",
+        "subcard_ZH": "安全质量文化",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "1",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 11
+      },
+      {
+        "url": "http://172.16.51.137:8010/api/news/9999?size=10",
+        "subcard_ZH": "计划与总结",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "2",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 12
+      }
+    ]
+  },
+  {
+    "card_TOP_COLOR": "#00A2E5",
+    "portalName": null,
+    "card_WIDTH": "1",
+    "card_INDEX": 5,
+    "subcards": [
+      {
+        "url": "http://172.16.51.137:8010/api/news/2?size=4",
+        "subcard_ZH": "安全质量文化",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "1",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 13
+      },
+      {
+        "url": "http://172.16.51.137:8010/api/news/9999?size=10",
+        "subcard_ZH": "计划与总结",
+        "method": "get",
+        "payload": "",
+        "content_TYPE": "application/json",
+        "queryString": "&apikey=e71982d5401b488da4acef8827c41845",
+        "subcard_INDEX": "2",
+        "subcard_ISMORE": "0",
+        "subcard_MORE_URL": null,
+        "subcard_TYPE": 14
+      }
+    ]
+  }
+]
