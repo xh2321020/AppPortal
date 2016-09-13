@@ -1,35 +1,21 @@
 /**
  * Created by Mattia on 2016/6/23.
  */
-import Vue from "vue"
-import { supervisionRequest } from '../webconfig';
-import ComHeader from "../components/header.vue";
-import ComFooter from "../components/footer.vue";
-
-let headerVm = new Vue({
-    el: "header",
-    components: {
-        ComHeader
-    }
-});
-let footerVm = new Vue({
-    el: "footer",
-    components: {
-        ComFooter
-    }
-});
+import {getQueryString,getCookie,setCookie,setSupervisionHeader} from "../common-function.js";
+let supervisionRequest=window.interfaceSettings.supervisionRequest.api;
+let timeNow=new Date().getTime();
 let detailVm = new Vue({
-    el: "#supervisionDetail_panel",
+    el: "#article",
     data: {
-        "id": 1000,
+        previous:null,
+        id:null,
         "code": "",
-        "pid": 0,
+        "pid": null,
         "pcode": null,
-        "pname": null,
         "name": "",
         "source": "",
         "area": "",
-        "status": 1,
+        "status": "0",
         "importance": 4,
         "urgency": 5,
         "scope": "",
@@ -44,22 +30,69 @@ let detailVm = new Vue({
         "comments": null,
         "latestTrace": {},
         children: [
-        ]
+        ],
+        progressModalId:"progressModal"+timeNow,
+        modalId:"modal"+timeNow,
+        progressRate:0,
+        currentModal:"close",
+        updateItem:{},
+        userLogin:{},
+        traceHistory:[],
+        alertMessage:"保存成功",
+        area_name:"",
+        source_name:"",
+        reason:""
+    }, 
+    computed:{
+        escapeName:function(){
+            return escape(this.name);
+        }
     },
     created: function () {
         let _this = this;
-        $.ajax({
+        if(window.userLogin);
+        else
+        window.userLogin={
+             updateuserid:getCookie("userid"),
+            updateusername:getCookie("username")
+        }
+        this.userLogin=window.userLogin;
+        this.userLogin={
+            updateuserid:getCookie("userid"),
+            updateusername:getCookie("username")
+        };
+        this.id=getQueryString("id");
+        this.fetchOriginSupervision(this.id);
+        this.fetchTrace();
+        this.previous=getQueryString("previous");      
+
+    },
+    methods:{
+        alertModal:function(message){
+            this.alertMessage=message;
+            $("#alertModal").modal("show");
+        },
+        missrole:function(){
+              this.currentModal="missrole";
+                 this.showModal();
+                         
+        },
+        fetchOriginSupervision:function(iid){
+            let _this=this;
+              $.ajax({
             type: "get",
             dataType: "json",
-            url: supervisionRequest.supDetailUrl + this.id,
+            url: setSupervisionHeader(supervisionRequest.supDetailUrl,null,iid),
             success: function (result) {
                 let children = [];
                 for (let i = 0, len = result.length; i < len; i++) {
                     let item = result[i];
-                    if (item.id == "1000") {
+                    if (item.id == iid) {
                         for (let key in item) {
                             _this[key] = item[key];
                         }
+                        if(item.latestTrace)
+                          _this.progressRate=item.latestTrace.rate?item.latestTrace.rate:0;
 
                     } else {
                         children.push(item);
@@ -67,181 +100,152 @@ let detailVm = new Vue({
                 }
 
                 _this.children = children;
-                // console.log(JSON.stringify(_this.children))
             },
             error: function (data) {
                 console.log(data);
             }
         });
-    }
-
-
-});
-
-
-import {fetch_deptsFromServer,fetch_areaFromServer,fetch_sourceFromServer,add_supervision} from "../common-function"
-let levelArray = [{
-    text: "1级", value: 1
-}, {
-    text: "2级", value: 2
-}, {
-    text: "3级", value: 3
-}, {
-    text: "4级", value: 4
-}, {
-    text: "5级", value: 5
-}];
-let createVm = new Vue({
-    el: "#createSupervision_panel",
-    data: {
-        pid: "",
-        id: "",
-        name: "",
-        sourceOptions: [{
-            text: "请选择", value: ""
-        }, {
-            text: "hehe", value: "1"
-        }, {
-            text: "uiui", value: "2"
-        }],
-        sourceSelected: "",
-        areaSelected: "",
-        areaOptions: [{
-            text: "请选择", value: ""
-        }, {
-            text: "hehe", value: "1"
-        }, {
-            text: "uiui", value: "2"
-        }],
-        estimatedcompletetiontime: "",
-        accountableOptions: [{
-            text: "请选择", value: ""
-        }, {
-            text: "hehe", value: "1"
-        }, {
-            text: "uiui", value: "2"
-        }],
-        urgency: 1,
-        urgencyOptions: levelArray.concat(),
-        importance: 1,
-        importanceOptions: levelArray.concat(),
-        responsibledeptcode: "",
-        responsibledeptOptions: [{
-            text: "请选择", value: ""
-        }],
-        responsiblename: "",
-        responsibleOptions: [],
-        public: 1,
-        publicOptions: levelArray.concat(),
-        comments: "",
-        accessory: {},
-        requests: supervisionRequest,
-        saveState:"",
-        selectedDepts: [],
-        leaders:[]
-    },
-    computed: {
-        scope: function () {
-            let depts = $.map(this.selectedDepts, function (item) {
-                return item.name;
-            })
-            return depts.join(",");
         },
-        accountablesn:function(){
-            let names=$.map(this.leaders,function(item){
-                return item.displayname;
-            });
-            return names.join(",");
-        }
-    },
-    created: function (argument) {
-        // let urls=['supSourceUrl','deptUrl'];
-        fetch_deptsFromServer("10001", (result, state, jqxhr)=> {
-            let depts = [{
-                text: "请选择", value: ""
-            }];
-            for (let i = 0, len = result.length; i < len; i++) {
-                depts.push({
-                    text: result[i].dicname,
-                    value: result[i].id
-                });
+        fetchTrace:function(){
+              let _this=this;
+              $.ajax({
+                type:"get",
+                url:setSupervisionHeader(supervisionRequest.traceHistory,null,this.id),
+                success:function(result,state,xhr){
+                    _this.traceHistory=result;
+                },
+                error:function(result,state,xhr){
+                    console.log("error",result);
+                }
+              });
+        },
+        updateProgress:function(){
+          if(this.userLogin.updateuserid!=this.accountablesn&&this.userLogin.updateuserid!=this.responsiblesn){
+               this.alertModal('仅“发起人”和“责任人”角色有此操作权限');
+                return;
             }
-            this.responsibledeptOptions = depts;
-        });
-//fetch area
-        fetch_areaFromServer((result, state, jqxhr)=> {
-            let area = [{
-                text: "请选择", value: ""
-            }];
-            // console.log(result)
-            for (let i = 0, len = result.length; i < len; i++) {
-                area.push({
-                    text: result[i].dicname,
-                    value: result[i].diccode
-                });
+            this.updateItem.id=this.id;
+             this.currentModal="updateProgress";
+             this.showModal();
+        },
+        showModal:function(){            
+                 $("#"+this.modalId).modal({backdrop: 'static', keyboard: false});
+        },
+          editOperation:function(id){
+             if(this.userLogin.updateuserid!=this.accountablesn){
+               this.alertModal("仅“发起人”角色有此操作权限");
+                return;
             }
-            this.areaOptions = area;
-        });
-        // fetch source
-        fetch_sourceFromServer((result, state, jqxhr)=> {
-            let source = [{
-                text: "请选择", value: ""
-            }];
-            // console.log(result)
-            for (let i = 0, len = result.length; i < len; i++) {
-                source.push({
-                    text: result[i].dicname,
-                    value: result[i].diccode
-                });
+            window.location.href='/pages/supervision/supervision-edit.html?id='+id+'&previous=detail';
+          },
+        postphone:function(param){
+            let item=(param=="parent")?this:param;          
+            if(this.userLogin.updateuserid!=item.accountablesn){
+               this.alertModal("仅“发起人”角色有此操作权限");
+                return;
             }
-            this.sourceOptions = source;
-        });
-        // body...
-    }, ready: function () {
-        let _this = this;
-        $("#completeDate").daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true
-        }, function (start, end, label) {
-            _this.estimatedcompletetiontime = start;
-            // alert(_this.estimatedcompletetiontime)
-            // alert(start.format('YYYY-MM-DD'))
-        });
-    },
-    methods: {
-        submit_handler () {
-            let options = {
-                "accountablesn": this.accountablesn,
-                "area": this.areaSelected,
-                // "code": "string",
-                "comments": this.comments,
-                "estimatedcompletetiontime":moment(this.estimatedcompletetiontime, "MM-DD-YYYY").format('YYYY-MM-DD'),
-                 "importance": this.importance,
-                "name": this.name,
-                "pid": this.pid,
-                "responsibledeptcode":this.responsibledeptcode,
-                "responsiblesn": this.responsiblesn,
-                "scope": this.scope,
-                "source": this.sourceSelected,
-                "status": 0,
-                "urgency":this.urgency,
-                "public":this.public
+            this.currentModal="postphone";            
+            this.postphoneDate=item.estimatedcompletetiontime;
+            this.updateItem={
+                id:item.id,
+                postphoneDate:item.estimatedcompletetiontime 
+                }     
+            this.showModal();  
+
+        },
+        revoke:function(item){
+            item=item=="parent"?this:item;
+           if(this.userLogin.updateuserid!=item.accountablesn){
+             this.alertModal("仅“发起人”角色有此操作权限");
+                return;
+            }
+            this.currentModal="revoke";
+            this.updateItem={
+                id:item.id
             };
-            add_supervision(options,(result, state, jqxhr)=>{
-                this.saveState="保存成功";
-                let timer=setTimeout(()=>{
-                    clearTimeout(timer);
-                    alert("hehe");
-                },700);
-            },(result,state,jqxhr)=>{
-                this.saveState="保存失败";
-                console.log(result)
-            });
+            this.showModal();
+        },
+        close:function(item){ 
+            item=item=="parent"?this:item;
+            if(this.userLogin.updateuserid!=item.accountablesn){
+              this.alertModal("仅“发起人”角色有此操作权限");
+                return;
+            }
+            this.currentModal="close";
+            this.updateItem={
+                id:item.id
+            };
+            this.showModal();
+        },
+        saveChanges:function(){
+            let _this=this;
+            let item=this.updateItem;
+            let url="",type="";
+             let options={};
+            switch(this.currentModal){
+                case "updateProgress":
+                options={ 
+                    "operatorname":this.userLogin.updateusername,
+                    "operatorsn":this.userLogin.updateuserid,
+                  "description":this.reason,
+                  "rate": this.progressRate,
+                  "supervisionid": this.updateItem.id
+              };
+                url=setSupervisionHeader(supervisionRequest.traceUrl,null,this.id);
+                type="put";
+                break;
+                case "postphone":
+                url=setSupervisionHeader(supervisionRequest.postphoneUrl,{newDateStr:item.postphoneDate},item.id);
+                type="put";
+                break;
+                case "revoke":
+                url=setSupervisionHeader(supervisionRequest.revokeUrl,null,item.id);
+                type="delete";               
+                break;
+                case "close":
+                url=setSupervisionHeader(supervisionRequest.closeUrl,null,item.id);                
+                type="delete";                
+                break;
+            }
+            if(this.currentModal!="updateProgress"){
+                  options={
+                    "updateuserid": this.userLogin.updateuserid,
+                    "updateusername": this.userLogin.updateusername,
+                    "reason": this.reason
+                };
+           }
+             $.ajax({
+                type:type,
+                contentType:"application/json",
+                data:JSON.stringify(options),
+                url:url,
+                success(result,state,xhr){
+                     $("#"+_this.modalId).modal("hide");
+                    let messageCode=result.messagecode;
+                    if(messageCode==200){
+                         _this.alertModal("保存成功");
+                          let timer=setTimeout(()=>{
+                            clearTimeout(timer);
+                            location.reload();
+                        },500);
+                    }else{
+                        _this.alertModal("保存失败");
+                    }
+                                           
+                },
+                error:function(result,state,xhr){
+                    console.log("error",result);
+                      this.alertModal("保存失败");
+                }
+             });
         }
     },
-    components: {
-        comAccordion: require("../components/accordion-menu.vue"),
-        leaderSelect:require("../components/user-selector.vue")
+    components:{
+         // updateRate:require("../supervision/components/update-rate.vue"),
+         postphone:require("../supervision/components/postphone.vue"),
+         modalPop:require("../components/modal-pop.vue"),
+        progressBar:require("../components/progressbar-drag.vue")
     }
 
 });
+
