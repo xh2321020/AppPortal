@@ -83,7 +83,7 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                       if(true){
                             var userIds = [];
                             var leaders = [];
-                            console.log("response:" + response.length);
+                            //console.log("response:" + response.length);
                             for(var i = 0, j = response.length; i < j; i++){
                                   var user =  response[i];
                                   user.id = user.uid;
@@ -147,6 +147,26 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
                         "collsaceid": ""
                   }
             };
+            $("#startdate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.addParams.startdate = t;
+                }
+            );
+            $("#enddate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.addParams.enddate = t;
+                }
+            );
+            $timeout(
+                function() {
+                      $("#myTab").children().eq(1).addClass("active");
+                      $("#myTab").children().eq(3).removeClass("active");
+                }, 100
+            );
       };
 
       $scope.addEvent = function(){
@@ -223,6 +243,20 @@ eventApp.controller("LeaderCtrl", function($scope, $http, $timeout, EventService
             $scope.editParams = $scope.currentEvent;
             $("#detail").removeClass("active").removeClass("in");
             $("#edit").addClass("active").addClass("in");
+            $("#edit_startdate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.editParams.startdate = t;
+                }
+            );
+            $("#edit_enddate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.editParams.enddate = t;
+                }
+            );
       };
 
       $scope.editSubmit = function(){

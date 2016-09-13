@@ -12,6 +12,7 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
                         "hptype": "",
                         "name": "",
                         "status": "0",
+                        "priority": "",
                         "styleid": "",
                         "updatetime": "",
                         "webtype": "0",
