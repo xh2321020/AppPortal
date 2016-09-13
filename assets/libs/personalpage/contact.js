@@ -18,11 +18,11 @@ var setPersonalpageHeader=function(url,paramObj,iid){
     getDepartments();
     function getDepartments() {
         $.ajax({ 
-                type: "get",
-                dataType:"json",//pid--项目id
-                url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou:""},null), //需换成正式环境的url//接口名 /contacts/getFileinfo
-                success(data, state, jqxhr){  
-                    var source =
+            type: "get",
+            dataType:"json",//pid--项目id
+            url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou:""},null), //需换成正式环境的url//接口名 /contacts/getFileinfo
+            success: function(data, state, jqxhr){
+                var source =
                 {
                     datatype: "json",
                     datafields: [
@@ -54,13 +54,15 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                     getOuDescription(data,item.id);
                     getMembers(item.id);
                 });
+
                 $("#loadingImgs").remove();
-                },error(result, state, jqxhr)
-                {
-                    console.log("error", jqxhr);
-                }
-            });
+            },
+            error: function(result, state, jqxhr){
+                console.log("error", jqxhr);
+            }
+        });
     };
+
     function getOuDescription(data, ouId){
         for(var i=0; i<data.length; i++){
             if(data[i].ou == ouId){
