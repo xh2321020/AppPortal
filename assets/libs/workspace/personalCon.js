@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-     url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTIwMTIwMDE0MTQ3MTUxNDYyNTE2OQ==";
+     //url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTIwMTIwMDE0MTQ3MTUxNDYyNTE2OQ==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  

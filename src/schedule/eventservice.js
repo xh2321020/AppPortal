@@ -33,22 +33,6 @@ eventApp.service( 'EventService', [ '$rootScope', '$http', '$timeout', function(
         }
     });
 
-    $timeout(
-        function() {
-            $('.form_date').datetimepicker({
-                language:  'zh-CN',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0,
-            });
-        },
-        3000
-    );
-
     Date.prototype.format = function(format) {
         var o = {
             "M+" : this.getMonth() + 1,

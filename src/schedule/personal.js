@@ -1,4 +1,4 @@
-eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventService) {
+eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventService, $timeout) {
       var urlParams = {
             'userid': EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
             'startdate': '',
@@ -82,6 +82,26 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                         "collsaceid": ""
                   }
             };
+            $("#startdate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.addParams.startdate = t;
+                }
+            );
+            $("#enddate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.addParams.enddate = t;
+                }
+            );
+            $timeout(
+                function() {
+                      $("#myTab").children().eq(0).addClass("active");
+                      $("#myTab").children().eq(3).removeClass("active");
+                }, 100
+            );
       };
 
       $scope.addEvent = function(){
@@ -158,6 +178,20 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             $scope.editParams = $scope.currentEvent;
             $("#detail").removeClass("active").removeClass("in");
             $("#edit").addClass("active").addClass("in");
+            $("#edit_startdate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.editParams.startdate = t;
+                }
+            );
+            $("#edit_enddate").daterangepicker({
+                      singleDatePicker:!0,
+                      showDropdowns:!0},
+                function(t,n,o){
+                      $scope.editParams.enddate = t;
+                }
+            );
       };
 
       $scope.editSubmit = function(){

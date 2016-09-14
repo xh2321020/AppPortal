@@ -1567,6 +1567,20 @@
     };
 
     $.fn.daterangepicker = function(options, callback) {
+         var locale = {
+        "format": 'YYYY-MM-DD',
+        "separator": " -222 ",
+        "applyLabel": "确定",
+        "cancelLabel": "取消",
+        "fromLabel": "起始时间",
+        "toLabel": "结束时间'",
+        "customRangeLabel": "自定义",
+        "weekLabel": "W",
+        "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+        "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        "firstDay": 1
+        };
+        options.locale=locale;
         this.each(function() {
             var el = $(this);
             if (el.data('daterangepicker'))
@@ -1579,3 +1593,4 @@
     return DateRangePicker;
 
 }));
+ // (function($) { $.fn.daterangepicker.dates['zh-CN'] = { days : ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"], daysShort : ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"], daysMin : ["日", "一", "二", "三", "四", "五", "六", "日"], months : ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], monthsShort : ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], today : "今天", suffix : [], meridiem : ["上午", "下午"] }; }(jQuery));
