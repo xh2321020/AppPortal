@@ -26,7 +26,7 @@
   },
 
   "portal": {
-	  	"server": "http://10.15.251.110:8010",
+	  	"server": "http://10.17.18.113:8010",
 	    "header": {
 	      "apikey": "a16cb0c916404be78cb0805fefc7d26a"
 	    },
