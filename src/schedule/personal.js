@@ -83,17 +83,13 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                   }
             };
             $("#startdate").daterangepicker({
-                      singleDatePicker:!0,
-                      showDropdowns:!0},
-                function(t,n,o){
-                      $scope.addParams.startdate = t;
+                      singleDatePicker:true,
+                      showDropdowns:true
                 }
             );
             $("#enddate").daterangepicker({
-                      singleDatePicker:!0,
-                      showDropdowns:!0},
-                function(t,n,o){
-                      $scope.addParams.enddate = t;
+                      singleDatePicker:true,
+                      showDropdowns:true
                 }
             );
             $timeout(
@@ -179,17 +175,13 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             $("#detail").removeClass("active").removeClass("in");
             $("#edit").addClass("active").addClass("in");
             $("#edit_startdate").daterangepicker({
-                      singleDatePicker:!0,
-                      showDropdowns:!0},
-                function(t,n,o){
-                      $scope.editParams.startdate = t;
+                      singleDatePicker:true,
+                      showDropdowns:true
                 }
             );
             $("#edit_enddate").daterangepicker({
-                      singleDatePicker:!0,
-                      showDropdowns:!0},
-                function(t,n,o){
-                      $scope.editParams.enddate = t;
+                      singleDatePicker:true,
+                      showDropdowns:true
                 }
             );
       };

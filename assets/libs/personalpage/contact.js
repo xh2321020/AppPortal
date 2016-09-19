@@ -6,6 +6,12 @@ function myFunction(parmar){
     window.open(url,"_blank");
 }
 
+var getUrlParamsString = function(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return (r[2]); return null;
+};
+
 $(document).ready(function () {
     var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
 var setPersonalpageHeader=function(url,paramObj,iid){
@@ -17,10 +23,10 @@ var setPersonalpageHeader=function(url,paramObj,iid){
     getMembers(ou);
     getDepartments();
     function getDepartments() {
-        $.ajax({ 
+        $.ajax({
             type: "get",
             dataType:"json",//pid--项目id
-            url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou:""},null), //需换成正式环境的url//接口名 /contacts/getFileinfo
+            url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou: getUrlParamsString('ou') ? getUrlParamsString('ou') : "" },null), //需换成正式环境的url//接口名 /contacts/getFileinfo
             success: function(data, state, jqxhr){
                 var source =
                 {
@@ -77,7 +83,7 @@ var setPersonalpageHeader=function(url,paramObj,iid){
             type: "post",
             contentType: "application/json",
             data: "",
-            url: setPersonalpageHeader(personalpageRequest.getMember,{ou:parmar},null),
+            url: setPersonalpageHeader(personalpageRequest.getMember,{ou: getUrlParamsString('ou') ? getUrlParamsString('ou') : parmar},null),
             success: function (data, state, jqxhr) {
                 var leaderHtml = '<div style="margin-bottom:1rem;" id="defaultLeader">'+
                     '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">领导/负责人</span></div></div></div>'+
