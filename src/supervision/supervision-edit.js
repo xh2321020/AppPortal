@@ -5,7 +5,7 @@
   /*common function start********************/
 import {getQueryString,getCookie,setSupervisionHeader} from "../common-function";
  
-import {fetch_deptsFromServer,fetch_areaFromServer,fetch_sourceFromServer,add_supervision} from "../common-function";
+import {add_supervision} from "../common-function";
 let supervisionRequest=window.interfaceSettings.supervisionRequest.api;
 let levelArray = [{
     text: "1级", value: 1
@@ -42,14 +42,10 @@ let createVm = new Vue({
         source_name:"",
         source:"",
         area:"",
-        sourceOptions: [{
-            text: "请选择", value: ""
-        }],
+        sourceOptions: [{ text: "请选择", value: ""}],
         sourceSelected: "",
         areaSelected: "",
-        areaOptions: [{
-            text: "请选择", value: ""
-        }],
+        areaOptions: [{ text: "请选择", value: ""}],
         estimatedcompletetiontime: "",
         urgency: 1,
         urgencyOptions: levelArray.concat(),
@@ -118,22 +114,31 @@ let createVm = new Vue({
             this.id=iid;          
             this.fetchOriginSupervision();
         }
-       this.previous=getQueryString("previous");
-        fetch_areaFromServer((result, state, jqxhr)=> {
-            let area = [{
-                text: "请选择", value: ""
-            }];
-            // console.log(result)
-            for (let i = 0, len = result.length; i < len; i++) {
-                area.push({
-                    text: result[i].dicname,
-                    value: result[i].diccode
-                });
+       this.previous=getQueryString("previous");      
+        $.ajax({
+            type:"get",
+            url:setSupervisionHeader(supervisionRequest.supAreaUrl),
+            success:function(result, state, jqxhr){
+                let area = [{
+                    text: "请选择", value: ""
+                }];
+                // console.log(result)
+                for (let i = 0, len = result.length; i < len; i++) {
+                    area.push({
+                        text: result[i].dicname,
+                        value: result[i].diccode
+                    });
+                }
+                _this.areaOptions = area;
+            },error:function(result){
+                // console.log("error",JSON.stringify(result));
             }
-            this.areaOptions = area;
         });
         // fetch source
-        fetch_sourceFromServer((result, state, jqxhr)=> {
+         $.ajax({
+            type:"get",
+            url:setSupervisionHeader(supervisionRequest.supSourceUrl),
+            success:function(result, state, jqxhr){
             let source = [{
                 text: "请选择", value: ""
             }];
@@ -144,11 +149,15 @@ let createVm = new Vue({
                     value: result[i].diccode
                 });
             }
-            this.sourceOptions = source;
+             _this.sourceOptions =[];
+            _this.sourceOptions = source;
+        },error:function(result){
+                // console.log("error",JSON.stringify(result));
+            }
         });
        window.addEventListener("message",(ev)=>{
         let message=ev.data;
-        console.log("message",message);
+        // console.log("message",message);
         //callback
        });
         // body...
@@ -157,8 +166,6 @@ let createVm = new Vue({
         $("#completeDate").daterangepicker({
             singleDatePicker: true,
             showDropdowns: true
-        }, function (start, end, label) {
-            _this.estimatedcompletetiontime = start;
         });
         // $("#iframe_accessory").attr("src","http://192.168.0.163:8080/cnnpdm/service.jsp?action=uploadAndView");
     },
@@ -197,7 +204,7 @@ let createVm = new Vue({
                 // console.log(JSON.stringify(_this.children))
             },
             error: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         });
         },
@@ -218,7 +225,7 @@ let createVm = new Vue({
                 "area": this.areaSelected,
                 // "code": "string",
                 "comments": this.comments,
-                "estimatedcompletetiontime":moment(this.estimatedcompletetiontime).format('YYYY-MM-DD'),
+                "estimatedcompletetiontime": $("#completeDate").val(),
                  "importance": this.importance,
                 "name": this.name,
                 "pid": this.pid,
@@ -244,7 +251,7 @@ let createVm = new Vue({
             },(result,state,jqxhr)=>{
                 this.save_modal_txt="保存失败";
                  $("#"+this.save_modal).modal();
-                console.log(result)
+                // console.log(result)
             });
         },
         navtoAll(){

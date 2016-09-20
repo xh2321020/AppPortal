@@ -76,7 +76,7 @@
                         _this.carousel=jsonArray;
 				},
 				error:function(result,status,xhr){
-					console.log("error",result);
+					// console.log("error",result);
 				}
 			});
 		},

@@ -76,10 +76,8 @@ let filterVm = new Vue({
                         this.filterOptions.searchEndDate = moment().day(14).format("YYYY-MM-DD");
                         break;
                     case "custom":
-                        let start = $("#startDate").val().split("/");
-                        let end = $("#endDate").val().split("/");
-                        this.filterOptions.searchBeginDate = start[2] + "-" + start[0] + "-" + start[1];
-                        this.filterOptions.searchEndDate = end[2] + "-" + end[0] + "-" + end[1];
+                        this.filterOptions.searchBeginDate = $("#startDate").val();
+                       this.filterOptions.searchEndDate = $("#endDate").val();
                         break;
                 }
                 // console.log(JSON.stringify(this.filterOptions))
@@ -223,8 +221,8 @@ let filterVm = new Vue({
                 },
                 error: function (data, state, jqxhr) {
                     $.unblockUI();
-                    console.log(jqxhr.key)
-                    console.log(data)
+                    // console.log(jqxhr.key)
+                    // console.log(data)
                 }
             });
         }
@@ -288,8 +286,8 @@ let filterVm = new Vue({
                     }
                 },
                 error: function (data, state, jqxhr) {
-                    console.log(jqxhr.key)
-                    console.log(data)
+                    // console.log(jqxhr.key)
+                    // console.log(data)
                 }
             }).key = key;
         }
@@ -298,6 +296,7 @@ let filterVm = new Vue({
     },
     ready: function () {      
         // body...
+   
         $("#startDate").daterangepicker({
             singleDatePicker: true,
             showDropdowns: true
@@ -493,7 +492,7 @@ var resultVm = new Vue({
 
                 },
                 error: function (data, state, jqxhr) {
-                    console.log(data)
+                    // console.log(data)
                 }
             });
 

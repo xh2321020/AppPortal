@@ -72,7 +72,7 @@ import {fetchAjaxService} from "../../common-function.js";
 			},
 			swipe:function(){
 			let swiper=new Swiper("#"+this.swiper_id,{
-				  autoplay:1000,
+				  autoplay:5000,
 				  autoplayDisableOnInteraction : false,
 				  loop : true,
 				   slidesPerView: 3,

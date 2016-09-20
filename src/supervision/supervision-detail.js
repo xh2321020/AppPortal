@@ -102,7 +102,7 @@ let detailVm = new Vue({
                 _this.children = children;
             },
             error: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         });
         },
@@ -115,7 +115,7 @@ let detailVm = new Vue({
                     _this.traceHistory=result;
                 },
                 error:function(result,state,xhr){
-                    console.log("error",result);
+                    // console.log("error",result);
                 }
               });
         },
@@ -234,7 +234,7 @@ let detailVm = new Vue({
                                            
                 },
                 error:function(result,state,xhr){
-                    console.log("error",result);
+                    // console.log("error",result);
                       this.alertModal("保存失败");
                 }
              });

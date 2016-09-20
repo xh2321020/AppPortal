@@ -44,7 +44,7 @@
 		},
 		created:function () {
 			// body...
-			console.log("rate",this.rate)
+			// console.log("rate",this.rate)
 		},ready:function () {
 		}
 	};

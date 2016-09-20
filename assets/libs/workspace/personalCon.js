@@ -216,6 +216,11 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
     var setPersonalpageHeader=function(url,paramObj,iid){
         return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+    };
+    function setPersonal_isolate(name,paramObj,iid){
+        var requestBody=window.interfaceSettings.personalpage_isolateRequest;
+        var url=requestBody.api[name];
+        return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},requestBody.header,paramObj)):$.param(requestBody.header));
     }
     var _this=this;
     var currentPort = new Array();
@@ -243,7 +248,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else if(fetchArray[i] == "USERKUAIJIERUKOU"){
             types = "get";
             datatypes = "json";
-            ajaxURL = personalpageRequest.getYonghuKuaiJieRuKou + usersid + personalpageRequestKey;
+            ajaxURL = setPersonal_isolate("getYonghuKuaiJieRuKou",null,usersid);
         } else if(fetchArray[i] == "QIRINEIRICHENG"){
             var startDate = dateFormatFun(new Date());
             var stDate = new Date(); 
@@ -258,7 +263,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else if(fetchArray[i] == "USERKUAIJIERUKOUAll"){
             types = "get";
             datatypes = "json";
-            ajaxURL = personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey;
+            ajaxURL =setPersonal_isolate("initUserKuaiJieRuKou");
         } else {
             ajaxURL = personalpageRequest.getJinQiGongZuo + personalpageRequestKey;
             datas = JSON.stringify({F_BOUNDUSER: usersid, Type:fetchArray[i]});
@@ -531,7 +536,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey,
+            url:setPersonal_isolate("initUserKuaiJieRuKou"),
             // data: "",
             success: function success(data, state, jqxhr) {
                 var kuaijierukouLeft="";
