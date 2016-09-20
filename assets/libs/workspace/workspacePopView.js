@@ -4,6 +4,11 @@ var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
 var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
 var setPersonalpageHeader=function(url,paramObj,iid){
     return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+};
+function setPersonal_isolate(name,paramObj,iid){
+    var requestBody=window.interfaceSettings.personalpage_isolateRequest;
+    var url=requestBody.api[name];
+    return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},requestBody.header,paramObj)):$.param(requestBody.header));
 }
 function opentask(parmar){
     var url = "pages/supervision/supervision-detail.html";
@@ -96,7 +101,7 @@ function opentask(parmar){
             type: "post",
             dataType: "json",
             contentType: "application/json",
-            url:setPersonalpageHeader(personalpageRequest.popViewEdit,{type:"edit", userid:usersid},null),
+            url:setPersonal_isolate("popViewEdit",{type:"edit", userid:usersid}),
             data: JSON.stringify(objJson),
             success: function success(data, state, jqxhr) {
                 alert("数据更新成功");
@@ -113,7 +118,7 @@ function opentask(parmar){
         $.ajax({
             type: "get",
             dataType: "json",
-            url:personalpageRequest.getYonghuKuaiJieRuKou + usersid + personalpageRequestKey,
+            url:setPersonal_isolate("getYonghuKuaiJieRuKou",null,usersid),
             success: function success(data, state, jqxhr) {
                 if(data.length == 0){
                     specialInit();
@@ -153,7 +158,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou+personalpageRequestKey,
+            url:setPersonal_isolate("initUserKuaiJieRuKou"),
             data: "",
             success: function success(data, state, jqxhr) {
                 var n=0;
@@ -197,7 +202,7 @@ function opentask(parmar){
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey,
+            url:setPersonal_isolate("initUserKuaiJieRuKou"),
             success: function success(data, state, jqxhr) {
                 var kuaijierukouLeft="";
                     var kuaijierukoupop="";
