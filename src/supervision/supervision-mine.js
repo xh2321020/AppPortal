@@ -75,10 +75,8 @@ let filterVm = new Vue({
                         this.filterOptions.searchEndDate = moment().day(14).format("YYYY-MM-DD");
                         break;
                     case "custom":
-                    let start=$("#startDate").val().split("/");
-                    let end= $("#endDate").val().split("/");
-                    this.filterOptions.searchBeginDate=start[2]+"-"+start[0]+"-"+start[1];
-                    this.filterOptions.searchEndDate=end[2]+"-"+end[0]+"-"+end[1];
+                    this.filterOptions.searchBeginDate=$("#startDate").val();
+                   this.filterOptions.searchEndDate= $("#endDate").val();
                     break;
                 }  
                 resultVm.fetchTransactions(supervisionRequest.searchUrl);
@@ -208,8 +206,8 @@ let filterVm = new Vue({
                     }
                 },
                 error: function (data, state, jqxhr) {
-                    console.log(jqxhr.key)
-                    console.log(data)
+                    // console.log(jqxhr.key)
+                    // console.log(data)
                 }
             }).key = key;
         }
@@ -222,7 +220,6 @@ let filterVm = new Vue({
             language:"zh-CN",
             singleDatePicker: true,
             showDropdowns: true
-        }, function (start, end, label) {
         });
         $("#endDate").daterangepicker({
             singleDatePicker: true,
@@ -451,7 +448,7 @@ var resultVm = new Vue({
                 },
 
                 error: function (data, state, jqxhr) {
-                    console.log(data)
+                    // console.log(data)
                 }
             });
 

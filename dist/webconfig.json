@@ -2,9 +2,13 @@
 
 
   "supervision": {
-    "server": "http://10.15.251.110:8010",
-    "header": {
-      "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+      "server": "http://10.15.251.110:8010",
+      "header": {
+        "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+      },
+    "server0": "http://172.16.51.137:8010",
+    "header0": {
+      "apikey": "e71982d5401b488da4acef8827c41845"
     },
     "api": {
        "supSourceUrl": "/api/cache/find/type/source-code",
@@ -44,16 +48,24 @@
         "searchuserUrl":"/api/contact/searchuser",
         "getChainsDetails":"/api/contact/Reportchain",
         "getDuBanShiXiang":"/api/supervision/search",
-        "getYonghuKuaiJieRuKou":"/api/work/",
         "getRiChengTiXing":"/api/schedule/scheduleuserdate",
-        "initUserKuaiJieRuKou":"/api/work/link",
         "getJinQiGongZuo":"/api/task/web/interfaceTaskListService.action",
-        "popViewEdit":"/api/work/add",
         "getDepartment":"/api/contact/getorgbyou",
         "getMember":"/api/contact/getorgmember",
         "getMemberDetails":"/api/contact/getuserlist",
         "getXingChengDetails":"/api/schedule/schedule/",
         "getSameOrgDetails":"/api/contact/getorgmember"
       }
-	}
+	},
+   "personalpage_isolate":{
+    "server": "http://10.17.18.113:8010",
+      "header": {
+        "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+      },
+      "api": {
+        "getYonghuKuaiJieRuKou":"/api/work/",
+        "initUserKuaiJieRuKou":"/api/work/link",
+        "popViewEdit":"/api/work/add"
+      }
+   }
 }

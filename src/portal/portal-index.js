@@ -24,23 +24,7 @@ var articleVm = new Vue({
         }else{
            url=portalRequest.api.catalogUrl.replace("%id%","0")+"?"+$.param(portalRequest.header);
         }
-      /*  window.ajaxService({
-            type:"get",
-            url:url,
-            dataType:"text",
-            success:function(result){
-                result=eval('(' + result + ')');
-                // let list=result
-                let list=new Array(result.length);
-                for(let i =0;i<result.length;i++){
-                    list[result[i].card_INDEX-1]=result[i];
-                }            
-                _this.catalogs=list;
-            },
-            error:function(result){
-                console.log("error",result)
-            }
-        });*/
+     
         $.ajax({
              type:"get",
             url:url,
@@ -55,7 +39,7 @@ var articleVm = new Vue({
                 _this.catalogs=list;
             },
             error:function(result){
-                console.log("error",result)
+                // console.log("error",result)
             }
         });
     },
