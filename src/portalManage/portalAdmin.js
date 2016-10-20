@@ -7,11 +7,12 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
             if(isAdd){
                   $scope.curPortal = {
                         "createuserid": "1234567",
-                        "createusername": "asdfasd",
+                        "createusername": "管理员",
                         "description": "",
                         "hptype": "",
                         "name": "",
                         "status": "0",
+                        "priority": "",
                         "styleid": "",
                         "updatetime": "",
                         "webtype": "0",
@@ -104,10 +105,9 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
             }
             user.isChecked = true;
             var admin = {
-//                  "hpid": 3,
                   "type": "",
                   "userid": user.uid,
-                  "username": user.displayname,
+                  "username": user.displayName,
                   "updatetime": "",
                   "columnid": "",
             };

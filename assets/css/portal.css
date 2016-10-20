@@ -66,6 +66,7 @@ div.scroll-panel{
 .scroll-panel .scroll-item{
     width: 100%;
     border: 1px solid lightgrey;
+    height: 9rem;
 }
 
 .scroll-item .col-md-4{
@@ -157,14 +158,13 @@ div.scroll-panel{
     line-height: normal;
 }
 .material .simple-item{
-    height: 6rem;
     position: relative;
     border-top: 1px solid #D0CCC7;
     padding-top:  1rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 .simple-item .subject-font{
-    width: 80%;
+    width: 75%;
     height: 4rem;
     overflow: hidden;
     word-wrap: normal;
@@ -177,17 +177,18 @@ div.scroll-panel{
     overflow: hidden;
     text-overflow: ellipsis;
     margin:2% 2% -2%;
+    font-size: 1.4rem;
 }
 .material .desc{
     line-height: normal;
     padding: 5px;
-    padding-right: 3rem;
+    height: 7rem;
+    font-size: 1.4rem;
 }
 .material  .date{
     position: absolute;
     right: 0;
     top: auto!important;
-    bottom: 1rem;
     margin-right: 3%;
 }
 /*核电动态end*/
@@ -208,7 +209,7 @@ div.scroll-panel{
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis ;
-    width: 70%;
+    width: 85%;
     display: inline-block;
 }
 .catalog-panel .list-item .date{

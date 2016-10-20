@@ -9,6 +9,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
       };
 
       $scope.addClick = function(isAdd, column){
+            $scope.addParams.addHpid = $scope.addParams.hpid;
             if(isAdd){
                   $scope.curColumn = {
                       "auditor_ids": "",
@@ -22,28 +23,10 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
                       "status": "2",
                       "version": ""
                   }
-                  //$scope.curColumn = {
-                  //      "admin": [],
-                  //      "createuserid": "1234567",
-                  //      "createusername": "asdfasdf",
-                  //      "description": "",
-                  //      "hpid": "",
-                  //      "name": "",
-                  //      "status": "0",
-                  //      "type": "",
-                  //      "updatetime": ""
-                  //};
-                  $scope.addParams.addHpid = $scope.portalList[0];
                   $('#myTab a:last').tab('show');
             } else{
+                  $scope.curColumn = column;
                   if($scope.portalList.length > 0){
-                        var tmp = column;
-                        $scope.curColumn = tmp;
-                        for(var i = 0, j = $scope.portalList.length; i < j; i++){
-                              if(column.hpid == $scope.portalList[i].id){
-                                    $scope.addParams.addHpid = $scope.portalList[i];
-                              }
-                        }
                         $('#myTab a:last').tab('show');
                   } else{
                         PortalService.showAlert("您还没有添加任何门户，快去试试添加门户吧!");
@@ -62,8 +45,24 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
             PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   $scope.portalList = response;
                   if($scope.portalList.length > 0){
-                        $scope.portalSelect($scope.portalList[0]);
-                        $scope.addParams.hpid = $scope.portalList[0];
+                        var hpId = PortalService.getHpId();
+                        if(hpId && hpId.length > 0){
+                              var isExist = false;
+                              for(var i = 0, j = $scope.portalList.length; i < j; i++){
+                                    if($scope.portalList[i].id == hpId){
+                                          isExist = true;
+                                          $scope.portalSelect($scope.portalList[i]);
+                                          $scope.addParams.hpid = $scope.portalList[i];
+                                    }
+                              }
+                              if(!isExist){
+                                    $scope.portalSelect($scope.portalList[0]);
+                                    $scope.addParams.hpid = $scope.portalList[0];
+                              }
+                        } else{
+                              $scope.portalSelect($scope.portalList[0]);
+                              $scope.addParams.hpid = $scope.portalList[0];
+                        }
                   } else{
                         PortalService.showAlert("您目前没有新建任何门户，快试试去新建门户吧！");
                   }
@@ -73,6 +72,7 @@ portalApp.controller("columnAdminCtrl", function($scope, $window, $http, PortalS
 
       $scope.portalSelect = function(portal){
             getColumnListData(portal.id);
+            PortalService.setHpId(portal.id);
       };
 
       $scope.columnOperate = function(index, operate){

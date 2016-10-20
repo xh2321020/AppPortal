@@ -4,17 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="http://10.15.251.110/"/>
-    <!--<base href="http://localhost:63342/AppPortal/"/>-->
+    <base href="" id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <title>新闻-搜索</title>
-    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/portal/news.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/portal/news.css"/>
 </head>
-<body ng-app="newsApp">
+<body id="newsApp">
 <header><com-header></com-header></header>
 
 <br>
-<div class="articleWrapper" ng-controller="newsSearchAppCtrl">
+<div class="articleWrapper">
     <br>
 
     <h4 style="margin: 20px; font-weight: 800">首页 > 搜索信息列表</h4>
@@ -30,9 +32,9 @@
             </thead>
             <tbody>
                 <div>
-                    <tr class="odd gradeX" ng-repeat="news in curNewList" style="cursor:pointer;">
-                        <td class="td-text" width="800" style="padding-left: 20px"><span ng-click="newsClick(news.id)" target='_blank'>{{news.title}}</span></td>
-                        <td class="td-text" width="150">{{news.newsfield}}</td>
+                    <tr class="odd gradeX" v-for="news in curNewList" style="cursor:pointer;">
+                        <td class="td-text" width="800" style="padding-left: 20px"><span  @click=newsClick(news.id) target='_blank'>{{news.title}}</span></td>
+                        <td class="td-text" width="150">{{news.newsfield | blankReplace}}</td>
                         <td class="td-text" width="150">{{news.orgName}}</td>
                         <td class="td-text" width="300">{{news.publishDate}}</td>
                     </tr>
@@ -42,35 +44,27 @@
 
         <div style="text-align: center">
             <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a ng-click="pageClick(1)">1</a></li>
-                <li ng-if="newsList.length > 20"><a ng-click="pageClick(2)">2</a></li>
-                <li ng-if="newsList.length > 40"><a ng-click="pageClick(3)">3</a></li>
-                <li ng-if="newsList.length > 60"><a ng-click="pageClick(4)">4</a></li>
-                <li ng-if="newsList.length > 80"><a ng-click="pageClick(5)">5</a></li>
-                <li ng-if="newsList.length > 100"><a ng-click="pageClick(6)">6</a></li>
-                <li ng-if="newsList.length > 120"><a ng-click="pageClick(7)">7</a></li>
-                <li ng-if="newsList.length > 140"><a ng-click="pageClick(8)">8</a></li>
-                <li ng-if="newsList.length > 160"><a ng-click="pageClick(9)">9</a></li>
-                <li ng-if="newsList.length > 180"><a ng-click="pageClick(10)">10</a></li>
-                <li><a href="#">&raquo;</a></li>
+                <li><a @click=preClick()>&laquo;</a></li>
+                <li v-for="n in 10" v-if="n + (curPageIndex - 1) * 10 <= pageSize">
+                    <a v-if="curIndex == n + (curPageIndex - 1) * 10 + 1" style="background: #00A2E5" @click=pageClick(n)>{{n + (curPageIndex - 1) * 10 + 1}}</a>
+                    <a v-if="curIndex != n + (curPageIndex - 1) * 10 + 1" @click=pageClick(n)>{{n + (curPageIndex - 1) * 10 + 1}}</a>
+                </li>
+                <li><a @click=nextClick()>&raquo;</a></li>
             </ul>
         </div>
     </div>
-
 </div>
 
 <footer><com-footer></com-footer></footer>
 
-<script src="/assets/libs/vue.min.js"></script>
-<script src="/assets/libs/jquery/jquery.min.js"></script>
-<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
-<script src="/assets/libs/angular/angular.min.js"></script>
-<script src='/src/portal/newsService.js'></script>
-<script src='/src/portal/news_search.js'></script>
-<script src='/assets/libs/jquery.blockUI.js'></script>
+<script src="assets/libs/vue.min.js"></script>
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script>jQuery.support.cors=true;</script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src='src/portal/news_search.js'></script>
+<script src='assets/libs/jquery.blockUI.js'></script>
 <script>
-    var scriptList=['./dist/header-footer.js'];
+    var scriptList=['./dist/header-footer.js','./dist/portal.js'];
 </script>
 <script src="./dist/main.js"></script>
 </body>

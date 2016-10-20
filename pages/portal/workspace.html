@@ -4,25 +4,47 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>工作空间</title>
-    <base href="" id="baseTag">
+    <title>个人工作台</title>
+    <base  id="baseTag">
     <script>
-            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    location.pagename="portal-workspace";
+     function loadScript(url,callback){
+        callback=callback?callback:function(){};
+        var script=document.createElement("script"); 
+        if(script.readyState){//IE
+         script.onreadystatechange=function(){ 
+        if(script.readyState=="loaded"||script.readyState=="complete"){
+        script.onreadystatechange=null; callback(); } };
+        }else{//其他浏览器
+        script.onload=function(){ callback(); }; } script.src=url; 
+        document.body.appendChild(script);
+    }
+
+     function loadCss(path){
+        if(!path || path.length === 0){
+                    throw new Error('argument "path" is required !');
+                }
+            // var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+     }
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host;
+        loadCss("assets/css/bootstrap.min.css");
+        loadCss("assets/css/portal/workspace.css"); 
+        loadCss("assets/css/portal/todotable.css");      
     </script>
-    <!-- <base href="../../"> -->
-    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/portal/workspace.css"/>
-    <link rel="stylesheet" href="assets/css/portal/todotable.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css">
-    <script src="assets/libs/vue.min.js"></script>
 </head>
-<body>
+<body> 
 <header>
     <com-header></com-header>
 </header>
 <article class="container-fluid article" id="article">
-    <script>
+   <script>
         function changeView(parmar){
+            // alert($("#lingdaopishi").val());
+            document.getElementById("lingdaopishi").style.display = "none";
             document.getElementById("lingdaopishi").style.display = "none";
             document.getElementById("gongbandaiyue").style.display = "none";
             document.getElementById("gerendaiban").style.display = "none";
@@ -31,14 +53,66 @@
             document.getElementById("gerendaiyue").style.display = "none";
             document.getElementById("weituodaiban").style.display = "none";
             document.getElementById("xiaoxitixing").style.display = "none";
+
+            document.getElementById("lingdaopishiUI").style.backgroundColor = "white";
+            document.getElementById("lingdaopishiUI").style.backgroundColor = "white";
+            document.getElementById("gongbandaiyueUI").style.backgroundColor = "white";
+            document.getElementById("gerendaibanUI").style.backgroundColor = "white";
+            document.getElementById("gongbandaibanUI").style.backgroundColor = "white";
+            document.getElementById("shoutuodaibanUI").style.backgroundColor = "white";
+            document.getElementById("gerendaiyueUI").style.backgroundColor = "white";
+            document.getElementById("weituodaibanUI").style.backgroundColor = "white";
+            document.getElementById("xiaoxitixingUI").style.backgroundColor = "white";
+            // alert(parmar+"UI");
+            var uiId = parmar+"UI";
+            document.getElementById(uiId).style.backgroundColor = "#f3f2f0";
             document.getElementById(parmar).style.display = "block";
+        }
+        function getCookie(name)
+        {
+            var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr=document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+        function openLink(title){
+            var address="";
+            switch(title){
+                case "lingdaopishi":
+                address="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=leader_comment";
+                break;
+                case "gongbandaiyue":
+                address="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=public_read";
+                break; 
+                case "gerendaiban":
+                address="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=personal";
+                break; 
+                case "gongbandaiban":
+                address="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=commoned";
+                break;
+                 case "shoutuodaiban":
+                address="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=delegated";
+                break;
+                 case "gerendaiyue":
+                address="http://bjecm.cnnp.com.cn/cnnpbpm/web/Bamboo.jsp?openExpandNode=person_read";
+                break; 
+                case "weituodaiban":
+                address="http://10.15.251.35/ecm_into.asp?name="+getCookie("userid");
+                break; 
+                case "xiaoxitixing":
+                address="http://bjecm.cnnp.com.cn/cnnpcomm/page/common/messageUI.jsp?actionType=4";
+                break; 
+                
+            }
+            window.open(address,"_blank");
         }
     </script>
 
     <div class="bodySpace"></div>
-    <div class="bodySection">
-        <div class="bodySectionLeft" style="width:17%">
-            <div class="panel-tool-bottom" style="height: 60%;">
+    <div class="bodySection" id="bodySection">
+        <div  class="bodySectionLeft" style="width:17%">
+            <div class="panel-tool-bottom top-section" >
                 <div class="bodySectionLeftPortal">
                     <div class="catalog-tools">
                         <span>工作快捷入口</span>
@@ -62,18 +136,18 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        工作快捷入口
+                                        本站点所有链接
                                     </h4>
                                 </div>
-                                <div class="modal-body">
-                                    <ul class="ul-wedigt" id="gongzuokuaijirukouhidePopUl" style="border: 0;height: 50rem;">
+                                <div class="modal-body" style="height: 51rem;overflow-y: scroll;">
+                                    <ul class="ul-wedigt" id="gongzuokuaijirukouhidePopUl" style="border: 0;height: auto;">
 
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#editModal" id="showOpenEditPage">
-                                        编辑
+                                        快捷入口个人配置
                                     </button>
                                     <button type="button" class="btn btn-default"
                                             data-dismiss="modal">关闭
@@ -92,13 +166,13 @@
                                         &times;
                                     </button>
                                     <h4 class="modal-title" id="editModalLabel">
-                                        编辑工作快捷入口
+                                         工作快捷入口个人配置
                                     </h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="ws-edit-pop-div"  id="noactionpopview" style="z-index:1; height:50rem;padding-top: 2rem;">
                                         <div style="width:15rem; height: 35rem; float: left; margin-left:19rem;">
-                                            <div style="padding-left:25%; margin-bottom:1rem;">已选择</div>
+                                            <div style="padding-left:25%; margin-bottom:1rem;">个人配置</div>
                                             <select multiple="" id="leftSel" onclick="setButton(this)" ondblclick="document.getElementById('btnRight').click()" style="height:40rem;width:15rem;">
 
                                             </select>
@@ -122,7 +196,7 @@
                                             <input type="button" value=" ↓ " id="btnDowm" onClick="move(false);" class="ws-edit-pop-div-table-btn-td-input" />
                                         </div>
                                         <div style="width:15rem; height: 50rem; float: left;">
-                                            <div style="padding-left:25%; margin-bottom:1rem;">可添加</div>
+                                            <div style="padding-left:25%; margin-bottom:1rem;">本站链接</div>
                                             <select multiple="" id="rightSel" onclick="setButton(this)" ondblclick="document.getElementById('btnLeft').click()" style="height:40rem;width:15rem;">
 
                                             </select>
@@ -143,7 +217,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bodySectionLeftTool" style="margin-top: 52rem;">
+            <div class="bodySectionLeftTool bottom-section" >
                 <div class="bodySectionLeftToolDiv">
                     <div class="catalog-tools">
                         <span>跨组织协作工具</span>
@@ -155,97 +229,130 @@
             </div>
 
         </div>
-        <div class="bodySectionRight"  style="width:82%">
-            <div style="width:100%; height:60%;float: left;">
+        <div class="bodySectionRight">
+            <div class="top-section">
                 <div class="panel-tool-bottom-right  default-font">
                     <div class="catalog-tools-right-div">
                         <div class="catalog" style="border-bottom: 1px solid lightgray; width: 98%;">
                             <span>统一待办</span>
                         </div>
                         <!-- /.taskCount-->
-                        <div class="task-btntype" style="padding-left: 0.5rem;padding-top:0.5rem;">
-                            <div  onclick="changeView('lingdaopishi')" class="title-hover">
-                                <div class="task-btntype-title">
-                                    <span id="lingdaopishiSpan">0</span>
-                                </div>
-                                <div class="task-btntype-subtitle">
-                                    <span>领导批示</span>
-                                </div>
-                            </div>
-                            <div  onclick="changeView('gongbandaiyue')" class="title-hover">
-                                <div class="task-btntype-title">
-                                    <span style="width: 7rem; height: 1rem;" id="gongbandaiyueSpan">0</span>
-                                </div>
-                                <div class="task-btntype-subtitle">
-                                    <span>公办待阅</span>
-                                </div>
-                            </div>
-                            <div  onclick="changeView('gerendaiban')" class="title-hover">
+                        <div class="task-btntype" style="padding-top:1rem;">
+                            <div onclick="openLink('gerendaiban')"  onmouseover="changeView('gerendaiban')"  style="margin-left: 0rem;" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="gerendaibanSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="gerendaibanUI" style="background-color:#f3f2f0;">
                                     <span>个人待办</span>
                                 </div>
                             </div>
-                            <div onclick="changeView('gongbandaiban')" class="title-hover">
+                            <div  onclick="openLink('gongbandaiban')" onmouseover="changeView('gongbandaiban')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="gongbandaibanSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
-                                    <span>公办待办</span>
+                                <div class="task-btntype-subtitle" id="gongbandaibanUI">
+                                    <span>公办待办</span> 
                                 </div>
                             </div>
-                            <div onclick="changeView('shoutuodaiban')" class="title-hover">
-                                <div class="task-btntype-title">
-                                    <span id="shoutuodaibanSpan">0</span>
-                                </div>
-                                <div class="task-btntype-subtitle" class="title-hover">
-                                    <span>受托待办</span>
-                                </div>
-                            </div>
-                            <div onclick="changeView('gerendaiyue')" class="title-hover">
+                            <div onclick="openLink('gerendaiyue')" onmouseover="changeView('gerendaiyue')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="gerendaiyueSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="gerendaiyueUI">
                                     <span>个人待阅</span>
                                 </div>
                             </div>
-                            <div onclick="changeView('weituodaiban')" class="title-hover">
+                            <div onclick="openLink('gongbandaiyue')"  onmouseover="changeView('gongbandaiyue')" class="title-hover">
+                                <div class="task-btntype-title">
+                                    <span style="width: 7rem; height: 1rem;" id="gongbandaiyueSpan">0</span>
+                                </div>
+                                <div class="task-btntype-subtitle" id="gongbandaiyueUI">
+                                    <span>公办待阅</span>
+                                </div>
+                            </div>
+                            <div  onclick="openLink('lingdaopishi')"  onmouseover="changeView('lingdaopishi')" class="title-hover">
+                                <div class="task-btntype-title">
+                                    <span id="lingdaopishiSpan">0</span>
+                                </div>
+                                <div class="task-btntype-subtitle" id="lingdaopishiUI">
+                                    <span>领导批示</span>
+                                </div>
+                            </div>
+                            <div onclick="openLink('weituodaiban')"  onmouseover="changeView('weituodaiban')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="weituodaibanSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="weituodaibanUI">
                                     <span>委托待办</span>
                                 </div>
                             </div>
-                            <div onclick="changeView('xiaoxitixing')" class="title-hover">
+                            <div onclick="openLink('shoutuodaiban')"  onmouseover="changeView('shoutuodaiban')" class="title-hover">
+                                <div class="task-btntype-title">
+                                    <span id="shoutuodaibanSpan">0</span>
+                                </div>
+                                <div class="task-btntype-subtitle" id="shoutuodaibanUI">
+                                    <span>受托待办</span>
+                                </div>
+                            </div>
+                            <div onclick="openLink('xiaoxitixing')"  onmouseover="changeView('xiaoxitixing')" class="title-hover">
                                 <div class="task-btntype-title">
                                     <span id="xiaoxitixingSpan">0</span>
                                 </div>
-                                <div class="task-btntype-subtitle">
+                                <div class="task-btntype-subtitle" id="xiaoxitixingUI">
                                     <span>消息提醒</span>
                                 </div>
                             </div>
                         </div>
+                        <div style="clear: both;"></div>
+                        <div id="backlogSection" >
+                            <div  v-if="window.plantName=='FQ-plant'" class="task-btntype task-plus" style="padding-top:1rem;" >
+                            <div  v-for="item in list" :style="{marginLeft:$index==0?'0':'1rem'}">
+                                <a :href="item.url" style="text-decoration: none;">
+                                    <div class="title-hover">
+                                        <div class="task-btntype-title">
+                                            <span v-text="item.count"></span>
+                                        </div>
+                                        <div class="task-btntype-subtitle">
+                                            <span v-text="item.name"></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                             <div  v-for="n in 4">
+                                <a  style="text-decoration: none;">
+                                    <div class="title-hover">
+                                        <div class="task-btntype-title">
+                                            <span></span>
+                                        </div>
+                                        <div class="task-btntype-subtitle">
+                                            <span ></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                                                
+                        </div>
+                        </div>
+                            
+                        
+                        
                         <div style=" height: 80rem;" id="selectData">
                             <!-- 领导批示 find-->
-                            <div class="line-tasktype-wedigt" id="lingdaopishi"  style="display: block;">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 4%;"/>
+                            <div class="line-tasktype-wedigt" id="lingdaopishi">
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;领导批示&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="lingdaopishitable">
 
                                 </div>
                             </div>
-                            <!-- 办公待阅 publicread-->
+                            <!-- 公办待阅 publicread-->
                             <div class="line-tasktype-wedigt" id="gongbandaiyue">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 17%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;公办待阅&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gongbandaiyuetable">
@@ -253,21 +360,21 @@
                                 </div>
                             </div>
                             <!-- 个人待办 personal-->
-                            <div class="line-tasktype-wedigt" id="gerendaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 30%;"/>
+                            <div class="line-tasktype-wedigt" id="gerendaiban" style="display: block;">
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;个人待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gerendaibantable">
-
+                                        
                                 </div>
                             </div>
                             <!-- 公办待办 public-->
                             <div class="line-tasktype-wedigt" id="gongbandaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 42%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;公办待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gongbandaibantable">
@@ -276,9 +383,9 @@
                             </div>
                             <!-- 受托待办-->
                             <div class="line-tasktype-wedigt" id="shoutuodaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 55%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;受托待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="shoutuodaibantable">
@@ -287,9 +394,9 @@
                             </div>
                             <!-- 个人待阅 personalread-->
                             <div class="line-tasktype-wedigt" id="gerendaiyue">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 64%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;个人待阅&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="gerendaiyuetable">
@@ -298,9 +405,9 @@
                             </div>
                             <!-- 委托待办-->
                             <div class="line-tasktype-wedigt" id="weituodaiban">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 76%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;委托待办&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="weituodaibantable">
@@ -309,21 +416,21 @@
                             </div>
                             <!-- 消息提醒-->
                             <div class="line-tasktype-wedigt" id="xiaoxitixing">
-                                <div class="line-tasktype-wedigt-arrow">
-                                    <div class="line-tasktype-wedigt-arrow-label">
-                                        <img class="line-tasktype-wedigt-arrow-label-img" src="assets/images/portal/workspace/arrow.png" style="margin-left: 88%;"/>
+                                <div style="width: 100%; height: 3rem; min-width: 48rem;">
+                                    <div class="workHalfLineSec-div">
+                                        <span class="todoTitle">&nbsp;消息提醒&nbsp;</span>
                                     </div>
                                 </div>
                                 <div id="xiaoxitixingtable">
 
                                 </div>
 
-                            </div>
+                            </div>                           
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bodySectionRightCurrentTab" style="margin-top:52rem;">
+            <div class="bodySectionRightCurrentTab bottom-section" style="margin-top:1rem;">
                 <div class="bodySectionRightCurentTabTitle">
                     <div class="catalog-tools" style="border: 0; margin-left: 1rem;">
                         <span>近期工作看板</span>
@@ -338,7 +445,7 @@
                         </div>
                         <div class="important-task-title" style="margin-bottom: 0.5rem;">
                             <span class="bodySectionRightCurrentTabSubTitleImp">重点事宜提醒</span>
-                            <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日会议和超期事项提醒）</span>
+                            <span class="bodySectionRightCurrentTabSubTitleOverdue">（今日日程、会议、督办等事宜提醒）</span>
                         </div>
                         <!-- data list-->
                         <div class="bodySectionRightMeeting">
@@ -383,56 +490,49 @@
 <footer style="margin-top: 2rem;">
     <com-footer></com-footer>
 </footer>
-
-<script src="assets/libs/jquery.min.js"></script>
-<script src="assets/libs/bootstrap.min.js"></script>
-<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
-<script src="dist/main.js"></script>
 <script>
-    var scriptList=['assets/libs/personalpage/portUrl.js','dist/header-footer.js','assets/libs/workspace/personalCon.js','assets/libs/workspace/workspacePopView.js'];
-</script>
-<!-- <script src="dist/urlJsonport.js"></script> -->
-<script>
-    $(function () {
-        $("#comPortalNav").hover(function (ev) {
-            $(this.querySelector(".nav-panel")).show();
-        }, function () {
-            $(this.querySelector(".nav-panel")).hide();
-        });
-        $("#showPopViw").click(function(ev){
-            $("#hidePopView").css("display","block");
-        });
-        $("#hidePopView").click(function(ev){
-            $("#hidePopView").css("display","none");
-        });
-        $("#closePopView").click(function(ev){
-            $("#hidePopView").css("display","none");
-        });
-        $("#showOpenEditPage").click(function(ev){
-            $("#hideEditPopView").css("display","block");
-            var currentSelL = null;
-            var currentSelR = null;
-            currentSelL = document.getElementById('leftSel');
-            currentSelR = document.getElementById('rightSel');
-            for(var k=0;k<currentSelL.length;k++){
-                for(var j=0; j<currentSelR.length; j++){
-                    // alert(currentSelL.options[k].value + "   " + currentSelR.options[j].value)
-                    if (currentSelL.options[k].value == currentSelR.options[j].value){
-                        var removeIndex = currentSelR.options[j].index;
-                        currentSelR.options.remove(removeIndex);
+    var scriptList=['assets/libs/personalpage/portUrl.js','dist/header-footer.js?timestamp='+(new Date().getTime()),'assets/libs/workspace/personalCon.js','assets/libs/workspace/workspacePopView.js'];
+    loadScript("assets/libs/vue.min.js");
+    loadScript("assets/libs/jquery.min.js",function(){
+        loadScript("assets/libs/bootstrap.min.js");
+        loadScript("./dist/main.js");
+        $(function () {
+       
+            $("#showPopViw").click(function(ev){
+                $("#hidePopView").css("display","block");
+            });
+            $("#hidePopView").click(function(ev){
+                $("#hidePopView").css("display","none");
+            });
+            $("#closePopView").click(function(ev){
+                $("#hidePopView").css("display","none");
+            });
+            $("#showOpenEditPage").click(function(ev){
+                $("#hideEditPopView").css("display","block");
+                var currentSelL = null;
+                var currentSelR = null;
+                currentSelL = document.getElementById('leftSel');
+                currentSelR = document.getElementById('rightSel');
+                for(var k=0;k<currentSelL.length;k++){
+                    for(var j=0; j<currentSelR.length; j++){
+                        if (currentSelL.options[k].value == currentSelR.options[j].value){
+                            var removeIndex = currentSelR.options[j].index;
+                            currentSelR.options.remove(removeIndex);
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        $("#closeEditPopView").click(function(ev){
-            $("#hidePopView").css("display","block");
-            $("#hideEditPopView").css("display","none");
+            $("#closeEditPopView").click(function(ev){
+                $("#hidePopView").css("display","block");
+                $("#hideEditPopView").css("display","none");
+            });
+            $("#noactionpopview").click(function(ev){
+                $("#hideEditPopView").css("display","block");
+            });
         });
-        $("#noactionpopview").click(function(ev){
-            $("#hideEditPopView").css("display","block");
-        });
-    })
+    });
 </script>
+<!-- <script src="dist/urlJsonport.js"></script> -->
 </body>
 </html>

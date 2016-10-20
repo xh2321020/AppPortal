@@ -44,13 +44,11 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
             $http.post(hostName + url + "?apikey=a16cb0c916404be78cb0805fefc7d26a", params)
                 .success(function(response){
                     $.unblockUI();
-                    console.log(url + ':' + response);
                     callback(response);
                 }
             )
                 .error(function(){
                     $.unblockUI();
-                    console.log('error params:' + JSON.stringify(params));
                     showAlert('数据提交失败，请重试！');
             });
         },
@@ -67,7 +65,6 @@ newsApp.service( 'NewsService', [ '$rootScope', '$http', function( $rootScope, $
             $http.get(hostName + url, '')
                 .success(function(response){
                     $.unblockUI();
-                    console.log(url + ':' + response);
                     callback(response);
                 }
             )

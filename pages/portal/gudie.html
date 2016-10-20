@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="" id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
+    <title>配置向导</title>
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+</head>
+<body id="yellowpageApp">
+<header><com-header></com-header></header>
+<br>
+<div class="articleWrapper">
+    <div>
+        <div style="text-align: center;margin-top: 20px;">
+            <span style="font-size: 30px">配置向导</span>
+        </div>
+        <div class="ul-wedigt" >
+            <img src="/assets/images/portal/guide.png" style=" width: 100%; height: 100%;">
+        </div>
+    </div>
+</div>
+
+<footer><com-footer></com-footer></footer>
+
+<script src="assets/libs/vue.min.js"></script>
+<script src="assets/libs/jquery.min.js"></script>
+<script src="assets/libs/bootstrap.min.js"></script>
+<script>
+    var scriptList=['./dist/header-footer.js','./dist/portal.js'];
+</script>
+<script src="./dist/main.js"></script>
+<style>
+    .articleWrapper {
+        margin: 0px auto;
+        font-size: 14px;
+        min-height: 600px;
+        max-width: 100%;
+        border: 1px solid #CCCCCC;
+        border-top: 0.5rem solid #00A2E5;
+    }
+</style>
+</body>
+</html>

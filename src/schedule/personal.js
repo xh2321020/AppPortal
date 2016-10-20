@@ -26,6 +26,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                         left: 'prev, next today',
                         center: 'title',
                         right: 'month, agendaWeek',
+                        allDayDefault: false,
                   },
                   firstDay:1,
                   eventClick: function(calEvent, jsEvent, view) {
@@ -81,6 +82,22 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
                         "collsaceid": ""
                   }
             };
+            $("#startdate").daterangepicker({
+                      singleDatePicker:true,
+                      showDropdowns:true
+                }
+            );
+            $("#enddate").daterangepicker({
+                      singleDatePicker:true,
+                      showDropdowns:true
+                }
+            );
+            $timeout(
+                function() {
+                      $("#myTab").children().eq(0).addClass("active");
+                      $("#myTab").children().eq(3).removeClass("active");
+                }, 100
+            );
       };
 
       $scope.addEvent = function(){
@@ -146,7 +163,7 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             user.isChecked = true;
             $scope.addParams.people.userid = user.uid;
             $scope.addParams.people.peopletype = user.isleade;
-            $scope.addParams.people.username = user.displayname;
+            $scope.addParams.people.username = user.displayName;
       };
 
       $scope.peopleConfig = function(){
@@ -157,6 +174,16 @@ eventApp.controller("PersonalCtrl", function($scope, $window, $http, EventServic
             $scope.editParams = $scope.currentEvent;
             $("#detail").removeClass("active").removeClass("in");
             $("#edit").addClass("active").addClass("in");
+            $("#edit_startdate").daterangepicker({
+                      singleDatePicker:true,
+                      showDropdowns:true
+                }
+            );
+            $("#edit_enddate").daterangepicker({
+                      singleDatePicker:true,
+                      showDropdowns:true
+                }
+            );
       };
 
       $scope.editSubmit = function(){

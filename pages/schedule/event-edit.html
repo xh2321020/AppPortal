@@ -5,17 +5,18 @@
     </tr>
     <tr>
         <td class="td-text" colspan="2">姓名</td>
-        <td colspan="8"><input size="60" type="text" ng-model="editParams.username">
+        <td colspan="8"><input size="60" type="text" ng-model="editParams.people.username" readonly>
             <button>选择人员</button>
         </td>
     </tr>
     <tr>
         <td class="td-text" colspan="2">开始日期</td>
         <td colspan="4">
-            <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input size="16" type="text" value="" readonly ng-model="editParams.startdate">
-                <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
-            </div>
+            <input type="text" class="form-control" id="edit_startdate" style="width: 50%;" readonly ng-model="editParams.startdate"/>
+            <!--<div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">-->
+                <!--<input size="16" type="text" value="" readonly ng-model="editParams.startdate">-->
+                <!--<span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>-->
+            <!--</div>-->
         </td>
         <td colspan="1" class="td-text">开始时间</td>
         <td colspan="3">
@@ -31,10 +32,11 @@
     <tr>
         <td class="td-text" colspan="2">结束日期</td>
         <td colspan="4">
-            <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input size="16" type="text" value="" readonly ng-model="editParams.enddate">
-                <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
-            </div>
+            <input type="text" class="form-control" id="edit_enddate" style="width: 50%;" readonly ng-model="editParams.enddate"/>
+            <!--<div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">-->
+                <!--<input size="16" type="text" value="" readonly ng-model="editParams.enddate">-->
+                <!--<span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>-->
+            <!--</div>-->
         </td>
         <td class="td-text" colspan="1">结束时间</td>
         <td colspan="3">
@@ -73,11 +75,11 @@
         <td colspan="3">
             <select class="select-time" ng-model="editParams.scheduletype">
                 <option>请选择</option>
-                <option value="0">会议型</option>
-                <option value="1">行程型</option>
-                <option value="2">工作型</option>
-                <option value="3">值班型</option>
-                <option value="4">委托型</option>
+                <option value="10025">会议型</option>
+                <option value="10026">行程型</option>
+                <option value="100272">工作型</option>
+                <option value="10028">值班型</option>
+                <option value="10029">委托型</option>
             </select>
         </td>
     </tr>
@@ -89,9 +91,8 @@
         <td class="td-text" colspan="1">公开范围</td>
         <td colspan="3">
             <select class="select-time" ng-model="editParams.scope">
-                <option value="0">公开</option>
-                <option value="1">半公开</option>
-                <option value="2">私密</option>
+                <option value="10030">公开</option>
+                <option value="10032">私密</option>
             </select>
         </td>
     </tr>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <base id="baseTag">   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="apploication/json">
@@ -8,16 +9,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-全部督办</title>
-   <base  id="baseTag">
     <script>
-        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
-    </script>
+     function loadScript(url,callback){
+        callback=callback?callback:function(){};
+        var script=document.createElement("script"); 
+        if(script.readyState){//IE
+         script.onreadystatechange=function(){ 
+        if(script.readyState=="loaded"||script.readyState=="complete"){
+        script.onreadystatechange=null; callback(); } };
+        }else{//其他浏览器
+        script.onload=function(){ callback(); }; } script.src=url; 
+        document.body.appendChild(script);
+    }
+
+     function loadCss(path){
+        if(!path || path.length === 0){
+                    throw new Error('argument "path" is required !');
+                }
+            // var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+     }
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";      
+        loadCss("assets/css/bootstrap.min.css");
+        loadCss("assets/css/daterangepicker.css");
+        loadCss("assets/css/supervision.css");
+    </script>  
     <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/daterangepicker.css" rel="stylesheet">
-    <link href="assets/css/supervision.css" rel="stylesheet">   
-    <script src="assets/libs/vue.min.js"></script>
-    
+     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <!--head-->
@@ -44,14 +70,14 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-panel fade in active" >
-                        <p class="tip"><span>展示所有的督办信息，包括您作为发起人和责任人的督办任务。</span></p>
+                        <p class="tip"><span>按照多维度条件筛查所有督办信息。</span></p>
                         <section id="filterSection">
                             <div class="filter">
                                 <ul class="filter-item filter-field clearfix">
                                     <li class="item-title">组织：</li>
                                     <li v-for="pitem in org.show">
                                         <a :class="['btn',{'btn-success':pitem.status=='1'}]"
-                                           @click="changeOrg($index,'show')">{{pitem.name}}</a>
+                                           @click="changeOrg($index,'show')">{{pitem.shortname?pitem.shortname:pitem.name}}</a>
                                     </li>
 
                                     <li class="more" v-if="org.more.length>0">
@@ -65,7 +91,7 @@
                                                 <template v-for="item in org.more">
                                                     <li @click="changeOrg($index,'more')">
                                                     <a :class="['btn','drop-menu-btn',{'btn-success':item.status=='1'}]"
-                                                    >{{item.name}}</a></li>
+                                                    >{{item.shortname?item.shortname:item.name}}</a></li>
                                                 </template>
                                             </ul>
                                         </div>
@@ -75,7 +101,7 @@
                                     <li class="item-title">部门：</li>
                                     <li v-for="ditem in depts.show">
                                         <a :class="['btn',{'btn-success':ditem.status=='1'}]"
-                                           @click="changeArea($index,'show','depts')">{{ditem.name}}</a>
+                                           @click="changeArea($index,'show','depts')">{{ditem.shortname?ditem.shortname:ditem.name}}</a>
                                     </li>
 
                                     <li class="more" v-if="depts.more.length>0">
@@ -89,7 +115,7 @@
                                                 <template v-for="ditem in depts.more">
                                                     <li @click="changeArea($index,'more','depts')">
                                                     <a :class="['btn','drop-menu-btn',{'btn-success':ditem.status=='1'}]"
-                                                    >{{ditem.name}}</a></li>
+                                                    >{{ditem.shortname?ditem.shortname:ditem.name}}</a></li>
                                                 </template>
                                             </ul>
                                         </div>
@@ -262,17 +288,19 @@
 <footer>
     <com-footer></com-footer>
 </footer>
-
-<!--<script data-main="assetsjs/main" src="assetsjs/require.js"></script>-->
-<script src="assets/libs/jquery.min.js"></script>
-<script src="assets/libs/bootstrap.min.js"></script>
-<script src="assets/libs/daterangepicker/moment.min.js"></script>
-<script src="assets/libs/daterangepicker/daterangepicker.js"></script>
-<script src="assets/libs/jquery.blockUI.js"></script>
-<script src="assets/libs/extendPagination.js"></script>
 <script>
     var scriptList=['./dist/header-footer.js','./dist/supervision-all.js'];
-    var hidNode = null;
+    loadScript("assets/libs/vue.min.js");
+    loadScript("assets/libs/daterangepicker/moment.min.js");
+    loadScript("assets/libs/jquery.min.js",function(){
+        loadScript("assets/libs/bootstrap.min.js");
+        loadScript("assets/libs/jquery.blockUI.js"); 
+        loadScript("assets/libs/extendPagination.js");    
+        loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){            
+        loadScript("./dist/main.js");
+        });
+    })
+     var hidNode = null;
     function hoverFunction(x) {
         hidNode = x.getElementsByClassName("hoverInfo")[0];
         hidNode.style.display = "block";
@@ -282,6 +310,5 @@
         hidNode.style.display = "none";
     }
 </script>
-<script src="dist/main.js"></script>
 </body>
 </html>

@@ -5,17 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>督办管理-首页</title>
-    <base  id="baseTag">
+    <title>督办管理-详情</title>
+    <base id="baseTag">
     <script>
-    	document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
-    </script>
-    <!-- Bootstrap -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/daterangepicker.css" rel="stylesheet">   
-    <link href="assets/css/supervision.css" rel="stylesheet"> 
-    <script src="assets/libs/vue.min.js"></script>
+     function loadScript(url,callback){
+        callback=callback?callback:function(){};
+        var script=document.createElement("script"); 
+        if(script.readyState){//IE
+         script.onreadystatechange=function(){ 
+        if(script.readyState=="loaded"||script.readyState=="complete"){
+        script.onreadystatechange=null; callback(); } };
+        }else{//其他浏览器
+        script.onload=function(){ callback(); }; } script.src=url; 
+        document.body.appendChild(script);
+    }
+
+     function loadCss(path){
+        if(!path || path.length === 0){
+                    throw new Error('argument "path" is required !');
+                }
+            // var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+     }
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";      
+        loadCss("assets/css/bootstrap.min.css");     
+        loadCss("assets/css/font-awesome.min.css");
+        loadCss("assets/css/daterangepicker.css");
+        loadCss("assets/css/supervision.css");
+    </script>     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,7 +82,7 @@
 			<td colspan="6">督办层级详情</td>
 		    </tr>
 		    <tr class="level-head">
-			<td width="12%">形象进度</td>
+			<td width="12%">事项进展</td>
 			<td width="43%">督办名称</td>
 			<td width="8%">发起人</td>
 			<td width="7%">责任人</td>
@@ -99,27 +119,34 @@
 			<td class="middle"><p>{{responsiblename}}</p></td>
 			<td class="middle"><p>{{estimatedcompletetiontime}}</p></td>
 			<td class="middle">
-			 	<a @click="editOperation(id)"  class="menu">编辑</a>
-			    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
-			    <a data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a>
+				<div v-if="status==0">
+				 	<a @click="editOperation(id)"  class="menu">编辑</a>
+				    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
+				    <a  data-toggle="modal" type="button" @click="updateProgress(id)">更新进度</a><br/>
+				    <!-- /.menu --><a  @click="postphone('parent')" class="menu">延期</a>
+				    <!-- /.menu --><a @click="revoke('parent')"class="menu">撤销</a>
+				    <!-- /.menu --><a @click="close('parent')" class="menu">完成</a>
+			   </div>
 			</td>
 		    </tr>
 
 		    <tr class="supervision-level" v-for="item in children">
-			<td><p class="td-content">{{item.name}}</p></td>
+			<td><a :href="'/pages/supervision/supervision-detail.html?id='+item.id" class="td-content">{{item.name}}</a></td>
 			<td class="middle"><p>{{item.accountablename}}</p></td>
 			<td class="middle"><p>{{item.responsiblename}}</p></td>
 			<td class="middle"><p>{{item.estimatedcompletetiontime}}</p></td>
 			<td class="middle">
-			    <a  @click="editOperation(item.id)" class="menu">编辑</a>
-			    <!-- /.menu --><a v-if="status=='0'" @click="postphone(item)" class="menu">延期</a>
-			    <!-- /.menu --><a @click="revoke(item)"class="menu">撤销</a>
-			    <!-- /.menu --><a @click="close(item)" class="menu">关闭</a>
+				<div v-if="item.status==0">
+				    <a  @click="editOperation(item.id)" class="menu">编辑</a>
+				    <!-- /.menu --><a  @click="postphone(item)" class="menu">延期</a>
+				    <!-- /.menu --><a @click="revoke(item)"class="menu">撤销</a>
+				    <!-- /.menu --><a @click="close(item)" class="menu">完成</a>
+				</div>
 			    <!-- /.menu -->
 			</td>
 		    </tr>
 		    <tr class="title2">
-			<td colspan="6">都办任务详情</td>
+			<td colspan="6">督办任务详情</td>
 		    </tr>
 		    <tr>
 			<td class="al-right">督办事项</td>
@@ -160,7 +187,7 @@
 		    <tr>
 			<td class="al-right">责任部门</td>
 			<!-- /.al-right -->
-			<td class="al-left" v-text="scope"></td>
+			<td class="al-left" v-text="responsibledeptname"></td>
 			<!-- /.al-left -->
 			<td style="min-width:17rem;"  colspan="2" class="al-right">重要程度（5为最重要）</td>
 			<!-- /.al-right -->
@@ -233,7 +260,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">更新原因</label>
 							<div class="col-sm-10">
-								<textarea class="form-control" v-model="comments"></textarea>
+								<textarea class="form-control" v-model="reason"></textarea>
 							</div>
 							
 						</div>					
@@ -243,7 +270,7 @@
 						  <div class="form-group">
 						    <label  class="col-sm-2 control-label">撤销原因</label>
 						    <div class="col-sm-10">
-						   		<textarea class="form-control" id="revokeArea" v-model="comments"></textarea>
+						   		<textarea class="form-control" id="revokeArea" v-model="reason"></textarea>
 						    </div>
 						  </div>
 				  	</form>
@@ -265,13 +292,17 @@
     <com-footer></com-footer>
 </footer>
 
-<script type="text/javascript" src="assets/libs/jquery.min.js"></script>
-<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
-<script src="assets/libs/daterangepicker/moment.min.js"></script>
-<script src="assets/libs/daterangepicker/daterangepicker.js"></script>
-<script >
-	 var scriptList=['./dist/header-footer.js','./dist/supervision-detail.js'];
+<script>
+    var scriptList=['./dist/header-footer.js','./dist/supervision-detail.js'];
+    loadScript("assets/libs/vue.min.js");
+    loadScript("assets/libs/daterangepicker/moment.min.js");
+    loadScript("assets/libs/jquery.min.js",function(){
+        loadScript("assets/libs/bootstrap.min.js");
+        loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){        	
+        loadScript("./dist/main.js");
+        });
+    });
+     
 </script>
-<script src="dist/main.js"></script>
 </body>
 </html>

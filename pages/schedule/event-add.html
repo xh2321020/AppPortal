@@ -14,10 +14,11 @@
     <tr>
         <td class="td-text" colspan="2">开始日期</td>
         <td colspan="4">
-            <div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input id="startdate" size="16" type="text" value="" readonly ng-model="addParams.startdate">
-                <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
-            </div>
+            <input type="text" class="form-control" id="startdate" style="width: 50%;" readonly ng-model="addParams.startdate" />
+            <!--<div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">-->
+                <!--<input id="startdate" size="16" type="text" value="" readonly ng-model="addParams.startdate">-->
+                <!--<span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>-->
+            <!--</div>-->
         </td>
         <td colspan="1" class="td-text">开始时间</td>
         <td colspan="3">
@@ -38,10 +39,11 @@
     <tr>
         <td class="td-text" colspan="2">结束日期</td>
         <td colspan="4">
-            <div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input id="enddate" size="16" type="text" value="" readonly ng-model="addParams.enddate">
-                <span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>
-            </div>
+            <input type="text" class="form-control" id="enddate" style="width: 50%;" readonly ng-model="addParams.enddate"/>
+            <!--<div class="controls input-append date form_date" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">-->
+                <!--<input id="enddate" size="16" type="text" value="" readonly ng-model="addParams.enddate">-->
+                <!--<span class="add-on glyphicon glyphicon-calendar"><i class="icon-th"></i></span>-->
+            <!--</div>-->
         </td>
         <td class="td-text" colspan="1">结束时间</td>
         <td colspan="3">
@@ -151,7 +153,7 @@
                             <td>{{user.company}} </td>
                             <td>{{user.office}} </td>
                             <td>{{user.department}} </td>
-                            <td>{{user.displayname}}</td>
+                            <td>{{user.displayName}}</td>
                         </tr>
                         </tbody>
                     </table>

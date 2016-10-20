@@ -6,24 +6,32 @@ function myFunction(parmar){
     window.open(url,"_blank");
 }
 
+var getUrlParamsString = function(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return (r[2]); return null;
+};
+
 $(document).ready(function () {
     var personalpageRequest = window.interfaceSettings.personalpageRequest.api;
 var setPersonalpageHeader=function(url,paramObj,iid){
     return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
 }
-    var ou = "02";
+    var ou = "00";
     var loadingImg='<div style="width:10rem; height:10rem; margin-left: 3rem;"><img src="assets/images/loading3.gif"></img> </div>';
     $("#loadingImgs").html(loadingImg);
-
     getMembers(ou);
     getDepartments();
     function getDepartments() {
-        $.ajax({ 
-                type: "get",
-                dataType:"json",//pid--项目id
-                url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou:""},null), //需换成正式环境的url//接口名 /contacts/getFileinfo
-                success(data, state, jqxhr){  
-                    var source =
+        $.ajax({
+            type: "get",
+            dataType:"json",//pid--项目id
+            url: setPersonalpageHeader(personalpageRequest.getDepartment,{ou: getUrlParamsString('ou') ? getUrlParamsString('ou') : "" },null), //需换成正式环境的url//接口名 /contacts/getFileinfo
+            success: function(data, state, jqxhr){
+                for(var i=0,len=data.length;i<len;i++){
+                    data[i].name=data[i].shortname?data[i].shortname:data[i].name;
+                }
+                var source =
                 {
                     datatype: "json",
                     datafields: [
@@ -47,33 +55,45 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                     name: 'name',
                     map: 'label'
                 }]);
+                getOuDescription(data,"00");
                 $('#jqxWidget').jqxTree({source: records, width: '300px'});
                 $('#jqxWidget').on('select', function (event) {
                     var args = event.args;
                     var item = $('#jqxWidget').jqxTree('getItem', args.element);
+                    getOuDescription(data,item.id);
                     getMembers(item.id);
                 });
+
                 $("#loadingImgs").remove();
-                },error(result, state, jqxhr)
-                {
-                    console.log("error", jqxhr);
-                }
-            });
+            },
+            error: function(result, state, jqxhr){
+                console.log("error", jqxhr);
+            }
+        });
     };
+
+    function getOuDescription(data, ouId){
+        for(var i=0; i<data.length; i++){
+            if(data[i].ou == ouId){
+                $("#depDesctiption").html(data[i].description);
+                break;
+            }
+        }
+    }
     function getMembers(parmar) {
         // var memberURL = window.userJsonPortalSettings.singleRequest.getMember + "&ou=" + parmar
         $.ajax({
             type: "post",
             contentType: "application/json",
             data: "",
-            url: setPersonalpageHeader(personalpageRequest.getMember,{ou:parmar},null),
+            url: setPersonalpageHeader(personalpageRequest.getMember,{ou: getUrlParamsString('ou') ? getUrlParamsString('ou') : parmar},null),
             success: function (data, state, jqxhr) {
                 var leaderHtml = '<div style="margin-bottom:1rem;" id="defaultLeader">'+
                     '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">领导/负责人</span></div></div></div>'+
                     '<div style="float: left;width: 100%;margin-top: 5px;" id="leaderResult">';
                 var allMemberHtml = '<div style="margin-bottom:1rem;margin-left: 1rem;" id="defaultAllMember">'+
                     '<div style="height: 2rem;"><div class="workHalfLine-div"><span class="workHalfLine-span">所有员工</span></div></div></div>'+
-                    '<div style="float: left;margin-top: 5px; margin-left: 1.5rem;" id="memberResult">';
+                    '<div style="float: left;margin-top: 5px; margin-left: 1.5rem; width:100%;" id="memberResult">';
                 var countLeaders=0;
                 var countMembers=0;
                 for (var i = 0; i < data.length; i++) {
@@ -81,22 +101,22 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                     var mobileNo = "";
                     var mailAdd = "";
                     var department = "";
-                    if ((typeof(data[i].mobile) == "undefined") || (typeof(data[i].mobile) == "")) {
+                    if ((typeof(data[i].mobile) == "undefined") || (typeof(data[i].mobile) == "null") || (data[i].mobile == null)) {
                         mobileNo = "";
                     } else {
                         mobileNo = data[i].mobile;
                     }
-                    if ((typeof(data[i].telephoneNumber) == "undefined") || (typeof(data[i].telephoneNumber) == "")) {
+                    if ((typeof(data[i].telephoneNumber) == "undefined") || (typeof(data[i].telephoneNumber) == "null") || (data[i].telephoneNumber == null)) {
                         mobileNo = mobileNo + "";
                     } else {
-                        mobileNo = mobileNo + " ,分机号" + data[i].telephoneNumber;
+                        mobileNo = mobileNo + "分机号" + data[i].telephoneNumber;
                     }
-                    if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
+                    if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "null") || (data[i].imageurl == null)) {
                         images = "assets/images/personalpage/defaultUserPhoto.png";
                     } else {
                         images = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
                     }
-                    if ((typeof(data[i].mail) == "undefined") || (typeof(data[i].mail) == "")) {
+                    if ((typeof(data[i].mail) == "undefined") || (typeof(data[i].mail) == "null") || (data[i].mail == null)) {
                         mailAdd = "";
                     } else {
                         mailAdd = data[i].mail;
@@ -113,13 +133,13 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                         if ((typeof(data[i].userstatus) == "undefined") || (data[i].userstatus == "")) {
                             leaderHtml = leaderHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
                             '<img style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div" style="margin-left: 1rem;"><p><span class="emp-class-div-p-span">' + data[i].displayname +
+                            '<div class="emp-class-div" style="margin-left: 1rem;"><p><span class="emp-class-div-p-span">' + data[i].displayName +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         } else {
                             leaderHtml = leaderHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
                             '<img  style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div"  style="margin-left: 1rem;"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
+                            '<div class="emp-class-div"  style="margin-left: 1rem;"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayName +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         }
@@ -128,13 +148,13 @@ var setPersonalpageHeader=function(url,paramObj,iid){
                         if ((typeof(data[i].userstatus) == "undefined") || (data[i].userstatus == "")) {
                             allMemberHtml = allMemberHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
                             '<img  style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div"  style="margin-left: 1rem;"><p><span class="emp-class-div-p-span">' + data[i].displayname +
+                            '<div class="emp-class-div"  style="margin-left: 1rem;"><p><span class="emp-class-div-p-span">' + data[i].displayName +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         } else {
                             allMemberHtml = allMemberHtml + '<div style="cursor:pointer" class="emp-class" onclick="myFunction(\''+data[i].uid+'\')">'+
                             '<img  style="margin-left: 0.5rem;" class="img emp-class-img" src="' + images + '"/>' +
-                            '<div class="emp-class-div" style="margin-left: 1rem;"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayname +
+                            '<div class="emp-class-div" style="margin-left: 1rem;"><p><span class="emp-class-div-s">授权信息</span><span class="emp-class-div-p-span">' + data[i].displayName +
                             '</span><br>' + department + '<span>' + mailAdd + '</span><br><span>' + mobileNo +
                             '</span></p></div></div>';
                         }

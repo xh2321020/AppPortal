@@ -13,7 +13,7 @@
     <header><com-header></com-header></header>
 
     <div ng-controller="styleAdminCtrl" class="content-border">
-        <div class="container">
+        <div class="container" style="max-width: 100% !important;">
             <div class="row">
                 <div class="col-md-1">
                     <div ng-include="'/pages/portalManage/tmp_navigation.html'"></div>
@@ -54,11 +54,15 @@
                                         <tr class="odd gradeX" ng-repeat="style in styleList">
                                             <td class="td-text">{{style.id}} </td>
                                             <td class="td-text">{{style.name}} </td>
-                                            <td class="td-text">{{style.status}} </td>
+                                            <td class="td-text" ng-if="style.status == 1">已启用</td>
+                                            <td class="td-text" ng-if="style.status != 1">未启用</td>
                                             <td class="td-text">{{style.updatetime}} </td>
                                             <td class="td-text">
                                                 <div>
-                                                    <a>编辑</a><a>删除</a>
+                                                    <a ng-click="addClick(false, style)">编辑</a>
+                                                    <a ng-click="del($index)">删除</a>
+                                                    <a ng-click="styleOperate($index, 'stop')"  ng-if="style.status == 1">停用</a>
+                                                    <a ng-click="styleOperate($index, 'start')"  ng-if="style.status != 2">启用</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -92,7 +96,7 @@
                                         </td>
                                     </tr>
 
-                                    <tr>
+                                    <tr ng-if="false">
                                         <td class="td-text-left" colspan="2">顶部图片列表</td>
                                         <td colspan="8">
                                             <select ng-model="curStyle.img" style="width: 120px;">
@@ -168,8 +172,8 @@
         <script src="/assets/libs/multiselect.min.js"></script>
         <script src="/assets/libs/jquery.ui.widget.js"></script>
         <script src="/assets/libs/jquery.iframe-transport.js"></script>
-        <script src="/assets/libs/jquery.fileupload.js"></script>
         <script src="/assets/libs/vue.min.js"></script>
+        <script src="/assets/libs/jquery.fileupload.js"></script>
         <script>
             var scriptList=['./dist/header-footer.js'];
         </script>

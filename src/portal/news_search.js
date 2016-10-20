@@ -1,32 +1,72 @@
-newsApp.controller("newsSearchAppCtrl", function($scope, $http, NewsService) {
+var newsList = [];
+var curNewList = [];
 
-    var getSearchNewsList = function(str){
-        NewsService.sendGetRequest('/api/news/search?title=' +  str, function(response){
-            console.log('result:' + ':' + response);
-            $scope.newsList = response;
-            $scope.curNewList = $scope.newsList.slice(0, 20);
-        });
-    };
-    var keyWords= NewsService.getUrlParamsString('keyWords');
-    if(keyWords && keyWords.length > 0){
-        getSearchNewsList(keyWords);
-    } else{
-        getSearchNewsList('能源');
-    }
-
-    $scope.pageClick = function(pageNo){
-        $scope.curNewList = $scope.newsList.slice((pageNo - 1) * 20, pageNo * 20);
-        var str;
-        for(var i = 0, j = $(".pagination li").length; i < j; i++){
-            str = '.pagination li:eq(' + i +')';
-            $(str).removeClass("active");
-        }
-        str = '.pagination li:eq(' + pageNo +')';
-        $(str).addClass("active");
-    };
-
-    $scope.newsClick = function(id){
-        //window.open('http://localhost:63342/AppPortal/pages/portal/news_detail.html?id=' + id);
-        window.open('/pages/portal/news_detail.html?id=' + id);
-    };
+var newsApp =  new Vue({
+    el: '#newsApp',
+    data: {
+        curPageIndex: 1,
+        curIndex: 1,
+        newsListLength: 0,
+        pageSize: 0,
+        newsList: newsList,
+        curNewList: curNewList,
+    },
+    methods: {
+        pageClick: function (pageNo) {
+            pageNo = pageNo + (newsApp.curPageIndex - 1) * 10 + 1;
+            newsApp.curIndex = pageNo;
+            newsApp.curNewList = newsApp.newsList.slice((pageNo - 1) * 20, pageNo * 20);
+            var str;
+            for (var i = 0, j = $(".pagination li").length; i < j; i++) {
+                str = '.pagination li:eq(' + i + ')';
+                $(str).removeClass("active");
+            }
+            str = '.pagination li:eq(' + pageNo + ')';
+            $(str).addClass("active");
+        },
+        newsClick: function(id){
+            window.open('/pages/portal/news_detail.html?id=' + id);
+        },
+        preClick: function () {
+            if(newsApp.curPageIndex > 1){
+                newsApp.curPageIndex--;
+            }
+        },
+        nextClick: function () {
+            if(newsApp.curPageIndex < newsApp.pageSize / 10){
+                newsApp.curPageIndex++;
+            }
+        },
+    },
 });
+
+var getUrlParamsString = function(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return (r[2]); return null;
+};
+
+var getSearchNewsList = function(str){
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        contentType:'application/json; charset=utf-8;',
+        url: 'http://10.15.251.110:8010/api/news/search?title=' + encodeURI(str) + '&size=1000&apikey=a16cb0c916404be78cb0805fefc7d26a',
+        success: function (data) {
+            newsApp.newsList = data;
+            newsApp.newsListLength = data.length;
+            newsApp.pageSize = newsApp.newsListLength / 20 > parseInt(newsApp.newsListLength / 20) + 1 ? parseInt(newsApp.newsListLength / 20) + 1 : parseInt(newsApp.newsListLength / 20);
+            newsApp.curNewList = newsApp.newsList.slice(0, 20);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+};
+
+var keyWords = getUrlParamsString('keyWords');
+if(keyWords && keyWords.length > 0){
+    getSearchNewsList(keyWords);
+} else{
+    getSearchNewsList('能源');
+}

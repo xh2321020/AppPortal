@@ -8,32 +8,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>督办管理-我的督办</title>
-    <base  id="baseTag">
+     <base id="baseTag">
     <script>
-        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
-    </script>
-    <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/daterangepicker.css" rel="stylesheet">
-    <link href="assets/css/supervision.css" rel="stylesheet">   
-    <script src="assets/libs/vue.min.js"></script>
+    function loadCss(path){
+        if(!path || path.length === 0){
+                    throw new Error('argument "path" is required !');
+                }
+            // var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+     }
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/"; 
+        loadCss("assets/css/bootstrap.min.css");
+        loadCss("assets/css/daterangepicker.css");
+        loadCss("assets/css/supervision.css");
+     function loadScript(url,callback){
+        callback=callback?callback:function(){};
+        var script=document.createElement("script"); 
+        if(script.readyState){//IE
+         script.onreadystatechange=function(){ 
+        if(script.readyState=="loaded"||script.readyState=="complete"){
+        script.onreadystatechange=null; callback(); } };
+        }else{//其他浏览器
+        script.onload=function(){ callback(); }; } script.src=url; 
+        document.body.appendChild(script);
+    }
+
+     
+    </script>  
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        var hidNode = null;
-        function hoverFunction(x) {
-            hidNode = x.getElementsByClassName("hoverInfo")[0];
-            hidNode.style.display = "block";
-
-        }
-        function outFunction(x) {
-            hidNode.style.display = "none";
-        }
-    </script>
 </head>
 <body>
 <!--head-->
@@ -50,7 +60,7 @@
                   ><a type="button">我的督办</a>
             </div>
 
-            <img class="horizontal-line" src="assets/images/hori-line.png"/>
+            <img class="horizontal-line" src="../../assets/images/hori-line.png"/>
              <div class="statistics">
              <style scoped>
              .statistics-content{
@@ -107,7 +117,7 @@
                                             </button>
                                             <ul class="dropdown-menu panel panel-default">
                                                 <template v-for="n in (area.length-7)">
-                                                    <li @click="changeArea((n+7),'area')"><a>{{<area>[n+7]</area>.dicname}}</a></li>
+                                                    <li @click="changeArea((n+7),'area')"><a>{{area[n+7].dicname}}</a></li>
                                                 </template>
                                             </ul>
                                         </div>
@@ -148,7 +158,6 @@
                             <!-- /.key -->
                             <!-- /.table table-condensed -->
                             <!-- /.row -->
-                            <div id="keySec">
                                 <table class="table table-hover table-condensed content-key datatable" id="keyList">
                                     <thead>
                                     <tr>
@@ -160,7 +169,24 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in keyItems.show">
                                         <td>{{item.code}}</td>
-                                        <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
+                                         <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -224,7 +250,24 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in otherItems.show">
                                         <td>{{item.code}}</td>
-                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
+                                       <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -286,7 +329,24 @@
                                     <tbody>
                                     <tr class="grid-content " v-for="item in doneItems.show">
                                         <td>{{item.code}}</td>
-                                         <td><a class="item-name" :href="'pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">{{item.name}}</a></td>
+                                       <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
                                         <td>{{item.accountablename}}</td>
                                         <td>{{item.responsiblename}}</td>
                                         <td>{{item.estimatedcompletetiontime}}</td>
@@ -320,22 +380,19 @@
 
                                     </tbody>
                                 </table>
-                                
-                                </div>
-                                <div class="pagination-outer" id="done-pagination">
-                                <form class="form-horizontal" style="width: 15rem;float: right;display: none;" id="donePagesizeSelect">
+                                <form class="form-horizontal" style="width: 15rem;float: right;" id="donePagesizeSelect">
                                   <div class="form-group">
                                     <label  class="col-sm-5 control-label">条数</label>
                                     <div class="col-sm-7">
-                                     <select class="form-control pagesize"   data-key="done"> 
-                                    <option value="3">3</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    </select> 
+                                         <select class="form-control pagesize"   data-key="done"> 
+                                            <option value="3">3</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                        </select> 
                                     </div>
                                   </div>
                                 </form>
-                            </div>
+                                 <div class="pagination-outer" id="done-pagination"> </div>                                
                         </section>
                     </div>
                 </div>
@@ -348,18 +405,27 @@
 <footer>
     <com-footer></com-footer>
 </footer>
-
-<!--<script data-main="assetsjs/main" src="assetsjs/require.js"></script>-->
-<script src="assets/libs/jquery.min.js"></script>
-<script src="assets/libs/bootstrap.min.js"></script>
-<script src="assets/libs/daterangepicker/moment.min.js"></script>
-<script src="assets/libs/daterangepicker/daterangepicker.js"></script>
-<script src="assets/libs/extendPagination.js"></script>
-<script src="assets/libs/jquery.blockUI.js"></script>
-<script >
+<script>
     var scriptList=['./dist/header-footer.js','./dist/supervision-mine.js'];
-</script>
-<script src="dist/main.js"></script>
+    loadScript("assets/libs/vue.min.js");
+    loadScript("assets/libs/daterangepicker/moment.min.js");
+    loadScript("assets/libs/jquery.min.js",function(){
+        loadScript("assets/libs/bootstrap.min.js");        
+        loadScript("assets/libs/jquery.blockUI.js"); 
+        loadScript("assets/libs/extendPagination.js"); 
+        loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){               
+            loadScript("./dist/main.js");
+        });
+    })
+     var hidNode = null;
+    function hoverFunction(x) {
+        hidNode = x.getElementsByClassName("hoverInfo")[0];
+        hidNode.style.display = "block";
 
+    }
+    function outFunction(x) {
+        hidNode.style.display = "none";
+    }
+</script>
 </body>
 </html>

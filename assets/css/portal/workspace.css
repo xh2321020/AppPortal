@@ -167,36 +167,39 @@ div.scroll-panel{
 .article-list-item a{
     text-decoration: none;
     color: black;
+    display: block;
+    min-width: 15rem;
 }
 .article-list-item-icon{
     width: 4rem;
     height: 4rem;
 }
 .article-list-item-span{
+    display: inline-block;
     font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 1.4rem;
     /*margin-bottom: -2rem;*/
     padding-left: 2rem;
+    width: 11rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .panel-tool-top{
     height: 19.5rem;
     width: 26rem;
-
     border: 0px solid lightgrey;
     border-top: 3px solid #A6CC38;
     /*overflow: hidden;*/
-    float: left;
 }
 .panel-tool-bottom{
-    /*height: 100%;*/
     min-height: 50rem;
     width: 98%;
     min-width: 10rem;
     border: 1px solid lightgrey;
     border-top: 3px solid #A6CC38;
-    float: left;
 }
 .panel-tool-top-right{
 
@@ -433,7 +436,7 @@ div.scroll-panel{
 }
 .task-btntype>div{
     min-width: 3.5rem;
-    width: 10%;
+    width: 11.4%;
     height: 5rem;
     margin-left:1rem;
     float: left;
@@ -483,11 +486,11 @@ div.scroll-panel{
     /*line-height: 16px;*/
 }
 .line-tasktype-wedigt{
-    width: 99%;
+    width: 98%;
     min-height: 39rem;
     float: left;
     display: none;
-    margin-left: 0.5rem;
+    /*margin-left: 0.5rem;*/
 }
 .line-tasktype-wedigt-arrow{
     margin-left: 1rem;
@@ -623,15 +626,13 @@ div.scroll-panel{
     list-style: outside none none;
     margin-left: 4rem;
     padding-bottom: 0.5rem;
-    padding-left: 2rem;
     padding-top: 1rem;
     text-align: left;
     vertical-align: middle;
-    width: 16rem;
+    width: 17rem;
 }
 .ul-wedigt-item{
     list-style: none;
-    padding-left: 0rem;
     padding-top: 1rem;
 }
 .ul-wedigt li:hover{
@@ -654,6 +655,12 @@ div.scroll-panel{
 }
 .ul-wedigt a span{
     font-size: 1.6rem;
+    width: 11rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: left;
 }
 .popViewTitle{
     width: 84rem;
@@ -680,7 +687,7 @@ div.scroll-panel{
 }
 .bodySection{
     width:100%;
-    height: 85rem;
+    height: 94rem;
     min-width:1024px;
 }
 .bodySectionLeft{
@@ -691,8 +698,8 @@ div.scroll-panel{
 }
 .bodySectionLeftTool{
     width: 98%;
-    height: 40%;
     min-height: 20rem;
+    margin-top: 1rem;
 }
 .bodySectionLeftToolDiv{
     padding-left: 1rem;
@@ -712,18 +719,36 @@ div.scroll-panel{
 .bodySectionLeftPortalMoreSys{
     color: #00a2e5;
     float: right;
-    padding-top: 3rem;
+    padding-top: 1rem;
     padding-right: 2rem;
 }
 .bodySectionRight{
-    width:77%;
+    width:82%;
     height:100%;
     float: right;
 }
+.top-section {
+    width:100%; 
+}
+.bottom-section{
+    width: 100%;
+}
+.headquaters .top-section{
+    height: 55%;
+}
+.headquaters .bottom-section{
+    height: 40%;
+}
+.FQ-plant .top-section{
+    height: 63%;
+}
+.FQ-plant .bottom-section{
+    height: 37%;
+}
 .bodySectionRightCurrentTab{
     width: 100%;
-    height: 40%;
     border: 1px solid lightgrey;
+    margin-top: 1rem;
 }
 .bodySectionRightCurentTabTitle{
     width: 100%; height: 4rem; border-top: 3px solid #A6CC38;
@@ -792,6 +817,12 @@ div.scroll-panel{
     margin-left: 2rem;
     font-weight: 600;
     font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+.workHalfLineSec-div{
+    border-bottom: 2px solid #a6cc38;
+    height: 70%;
+    vertical-align: top;
+    width: 100%;
 }
 .moreURL{
 
@@ -872,4 +903,10 @@ div.scroll-panel{
     color: black; 
     height: 4rem; 
     padding-left: 1rem;
+}
+.todoTitle{
+    color:#a6cc38; 
+    background-color: white; 
+    margin-left:2rem;
+    font-family: 'Microsoft YaHei Regular','microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
 }

@@ -11,6 +11,16 @@ function getUserCookies(name){
         return null;
 }
 
+function opentask(parmar){
+        var url = "";
+        if(parmar == "xingcheng"){
+            url = "/pages/schedule/personal.html";
+        }else if(parmar == "duban"){
+            url = "/pages/supervision/supervision-detail.html";
+        }
+        window.open(url,"_blank");
+}
+
 var currentUserId=getUserCookies("userid");
 var pageUserUid="";
 var cancelText = "";
@@ -132,12 +142,12 @@ $(document).ready(function () {
             var countLeaders=0;
             var countMembers=0;
             for (var i = 0; i < data.length; i++) {
-                var personalhtml='<span class="font-fam">个人工作台 >个人页面 >'+data[i].displayname+ '</span>';
+                var personalhtml='<span class="font-fam">个人工作台 >个人页面 >'+data[i].displayName+ '</span>';
                 $("#defaultTitle").remove();
                 $("#personalPageId").html(personalhtml);
                 var iconImages = "";
                 var department = "";
-                if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
+                if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "") || (data[i].imageurl == null)) {
                     iconImages = "assets/images/personalpage/defaultUserPhoto.png";
                 } else {
                     iconImages = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
@@ -155,7 +165,7 @@ $(document).ready(function () {
                 }
                 var leaderHtml = '';
                 leaderHtml = leaderHtml +'<div class="xc-main-image" style="width:24%;"> <img class="img xc-main-image-img" src="'+ iconImages +
-                '" alt="u229"/><p class="xc-main-image-p"><span> ' + data[i].displayname  + '</span></p></div><div class="ma-detail-suo" style="padding-top:1.5rem;">'+
+                '" alt="u229"/><p class="xc-main-image-p"><span> ' + data[i].displayName  + '</span></p></div><div class="ma-detail-suo" style="padding-top:1.5rem;">'+
                 '<div class="ma-detail-suo-org"><div class="ma-detail-title-suo">组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;织：</div><div class="ma-detail-suo-org-title">'+department+'</div>';
                 var titleArray = ["Title","Tel","Mob","Mail","Loc","Work","Anno","Date"];
                 var keyArray = ["title","telephonenumber","mobile","mail","physicalDeliveryOfficeName","workitem","delegateannu","delegatedate"];
@@ -177,6 +187,7 @@ $(document).ready(function () {
                         '" onclick="editWork(\''+titleArray[k]+
                         '\')"><span class="glyphicon glyphicon-edit xc-edit-btn-char"></span></button></div>';
                     }else{
+                      console.log("spantitle",getValue(data[i][keys]))
                         interHtml = interHtml + '<div class="xc-member-data-div"><div class="ma-detail-title-suo">'
                         + titleCharArray[k]+'</div><div class="xc-member-data">'+
                         '<span id="span'+titleArray[k]+'" class="xc-workitemsdiv">'+getValue(data[i][keys])+'</span>'+
@@ -194,7 +205,7 @@ $(document).ready(function () {
         }
     });
     function getValue(key){
-        if ((typeof(key) == "undefined") || (typeof(key) == "")) {
+        if ((typeof(key) == "undefined") || (typeof(key) == "null") || (key == null)) {
             return  "";
         } else {
             return  key;
@@ -217,7 +228,7 @@ $(document).ready(function () {
                 for (var i = 0; i < data.length; i++) {
                     if(data[i].position == currentposition){
                         var member = leveArray[currentposition-1];
-                        var currentMember = member + '<a class="xc-org-chain-member-a" onclick="myFunction(\''+data[i].uid+'\')"> '+data[i].displayname+"</a>,";
+                        var currentMember = member + '<a class="xc-org-chain-member-a" onclick="myFunction(\''+data[i].uid+'\')"> '+data[i].displayName+"</a>,";
                         leveArray[currentposition-1] = currentMember;
                         for (var m = 2; m < data[i].orgtree.length; m++) {
                             for (var key in data[i].orgtree[m]) {
@@ -227,7 +238,7 @@ $(document).ready(function () {
                     }else{
                         currentposition = data[i].position;
                         var member = leveArray[currentposition-1];
-                        var currentMember = member + '<a class="xc-org-chain-member-a" onclick="myFunction(\''+data[i].uid+'\')"> '+data[i].displayname+"</a>,";
+                        var currentMember = member + '<a class="xc-org-chain-member-a" onclick="myFunction(\''+data[i].uid+'\')"> '+data[i].displayName+"</a>,";
                         leveArray[currentposition-1] = currentMember;
                         for (var m = 2; m < data[i].orgtree.length; m++) {
                             for (var key in data[i].orgtree[m]) {
@@ -278,15 +289,15 @@ $(document).ready(function () {
             type: "get",
             dataType:"json",
             // url: setPersonalpageHeader(personalpageRequest.getChainsDetails,{uid:parmar},null),
-            url: personalpageRequest.getXingChengDetails + parmar,
+            url: personalpageRequest.getXingChengDetails + parmar + personalpageRequestKey,
             success: function (data, state, jqxhr) {
                 var xinChengIcon = "";
                 for(var i = 0; i< data.length; i++){
                     var arrayChar=getWeeks(data[i].startdate);
-                    xinChengIcon = xinChengIcon + '<div class="xc-div"><div class="xc-div-datediv">'+
+                    xinChengIcon = xinChengIcon + '<div class="xc-div" style="cursor:pointer;" onclick=(opentask(\'xingcheng\'))><div class="xc-div-datediv">'+
                     '<div class="round-data">'+arrayChar[0]+'</div><p class="right-p">'+arrayChar[1]+'</p></div><div>'+
-                    '<span class="xc-right-name" style="max-width: 18rem; margin-top:0.5rem;" title="'+data[i].description+'">'+ data[i].description+'</span><br>'+
-                    '<span class="right-bottom-org">'+data[i].starttime+'~'+data[i].endtime+' 领导活动</span></div></div>';
+                    '<span class="xc-right-name" style="max-width: 18rem; margin-top:0.5rem; float:none;" title="'+data[i].title+'">&nbsp;&nbsp;'+ data[i].title+'</span>'+
+                    '<span class="right-bottom-org">'+data[i].starttime+'~'+data[i].endtime+'</span></div></div>';
                 }
                 $("#xinChengDate").html(xinChengIcon);
                 var newDate = new Date();
@@ -304,6 +315,7 @@ $(document).ready(function () {
             }
         });
     }
+    
     function getSameOrg(parpp){
         parpp = sameOrgOu;
         $.ajax({
@@ -323,7 +335,7 @@ $(document).ready(function () {
                 }
                 for(var i = 0; i< sameOrgCount; i++){
                     var iconImages=""
-                    if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "")) {
+                    if ((typeof(data[i].imageurl) == "undefined") || (typeof(data[i].imageurl) == "") || (data[i].imageurl == null)) {
                         iconImages = "assets/images/personalpage/defaultUserPhoto.png";
                     } else {
                         iconImages = window.interfaceSettings.personalpageRequest.server + data[i].imageurl;
@@ -331,7 +343,7 @@ $(document).ready(function () {
                     sameOrgHtml = sameOrgHtml +'<div class="tyzz-div" onclick="myFunction(\'' +data[i].uid +
                     '\')"><div style="float: left;"><div style="margin-right: 5px;">'+
                     '<img class="img right-bottom-img" src="'+iconImages+'" alt="u280"/></div></div>'+
-                    '<span class="right-name">'+data[i].displayname+'</span><br>' +
+                    '<span class="right-name">'+data[i].displayName+'</span><br>' +
                     '<span class="right-bottom-org">'+ sameOrgName + '</span></div>';
                 }
                 if(data.length > 0){

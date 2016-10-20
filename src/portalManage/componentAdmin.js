@@ -6,18 +6,26 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
             'columns': [],
       };
 
+      $scope.isShowSenior = {
+            'isShowSenior0': false,
+            'isShowSenior1': false,
+            'isShowSenior2': false,
+      };
+
       $scope.listClick = function(){
             $('#myTab a:first').tab('show');
       };
 
       $scope.addClick = function(isAdd, component){
+            $scope.addParams.addHpid = $scope.addParams.hpid;
             if(isAdd){
+                  $scope.addPortalSelect($scope.addParams.addHpid);
                   $scope.addParams.columns[0] = "";
                   $scope.addParams.columns[1] = "";
                   $scope.addParams.columns[2] = "";
                   $scope.curComponent =
                   {
-                        "hpid": '',
+                        "hpid": '100',
                         "name": "",
                         "styleid": "",
                         "status": "",
@@ -32,13 +40,13 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "columnid": '',
                               "styleid": "",
                               "code": "",
-                              "more_url": "",
-                              "ismore": "0",
+                              "more_url": "http://10.15.251.110/pages/portal/news_more.html?type=",
+                              "ismore": "1",
                               "url": "",
                               "content_type": "application/json",
                               "method": "get",
                               "payload": "",
-                              "querystring": ""
+                              "querystring": "&apikey=a16cb0c916404be78cb0805fefc7d26a"
                         },{
                               "name": "",
                               "form_inid": "2",
@@ -68,12 +76,11 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                         }]
                   };
             } else{
-                  $scope.addParams.addHpid = $scope.addParams.hpid;
                   $scope.addPortalSelect($scope.addParams.hpid
                       , function(){
                             for(var i = 0, j = component.formin.length; i < j; i++){
                                   for(var m = 0, n = $scope.columnList.length; m < n; m++){
-                                        if($scope.columnList[m].id = component.formin[i].columnid){
+                                        if($scope.columnList[m].id == component.formin[i].columnid){
                                               $scope.addParams.columns[i] = $scope.columnList[m];
                                         }
                                   }
@@ -90,7 +97,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                                     $scope.addParams.addHpid = $scope.portalList[i];
                               }
                         }
-                        if($scope.curComponent.formin.length == 1){
+                        if($scope.curComponent.formin.length == 2){
                               var formin1 = {
                                     "name": "",
                                     "form_inid": "2",
@@ -106,7 +113,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                                     "querystring": ""
                               };
                               $scope.curComponent.formin.push(formin1);
-                        } else if($scope.curComponent.formin.length == 2){
+                        } else if($scope.curComponent.formin.length == 3){
                               var formin2 = [{
                                     "name": "",
                                     "form_inid": "2",
@@ -143,6 +150,18 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
             $('#myTab a:last').tab('show');
       };
 
+      $scope.showSeniorClick0 = function(){
+            $scope.isShowSenior.isShowSenior0 = !$scope.isShowSenior.isShowSenior0;
+      };
+
+      $scope.showSeniorClick1 = function(){
+            $scope.isShowSenior.isShowSenior1 = !$scope.isShowSenior.isShowSenior1;
+      };
+
+      $scope.showSeniorClick2 = function(){
+            $scope.isShowSenior.isShowSenior2 = !$scope.isShowSenior.isShowSenior2;
+      };
+
       var getComponentListData = function(hpid){
             PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepageform/?hpid=" + hpid, function(response){
                   $scope.componentList = response;
@@ -159,6 +178,21 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
             });
       };
 
+      $scope.column1Select = function(){
+            $scope.curComponent.formin[0].url = "http://10.15.251.110:8010/api/news/"+ $scope.addParams.columns[0].id + "?size=4";
+            $scope.curComponent.formin[0].more_url = "http://10.15.251.110/pages/portal/news_more.html?type="+ $scope.addParams.columns[0].id;
+      };
+
+      $scope.column2Select = function(){
+            $scope.curComponent.formin[1].url = "http://10.15.251.110:8010/api/news/"+ $scope.addParams.columns[1].id + "?size=4";
+            $scope.curComponent.formin[1].more_url = "http://10.15.251.110/pages/portal/news_more.html?type="+ $scope.addParams.columns[1].id;
+      };
+
+      $scope.column3Select = function(){
+            $scope.curComponent.formin[2].url = "http://10.15.251.110:8010/api/news/"+ $scope.addParams.columns[2].id + "?size=4";
+            $scope.curComponent.formin[2].more_url = "http://10.15.251.110/pages/portal/news_more.html?type="+ $scope.addParams.columns[2].id;
+      };
+
       var getColumnListData = function(hpid, callback){
             PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagecolumn/?hpid=" + hpid, function(response){
                   $scope.columnList = response;
@@ -172,8 +206,24 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
             PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   $scope.portalList = response;
                   if($scope.portalList.length > 0){
-                        $scope.portalSelect($scope.portalList[0]);
-                        $scope.addParams.hpid = $scope.portalList[0];
+                        var hpId = PortalService.getHpId();
+                        if(hpId && hpId.length > 0){
+                              var isExist = false;
+                              for(var i = 0, j = $scope.portalList.length; i < j; i++){
+                                    if($scope.portalList[i].id == hpId){
+                                          isExist = true;
+                                          $scope.portalSelect($scope.portalList[i]);
+                                          $scope.addParams.hpid = $scope.portalList[i];
+                                    }
+                              }
+                              if(!isExist){
+                                    $scope.portalSelect($scope.portalList[0]);
+                                    $scope.addParams.hpid = $scope.portalList[0];
+                              }
+                        } else{
+                              $scope.portalSelect($scope.portalList[0]);
+                              $scope.addParams.hpid = $scope.portalList[0];
+                        }
                   } else{
                         PortalService.showAlert("您目前没有新建任何门户，快试试去新建门户吧！");
                   }
@@ -184,6 +234,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
 
       $scope.portalSelect = function(portal){
             getComponentListData(portal.id);
+            PortalService.setHpId(portal.id);
       };
 
       $scope.addPortalSelect = function(portal, callback){
@@ -220,4 +271,44 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                   }
             });
       };
+
+      //var dataList = PortalService.getData();
+      //var columnid = [17041,17043,17044,17045, 17046,17047,17048,17049, 17050,17051,17052,17053,17054,17055];
+      //for(var i = 0, j = dataList.length; i < j; i++){
+      //      var tmp = dataList[i];
+      //      var url = tmp.SUBCARDS[0].DATASOURCE.URL;
+      //      var data = {
+      //            "hpid": 100,
+      //            "name": tmp.SUBCARDS[0].SUBCARD_ZH,
+      //            "styleid": "",
+      //            "status": "2",
+      //            "description": tmp.SUBCARDS[0].SUBCARD_ZH,
+      //            "width": tmp.CARD_WIDTH,
+      //            "createuserid": '1',
+      //            "createusername": '1',
+      //            "top_color": "#00A2E5",
+      //            "formin": [{
+      //                  "name": tmp.SUBCARDS[0].SUBCARD_ZH,
+      //                  "form_inid": "1",
+      //                  "columnid": columnid[i],
+      //                  "styleid": tmp.SUBCARDS[0].SUBCARD_TYPE,
+      //                  "code": "",
+      //                  "more_url": "http://10.15.251.110/pages/portal/news_more.html?type=" + url.substring(url.indexOf("news/") + 5, url.indexOf("?")),
+      //                  "ismore": "1",
+      //                  "url": url,
+      //                  "content_type": "application/json",
+      //                  "method": "get",
+      //                  "payload": "",
+      //                  "querystring": "&apikey=a16cb0c916404be78cb0805fefc7d26a"
+      //            }]
+      //      };
+      //      var requestUrl = PortalService.getHostName();
+      //      requestUrl += "/api/homepage/homepageform/add";
+      //      PortalService.sendPostRequest(requestUrl, data, function(response){
+      //            console.log("curComponent:" + response);
+      //            if(true){
+      //                  PortalService.showAlert("新增成功");
+      //            }
+      //      });
+      //}
 });

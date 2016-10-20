@@ -8,7 +8,7 @@ $(document).ready(function () {
         //7.委托待办
         //8.消息提醒
     var url = window.location.href;
-    // url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTE5OTg2MDU0MTQ3MDk3NjUwMzY0Ng==";
+     //url = "http://tst-ecm-app.cnnp.com.cn/pages/portal/workspace.html?dWlkPTIwMTIwMDE0MTQ3MTUxNDYyNTE2OQ==";
     var mm = url.substring(url.indexOf('?')+1, url.length);
     var currentHost = url.substring(0,url.indexOf('/pages'));
     var Base64 = {  
@@ -216,10 +216,15 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     var personalpageRequestKey = "?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey;
     var setPersonalpageHeader=function(url,paramObj,iid){
         return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},window.interfaceSettings.personalpageRequest.header,paramObj)):$.param(window.interfaceSettings.personalpageRequest.header));
+    };
+    function setPersonal_isolate(name,paramObj,iid){
+        var requestBody=window.interfaceSettings.personalpage_isolateRequest;
+        var url=requestBody.api[name];
+        return (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},requestBody.header,paramObj)):$.param(requestBody.header));
     }
     var _this=this;
     var currentPort = new Array();
-    var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
+    var fetchArray = ["GETUSERNAME","USERKUAIJIERUKOU","DUBANSHIXIANG","XINGCHENG", "QIRINEIRICHENG","1", "2", "3", "4", "5", "6", "7", "8","USERKUAIJIERUKOUAll"];
     var nameArray = ["findcount","dubanshixiang", "find1","find2", "find3", "find4", "find5","find6","find7","find8"];
     var usersid =etCookie("userid");
     for (var i = 0, len = fetchArray.length + 1; i < len-1; i++) {
@@ -227,18 +232,23 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         var datas = "";
         var contentTypes = "application/json";
         var datatypes = "json";
-        var types = "post";
+        var types = "POST";
         var arrayId=fetchArray[i];
         if(fetchArray[i] == "GETUSERNAME"){
             ajaxURL = setPersonalpageHeader(personalpageRequest.getMemberDetails, {uid:usersid},null);
+        }else if (fetchArray[i] == "XINGCHENG") {
+            types="get";
+            datatypes="json";
+            ajaxURL = personalpageRequest.getXingChengDetails + usersid + personalpageRequestKey;
+            // ajaxURL = personalpageRequest.getDuBanShiXiang+"&page=0&size=50";
         }else if (fetchArray[i] == "DUBANSHIXIANG") {
             ajaxURL = setPersonalpageHeader(personalpageRequest.getDuBanShiXiang,{page:0, size:50},null);
             // ajaxURL = personalpageRequest.getDuBanShiXiang+"&page=0&size=50";
-            datas = JSON.stringify({ "accountablesn": usersid });
+            datas = JSON.stringify({ "accountableSN": usersid });
         } else if(fetchArray[i] == "USERKUAIJIERUKOU"){
             types = "get";
             datatypes = "json";
-            ajaxURL = personalpageRequest.getYonghuKuaiJieRuKou + usersid + personalpageRequestKey;
+            ajaxURL = setPersonal_isolate("getYonghuKuaiJieRuKou",null,usersid);
         } else if(fetchArray[i] == "QIRINEIRICHENG"){
             var startDate = dateFormatFun(new Date());
             var stDate = new Date(); 
@@ -253,26 +263,27 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else if(fetchArray[i] == "USERKUAIJIERUKOUAll"){
             types = "get";
             datatypes = "json";
-            ajaxURL = personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey;
+            ajaxURL =setPersonal_isolate("initUserKuaiJieRuKou");
         } else {
-            ajaxURL = personalpageRequest.getJinQiGongZuo + personalpageRequestKey;
+            ajaxURL =setPersonal_isolate("getJinQiGongZuo");
             datas = JSON.stringify({F_BOUNDUSER: usersid, Type:fetchArray[i]});
         }
+     
         $.ajax({
             type: types,
             dataType: datatypes,
-            contentType: contentTypes,
+            contentType:contentTypes,
             url: ajaxURL,
             data: datas,
             success: function success(data, state, jqxhr) {
                 var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-                "<tr><th style='text-align: center; color:black;'> 事项名称 </th>"+
-                "<th style='text-align: center;color:black;'> 创建人员 </th><th style='text-align: center;color:black;'> 创建时间 </th></tr></thead><tbody>";
-                var tableFooter = "</tbody></table></section>";
+                "<tr><th style='text-align: center; color:black;background-color: white; '> 事项名称 </th>"+
+                "<th style='text-align: center;color:black;background-color: white; '> 创建人员 </th><th style='text-align: center;color:black;background-color: white; '> 创建时间 </th></tr></thead><tbody>";
+                var tableFooter = "</tbody></table>";
                 if(fetchArray[jqxhr.index] == "GETUSERNAME"){
                     var chinesename="";
                     var orgTree = "";
-                    chinesename = data[0].displayname;
+                    chinesename = data[0].displayName;
                     orgTree = JSON.stringify(data[0].orgtree);
                     if(document.cookie && document.cookie != ''){
                         updateCookie("username",chinesename,30,"/");
@@ -285,20 +296,24 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                     '<a class="default-font" href="pages/supervision/supervision-mine.html" style="float:right;"  target="_blank">更多 ></a></div>';
                         for(var j=0; j<data.length; j++){
                             var description = "";
-                            if ((typeof(data[j].description) == "undefined") || (typeof(data[j].description) == "")) {
+                            if ((typeof(data[j].estimatedcompletetiontime) == "undefined") || (typeof(data[j].estimatedcompletetiontime) == "")) {
                                 description = "";
                             } else {
-                                description = data[j].description;
+                                description = data[j].estimatedcompletetiontime;
                             }
+                            var url = "/pages/supervision/supervision-detail.html?id="+ data[j].id;
+                            var divLable =  '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onClick="window.open(\'' + url + '\')"><div style="overflow: hidden; position: relative;">';
                             dubanshixiang=dubanshixiang+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">督办</div></div>'+
-                            '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\''+data[j].id+'\')"><div style="overflow: hidden; position: relative;">'+
+                                divLable +
                             '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
-                            'white-space: nowrap; width: 100%; display: block; padding-top:0;" title="'+data[j].name+'">'+
-                            data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font">'+description+
+                            'white-space: nowrap; width: 100%; display: block; padding-top:0; margin-left: 1rem;" title="'+data[j].name+'">'+
+                            data[j].name+'</span></div><div><span class="task-list-detail-subtitle default-font" style="margin-left:1rem;">'+description+
                             '</span></div></div> <div class="task-list-spack"></div></li>';
                             if((data.length>0)&&(j<=1)){
+                                var url = "/pages/supervision/supervision-detail.html?id="+ data[j].id;
+                                var aLable = '<a href="' + url +'" class="qiRiTiXing-a" target="_blank">';
                                 qiridubantixing = qiridubantixing + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
-                                '<a href="pages/supervision/supervision-detail.html" class="qiRiTiXing-a" target="_blank">'+
+                                    aLable +
                                 '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
                             }
                         }
@@ -325,7 +340,7 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                         if((data.length>0)&&(j<=1)){
                             qirineiricheng = qirineiricheng + '<div class="task-list-detail-title-tomorrow qiRiTiXing" style="width:100%;">'+
                             '<a href="pages/schedule/personal.html" class="qiRiTiXing-a"  target="_blank">'+
-                            '<div class="qiRiTiXing-a-div default-font" title="'+data[j].name+'">'+data[j].name+'</div></a></div>';
+                            '<div class="qiRiTiXing-a-div default-font" title="'+data[j].title+'">'+data[j].title+'</div></a></div>';
                         }
                     }
                     $("#qiribeirichengTitle").html("七日内日程提醒("+data.length+")");
@@ -345,30 +360,34 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                         var kuaijierukouLeft="";
                         var kuaijierukoupop="";
                         var kuaijierukouselector="";
-                                           
+                        var max=8;
+                        if(window.plantName=="FQ-plant")max=10;                  
                         for(var j=0; j<data.length;j++){
-                            if(j<8){
+                            if(j<max){
                                 kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+
                                 '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
                                 '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
                             }
-                            kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
-                            '<a href="'+data[j].link+'" target="_blank">'+
-                            '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
+                           
                             kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].linkid+'">'+data[j].description+'</option>';
                         }
                         //主页面工作快捷入口
                         $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
                         //弹框页面工作快捷入口（编辑页面）
-                        $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
+                        // $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                         //编辑选择框已添加的工作快捷入口
                         $("#leftSel").html(kuaijierukouselector);
                     }
                 }else if(fetchArray[jqxhr.index] == "USERKUAIJIERUKOUAll"){
                     var restPort = "";
+                    var kuaijierukoupop="";
                     for(var j=0; j<data.length;j++){
+                         kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
+                            '<a href="'+data[j].link+'" target="_blank">'+
+                            '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
                         restPort = restPort + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
                     }
+                     $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                     $("#rightSel").html(restPort);
                     var currentSelL = null;
                     var currentSelR = null;
@@ -384,7 +403,25 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                             }
                         }
                     }
-                } else if(fetchArray[jqxhr.index] == "1"){
+                }else if(fetchArray[jqxhr.index] == "XINGCHENG"){
+                    var xingcheng="";
+                    for(var j=0; j<data.length; j++){
+                        var description = "";
+                        if ((typeof(data[j].enddate) == "undefined") || (typeof(data[j].enddate) == "")) {
+                            description = "";
+                        } else {
+                            description = data[j].enddate;
+                        }
+                        xingcheng=xingcheng+'<li class="li-task-list"><div class="task-list-meet"><div class="default-font">行程</div></div>'+
+                        '<div class="task-list-detail" style="border: 1px dashed #a6cc38;cursor:pointer;" onclick="opentask(\'xingcheng\')"><div style="overflow: hidden; position: relative;">'+
+                        '<span class="task-list-detail-title  default-font" style="overflow: hidden; text-overflow: ellipsis; '+
+                        'white-space: nowrap; width: 100%; display: block; padding-top:0; margin-left: 1rem;" title="'+data[j].title+'">'+
+                        data[j].title+'</span></div><div><span class="task-list-detail-subtitle default-font" style="margin-left:1rem;">'+description+
+                        '</span></div></div> <div class="task-list-spack"></div></li>';
+                    }
+                    $("#nodataDiv").remove();
+                    $("#worksoftodayUl").append(xingcheng);
+                }else if(fetchArray[jqxhr.index] == "1"){
                     var currentHtml=htmlcode(data);
                     $("#lingdaopishiSpan").html(data.length);
                     $("#lingdaopishitable").html(currentHtml);
@@ -419,13 +456,81 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
                 }
                 var index = jqxhr.index;
                 // _this[nameArray[index]] = data;
-                if (jqxhr.index == 0) console.log(data);
+                if (jqxhr.index == 0){
+                    console.log(data);
+                }
             },
-            error: function error(err) {
-                console.log(err);
+            error: function error(err,state,xhr) {
+                // alert(xhr.index)
+                // alert(fetchArray[xhr.index]+"\r\n"+JSON.stringify(err))
             }
         }).index = i;
     }
+        (function(){
+            var bodySection=$("#bodySection");
+            switch(window.plantName){
+                case "headquaters":
+                bodySection.addClass("headquaters");
+                break;
+                case "FQ-plant":
+                bodySection.addClass("FQ-plant");
+                break;
+                default:
+                bodySection.addClass("headquaters");
+                break;
+            }
+
+            var backlogVm=new Vue({
+                el:"#backlogSection",
+                data:{
+                    list:[{name:"ERP"},{name:"EAM"},{name:"ESM"},{name:"FFBUS"}]
+                },
+                created:function(){
+                    var _this=this;
+                    if(window.plantName!="FQ-plant")return;
+                    $.ajax({
+                        url:setPersonal_isolate("taskCount",{uid:etCookie("userid"),'_':new Date().getTime()}),
+                        type:"get",
+                        success:function(result,state,xhr){
+                            result=JSON.parse(result);
+                            var urls={
+                                FFBUS:'http://10.17.20.82/SSMISDIYWeb/default2.asp?DB=SSMISDIYDB',
+                                EAM : 'http://eam01.cnnp.com.cn/faPROD/domain/workbenchrenderer',
+                                ESM : 'http://10.17.16.43/SSMISDIYWeb/default1.asp?DB=esm',
+                                ERP : 'http://erp.cnnp.com.cn/irj/portal'
+                            }
+                            var list=[];
+                            list.push({
+                                name:"ERP",
+                                count:result.ERP,
+                                url:urls["ERP"]
+                            });
+                            list.push({
+                                name:"EAM",
+                                count:result.EAMAS,
+                                url:urls["EAM"]
+                            });
+                            list.push({
+                                name:"ESM",
+                                count:result.ESM,
+                                url:urls["ESM"]
+                            });
+                            list.push({
+                                name:"FFBUS",
+                                count:result.FFBUS,
+                                url:urls["FFBUS"]
+                            });
+                            
+                            _this.list=list;
+                        },
+                        error:function(data){
+                            alert(JSON.stringify(data));
+                        }
+                    });
+                }
+            });
+
+        })();
     
     function dateFormatFun(parmar){
         var myDate = new Date(parmar);
@@ -433,9 +538,9 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
     }
     function htmlcode(data){
         var tableHeader = "<section class='grid-table'><table class='table table-condensed head-title'><thead>"+
-        "<tr><th style='text-align: center; width:60%; color:black;'> 事项名称 </th>"+
-        "<th style='text-align: center;color: black;'> 创建人员 </th><th style='text-align: center;color: black;'> 创建时间 </th></tr></thead><tbody>";
-        var tableFooter = "</tbody></table></section>";
+        "<tr><th style='text-align: center; width:60%; color:black;background-color: white; '> 事项名称 </th>"+
+        "<th style='text-align: center;color: black;background-color: white; '> 创建人员 </th><th style='text-align: center;color: black;background-color: white; '> 创建时间 </th></tr></thead><tbody>";
+        var tableFooter = "</tbody></table>";
         var initHtml = "";
         var moreUrlHtml = "";
         var count = 0;
@@ -444,16 +549,28 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else {
             if (data.length > 10) {
                 count = 10;
-                moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank">' + '<div class="moreURL-div" style="float: right; padding-right:6rem;">更多 ></div></a>';
+                // moreUrlHtml = '<a href="' + data[0].f_MODELVIEWURL + '" class="moreURL" target="_blank" style="margin-bottom: 0.5rem;">' + '<div class="moreURL-div" style="float: right; line-height:0;">更多 ></div></a>';
             } else {
                 count = data.length;
             }
             for (var j = 0; j < count; j++) {
-                initHtml = initHtml + '<tr class="grid-content"style="border-bottom: 1px solid lightgrey;">' + '<td class=" default-font" style="height:3rem;"><a href="' + data[j].f_URL + '" style="color: black;"  target="_blank">' + data[j].f_SUBJECT + '</a></td>' + '<td class=" default-font" style="text-align: center;">' + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                if((j%2) == 1){
+                    initHtml = initHtml + '<tr class="grid-content" style="border-bottom: 1px solid lightgrey; height:3rem;">' + '<td class=" default-font"><a href="'
+                     + data[j].f_URL + '" style="color: black;"  target="_blank"><div style="height:2rem; overflow: hidden; width: 100%;">' 
+                     + data[j].f_SUBJECT + '</div></a></td>' + '<td class=" default-font" style="text-align: center;">' 
+                     + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                }else{
+                    initHtml = initHtml + '<tr class="grid-content" style="border-bottom: 1px solid lightgrey; height:3rem; background-color:#f3f2f0;">' + '<td class=" default-font"><a href="'
+                     + data[j].f_URL + '" style="color: black;"  target="_blank"><div style="height:2rem; overflow: hidden; width: 100%;">' 
+                     + data[j].f_SUBJECT + '</div></a></td>' + '<td class=" default-font" style="text-align: center;">' 
+                     + data[j].f_SOURCE + '</td><td class=" default-font"  style="text-align: center;">' + dateFormatFun(data[j].f_RECEVIETIME) + '</td></tr>';
+                }
+
+                
             }
             initHtml = tableHeader + initHtml + tableFooter;
         }
-        return initHtml + moreUrlHtml;
+        return initHtml +"</section>";
     }
     function etCookie(name){
         var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
@@ -490,28 +607,29 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
             type: "get",
             dataType: "json",
             contentType: "application/json",
-            url: personalpageRequest.initUserKuaiJieRuKou + personalpageRequestKey,
+            url:setPersonal_isolate("initUserKuaiJieRuKou"),
             // data: "",
             success: function success(data, state, jqxhr) {
                 var kuaijierukouLeft="";
-                var kuaijierukoupop="";
+                // var kuaijierukoupop="";
                 var kuaijierukouselector="";
+                var max=8;
+                if(window.plantName=="FQ-plant")max=10;
                 for(var j=0; j<data.length;j++){
-                    if(j<8){
+                    if(j<max){
                         kuaijierukouLeft = kuaijierukouLeft + '<li class="article-list-item"><a href="'+data[j].link+'" target="_blank">'+                            '<img src="'+data[j].icoa+'" class="article-list-item-icon">'+
                         '<span class="article-list-item-span">'+data[j].description+'</span></a></li>';
                     }
-                    kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
-                    '<a href="'+data[j].link+'" target="_blank">'+
-                    '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
+                    // kuaijierukoupop = kuaijierukoupop + '<li class="ul-wedigt-item">'+
+                    // '<a href="'+data[j].link+'" target="_blank">'+
+                    // '<img src="'+data[j].icoa+'"><span style="margin-left: 1rem;">'+data[j].description+'</span></a></li>';
                     kuaijierukouselector = kuaijierukouselector + '<option value="'+data[j].id+'">'+data[j].description+'</option>';
                 }
                 //主页面工作快捷入口
                 $("#gongzuokuaijierukouUl").html(kuaijierukouLeft);
                 //弹框页面工作快捷入口（编辑页面）
-                $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
+                // $("#gongzuokuaijirukouhidePopUl").html(kuaijierukoupop);
                 //编辑选择框已添加的工作快捷入口
-                // alert(kuaijierukouselector);
                 $("#leftSel").html(kuaijierukouselector);
             },
             error: function error(err) {

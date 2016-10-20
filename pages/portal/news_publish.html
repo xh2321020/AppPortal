@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="http://10.15.251.110/"/>
+    <title>新闻-远程投稿</title>
+    <link rel="stylesheet" href="/assets/css/portal/global.css"/>
+    <link rel="stylesheet" href="/assets/css/portal/miracle.css"/>
+</head>
+<body id="newsApp" style="background: #bebebe">
+<iframe src="http://bjecm.cnnp.com.cn/publish2/index/header"  style="width: 100%; height: 61px" frameborder="0" scrolling="no"></iframe>
+
+<div style="width: 100%; min-height: 750px; max-height: 1000px;background: #dedede;">
+    <div class="viewport">
+        <div class="wTitle"><img src="/assets/images/portal/titleIcon.gif">信息详情&nbsp;&gt;&nbsp;远程投稿</div>
+        <div>
+            <table border="0" cellpadding="0" cellspacing="0" class="col2Frm">
+                <tbody>
+                    <tr>
+                        <td class="label">信息标题</td>
+                        <td colspan="3">{{newsDetil.title}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">作者</td>
+                        <td colspan="3">{{newsDetil.author}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">发布人</td>
+                        <td colspan="3">{{newsDetil.auditor_name}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">发布时间</td>
+                        <td colspan="3">{{newsDetil.audit_date}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="label">信息摘要</td>
+                        <td colspan="3">{{newsDetil.subTitle}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="wTitle" style="margin-top: 15px;"><img src="/assets/images/portal/titleIcon.gif">向本站投稿</div>
+            <table border="0" cellpadding="0" cellspacing="0" class="col2Frm">
+                <tbody>
+                    <tr>
+                        <td width="7%" class="label">目标栏目</td>
+                        <td width="93%">
+                            <div id="content2">
+                                <ul class="ul-org">
+                                    <li v-for="cloumn in localColumnList" class="li-org" onclick="localCloumnClick(this)">
+                                        <span class="span-org-selected" v-if="cloumn.isSelected">{{cloumn.name}}</span>
+                                        <span class="span-org" v-if="!cloumn.isSelected">{{cloumn.name}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="wToolbarBtm">
+                <a class="imgLink btn1" onclick="publish2Local()"><img src="/assets/images/portal/edit.gif" alt="投 稿">投 稿</a>
+            </div>
+
+            <div class="wTitle" style="margin-top: 15px;"><img src="/assets/images/portal/titleIcon.gif">向中核投稿</div>
+            <table border="0" cellpadding="0" cellspacing="0" class="col2Frm">
+                <tbody>
+                    <tr>
+                        <td width="7%" class="label">目标栏目</td>
+                        <td width="93%">
+                            <div id="content">
+                                <ul class="ul-org">
+                                    <li v-for="cloumn in cloumnList" class="li-org" onclick="cloumnClick(this)">
+                                        <span class="span-org-selected" v-if="cloumn.isSelected">{{cloumn.name}}</span>
+                                        <span class="span-org" v-if="!cloumn.isSelected">{{cloumn.name}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="wToolbarBtm">
+                <a class="imgLink btn1" onclick="publish2Hq()"><img src="/assets/images/portal/edit.gif" alt="投 稿">投 稿</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/libs/vue.min.js"></script>
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script>jQuery.support.cors=true;</script>
+<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src='/src/portal/news_publish.js'></script>
+<script src='/assets/libs/jquery.blockUI.js'></script>
+<script>
+var scriptList=['./dist/header-footer.js'];
+</script>
+<script src="./dist/main.js"></script>
+</body>
+</html>
