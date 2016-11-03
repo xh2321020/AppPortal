@@ -165,7 +165,7 @@
 
 .card-content {
     display: inline-block;
-    color: #555;
+    color: #fff;
     width: 80px;
     text-align: center;
     font-family: 'Droid Sans', sans-serif;
@@ -179,3 +179,5 @@
 .bg-03 { background: #ffc000; }
 .bg-04 { background: #92d050; }
 .bg-05 { background: #c9c9c9; }
+.bg-06 { background: #A965C9; }
+.bg-07 { background: #C96331; }

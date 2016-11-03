@@ -7,12 +7,11 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
             if(isAdd){
                   $scope.curPortal = {
                         "createuserid": "1234567",
-                        "createusername": "管理员",
+                        "createusername": "asdfasd",
                         "description": "",
                         "hptype": "",
                         "name": "",
                         "status": "0",
-                        "priority": "",
                         "styleid": "",
                         "updatetime": "",
                         "webtype": "0",
@@ -31,7 +30,7 @@ portalApp.controller("PortalAdminCtrl", function($scope, $window, $http, PortalS
       };
 
       $scope.portalOperate = function(index, operate){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage_type/edittype?hpid=" + $scope.portalList[index].id + "&type=" + operate, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/edittype?hpid=" + $scope.portalList[index].id + "&type=" + operate, function(response){
                   console.log(response);
                   if(true){
                         PortalService.showAlert("操作成功");

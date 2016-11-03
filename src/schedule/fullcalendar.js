@@ -4905,12 +4905,12 @@ function DayEventRenderer() {
 				" style='position:absolute;z-index:8;left:"+left+"px;" + skinCss + "'" +
 				">" +
 				"<div class='fc-event-inner'>";
-			if (!event.allDay && seg.isStart) {
-				html +=
-					"<span class='fc-event-time'>" +
-					htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
-					"</span>";
-			}
+			//if (!event.allDay && seg.isStart) {
+			//	html +=
+			//		"<span class='fc-event-time'>" +
+			//		htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
+			//		"</span>";
+			//}
 			//canice_content
 			html +=
 				"<span class='fc-event-title'>" +

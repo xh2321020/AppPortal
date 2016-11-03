@@ -262,6 +262,9 @@ var duBanGuanLiURL = '<li class="article-list-item"><a href="http://bjecm.cnnp.c
         } else {
             ajaxURL = personalpageRequest.getJinQiGongZuo + personalpageRequestKey;
             datas = JSON.stringify({F_BOUNDUSER: usersid, Type:fetchArray[i]});
+            if(fetchArray[i] == 4){
+                datas = JSON.stringify({F_BOUNDUSER: usersid, Type:4});
+            }
         }
         $.ajax({
             type: types,

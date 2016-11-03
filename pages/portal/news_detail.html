@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="http://10.15.251.110/"/>
+    <base href="" id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <title>新闻详情</title>
-    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/portal/news.css"/>
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/portal/news.css"/>
 </head>
 <body ng-app="newsApp">
 <header><com-header></com-header></header>
@@ -29,8 +32,10 @@
     <div class="articleCon" style="width: 85%">
         <!--{{newsDetail.content}}-->
         <div style="margin:0px auto; text-align:center" ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '主附件' || attachment.file_from == '附件正文'">
-            <img style="margin: 10px" ng-if="attachment.file_type == 'jpg'" ng-src="{{attachment.path}}" width="600" height="400">
-            <img style="margin: 10px" ng-if="attachment.file_type == 'png'" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('jpg') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('JPG') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('png') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('PNG') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
 
             <!--<embed id={{attachment.id}} style="margin: 10px" ng-if="attachment.file_type == 'pdf'" width="100%" src="http://bjecm.cnnp.com.cn/publish2/attachment/show?fileId=20291#pagemode=none" height="500px" type="application/pdf"></embed>-->
 
@@ -49,7 +54,7 @@
                 </embed>
             </object>
 
-            <video ng-if="attachment.file_type == 'other' || attachment.name.indexOf('mp4') != -1" width="800" height="600" controls="controls" autoplay="autoplay">
+            <video ng-if="attachment.name.indexOf('mp4') != -1" width="800" height="600" controls="controls" autoplay="autoplay">
                 <source ng-src={{attachment.path}} type="video/ogg" />
                 <source ng-src={{attachment.path}} type="video/mp4">
             </video>
@@ -59,7 +64,7 @@
         <table cellpadding="0" cellspacing="0" width="100%" border="0" class="articleRels" style="margin-top: 20px">
             <tbody>
                 <tr>
-                    <td width="80" valign="top"><p>相关附件：</p></td>
+                    <td width="80" valign="top"  ng-if="params.isShowAttach"><p>相关附件：</p></td>
                     <td ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '附件区'">
                         <div id="atch_p">
                             <p class="atchWrapper" id="atchWrapper_7492">
@@ -74,16 +79,16 @@
 </div>
 
 <footer><com-footer></com-footer></footer>
-<script src="/assets/libs/vue.min.js"></script>
-<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/vue.min.js"></script>
+<script src="assets/libs/jquery/jquery.min.js"></script>
 <script>jQuery.support.cors=true;</script>
-<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
-<script src="/assets/libs/angular/angular.min.js"></script>
-<script src='/src/portal/newsService.js'></script>
-<script src='/src/portal/news_detail.js'></script>
-<script src='/assets/libs/jquery.blockUI.js'></script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src="assets/libs/angular/angular.min.js"></script>
+<script src='src/portal/newsService.js'></script>
+<script src='src/portal/news_detail.js'></script>
+<script src='assets/libs/jquery.blockUI.js'></script>
 <script>
-    var scriptList=['./dist/header-footer.js'];
+    var scriptList=['./dist/header-footer.js','./dist/portal.js'];
 </script>
 <script src="./dist/main.js"></script>
 </body>

@@ -64,6 +64,10 @@ var getSearchNewsList = function(str){
     });
 };
 
+Vue.filter('blankReplace', function (input) {
+    return input ? input.replace(/&nbsp;/g, '') : '';
+})
+
 var keyWords = getUrlParamsString('keyWords');
 if(keyWords && keyWords.length > 0){
     getSearchNewsList(keyWords);

@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>栏目配置管理-栏目管理</title>
-        <base href="http://10.15.251.110/"/>
+        <base href="" id="baseTag">
+        <script>
+            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        </script>
         <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/portalManage/style.css">
     </head>
@@ -12,7 +15,7 @@
     <header><com-header></com-header></header>
 
     <div ng-controller="columnAdminCtrl" class="content-border">
-        <div class="container">
+        <div class="container" style="max-width: 100% !important;">
             <div class="row">
                 <div class="col-md-1">
                     <div ng-include="'/pages/portalManage/tmp_navigation.html'"></div>
@@ -43,7 +46,7 @@
                                     <tr style="background: #ffc000">
                                         <th class="th-text">栏目ID</th>
                                         <th class="th-text">栏目名称</th>
-                                        <th class="th-text">管理员</th>
+                                        <!--<th class="th-text">管理员</th>-->
                                         <th class="th-text">状态</th>
                                         <th class="th-text">操作</th>
                                     </tr>
@@ -53,7 +56,6 @@
                                         <tr class="odd gradeX" ng-repeat="column in columnList">
                                             <td class="td-text">{{column.id}} </td>
                                             <td class="td-text">{{column.name}} </td>
-                                            <td class="td-text">{{column.auditor_names}} </td>
                                             <td class="td-text" ng-show="column.status == 0">停用</td>
                                             <td class="td-text" ng-show="column.status == 1">停用</td>
                                             <td class="td-text" ng-show="column.status == 2">启用</td>
@@ -61,9 +63,6 @@
                                                 <div>
                                                     <a ng-click="addClick(false, column)">编辑</a>
                                                     <a ng-click="columnOperate($index, 'del')">删除</a>
-                                                    <a ng-click="columnOperate($index, 'start')"  ng-if="column.status == 0">启用</a>
-                                                    <a ng-click="columnOperate($index, 'start')"  ng-if="column.status == 1">启用</a>
-                                                    <a ng-click="columnOperate($index, 'stop')"  ng-if="column.status == 2">停用</a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -85,24 +84,20 @@
 
                             <table class="table table-bordered">
                                 <tbody>
-                                <tr>
-                                    <td class="td-text-left" colspan="2">栏目ID</td>
-                                    <td colspan="8"><input size="60" type="text" readonly placeholder="自动生成" ng-model="curColumn.id"></td>
-                                </tr>
-                                <tr>
-                                    <td class="td-text-left" colspan="2">栏目名称</td>
-                                    <td colspan="4">
-                                        <input size="26" type="text" ng-model="curColumn.name">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="td-text-left" colspan="2">栏目说明</td>
-                                    <td colspan="8"><input size="60" type="text" ng-model="curColumn.description" placeholder="请输入栏目说明"></td>
-                                </tr>
-                                <!--<tr>-->
-                                <!--<td class="td-text-left" colspan="2">更多设置</td>-->
-                                <!--<td colspan="8"><button class="btn btn-primary" ng-click="addPeopleClick()">打开栏目内容管理系统</button></td>-->
-                                <!--</tr>-->
+                                    <tr>
+                                        <td class="td-text-left" colspan="2">栏目ID</td>
+                                        <td colspan="8"><input size="60" type="text" readonly placeholder="自动生成" ng-model="curColumn.id"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text-left" colspan="2">栏目名称</td>
+                                        <td colspan="4">
+                                            <input size="26" type="text" ng-model="curColumn.name">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text-left" colspan="2">栏目说明</td>
+                                        <td colspan="8"><input size="60" type="text" ng-model="curColumn.description" placeholder="请输入栏目说明"></td>
+                                    </tr>
                                 </tbody>
                             </table>
 
@@ -131,7 +126,7 @@
         <script src='/assets/libs/jquery.blockUI.js'></script>
         <script src="/assets/libs/vue.min.js"></script>
         <script>
-            var scriptList=['./dist/header-footer.js'];
+            var scriptList=['./dist/header-footer.js','./dist/portal.js'];
         </script>
         <script src="./dist/main.js"></script>
     </body>

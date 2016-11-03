@@ -4,7 +4,6 @@
 var portalApp = angular.module("portalApp", []);
 
 portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', function( $rootScope, $http, $timeout) {
-//    var configHostName = 'http://192.168.252.1:8000';
 //    var configHostName = 'http://172.16.51.144:8000';
 	var configHostName = "http://10.15.251.110:8010";
 //    var userHostName = 'http://172.16.51.137:8010/';
@@ -101,6 +100,12 @@ portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', functio
             } else{
                 return null;
             }
+        },
+        setHpId: function(id){
+            window.localStorage.setItem("CNNP_ECM_HPID", id);
+        },
+        getHpId: function(){
+            return window.localStorage.getItem("CNNP_ECM_HPID");
         },
         getData: function(){
           return [{

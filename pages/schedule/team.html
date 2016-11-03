@@ -4,12 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>中国核电内网门户-日程管理</title>
-
-        <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/schedule/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" href="/assets/css/schedule/fullcalendar.css">
+        <base href="" id="baseTag">
+        <script>
+            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        </script>
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/schedule/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="assets/css/schedule/fullcalendar.css">
         <link href="assets/css/daterangepicker.css" rel="stylesheet">
-        <link rel="stylesheet" href="/assets/css/schedule/style.css">
+        <link rel="stylesheet" href="assets/css/schedule/style.css">
     </head>
     <body ng-app="eventApp">
     <header><com-header></com-header></header>
@@ -99,19 +102,19 @@
     
     <footer><com-footer></com-footer></footer>
     
-    	<script src="/assets/libs/angular/angular.min.js"></script>
-        <script src="/assets/libs/jquery-1.11.1.min.js"></script>
-        <script src='/assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
-        <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+    	<script src="assets/libs/angular/angular.min.js"></script>
+        <script src="assets/libs/jquery-1.11.1.min.js"></script>
+        <script src='assets/libs/jquery-ui-1.10.2.custom.min.js'></script>
+        <script src="assets/libs/bootstrap/bootstrap.min.js"></script>
         <script src="assets/libs/daterangepicker/moment.min.js"></script>
         <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
-        <script src='/src/schedule/fullcalendar.js'></script>
-        <script src="/src/schedule/eventservice.js"></script>
-        <script src="/src/schedule/team.js"></script>
-        <script src='/assets/libs/jquery.blockUI.js'></script>
-        <script src="/assets/libs/vue.min.js"></script>
+        <script src='src/schedule/fullcalendar.js'></script>
+        <script src="src/schedule/eventservice.js"></script>
+        <script src="src/schedule/team.js"></script>
+        <script src='assets/libs/jquery.blockUI.js'></script>
+        <script src="assets/libs/vue.min.js"></script>
         <script>
-            var scriptList=['./dist/header-footer.js'];
+            var scriptList=['./dist/header-footer.js','./dist/portal.js'];
         </script>
         <script src="./dist/main.js"></script>
     </body>

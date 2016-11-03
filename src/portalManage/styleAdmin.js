@@ -9,11 +9,27 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
             $('#myTab a:first').tab('show');
       };
 
+      $scope.styleOperate = function(index, operate){
+            PortalService.sendPostRequest(PortalService.getHostName() + "/api/homepage/style/enable/" + $scope.styleList[index].id, '',function(response){
+                  if(true){
+                        PortalService.showAlert("操作成功");
+                  }
+                  if(operate == "start"){
+                        for(var i = 0, j = $scope.styleList.length; i < j; i++){
+                              $scope.styleList[i].status = 0;
+                        }
+                        $scope.styleList[index].status = 1;
+                  } else if(operate == "stop"){
+                        $scope.styleList[index].status = 0;
+                  }
+            });
+      };
+
       $scope.addClick = function(isAdd, style){
+            $scope.selectDate.addPortal = $scope.selectDate.listPortal;
             if(isAdd){
+                  $scope.addPortalselect();
                   $scope.curStyle = {
-//                        "createuserid": PortalService.getCookie("userid"),
-//                        "createusername": PortalService.getCookie("name"),
                         "createuserid": "1234567",
                         "createusername": "sdfas",
                         "description": "",
@@ -28,7 +44,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                         ],
                         "name": "",
                         "order": [],
-                        "status": "1",
+                        "status": "0",
                         "updatetime": ""
                   };
             } else{
@@ -52,7 +68,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       };
 
       var getStyleListData = function(hpid){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagestyle/" + hpid, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/style/" + hpid, function(response){
                   $scope.styleList = response;
             });
       };
@@ -61,8 +77,24 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
             PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepage/" + PortalService.getUserId(), function(response){
                   $scope.portalList = response;
                   if($scope.portalList.length > 0){
-                        $scope.portalSelect($scope.portalList[0]);
-                        $scope.selectDate.listPortal = $scope.portalList[0];
+                        var hpId = PortalService.getHpId();
+                        if(hpId && hpId.length > 0){
+                              var isExist = false;
+                              for(var i = 0, j = $scope.portalList.length; i < j; i++){
+                                    if($scope.portalList[i].id == hpId){
+                                          isExist = true;
+                                          $scope.portalSelect($scope.portalList[i]);
+                                          $scope.selectDate.listPortal = $scope.portalList[i];
+                                    }
+                              }
+                              if(!isExist){
+                                    $scope.portalSelect($scope.portalList[0]);
+                                    $scope.selectDate.listPortal = $scope.portalList[0];
+                              }
+                        } else{
+                              $scope.portalSelect($scope.portalList[0]);
+                              $scope.selectDate.listPortal = $scope.portalList[0];
+                        }
                   } else{
                         PortalService.showAlert("您目前没有新建任何门户，快试试去新建门户吧！");
                   }
@@ -72,6 +104,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
 
       $scope.portalSelect = function(portal){
             getStyleListData(portal.id);
+            PortalService.setHpId(portal.id);
       };
 
       $scope.addPortalselect = function(){
@@ -132,7 +165,6 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
 
       var initFileUpload = function(){
             'use strict';
-            // Change this to the location of your server-side upload handler:
             var url = window.location.hostname === 'blueimp.github.io' ?
                 '//jquery-file-upload.appspot.com/' : 'server/php/';
             $('#fileupload').fileupload({
@@ -156,9 +188,42 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       initFileUpload();
 
       $scope.preview = function(){
-            $scope.savStyle(function(){
-                  window.open("pages/portal/index.html?type=" + $scope.selectDate.addPortal.hptype + "&node=" + $scope.selectDate.addPortal.id)
+            $scope.curStyle.hpid = $scope.selectDate.addPortal.id;
+            var count = 1;
+            $scope.curStyle.order = [];
+            $("#multiselect_to option").each(function(){
+                  for(var i = 0, j = $scope.addStyleList.length; i < j; i++){
+                        if($scope.addStyleList[i].id == $(this).val()){
+                              var order = {
+                                    "formid": $scope.addStyleList[i].id,
+                                    "orderid": count++,
+                                    "styleid": $scope.addStyleList[i].styleid,
+                              };
+                              $scope.curStyle.order.push(order);
+                        }
+                  }
             });
+            console.log($scope.curStyle);
+            var requestUrl = PortalService.getHostName();
+            if($scope.curStyle.id && $scope.curStyle.id != ""){
+                  requestUrl += "/api/homepage/homepagestyle/edit";
+            } else{
+                  requestUrl += "/api/homepage/homepagestyle/add";
+            }
+            PortalService.sendPostRequest(requestUrl, $scope.curStyle, function(response){
+                  console.log("curPortal:" + response);
+                  if($scope.curStyle.id && $scope.curStyle.id != ""){
+                        PortalService.showAlert("提交成功");
+                        window.open("http://w3.cnnp.com.cn/pages/portal/index.html?style="  + $scope.curStyle.id, "_blank");
+                  } else{
+                        PortalService.showAlert("提交成功");
+                        window.open("http://w3.cnnp.com.cn/pages/portal/index.html?style="  + response, "_blank");
+                  }
+            });
+      };
+
+      $scope.preview2 = function(id){
+            window.open("http://w3.cnnp.com.cn/pages/portal/index.html?style="  + id, "_blank");
       };
 
       $scope.moveUp = function(){
@@ -171,11 +236,11 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       }
 
       $scope.moveDown = function(){
-            var index = document.getElementById('multiselect').options[document.getElementById('multiselect').selectedIndex].index;
+            var index = document.getElementById('multiselect_to').options[document.getElementById('multiselect_to').selectedIndex].index;
             if(index < ($scope.addStyleList.length  - 1)){
                   var option = document.getElementById('multiselect_to').options[index];
                   document.getElementById('multiselect_to').options[index] = document.getElementById('multiselect_to').options[index + 1];
-                  document.getElementById("multiselect_to").insertAfter(option, document.getElementById('multiselect_to').options[index]);
+                  document.getElementById("multiselect_to").insertBefore(option, document.getElementById('multiselect_to').options[index + 1]);
             }
       }
 });
