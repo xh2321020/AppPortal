@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>门户配置管理-门户管理</title>
-        <base href="http://10.15.251.110/"/>
+        <base href="" id="baseTag">
+        <script>
+            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        </script>
         <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/portalManage/style.css">
     </head>
@@ -12,7 +15,7 @@
     <header><com-header></com-header></header>
 
     <div ng-controller="PortalAdminCtrl" class="content-border">
-        <div class="container">
+        <div class="container" style="max-width: 100% !important;">
             <div class="row">
                 <div class="col-md-1">
                     <div ng-include="'/pages/portalManage/tmp_navigation.html'"></div>
@@ -37,7 +40,8 @@
                                         <th class="th-text">门户ID</th>
                                         <th class="th-text">门户名称</th>
                                         <th class="th-text">门户类型</th>
-                                        <th class="th-text">管理员</th>
+                                        <!--<th class="th-text">管理员</th>-->
+                                        <th class="th-text">优先级(大靠前)</th>
                                         <th class="th-text">状态</th>
                                         <th class="th-text">更新时间</th>
                                         <th class="th-text">操作</th>
@@ -45,23 +49,24 @@
                                     </thead>
                                     <tbody>
                                     <div>
-                                        <tr class="odd gradeX" ng-repeat="portal in portalList">
+                                        <tr class="odd gradeX" ng-repeat="portal in portalList | orderBy:'-updatetime'">
                                             <td class="td-text">{{portal.id}} </td>
                                             <td class="td-text">{{portal.name}} </td>
-                                            <td class="td-text" ng-if="portal.hptype == 0">企业门户</td>
+                                            <td class="td-text" ng-if="portal.hptype == 0" style="color: #00b0f0">公司门户</td>
                                             <td class="td-text" ng-if="portal.hptype == 1">部门门户</td>
                                             <td class="td-text" ng-if="portal.hptype == 2">专题门户</td>
-                                            <td class="td-text">
-                                                <span ng-repeat="admin in portal.admin">{{admin.username}}</span>
-                                            </td>
+                                            <!--<td class="td-text">-->
+                                                <!--<span ng-repeat="admin in portal.admin">{{admin.username}}</span>-->
+                                            <!--</td>-->
+                                            <td class="td-text">{{portal.priority}} </td>
                                             <td class="td-text" ng-show="portal.status == 1">启用</td>
-                                            <td class="td-text" ng-show="portal.status == 0">停用</td>
+                                            <td class="td-text" ng-show="portal.status == 0" style="color: #ddd">停用</td>
                                             <td class="td-text">{{portal.updatetime}} </td>
                                             <td class="td-text">
                                                 <div>
                                                     <a ng-click="addClick(false, portal)">编辑</a>
                                                     <a ng-click="portalOperate($index, 'del')">删除</a>
-                                                    <a ng-click="portalBuild()">生成页面</a>
+                                                    <!--<a ng-click="portalBuild()">生成页面</a>-->
                                                     <a ng-click="portalOperate($index, 'start')" ng-if="portal.status == 0">启用</a>
                                                     <a ng-click="portalOperate($index, 'stop')" ng-if="portal.status == 1">停用</a>
                                                 </div>
@@ -99,19 +104,19 @@
                                 <tr>
                                     <td class="td-text-left" colspan="2">门户说明</td>
                                     <td colspan="4"><input class="input-padding" size="50" type="text" ng-model="curPortal.description" placeholder="请输入门户说明"></td>
-                                    <td class="td-text-left" colspan="2">门户优先级(优先级越大，<显示越靠></显示越靠>前)</td>
+                                    <td class="td-text-left" colspan="2">门户优先级(数字越大，显示越靠前)</td>
                                     <td colspan="3">
                                         <input class="input-padding" style="width: 120px" type="text" ng-model="curPortal.priority" placeholder="请输入门户优先级">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="td-text-left" colspan="2">门户管理员</td>
-                                    <td colspan="8"><input class="input-padding" size="60" type="text" ng-model="curPortal.admin[0].username" readonly>
-                                        <div id="userselect" style="display: inline">
-                                            <button class="btn btn-primary" readonly ng-click="addPeopleClick()">选择管理员</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <!--<tr>-->
+                                    <!--<td class="td-text-left" colspan="2">门户管理员</td>-->
+                                    <!--<td colspan="8"><input class="input-padding" size="60" type="text" ng-model="curPortal.admin[0].username" readonly>-->
+                                        <!--<div id="userselect" style="display: inline">-->
+                                            <!--<button class="btn btn-primary" readonly ng-click="addPeopleClick()">选择管理员</button>-->
+                                        <!--</div>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
 
                                 <tr>
                                     <td colspan="10">
@@ -153,7 +158,7 @@
         <script src='/assets/libs/jquery.blockUI.js'></script>
         <script src="/assets/libs/vue.min.js"></script>
         <script>
-            var scriptList=['./dist/header-footer.js'];
+            var scriptList=['./dist/header-footer.js','./dist/portal.js'];
         </script>
         <script src="./dist/main.js"></script>
     </body>

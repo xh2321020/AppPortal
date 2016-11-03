@@ -138,7 +138,7 @@ eventApp.controller("AllCtrl", function($scope, $http, $timeout, EventService) {
                   "responsible": "",
                   "responsibledepartment": "",
                   "sourcelink": "",
-                  "createuserid": urlParams.userid,
+                  "createuserid": EventService.getCookie('userid') ? EventService.getCookie('userid') : "",
                   "createusername": EventService.getCookie('username') ? EventService.getCookie('username') : "",
                   "createtime": new Date().format("yyyy-MM-dd"),
                   "other": "",

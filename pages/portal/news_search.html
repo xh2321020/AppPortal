@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="http://10.15.251.110/"/>
+    <base href="" id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
     <title>新闻-搜索</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/portal/news.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/portal/news.css"/>
 </head>
 <body id="newsApp">
 <header><com-header></com-header></header>
@@ -31,7 +34,7 @@
                 <div>
                     <tr class="odd gradeX" v-for="news in curNewList" style="cursor:pointer;">
                         <td class="td-text" width="800" style="padding-left: 20px"><span  @click=newsClick(news.id) target='_blank'>{{news.title}}</span></td>
-                        <td class="td-text" width="150">{{news.newsfield}}</td>
+                        <td class="td-text" width="150">{{news.newsfield | blankReplace}}</td>
                         <td class="td-text" width="150">{{news.orgName}}</td>
                         <td class="td-text" width="300">{{news.publishDate}}</td>
                     </tr>
@@ -54,14 +57,14 @@
 
 <footer><com-footer></com-footer></footer>
 
-<script src="/assets/libs/vue.min.js"></script>
-<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/vue.min.js"></script>
+<script src="assets/libs/jquery/jquery.min.js"></script>
 <script>jQuery.support.cors=true;</script>
-<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
-<script src='/src/portal/news_search.js'></script>
-<script src='/assets/libs/jquery.blockUI.js'></script>
+<script src="assets/libs/bootstrap/bootstrap.min.js"></script>
+<script src='src/portal/news_search.js'></script>
+<script src='assets/libs/jquery.blockUI.js'></script>
 <script>
-    var scriptList=['./dist/header-footer.js'];
+    var scriptList=['./dist/header-footer.js','./dist/portal.js'];
 </script>
 <script src="./dist/main.js"></script>
 </body>
