@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>门户配置管理-门户管理</title>
-        <base href="http://10.15.251.110/"/>
+        <base href="" id="baseTag">
+        <script>
+            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        </script>
         <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/portalManage/style.css">
     </head>
@@ -46,7 +49,7 @@
                                     </thead>
                                     <tbody>
                                     <div>
-                                        <tr class="odd gradeX" ng-repeat="portal in portalList">
+                                        <tr class="odd gradeX" ng-repeat="portal in portalList | orderBy:'-updatetime'">
                                             <td class="td-text">{{portal.id}} </td>
                                             <td class="td-text">{{portal.name}} </td>
                                             <td class="td-text" ng-if="portal.hptype == 0" style="color: #00b0f0">公司门户</td>
@@ -155,7 +158,7 @@
         <script src='/assets/libs/jquery.blockUI.js'></script>
         <script src="/assets/libs/vue.min.js"></script>
         <script>
-            var scriptList=['./dist/header-footer.js'];
+            var scriptList=['./dist/header-footer.js','./dist/portal.js'];
         </script>
         <script src="./dist/main.js"></script>
     </body>

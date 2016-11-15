@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"></title>
         <title>组件配置管理-组件管理</title>
-        <base href="http://10.15.251.110/"/>
+        <base href="" id="baseTag">
+        <script>
+            document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        </script>
         <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/portalManage/style.css">
         <link rel="stylesheet" href="/assets/css/portalManage/simplelightbox.min.css">
@@ -155,7 +158,10 @@
                                             <option value="style7">样式7</option>
                                             <option value="style8">样式8</option>
                                             <option value="style9">样式9</option>
-                                            <option value="style110">样式10</option>
+                                            <option value="style10">样式10</option>
+                                            <option value="style11">样式11</option>
+                                            <option value="style12">样式12</option>
+                                            <option value="style13">样式13</option>
                                         </select>
 
                                         <a class="btn btn-primary big" style="margin-left: 20px" href="/assets/images/style_sample.png" rel="lightbox-tour">组件样式参考图片</a>
@@ -438,7 +444,7 @@
         <script src='/assets/libs/simple-lightbox.min.js'></script>
         <script src="/assets/libs/vue.min.js"></script>
         <script>
-            var scriptList=['./dist/header-footer.js'];
+            var scriptList=['./dist/header-footer.js','./dist/portal.js'];
         </script>
         <script src="./dist/main.js"></script>
     </body>

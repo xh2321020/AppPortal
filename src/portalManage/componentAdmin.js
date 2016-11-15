@@ -40,7 +40,7 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                               "columnid": '',
                               "styleid": "",
                               "code": "",
-                              "more_url": "http://10.15.251.110/pages/portal/news_more.html?type=",
+                              "more_url": "http://w3.cnnp.com.cn/pages/portal/news_more.html?type=",
                               "ismore": "1",
                               "url": "",
                               "content_type": "application/json",
@@ -179,18 +179,18 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
       };
 
       $scope.column1Select = function(){
-            $scope.curComponent.formin[0].url = "http://10.15.251.110:8010/api/news/"+ $scope.addParams.columns[0].id + "?size=4";
-            $scope.curComponent.formin[0].more_url = "http://10.15.251.110/pages/portal/news_more.html?type="+ $scope.addParams.columns[0].id;
+            $scope.curComponent.formin[0].url = "http://w3.cnnp.com.cn:8010/api/news/"+ $scope.addParams.columns[0].id + "?size=4";
+            $scope.curComponent.formin[0].more_url = "http://w3.cnnp.com.cn//pages/portal/news_more.html?type="+ $scope.addParams.columns[0].id;
       };
 
       $scope.column2Select = function(){
-            $scope.curComponent.formin[1].url = "http://10.15.251.110:8010/api/news/"+ $scope.addParams.columns[1].id + "?size=4";
-            $scope.curComponent.formin[1].more_url = "http://10.15.251.110/pages/portal/news_more.html?type="+ $scope.addParams.columns[1].id;
+            $scope.curComponent.formin[1].url = "http://w3.cnnp.com.cn:8010/api/news/"+ $scope.addParams.columns[1].id + "?size=4";
+            $scope.curComponent.formin[1].more_url = "http://w3.cnnp.com.cn/pages/portal/news_more.html?type="+ $scope.addParams.columns[1].id;
       };
 
       $scope.column3Select = function(){
-            $scope.curComponent.formin[2].url = "http://10.15.251.110:8010/api/news/"+ $scope.addParams.columns[2].id + "?size=4";
-            $scope.curComponent.formin[2].more_url = "http://10.15.251.110/pages/portal/news_more.html?type="+ $scope.addParams.columns[2].id;
+            $scope.curComponent.formin[2].url = "http://w3.cnnp.com.cn:8010/api/news/"+ $scope.addParams.columns[2].id + "?size=4";
+            $scope.curComponent.formin[2].more_url = "http://w3.cnnp.com.cn/pages/portal/news_more.html?type="+ $scope.addParams.columns[2].id;
       };
 
       var getColumnListData = function(hpid, callback){
@@ -271,44 +271,4 @@ portalApp.controller("componentAdminCtrl", function($scope, $window, $http, Port
                   }
             });
       };
-
-      //var dataList = PortalService.getData();
-      //var columnid = [17041,17043,17044,17045, 17046,17047,17048,17049, 17050,17051,17052,17053,17054,17055];
-      //for(var i = 0, j = dataList.length; i < j; i++){
-      //      var tmp = dataList[i];
-      //      var url = tmp.SUBCARDS[0].DATASOURCE.URL;
-      //      var data = {
-      //            "hpid": 100,
-      //            "name": tmp.SUBCARDS[0].SUBCARD_ZH,
-      //            "styleid": "",
-      //            "status": "2",
-      //            "description": tmp.SUBCARDS[0].SUBCARD_ZH,
-      //            "width": tmp.CARD_WIDTH,
-      //            "createuserid": '1',
-      //            "createusername": '1',
-      //            "top_color": "#00A2E5",
-      //            "formin": [{
-      //                  "name": tmp.SUBCARDS[0].SUBCARD_ZH,
-      //                  "form_inid": "1",
-      //                  "columnid": columnid[i],
-      //                  "styleid": tmp.SUBCARDS[0].SUBCARD_TYPE,
-      //                  "code": "",
-      //                  "more_url": "http://10.15.251.110/pages/portal/news_more.html?type=" + url.substring(url.indexOf("news/") + 5, url.indexOf("?")),
-      //                  "ismore": "1",
-      //                  "url": url,
-      //                  "content_type": "application/json",
-      //                  "method": "get",
-      //                  "payload": "",
-      //                  "querystring": "&apikey=a16cb0c916404be78cb0805fefc7d26a"
-      //            }]
-      //      };
-      //      var requestUrl = PortalService.getHostName();
-      //      requestUrl += "/api/homepage/homepageform/add";
-      //      PortalService.sendPostRequest(requestUrl, data, function(response){
-      //            console.log("curComponent:" + response);
-      //            if(true){
-      //                  PortalService.showAlert("新增成功");
-      //            }
-      //      });
-      //}
 });

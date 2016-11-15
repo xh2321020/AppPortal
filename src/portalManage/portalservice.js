@@ -6,6 +6,7 @@ var portalApp = angular.module("portalApp", []);
 portalApp.service( 'PortalService', [ '$rootScope', '$http', '$timeout', function( $rootScope, $http, $timeout) {
 //    var configHostName = 'http://172.16.51.144:8000';
 	var configHostName = "http://10.15.251.110:8010";
+    var configHostName = "http://w3.cnnp.com.cn:8010";
 //    var userHostName = 'http://172.16.51.137:8010/';
     var userHostName = configHostName;
     var userId = '1234567';

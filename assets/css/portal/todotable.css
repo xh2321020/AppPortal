@@ -1,13 +1,13 @@
 .grid-table{
-    /*padding: 0;*/
-    /*padding-top: 0.5rem;*/
-    width: 100%;
-    /*margin-left: 1rem;*/
+    padding: 0;
+    padding-top: 0.5rem;
+    width: 93%;
+    margin-left: 1rem;
     height: 33rem;
     float: left;
 }
 .grid-table thead{
-    background:url("../../images/th_graph.png");
+    background:url("../images/th_graph.png");
     background-size: cover;
 }
 .grid-table th{

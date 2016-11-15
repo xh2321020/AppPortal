@@ -66,7 +66,7 @@
      100%   {transform: rotate(360deg)};
     }
      .cover{
-        /*position:absolute;
+      /*  position:absolute;
         width: 100%;
         height: 100%;
         z-index: 100;
@@ -89,7 +89,7 @@
         vertical-align: middle;
         margin:0 auto ;
         border-radius: 50%;
-        background: none;
+        /*background: none;*/
         opacity: 0.8;
     /*animation: loadingRotate 1s linear 0.05s  infinite;*/
      }
@@ -107,9 +107,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">责任领导选择(仅搜索领导)</h4>
+                    <h4 class="modal-title">{{givenParams.title}}</h4>
                 </div>
                 <div class="modal-body">
+                <div v-show="(currentView=='business')">
                     <div class="input"><input type="text" class="form-control inputSuccess1" v-model="input"
                                               @keyup="searchInput"></div>
                    <section class="search-result">
@@ -125,9 +126,7 @@
                         <tbody>
                         <tr v-for="member in members">
                             <td v-for="n in 3">{{member.orgtree[n+1]?member.orgtree[n+1].name:""}}</td>
-                            <!-- <td >{{member.orgtree[1]?member.orgtree[1].name:""}}</td>
-                            <td>{{member.orgtree[1]?member.orgtree[1].name:""}}</td> -->
-                            <td>{{member.displayname}}</td>
+                            <td>{{member.displayName}}</td>
                             <td>
                                 <button class="btn btn-default" @click="addUser(member)">添加</button>
                             </td>
@@ -137,18 +136,28 @@
                     </table>
                     <div class="result">
                         <ul class="list">
-                            <li v-for="user in selected" class="btn btn-primary" @click="removeUser($index,event)">
-                                <a v-text="user.displayname" style="color: white;">
+                            <li v-for="user in selectedUsers" class="btn btn-primary" @click="removeUser($index,event)">
+                                <a v-text="user.displayName" style="color: white;">
                                 </a><i class="glyphicon glyphicon-remove"></i></li>
                         </ul>
                     </div>
                         <div class="cover">
-                            <img class="loading" :src="'assets/images/loading3.gif'"></img>
+                            <img class="loading" :src="'assets/images/loading3.gif'">
                         </div>
                    </section>
                 </div>
+                <div v-show="currentView=='dialog1'">
+                      <p style="margin: 0 auto;">不可重复添加</p>
+                </div>
+                 <div v-show="currentView=='dialog2'">
+                     <p >只能选择一个候选人，请移除后再添加..</p>
+                 </div>
+                    
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+                      <button type="button" v-show="currentView!='business'" class="btn btn-default" @click="dialogClose">确定</button>
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
@@ -165,38 +174,44 @@
             members: [],
             // options:[],
             input: "",
-            request: {}
+            request: {},
+            multiple:true,
+            leaderOnly:true,
+            searchuserUrl:"",
+            title:"",
+            currentView:"business"
         };
     }
     ,
-    props:["supervisionRequest", "multiple", 'leaderOnly','selected'],
+    props:["givenParams",'selectedUsers'],
            
     created()
     {
-        if (this.multiple == "false")this.multiple = false;
-        else this.multiple = true;
-        if (this.leaderOnly == "false")this.leaderOnly = false;
-        else this.leaderOnly = true;       
-    }
-    ,
-    ready()
-    {
-
-    }
-    ,
+        this.multiple=this.givenParams.multiple;
+        this.leaderOnly=this.givenParams.leaderOnly;
+        this.searchuserUrl=this.givenParams.searchuserUrl;      
+    },
     methods:{
+        dialogClose:function () {
+        // body...
+        this.currentView="business";
+        },
         selectMember:function (item) {
             this.selected = item;
         },
         searchInput()
         {
             let _this = this;
-            let input = this.input.trim();
+            let input = this.input.replace(/(^\s*)|(\s*$)/g,"");
             if (input == ""){
+                 if (_this.request.readyState && _this.request.readyState != 4) {
+                        _this.request.abort();
+                        $(".cover").hide();
+                    }
                 return;}
             let timer = setTimeout(() =>{   
                 clearTimeout(timer);
-                let inputVal = _this.input.trim();
+                let inputVal = _this.input.replace(/(^\s*)|(\s*$)/g,""); 
                 if (inputVal != input) {
                     return;
                 } else {
@@ -205,10 +220,10 @@
                         _this.request.abort();
                         $(".cover").hide();
                     }
-
                     _this.request = $.ajax({
                         type: "get",
-                        url: this.supervisionRequest.searchuserUrl + "&q=" + inputVal,
+                        url: this.searchuserUrl +"?"+$.param($.extend(window.interfaceSettings.supervisionRequest.header,{q:encodeURIComponent(inputVal)})),
+                        timeout:6000,
                         success(result, state, jqxhr)
                     {
                         let members = [];
@@ -230,13 +245,22 @@
                             count++
                             if (count == 4)break;
                         }
+                        // console.log("members",members)
+                        _this.members=[];
                         _this.members = members;
                          $(".cover").hide();
                     }
                 ,
+                　complete : function(xhr,status){ //请求完成后最终执行参数
+            　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
+                    $(".cover").hide();
+             　　　　　 _this.request.abort();
+            　　　　　  alert("请求超时");
+            　　　　}
+            　　},
                     error(result, state, jqxhr)
                     {   $(".cover").hide();
-                        console.log("error", jqxhr);
+                        // console.log("error", jqxhr);
                     }
                 }
             );
@@ -252,21 +276,21 @@
     addUser(item)
     {
         if (item.selected) {
-            alert("不可重复添加")
+            this.currentView="dialog1";
             return;
         }
-        if (this.multiple || this.selected.length == 0) {
-            this.selected.push(item);
-            item.selected = true;
+        if (this.multiple || this.selectedUsers.length == 0) {
+            this.selectedUsers.push(item);
+            item.selectedUsers = true;
         } else {
-            alert("只能选择一个候选人，请移除后再添加..")
+            this.currentView="dialog2";
         }
     }
     ,
     removeUser(index)
     {
-        this.selected[index].selected = false;
-        this.selected.splice(index, 1);
+        this.selectedUsers[index].selected = false;
+        this.selectedUsers.splice(index, 1);
     }
     }
     }

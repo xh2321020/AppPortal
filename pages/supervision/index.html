@@ -48,12 +48,12 @@
     <com-footer></com-footer>
 </footer>
 <script>
-    var scriptList=['./dist/header-footer.js','./dist/portal.js'];
+    var scriptList=['./dist/header-footer.js?timestramp='+(new Date().getTime()),'./dist/portal.js?timestramp='+(new Date().getTime())];
     loadScript("assets/libs/vue.min.js");
     loadScript("assets/libs/jquery.min.js",function(){
         loadScript("assets/libs/bootstrap.min.js");
         window.pageName="portal";
-        loadScript("./dist/main.js");
+        loadScript("./dist/main.js?timestramp="+(new Date().getTime()));
     });
     // loadScript("assets/libs/video-js/jQuery-video5.8/js/video.min.js",function(){
     //     videojs.options.flash.swf = "assets/libs/video-js/video-js.swf";

@@ -1,1 +1,472 @@
-!function(e){function t(a){if(r[a])return r[a].exports;var s=r[a]={exports:{},id:a,loaded:!1};return e[a].call(s.exports,s,s.exports,t),s.loaded=!0,s.exports}var r={};return t.m=e,t.c=r,t.p="",t(0)}([function(e,t,r){"use strict";function a(e){return e&&e.__esModule?e:{"default":e}}var s=r(9),n=a(s),o=r(12),i=window.interfaceSettings.supervisionRequest.api;window.userLoginInfo={userid:(0,o.getCookie)("userid"),username:(0,o.getCookie)("username")};for(var c=new Vue({el:"#filterSection",data:{userLoginInfo:{},filterOptions:{areaCode:[],sourceCode:[],responsiblesn:""},dateFilter:[{title:"全部",status:!0},{title:"上周",status:!0},{title:"本周",status:!0},{title:"下周",status:!0},{title:"时段",status:!0}],dateOptions:{show:!1,type:"date",value:"2016-6-21",begin:"2016-6-20",end:"2016-12-25",x:0,y:0,range:!0},area:[],source:[],derivedMeeting:[],stateList:[{label:"正常",value:!0,feature:"label-success",margin:"50%"},{label:"一周内过期",value:!0,feature:"label-warning",margin:""},{label:"已过期",value:!0,feature:"label-danger",margin:""},{label:"已完成",value:!1,feature:"label-default",margin:""}]},methods:{changeTime:function(e){e.stopPropagation();var t=e.currentTarget,r=$(t),a=t.getAttribute("data-mark");if(!r.hasClass("btn-success")||"custom"==a){switch($("#datePicker").find(".btn").removeClass("btn-success"),r.addClass("btn-success"),a){case"all":delete this.filterOptions.searchBeginDate,delete this.filterOptions.searchEndDate;break;case"lastweek":this.filterOptions.searchBeginDate=moment().day(-6).format("YYYY-MM-DD"),this.filterOptions.searchEndDate=moment().day(0).format("YYYY-MM-DD");break;case"thisweek":this.filterOptions.searchBeginDate=moment().weekday(1).format("YYYY-MM-DD"),this.filterOptions.searchEndDate=moment().day(7).format("YYYY-MM-DD");break;case"nextweek":this.filterOptions.searchBeginDate=moment().day(8).format("YYYY-MM-DD"),this.filterOptions.searchEndDate=moment().day(14).format("YYYY-MM-DD");break;case"custom":var s=$("#startDate").val().split("/"),n=$("#endDate").val().split("/");this.filterOptions.searchBeginDate=s[2]+"-"+s[0]+"-"+s[1],this.filterOptions.searchEndDate=n[2]+"-"+n[0]+"-"+n[1]}d.fetchTransactions(i.searchUrl)}},changeArea:function(e,t){if("source"==t&&(0==e||"MEETING"==this.source[e].diccode))for(var r=this.filterOptions.sourceCode,a=this.derivedMeeting,s=0;s<a.length;s++){var n=$.inArray(a[s].diccode,r);n>-1&&(r.splice(n,1),this.derivedMeeting[s].status="0")}var o=this[t];if(0==e){if("1"==o[0].status)return;o[0].status="1";for(var c=1,u=o.length;u>c;c++)o[c].status="0";this.filterOptions[t+"Code"]=[]}else{var l=this.filterOptions[t+"Code"];if(o[0].status="0","1"==o[e].status){o[e].status="0";for(var f in l)l[f]==o[e].diccode&&l.splice(f,1)}else o[e].status="1",l.push(o[e].diccode);this.filterOptions[t+"Code"]=l}this[t]=o,d.fetchTransactions(i.searchUrl)},changeMeeting:function(e){var t=this.source,r=this.filterOptions.sourceCode;if("1"==t[0].status){t[0].status="0";var a=$.inArray(t[0].diccode,r);r.splice(a,1)}for(var s=1;s<t.length;s++)if("MEETING"==t[s].diccode&&"1"==t[s].status){t[s].status="0";var n=$.inArray(t[s].diccode,r);r.splice(n,1);break}var o=this.derivedMeeting[e],c=$.inArray(o.diccode,r);c>-1?(r.splice(c,1),o.status="0"):(o.status="1",r.push(o.diccode)),d.fetchTransactions(i.searchUrl)}},created:function(){var e=this,t={supAreaUrl:i.supAreaUrl,supSourceUrl:i.supSourceUrl,completedRateStatistics:i.completedRateStatistics};for(var r in t)"completedRateStatistics"==r?t[r]=(0,o.setSupervisionHeader)(t[r],null,window.userLoginInfo.userid):t[r]=(0,o.setSupervisionHeader)(t[r]),$.ajax({type:"get",dataType:"json",url:t[r],success:function(t,r,a){var s=a.key;if("completedRateStatistics"==s){var n=t[1]+"/"+(t[0]+t[1]);return void $("#completedRateStatistics").text(n)}for(var o in t)t[o].status="0";var i=[{status:"1",dicname:"全部"}];if("supAreaUrl"==s)e.area=i.concat(t);else{for(var c=[],u=[],l=0;l<t.length;l++)"10019"==t[l].parentid?c.push(t[l]):u.push(t[l]);e.derivedMeeting=c,e.source=i.concat(u)}},error:function(e,t,r){console.log(r.key),console.log(e)}}).key=r},ready:function(){$("#startDate").daterangepicker({singleDatePicker:!0,showDropdowns:!0},function(e,t,r){}),$("#endDate").daterangepicker({singleDatePicker:!0,showDropdowns:!0})}}),u=new Array(8),l=0;8>l;l++)u[l]="sorting";var d=new Vue({el:"#result-section",data:{ths:[{key:"code",val:"督办编号"},{key:"name",val:"督办事项名称"},{key:"accountablename",val:"发起人(A)"},{key:"responsiblename",val:"责任人(R)"},{key:"estimatedcompletetiontime",val:"计划完成时间"},{key:"urgency",val:"紧急程度"},{key:"importance",val:"重要程度"},{key:"rate",val:"最新进展"}],keyItems:{sorting:u,total:[],show:[],current:1},otherItems:{sorting:u,total:[],show:[],current:1},doneItems:{sorting:u,total:[],show:[],current:1},levelBackground:["gray","#A1C636","#5CB85C","#F0AD4E","#D9534F"],sizeOptions:[{text:"3",value:"3"},{text:"10",value:"10"},{text:"20",value:"20"}]},created:function(){this.userLoginInfo={userid:(0,o.getCookie)("userid"),username:(0,o.getCookie)("username")},this.fetchTransactions(i.searchUrl)},ready:function(){var e=this;$(".pagesize").change(function(t){var r=t.currentTarget,a=r.getAttribute("data-key"),s=Number(e[a+"Items"].total.length);$("#"+a+"-pagination").extendPagination({totalCount:s,limit:r.value,name:a,callback:function(t,r,a,s){e.changePage(t,r,a,s)}}),e.changePage(1,r.value,s,a)})},methods:{changePage:function(e,t,r,a){var s=this[a+"Items"];s.current=e,this.changeHandler(e,a,s)},sortColumn:function(e,t){function r(e,t){return/^\d/.test(e)^/^\D/.test(t)?e>t?1:e==t?0:-1:e>t?-1:e==t?0:1}var a=this,s=this[t+"Items"],n=s.sorting[e];"sorting_asc"==n?!function(){var n=u.concat();n[e]="sorting_desc",s.sorting=n;var o=a.ths[e].key;s.total.sort(function(e,t){return r(t[o],e[o])}),a.changeHandler(s.current,t,s)}():!function(){var n=u.concat();n[e]="sorting_asc",s.sorting=n;var o=a.ths[e].key;s.total.sort(function(e,t){return r(e[o],t[o])}),a.changeHandler(s.current,t,s)}()},changeHandler:function(e,t,r){var a=$("#"+t+"PagesizeSelect").find("select").val();r.show=r.total.slice((e-1)*a,a*e)},fetchTransactions:function(e){e=(0,o.setSupervisionHeader)(e,{page:0,size:1e3});var t={};for(var r in c.filterOptions)t[r]=c.filterOptions[r];0==t.areaCode.length?delete t.areaCode:t.areaCode=t.areaCode.join(","),t.source=t.sourceCode,delete t.sourceCode,0==t.source.length?delete t.source:t.source=t.source.join(",");var a=this;t.accountableSN=this.userLoginInfo.userid,t.responsibleSN=this.userLoginInfo.userid,t=(0,n["default"])(t),$.ajax({type:"POST",dataType:"json",data:t,contentType:"application/json",url:e,success:function(e,t,r){for(var s=[],n=[],o=[],i=0,c=e.length;c>i;i++){var l=e[i];if(l.latestTrace?(l.rate=l.latestTrace.rate,l.latestDesc=l.latestTrace.description):(l.rate=0,l.latestDesc=""),l.rate<25?l.rateState="progress-bar-danger":l.rate<75?l.rateState="progress-bar-warning":l.rateState="progress-bar-success",1==l.status)s.push(l);else{var d=new moment,f=new moment(l.estimatedcompletetiontime),p=f.diff(d,"days");p>6&&l.urgency<4&&l.importance<4?o.push(l):n.push(l)}}var g={doneList:s,keyList:n,otherList:o},h=u.concat(),v=$("#"+name+"PagesizeSelect").find("select").val()||3,m=["key","other","done"];for(var y in m){var k=m[y];a[k+"Items"]={total:g[k+"List"],show:g[k+"List"].slice(0,v),sorting:h,current:1};var b=Number(v)||3,S=Number(a[k+"Items"].total.length);0==S?$("#"+k+"PagesizeSelect").hide():$("#"+k+"PagesizeSelect").show(),$("#"+k+"-pagination").extendPagination({totalCount:S,limit:b,name:k,callback:function(e,t,r,s){a.changePage(e,t,r,s)}})}},error:function(e,t,r){console.log(e)}})},newfunc:function(){}}})},,function(e,t){var r=e.exports={version:"2.4.0"};"number"==typeof __e&&(__e=r)},,,,,,,function(e,t,r){e.exports={"default":r(13),__esModule:!0}},,,function(e,t,r){"use strict";function a(e){return e&&e.__esModule?e:{"default":e}}function s(e,t,r,a,s,n){if(r){var o=new Date;o.setTime(o.getTime()+24*r*60*60*1e3);var i=o.toGMTString()}else var i="";var c=e+"="+escape(t);i&&(c+=";expires="+i),a&&(c+=";path="+escape(a)),s&&(c+=";domain="+escape(s)),n&&(c+=";secure="+n),document.cookie=c}function n(e){var t,r=new RegExp("(^| )"+e+"=([^;]*)(;|$)");return(t=document.cookie.match(r))?unescape(t[2]):null}function o(e){var t=new Date;t.setTime(t.getTime()-864e5),s(e,"",t)}function i(e){var t=new RegExp("(^|&)"+e+"=([^&]*)(&|$)","i"),r=window.location.search.substr(1).match(t);return null!=r?unescape(r[2]):null}function c(){$.blockUI({message:"数据获取中，请稍候... ...",css:{border:"none",padding:"15px",backgroundColor:"#000","-webkit-border-radius":"10px","-moz-border-radius":"10px",opacity:.5,color:"#fff"}})}function u(e,t){var r=function(e,r,a){t.list=e,t.successNext&&t.successNext()},a=function(e,t,r){console.log("error",e)},s={type:"get",url:e.URL+e.QueryString,success:r,error:a};"post"==e.METHOD&&(s={type:"post",url:e.URL+e.QueryString,data:e.PLAYLOAD,contentType:e.CONTENT_TYPE,success:r,error:a}),$.ajax(s)}Object.defineProperty(t,"__esModule",{value:!0}),t.fetchAjaxService=t.loadingCover=t.getQueryString=t.deleteCookie=t.getCookie=t.setCookie=t.add_supervision=t.fetch_sourceFromServer=t.fetch_areaFromServer=t.fetch_deptsFromServer=t.fetch_serviceByHttpProtocol=t.setSupervisionHeader=void 0;var l=r(9),d=a(l),f=window.interfaceSettings.supervisionRequest,p=function(e,t,r){return(r?e.replace("%id%",r):e)+"?"+(t?$.param($.extend({},f.header,t)):$.param(f.header))},g=function(e,t,r,a,s){"post"==t&&(r=(0,d["default"])(r)),$.ajax({url:e,type:t,data:r,contentType:"application/json",success:function(e,t,r){console.log("success"),a(e,t,r)},error:function(e,t,r){console.log("error"),s(e,t,r)}})},h=function(e,t){var r=p(f.api.deptUrl,null,e);g(r,"get",{},t,function(e,t,r){console.log(e)})},v=function(e){var t=p(f.api.supSourceUrl);g(t,"get",{},e,function(e,t,r){console.log(e)})},m=function(e){var t=p(f.api.supAreaUrl);g(t,"get",{},e,function(e,t,r){console.log(e)})},y=function(e,t){var r=p(f.api.supAddUrl);g(r,"post",e,t,function(e,t,r){console.log(e)})};t.setSupervisionHeader=p,t.fetch_serviceByHttpProtocol=g,t.fetch_deptsFromServer=h,t.fetch_areaFromServer=m,t.fetch_sourceFromServer=v,t.add_supervision=y,t.setCookie=s,t.getCookie=n,t.deleteCookie=o,t.getQueryString=i,t.loadingCover=c,t.fetchAjaxService=u},function(e,t,r){var a=r(2),s=a.JSON||(a.JSON={stringify:JSON.stringify});e.exports=function(e){return s.stringify.apply(s,arguments)}}]);
+/**
+ * Created by Mattia on 2016/6/12.
+ */
+// var requestInterfaces=require("../webconfig.js")
+
+import {getQueryString,getCookie,setSupervisionHeader} from '../common-function';
+let supervisionRequest=window.interfaceSettings.supervisionRequest.api;
+window.userLoginInfo={
+    userid:getCookie("userid"),
+    username:getCookie("username")
+};
+let filterVm = new Vue({
+    el: "#filterSection",
+    data: {
+        userLoginInfo:{},
+        filterOptions: {
+            areaCode: [],
+            sourceCode: [],
+            // accountablesn:"",
+            responsiblesn:""
+        },
+        dateFilter: [
+            {title: "全部", status: true},
+            {title: "上周", status: true},
+            {title: "本周", status: true},
+            {title: "下周", status: true},
+            {title: "时段", status: true}
+        ],
+        dateOptions: {
+            show: false,
+            type: "date", //date datetime
+            value: "2016-6-21",
+            begin: "2016-6-20",
+            end: "2016-12-25",
+            x: 0,
+            y: 0,
+            range: true,//是否多选
+        },
+        area: [], source: [],
+        derivedMeeting:[],
+        stateList: [
+            {label: "正常", value: true, feature: "label-success", margin: '50%'},
+            {label: "一周内过期", value: true, feature: "label-warning", margin: ''},
+            {label: "已过期", value: true, feature: "label-danger", margin: ''},
+            {label: "已完成", value: false, feature: "label-default", margin: ''}
+        ]
+    },
+    methods: {
+        changeTime: function (ev) {
+            // 日期条件选择
+            let that = this;
+            ev.stopPropagation();
+            let curtar = ev.currentTarget;
+            let btn = $(curtar)
+            let mark = curtar.getAttribute("data-mark");
+            if (!btn.hasClass("btn-success")||mark=="custom") {
+                $("#datePicker").find(".btn").removeClass("btn-success");
+                btn.addClass("btn-success");
+               
+                switch (mark) {
+                    case "all":
+                        delete this.filterOptions.searchBeginDate;
+                        delete this.filterOptions.searchEndDate;
+                        break;
+                    case "lastweek":
+                        this.filterOptions.searchBeginDate = moment().day(-6).format("YYYY-MM-DD");
+                        this.filterOptions.searchEndDate = moment().day(0).format("YYYY-MM-DD");
+                        break;
+                    case "thisweek":
+                        this.filterOptions.searchBeginDate = moment().weekday(1).format("YYYY-MM-DD");
+                        this.filterOptions.searchEndDate = moment().day(7).format("YYYY-MM-DD");
+                        break;
+                    case "nextweek":
+                        this.filterOptions.searchBeginDate = moment().day(8).format("YYYY-MM-DD");
+                        this.filterOptions.searchEndDate = moment().day(14).format("YYYY-MM-DD");
+                        break;
+                    case "custom":
+                    this.filterOptions.searchBeginDate=$("#startDate").val();
+                   this.filterOptions.searchEndDate= $("#endDate").val();
+                    break;
+                }  
+                resultVm.fetchTransactions(supervisionRequest.searchUrl);
+            }
+        },
+        changeArea: function (index,filter) {
+            // console.log(JSON.stringify(this.area.show));return;
+            if(filter=="source"&&(index==0||this.source[index].diccode=="MEETING")){
+                let sourceArray=this.filterOptions["sourceCode"];
+                 let meetings=this.derivedMeeting;
+            for(let i=0;i<meetings.length;i++){
+                let metindex=$.inArray(meetings[i].diccode,sourceArray);
+                if(metindex>-1){
+                    sourceArray.splice(metindex,1);
+                    this.derivedMeeting[i].status="0";
+                }
+            }
+           }
+
+             let area = this[filter];
+            if (index == 0) {          
+                if(area[0].status=="1")return;      //all
+                area[0].status = "1";
+                for (let i = 1, len = area.length; i < len; i++) {
+                    area[i].status = "0";
+                }
+                this.filterOptions[filter+"Code"] = [];
+            } else {
+                //other
+                let areaCode = this.filterOptions[filter+"Code"];
+                area[0].status = "0";
+                if (area[index].status == "1") {
+                    area[index].status = "0";
+
+                    for (let i in areaCode) {
+                        if (areaCode[i] == area[index].diccode) {
+                            areaCode.splice(i, 1);
+                        }
+                    }
+                }
+                else {
+                    area[index].status = "1";
+                    areaCode.push(area[index].diccode);
+                }
+                this.filterOptions[filter+"Code"] = areaCode;
+            }
+             this[filter]=area;
+            //
+            resultVm.fetchTransactions(supervisionRequest.searchUrl);
+        },
+        changeMeeting:function (index) {
+            // body...
+            let source =this.source;
+            let options=this.filterOptions["sourceCode"];
+            if(source[0].status=="1"){
+                 source[0].status="0";
+                 let indMeeting0=$.inArray(source[0].diccode,options);
+                  options.splice(indMeeting0,1);//markable for responsive options
+              }
+            for(let i=1;i<source.length;i++){
+                if(source[i].diccode=="MEETING"&&source[i].status=="1"){
+                    source[i].status="0";                   
+                  let indMeeting=$.inArray(source[i].diccode,options);
+                  options.splice(indMeeting,1);//markable for responsive options
+                  break;
+                }
+            }
+            let targetOption=this.derivedMeeting[index];
+            let targetIndex=$.inArray(targetOption.diccode,options);
+            if(targetIndex>-1){
+                options.splice(targetIndex,1);
+                targetOption.status="0";
+            }else{
+                targetOption.status="1";
+                options.push(targetOption.diccode);
+            }
+
+             resultVm.fetchTransactions(supervisionRequest.searchUrl);
+        }
+
+    },
+    created: function () {
+        let _this = this;        
+        var urls = {
+            'supAreaUrl': supervisionRequest["supAreaUrl"],
+            "supSourceUrl": supervisionRequest["supSourceUrl"],
+            "completedRateStatistics":supervisionRequest["completedRateStatistics"]
+        };
+        for (let key in urls) {
+             if(key=="completedRateStatistics") {
+                urls[key]=setSupervisionHeader(urls[key],null,window.userLoginInfo.userid);
+             }
+                else urls[key]=setSupervisionHeader(urls[key]);
+           
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                // contentType:"application/json;charset=UTF-8",
+                url: urls[key],
+                success: function (result, state, jqxhr) {
+                    let name = jqxhr.key;
+                     if(name=="completedRateStatistics"){
+                        let completedRateStatistics=result[1]+"/"+(result[0]+result[1]);
+                        $("#completedRateStatistics").text(completedRateStatistics);
+                        return;
+                     }
+                    for (let i in result) {
+                        result[i].status = "0";
+                    }
+                  
+                    let show = [{status: "1", dicname: "全部"}];
+                    if (name == "supAreaUrl") {
+                        //领域
+                        _this.area =show.concat(result);
+                    } else {
+                        //督办来源
+                         let derived=[],spliced=[];
+                        for(let sourcei=0;sourcei<result.length;sourcei++){
+                            if(result[sourcei].parentid=="10019"){
+                                derived.push(result[sourcei]);
+                            }else{
+                                spliced.push(result[sourcei]);
+                            }
+                        }  
+                        _this.derivedMeeting=derived;
+                        _this.source = show.concat(spliced);
+                    }
+                },
+                error: function (data, state, jqxhr) {
+                    // console.log(jqxhr.key)
+                    // console.log(data)
+                }
+            }).key = key;
+        }
+
+
+    },
+    ready: function () {
+        // body...
+        $("#startDate").daterangepicker({
+            language:"zh-CN",
+            singleDatePicker: true,
+            showDropdowns: true
+        });
+        $("#endDate").daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        });
+    }
+});
+let sortings = new Array(8);
+(function () {
+    for (leti = 0; i > 8; i++) {
+        sortings[i] = "sorting";
+    }
+});
+for (let i = 0; i < 8; i++)sortings[i] = "sorting";
+
+var resultVm = new Vue({
+    el: "#result-section",
+    data: {
+        ths: [{key: "code", val: '督办编号'},
+            {key: "name", val: '督办事项名称'},
+            {key: "accountablename", val: '发起人(A)'},
+            {key: "responsiblename", val: '责任人(R)'},
+            {key: "estimatedcompletetiontime", val: '计划完成时间'},
+            {key: "urgency", val: '紧急程度'},
+            {key: "importance", val: '重要程度'},
+            {key: "rate", val: '最新进展'}
+        ],
+        keyItems: {
+            sorting: sortings,
+            total: [],
+            show: [],
+            current: 1
+        },
+        otherItems: {
+            sorting: sortings,
+            total: [],
+            show: [],
+            current: 1
+        },
+        doneItems: {
+            sorting: sortings,
+            total: [],
+            show: [],
+            current: 1
+        },
+        orgItems: {
+            sorting: sortings,
+            total: [],
+            show: [],
+            current: 1
+        },
+          levelBackground:["gray","#A1C636","#5CB85C","#F0AD4E","#D9534F"],
+        sizeOptions:[
+      { text: "3", value: "3"},
+      { text: "10", value: "10"},
+      { text: "20", value: "20"}
+        ]
+
+    },
+    created: function () {
+        let _this = this;
+        let userid=getCookie("userid"),username=getCookie("username");
+        if(userid&&userid!=""){
+        this.userLoginInfo={
+            userid:userid,
+            username:username
+        };
+        //search for the initialization
+        this.fetchTransactions(supervisionRequest.searchUrl);
+    }else{
+        location.href = "http://bjecm.cnnp.com.cn/pt/LoginServlet?url="+Base64.encode(window.location.href);
+    }
+        //fetch list end
+
+    },ready:function(){
+        let that=this;
+        $(".pagesize").change((ev)=>{
+
+            let target=ev.currentTarget;
+            let key=target.getAttribute("data-key");
+             var totalCount = Number(that[key + "Items"].total.length);
+            $('#' + key + '-pagination').extendPagination({
+                totalCount: totalCount,
+                limit: target.value,
+                name: key,
+                callback: function (curr, limit, totalCount, key) {
+                    that.changePage(curr, limit, totalCount, key);
+                }
+            });
+               that.changePage(1, target.value, totalCount, key);
+        });
+    },
+    methods: {
+        changePage: function (curr, limit, totalCount, name) {
+            let items = this[name + "Items"];
+            items.current = curr;
+            this.changeHandler(curr, name, items);
+        },
+        sortColumn: function (n, name) {
+
+            let items = this[name + "Items"];
+            let status = items.sorting[n];
+            if (status == "sorting_asc") {
+                //des sorting
+                let sorting = sortings.concat();
+                sorting[n] = "sorting_desc";
+                items.sorting = sorting;
+                let key = this.ths[n].key;
+                items.total.sort(function (a, b) {
+                    return sorter(b[key], a[key])
+                });
+                this.changeHandler(items.current, name, items);
+            } else {
+                //asc sorting
+                let sorting = sortings.concat();
+                sorting[n] = "sorting_asc";
+                items.sorting = sorting;
+                let key = this.ths[n].key;
+                items.total.sort(function (a, b) {
+                    return sorter(a[key], b[key])
+                });
+                this.changeHandler(items.current, name, items);
+            }
+
+            function sorter(a, b) {
+                if (/^\d/.test(a) ^ /^\D/.test(b)) return a > b ? 1 : (a == b ? 0 : -1);
+                return a > b ? -1 : (a == b ? 0 : 1);
+            }
+
+        },
+        changeHandler: function (curr, name, items) {
+            let pageSize = $("#"+name+"PagesizeSelect").find("select").val();
+            items.show = items.total.slice((curr - 1) * pageSize, pageSize * (curr));
+        },
+        fetchTransactions: function (url) {
+            url=setSupervisionHeader(url,{page:0,size:1000});
+            // //search for the tablelist
+            //  jQuery.support.cors = true;
+            let options = {
+
+            };
+            for (let key in filterVm.filterOptions) {
+                options[key] = filterVm.filterOptions[key];
+            }
+            if (options.areaCode.length == 0) {
+                delete options.areaCode;
+            }
+            else {
+                options.areaCode = options.areaCode.join(",");
+            }
+            options.source=options.sourceCode;
+            delete options.sourceCode;
+            if (options.source.length == 0) {
+                delete options.source;
+            }
+            else {
+                options.source = options.source.join(",");
+            }
+            let that = this;
+            options.accountableSN=this.userLoginInfo.userid;
+            options.responsibleSN=this.userLoginInfo.userid;
+            options = JSON.stringify(options);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data: options,
+                contentType: "application/json",
+                url: url,
+                success: function (result, state, jqxhr) {
+                    let doneList = [], keyList = [], otherList = [],orgList=[];
+                    for (let i = 0, len = result.length; i < len; i++) {
+                        let item = result[i];
+                        if (item.latestTrace) {
+                            item.rate = item.latestTrace.rate;
+                            item.latestDesc = item.latestTrace.description;
+                        } else {
+                            item.rate = 0;
+                            item.latestDesc = "";
+                        }
+                        if (item.rate < 25) {
+                            item.rateState = "progress-bar-danger";
+                        } else if (item.rate < 75) {
+                            item.rateState = "progress-bar-warning";
+                        } else {
+                            item.rateState = "progress-bar-success";
+                        }
+                        if(item.responsiblesn==that.userLoginInfo.userid){
+
+                            if (item.status == 1) {
+                                //已完成
+                                doneList.push(item);
+                            } else {
+                                //未完成
+                                let now = new moment(), comDate = new moment(item.estimatedcompletetiontime);
+                                let days = comDate.diff(now, "days");
+                                if (days > 6 && item.urgency < 4 && item.importance < 4) {
+                                    //other
+                                    otherList.push(item);
+                                } else {
+                                    //key
+                                    keyList.push(item);
+                                }
+                            }
+                    }else{
+                        orgList.push(item);
+                    }
+                    }
+                    let res = {doneList: doneList, keyList: keyList, otherList: otherList,orgList:orgList};
+                    let sorting = sortings.concat(), pageSize =$("#"+name+"PagesizeSelect").find("select").val()||3;
+                    let names = ['key', 'other', 'done','org'];
+                    for (let i in names) {
+                        let name = names[i];
+                        that[name + 'Items'] = {
+                            total: res[name + "List"],
+                            show: res[name + "List"].slice(0, pageSize),
+                            sorting: sorting,
+                            current: 1
+                        };
+
+                        let limit = Number(pageSize) || 3;
+                        var totalCount = Number(that[name + "Items"].total.length);
+                        if(totalCount<4)$("#"+name+"PagesizeSelect").hide();
+                        else $("#"+name+"PagesizeSelect").show();
+                        $('#' + name + '-pagination').extendPagination({
+                            totalCount: totalCount,
+                            // showCount: showCount,
+                            limit: limit,
+                            name: name,
+                            callback: function (curr, limit, totalCount, name) {
+                                that.changePage(curr, limit, totalCount, name);
+                            }
+                        });
+                    }
+
+                },
+
+                error: function (data, state, jqxhr) {
+                    // console.log(data)
+                }
+            });
+
+            //fetch list end
+        },
+        newfunc: function () {
+            
+        }
+    }
+
+    /* body... */
+});

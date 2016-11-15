@@ -22,7 +22,7 @@ input{height:20px; line-height:22px;}
 .longerField{width:450px}
 * input{vertical-align:middle}
 textArea{line-height:22px;overflow-y:auto}
-.focusField{border: #999999 1px solid; background: transparent url(../images/fieldBg2.gif) -1px -801px no-repeat; padding-left:5px; font-size:12px}   
+.focusField{border: #999999 1px solid; background: transparent url(/assets/images/portal/fieldBg2.gif) -1px -801px no-repeat; padding-left:5px; font-size:12px}
 .idleField{ border: #7f9db9 1px solid; background: transparent url(../images/fieldBg2.gif) -1px -1px no-repeat; padding-left:5px; font-size:12px}
 .noteArea{width:99%;height:150px; margin:5px auto;}
 .noteArea2{width:650px;height:200px;margin:5px auto;}

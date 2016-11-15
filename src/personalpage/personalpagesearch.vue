@@ -175,10 +175,10 @@
                         <img class="loading" :src="'assets/images/loading3.gif'"></img>
                     </div>
                     <div v-for="member in members" class="emp-class-result">
-                        <div class="emp-class" onclick="myFunction(\'{{member.employeeid}}\')">
+                        <div class="emp-class" onclick="myFunction(\'{{member.employeeID}}\')">
                             <img class="img emp-class-img" :src="member.imageurl"/>
                             <div class="emp-class-div">
-                                <span class="emp-class-div-p-span">{{member.displayname}}</span><br>
+                                <span class="emp-class-div-p-span">{{member.displayName}}</span><br>
                                 <div>
                                     <div v-for="n in 4" class="emp-class-div-p-span-org">
                                         {{member.orgtree[n+1]?member.orgtree[n+1].name:""}}
@@ -225,6 +225,7 @@
         },
         searchInput()
         {
+            var personalpageRequestVue = window.interfaceSettings.personalpageRequest.api;
             let _this = this;
             let input = this.input.trim();
             if (input == ""){
@@ -242,9 +243,10 @@
                     }
                     $(".cover").show();
                     $("#userInfo").html("");
+                    var searchuserURL= personalpageRequestVue.searchuserUrl +"?apikey=" + window.interfaceSettings.personalpageRequest.header.apikey+ "&q=" + inputVal
                     _this.request = $.ajax({
                         type: "get",
-                        url: "http://172.16.51.137:8010/api/contact/searchuser?apikey=e71982d5401b488da4acef8827c41845" + "&q=" + inputVal,
+                        url: searchuserURL,
                         success(result, state, jqxhr)
                     {
                         let members = [];
@@ -253,7 +255,7 @@
                             if ((typeof(result[i].imageurl) == "undefined") || (typeof(result[i].imageurl) == "")) {
                                 result[i].imageurl = "assets/images/personalpage/defaultUserPhoto.png";
                             } else {
-                                result[i].imageurl = "assets/images/personalpage/defaultUserPhoto.png";
+                                result[i].imageurl = window.interfaceSettings.personalpageRequest.server + result[i].imageurl;
                             }
                             let orgtree = result[i].orgtree;
                             if (orgtree) {
