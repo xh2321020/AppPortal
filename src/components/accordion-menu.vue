@@ -148,7 +148,7 @@ h1 a {
 		
 			<ul :id="accordion_id" class="accordion">
 				<li v-for="org in orgs">
-					<div class="link"><i class="fa fa-th-list"></i>{{org.name}}<i class="fa fa-chevron-down"></i></div>
+					<div class="link"><i class="fa fa-th-list"></i>{{org.shortname?org.shortname:name}}<i class="fa fa-chevron-down"></i></div>
 					<ul class="submenu">
 						
 						<li  v-for="dept in depts[org.ou]">
@@ -167,13 +167,11 @@ h1 a {
 			</ul>
 		</div>
 		<!-- accordion end -->
-
-       <!-- <com-accordion :selected-Depts.sync="selectedDepts" :supervision-request="requests" multiple="true"></com-accordion> -->
-      </div>
-     <!--  <div class="modal-footer">
+		  <div class="modal-footer">
      	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-     	<button type="button" class="btn btn-primary">Save changes</button>
-     </div> -->
+     </div>
+      </div>
+    
     </div>
   </div>
 </div>
@@ -183,6 +181,7 @@ h1 a {
 	
 </template>
 <script >
+let supervisionRequest=window.interfaceSettings.supervisionRequest;
 export default{
 	data(){
 		return{
@@ -202,14 +201,14 @@ props:["supervisionRequest","selectedDepts","multiple","btn_title"],
 		    $.ajax({
                 type: "get",
                 dataType: "json",
-                url: this.supervisionRequest.orgUrl,
+                url: supervisionRequest.api.orgUrl+"?"+$.param(supervisionRequest.header),
                 success: function (result, state, jqxhr) {
                     _this.orgs = result;
                     _this.fetchDepts();                   
                 },
                 error: function (data, state, jqxhr) {
-                    console.log(jqxhr.key)
-                    console.log(data)
+                    // console.log(jqxhr.key)
+                    // console.log(data)
                 }
             });
 	},
@@ -276,7 +275,7 @@ props:["supervisionRequest","selectedDepts","multiple","btn_title"],
 				$.ajax({
 				type:"get",
 				dataType: "json",
-				url:this.supervisionRequest.deptUrl,
+				url:supervisionRequest.api.deptUrl+"?"+$.param(supervisionRequest.header),
 				success:function(result,state,jqxhr){
 					if(result&&result.length>0){
 						// _this.depts[jqxhr.index.toString()]=result;	
@@ -317,7 +316,7 @@ props:["supervisionRequest","selectedDepts","multiple","btn_title"],
 					}					
 				},
 				error:function(data){
-					console.log(data)
+					// console.log(data)
 				}
 			});
 		},
@@ -328,7 +327,7 @@ props:["supervisionRequest","selectedDepts","multiple","btn_title"],
 				$.ajax({
 				type:"get",
 				dataType: "json",
-				url:this.supervisionRequest.deptUrl + depts[i].ou,
+				url:supervisionRequest.deptUrl.replace("%id%",depts[i].ou)+"?"+$.param(supervisionRequest.header),
 				success:function(result,state,jqxhr){
 					for(let j=0;j<result.length;j++){
 						result[j].selected=false;
@@ -351,7 +350,7 @@ props:["supervisionRequest","selectedDepts","multiple","btn_title"],
 						}				
 				},
 				error:function(data){
-					console.log(data)
+					// console.log(data)
 				}
 			}).index=depts[i].ou;
 			}

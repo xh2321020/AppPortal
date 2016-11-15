@@ -36,7 +36,8 @@
   	    },
   	    "api":{
   	        "portalSectorUrl": "/api/homepage/sector",
-  	        "catalogUrl": "/api/homepage/%id%"
+  	        "catalogUrl": "/api/homepage/%id%",
+            "previewUrl":"/api/homepage/preview/%id%"
   	    }
   	},
   	"personalpage":{

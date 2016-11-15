@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base  id="baseTag">
+    <base href="" id="baseTag">
     <script>
         document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
     </script>
@@ -32,10 +32,10 @@
     <div class="articleCon" style="width: 85%">
         <!--{{newsDetail.content}}-->
         <div style="margin:0px auto; text-align:center" ng-repeat="attachment in newsDetail.attachments" ng-if="attachment.file_from == '主附件' || attachment.file_from == '附件正文'">
-            <img style="margin: 10px" ng-if="attachment.name.indexOf('jpg') != -1" ng-src="{{attachment.path}}" width="600" height="400">
-            <img style="margin: 10px" ng-if="attachment.name.indexOf('JPG') != -1" ng-src="{{attachment.path}}" width="600" height="400">
-            <img style="margin: 10px" ng-if="attachment.name.indexOf('png') != -1" ng-src="{{attachment.path}}" width="600" height="400">
-            <img style="margin: 10px" ng-if="attachment.name.indexOf('PNG') != -1" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('jpg') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('JPG') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('png') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
+            <img style="margin: 10px" ng-if="attachment.name.indexOf('PNG') != -1 && params.isShowHeadPic" ng-src="{{attachment.path}}" width="600" height="400">
 
             <!--<embed id={{attachment.id}} style="margin: 10px" ng-if="attachment.file_type == 'pdf'" width="100%" src="http://bjecm.cnnp.com.cn/publish2/attachment/show?fileId=20291#pagemode=none" height="500px" type="application/pdf"></embed>-->
 

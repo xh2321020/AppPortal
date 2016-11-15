@@ -161,9 +161,10 @@ table.dataTable.no-footer{
     color: #0000C0;
 }
 .grid-table .key{
-    background-color: lightgrey;
+    background-color: #cae971;
 font-weight: bold;
-margin: 1rem 0;
+margin-top: 1rem;
+padding: 0.5rem 0;
 }
 
 .grid-table  th{

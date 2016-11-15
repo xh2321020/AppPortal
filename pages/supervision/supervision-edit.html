@@ -162,9 +162,25 @@
 			<td width="13%" class="al-right">附件</td>
 			<td colspan="3" class="al-left">
 			<div  style="width: 100%;position: relative;">
-			      
+			      <style scoped>
+					.attachment::before{
+						margin-bottom: -2px;
+						content: "";
+						display: inline-block;
+						width: 1.8rem;
+						height: 1.8rem;
+						background: url(assets/images/attachment.png);
+					}
+					.attachment{
+						margin-right: 2rem;
+						cursor: pointer;
+					}
+			      </style>
 			    <button class="btn btn-default accessoryBtn">附件上传</button>
 			     <iframe style="width: 82px;height: 34px;opacity: 0;position: absolute;top: 0;left: 0;" src="http://bjecm.cnnp.com.cn/cnnpdm/service.jsp?action=uploadAndView" frameborder="0"></iframe>
+			     <template v-for="attachment in attachments">
+			     	<a  class="attachment">attachment.name</a>
+			     </template>
 			    
 			    <!-- <file-uploader></file-uploader> -->
 			</div>
@@ -190,6 +206,7 @@
     loadScript("assets/libs/vue.min.js");
     loadScript("assets/libs/daterangepicker/moment.min.js");
     loadScript("assets/libs/jquery.min.js",function(){
+    	loadScript("assets/libs/jquery.blockUI.js"); 
         loadScript("assets/libs/bootstrap.min.js");
         loadScript("assets/libs/extendPagination.js");   
         loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){        	 

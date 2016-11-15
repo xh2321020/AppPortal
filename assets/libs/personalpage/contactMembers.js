@@ -61,7 +61,7 @@ function editSave(parmar,parmarKey){
         type: "post",
         contentType: "application/json",
         data:"" ,
-        url: updateUserProfile + pageUserUid +'&'+parmarKey+'=' + $(input).val(),
+        url: updateUserProfile + pageUserUid +'&'+parmarKey+'=' + encodeURIComponent($(input).val()),
         success: function (data, state, jqxhr) {
             if(data == "1"){
                 var buttonDiv = "#button"+parmar;

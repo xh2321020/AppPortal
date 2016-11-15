@@ -10,7 +10,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       };
 
       $scope.styleOperate = function(index, operate){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/style/enable/" + $scope.styleList[index].id, function(response){
+            PortalService.sendPostRequest(PortalService.getHostName() + "/api/homepage/style/enable/" + $scope.styleList[index].id, '',function(response){
                   if(true){
                         PortalService.showAlert("操作成功");
                   }
@@ -44,7 +44,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
                         ],
                         "name": "",
                         "order": [],
-                        "status": "1",
+                        "status": "0",
                         "updatetime": ""
                   };
             } else{
@@ -68,7 +68,7 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       };
 
       var getStyleListData = function(hpid){
-            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/homepagestyle/" + hpid, function(response){
+            PortalService.sendGetRequest(PortalService.getHostName() + "/api/homepage/style/" + hpid, function(response){
                   $scope.styleList = response;
             });
       };
@@ -165,7 +165,6 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
 
       var initFileUpload = function(){
             'use strict';
-            // Change this to the location of your server-side upload handler:
             var url = window.location.hostname === 'blueimp.github.io' ?
                 '//jquery-file-upload.appspot.com/' : 'server/php/';
             $('#fileupload').fileupload({
@@ -189,9 +188,42 @@ portalApp.controller("styleAdminCtrl", function($scope, $window, $http, PortalSe
       initFileUpload();
 
       $scope.preview = function(){
-            $scope.savStyle(function(){
-                  window.open("pages/portal/index.html?type=" + $scope.selectDate.addPortal.hptype + "&node=" + $scope.selectDate.addPortal.id)
+            $scope.curStyle.hpid = $scope.selectDate.addPortal.id;
+            var count = 1;
+            $scope.curStyle.order = [];
+            $("#multiselect_to option").each(function(){
+                  for(var i = 0, j = $scope.addStyleList.length; i < j; i++){
+                        if($scope.addStyleList[i].id == $(this).val()){
+                              var order = {
+                                    "formid": $scope.addStyleList[i].id,
+                                    "orderid": count++,
+                                    "styleid": $scope.addStyleList[i].styleid,
+                              };
+                              $scope.curStyle.order.push(order);
+                        }
+                  }
             });
+            console.log($scope.curStyle);
+            var requestUrl = PortalService.getHostName();
+            if($scope.curStyle.id && $scope.curStyle.id != ""){
+                  requestUrl += "/api/homepage/homepagestyle/edit";
+            } else{
+                  requestUrl += "/api/homepage/homepagestyle/add";
+            }
+            PortalService.sendPostRequest(requestUrl, $scope.curStyle, function(response){
+                  console.log("curPortal:" + response);
+                  if($scope.curStyle.id && $scope.curStyle.id != ""){
+                        PortalService.showAlert("提交成功");
+                        window.open("http://w3.cnnp.com.cn/pages/portal/index.html?style="  + $scope.curStyle.id, "_blank");
+                  } else{
+                        PortalService.showAlert("提交成功");
+                        window.open("http://w3.cnnp.com.cn/pages/portal/index.html?style="  + response, "_blank");
+                  }
+            });
+      };
+
+      $scope.preview2 = function(id){
+            window.open("http://w3.cnnp.com.cn/pages/portal/index.html?style="  + id, "_blank");
       };
 
       $scope.moveUp = function(){

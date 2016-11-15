@@ -8,6 +8,7 @@
     <title>督办管理-详情</title>
     <base id="baseTag">
     <script>
+    window.pagename="supervision-detail";
      function loadScript(url,callback){
         callback=callback?callback:function(){};
         var script=document.createElement("script"); 
@@ -225,8 +226,8 @@
 			<td colspan="6" style="padding:0;">
 			    <table class="table table-bordered pro-table ">
 				<tr class="level-head">
-				    <td>执行时间</td>
-				    <td>执行人</td>
+				    <td>进度更新时间</td>
+				    <td>更新人</td>
 				    <td>进度</td>
 				    <td width="50%">执行情况</td>
 				</tr>
@@ -299,7 +300,7 @@
     loadScript("assets/libs/jquery.min.js",function(){
         loadScript("assets/libs/bootstrap.min.js");
         loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){        	
-        loadScript("./dist/main.js");
+        loadScript("./dist/main.js?timestmp="+(new Date().getTime()));
         });
     });
      

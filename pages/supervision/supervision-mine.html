@@ -153,7 +153,7 @@
                         <section class="grid-table container-fluid " id="result-section">
 
                             <div class="key">
-                                <p>需重点关注的未完成督办事项（满足以下条件之一：a.一周内过期或已过期 b.重要程度≥4 c.紧急程度≥4）</p>
+                                <p>&nbsp&nbsp1.需重点关注的未完成督办事项（满足以下条件之一：a.一周内过期或已过期 b.重要程度≥4 c.紧急程度≥4）</p>
                             </div>
                             <!-- /.key -->
                             <!-- /.table table-condensed -->
@@ -237,7 +237,7 @@
 
                                 <!-- </div> -->
                                 <div class="key">
-                                    <p>其他未完成督办事项 (未完成的，不在以上表格中的事项）</p>
+                                    <p>&nbsp&nbsp2.其他未完成督办事项 (未完成的，不在以上表格中的事项）</p>
                                 </div>
                                 <table class="table table-hover table-condensed content-key" id="otherList">
                                     <thead>
@@ -316,7 +316,7 @@
                                 <div class="pagination-outer" id="other-pagination">
                                 </div>
                                 <div class="key">
-                                    <p>近期已完成的督办事项（一个月内）</p>
+                                    <p>&nbsp&nbsp3.近期已完成的督办事项（一个月内）</p>
                                 </div>
                                 <table class="table table-hover table-condensed content-key" id="doneList">
                                     <thead>
@@ -392,7 +392,85 @@
                                     </div>
                                   </div>
                                 </form>
-                                 <div class="pagination-outer" id="done-pagination"> </div>                                
+                                 <div class="pagination-outer" id="done-pagination"> </div>  
+                                 <div class="key">
+                                    <p>&nbsp&nbsp4.所在部门督办事项</p>
+                                </div>
+                                <table class="table table-hover table-condensed content-key" id="orgList">
+                                    <thead>
+                                    <tr>
+                                        <th v-for=" n in 8" :class="[orgItems.sorting[n]]"
+                                            @click="sortColumn(n,'org')">{{ths[n].val}}
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="grid-content " v-for="item in orgItems.show">
+                                        <td>{{item.code}}</td>
+                                       <td>
+                                          <style scoped>
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" :href="'/pages/supervision/supervision-detail.html?id='+item.id+'&previous=mine'">
+
+                                         <div class="display" v-text="item.name"></div>
+                                            <div class="hoverInfo" v-text="item.name"></div>
+                                         </a>
+                                         </td>
+                                        <td>{{item.accountablename}}</td>
+                                        <td>{{item.responsiblename}}</td>
+                                        <td>{{item.estimatedcompletetiontime}}</td>
+                                       <td>
+                                            <div class="level" :style="{backgroundColor: levelBackground[item.urgency-1]}">{{item.urgency}}</div>
+                                        </td>
+                                        <td>
+                                            <div class="level" :style="{backgroundColor: levelBackground[item.importance-1]}">{{item.importance}}</div>
+                                        </td>
+                                        <td>
+                                            <div onmouseover="hoverFunction(this)" onmouseout="outFunction(this)"
+                                                 style="position: relative;">
+                                                <div class="progress">
+                                                    <div :class=['progress-bar','small-pro',item.rateState]
+                                                         role="progressbar"
+                                                         aria-valuenow="{{item.rate}}"
+                                                         aria-valuemin="0" aria-valuemax="100"
+                                                         :style="{width: item.rate+'%'}">
+                                                        {{item.rate}}%
+                                                    </div>
+                                                </div>
+                                                <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">{{item.latestDesc}}
+                                                </span>
+
+                                                <div class="hoverInfo">{{item.latestDesc}}
+                                                </div>
+                                                <!-- /.hoverInfo -->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <form class="form-horizontal" style="width: 15rem;float: right;" id="orgPagesizeSelect">
+                                  <div class="form-group">
+                                    <label  class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                         <select class="form-control pagesize"   data-key="org"> 
+                                            <option value="3">3</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                        </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                                 <div class="pagination-outer" id="org-pagination"> </div>                                
                         </section>
                     </div>
                 </div>

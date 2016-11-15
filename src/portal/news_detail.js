@@ -1,8 +1,5 @@
 newsApp.controller("newsDetailAppCtrl", function($scope, $http, $sce, NewsService, $timeout) {
 
-    $scope.params = {
-        'isShowAttach' : false,
-    };
     var getNewsDetail = function(id){
         NewsService.sendGetRequest('/api/news/one?newid=' + id, function(response){
             $scope.newsDetail = response;
@@ -12,6 +9,7 @@ newsApp.controller("newsDetailAppCtrl", function($scope, $http, $sce, NewsServic
 
     var id = NewsService.getUrlParamsString('id');
     if(id && id.length > 0){
+        //alert("id:" + id);
         $.ajax({
             type: "get",
             dataType: "json",
@@ -21,22 +19,7 @@ newsApp.controller("newsDetailAppCtrl", function($scope, $http, $sce, NewsServic
                 $scope.$apply(
                     function(){
                         $scope.newsDetail = response;
-                        $scope.newsDetail.audit_date = $scope.newsDetail.audit_date.substring(0, $scope.newsDetail.audit_date.indexOf('.'))
-                        if($scope.newsDetail.content && $scope.newsDetail.content.length > 0 && $scope.newsDetail.content.indexOf('/publish2/attachment/show?fileId=') > 0){
-                            $scope.newsDetail.content = $scope.newsDetail.content.replace('/publish2/attachment/show?fileId=', '/cnnp/publish2/attachment/'
-                                + $scope.newsDetail.content.substring($scope.newsDetail.content.indexOf('/publish2/attachment/show?fileId=')
-                                + '/publish2/attachment/show?fileId='.length, $scope.newsDetail.content.indexOf('/publish2/attachment/show?fileId=')
-                                + '/publish2/attachment/show?fileId='.length + 2) + '/');
-                        }
                         $scope.newsDetail.content = $sce.trustAsHtml($scope.newsDetail.content);
-
-                        if($scope.newsDetail.attachments && $scope.newsDetail.attachments.length > 0){
-                            for(var i = 0, j = $scope.newsDetail.attachments.length; i < j; i++){
-                                if($scope.newsDetail.attachments[i].file_from == '¸½¼þÇø'){
-                                    $scope.params.isShowAttach = true;
-                                }
-                            }
-                        }
                     }
                 );
             }, error: function (err) {

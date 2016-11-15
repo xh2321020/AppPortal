@@ -69,7 +69,7 @@ export default{
       this.$broadcast('DO_POST_FILE');
     },
     completeUpload(file,response,status,header){
-      console.log("finish upload;")
+      // console.log("finish upload;")
     }
   },
   components:{

@@ -48,7 +48,7 @@
     ,
     error(result, state, jqxhr)
     {
-        console.log("error", jqxhr);
+        // console.log("error", jqxhr);
     }
     }
     )
